@@ -1,18 +1,15 @@
 using API.Context;
 using API.Repositories.Data;
+//using API.Middleware;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
+//using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MCC_Compensation
 {
@@ -44,6 +41,18 @@ namespace MCC_Compensation
             services.AddScoped<PositionRepository>();
             services.AddScoped<RoleRepository>();
             services.AddScoped<StatusRepository>();
+
+            services.AddMvc()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling =
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+            services.AddMvc()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.DefaultValueHandling =
+                Newtonsoft.Json.DefaultValueHandling.Ignore
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
