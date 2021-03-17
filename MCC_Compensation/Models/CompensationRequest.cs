@@ -13,7 +13,9 @@ namespace API.Models
     {
         [Key][Required]
         public int RequestID { get; set; }
+
         public string NIK { get; set; }
+       
         public int CompensationID { get; set; }
 
         [DataType(DataType.Date)]

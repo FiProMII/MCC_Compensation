@@ -36,6 +36,7 @@ namespace API.Models
         [DataType(DataType.Date)]
         public DateTime JoinDate { get; set; }
 
+        [Required]
         public int PositionID {get;set;}
 
         public string ManagerNIK { get; set; }

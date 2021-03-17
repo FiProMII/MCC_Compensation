@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -10,7 +11,10 @@ namespace API.Models
     [Table("TB_T_AccountRole")]
     public class AccountRole
     {
+        [Required]
         public string NIK { get; set; }
+
+        [Required]
         public int RoleID { get; set; }
 
         [JsonIgnore]
