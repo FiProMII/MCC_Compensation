@@ -14,6 +14,8 @@ namespace API.Models
         [Key][Required]
         public int PositionID { get; set; }
         public string PositionName { get; set; }
+
+        [Required]
         public int DepartmentID { get; set; }
 
         [JsonIgnore]
