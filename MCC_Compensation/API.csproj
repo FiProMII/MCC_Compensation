@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\Controller\" />
     <Folder Include="Middleware\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
