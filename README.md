@@ -1,1 +1,3 @@
-# MCC_Compensation
+# Documentation Final Project
+
+![Database Diagrams](ERD.png)
