@@ -70,10 +70,6 @@
               "target": "Package",
               "version": "[5.0.4, )"
             },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[6.9.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
