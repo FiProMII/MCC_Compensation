@@ -8,8 +8,6 @@
     <Folder Include="Base\Controller\" />
     <Folder Include="Middleware\" />
     <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Repositories\Data\" />
   </ItemGroup>
 
   <ItemGroup>

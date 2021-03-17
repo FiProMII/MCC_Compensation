@@ -1,4 +1,5 @@
 using API.Context;
+using API.Repositories.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,18 @@ namespace MCC_Compensation
 
             services.AddDbContext<MyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyContext")));
+
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRoleRepository>();
+            services.AddScoped<ApprovalRepository>();
+            services.AddScoped<CompensationRepository>();
+            services.AddScoped<CompensationRequestRepository>();
+            services.AddScoped<DepartmentRepository>();
+            services.AddScoped<DocumentRepository>();
+            services.AddScoped<EmployeeRepository>();
+            services.AddScoped<PositionRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<StatusRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
