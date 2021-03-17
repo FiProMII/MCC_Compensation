@@ -1,4 +1,5 @@
 ﻿using API.Repositories.Interface;
+using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,77 +25,134 @@ namespace API.Base.Controller
         [HttpGet]
         public ActionResult<Entity> Get()
         {
+            ResponseVM<IEnumerable<Entity>> responseContent = new ResponseVM<IEnumerable<Entity>>();
             var result = repository.Get();
 
             if (result != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, message = "Data found" });
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
             }
             else
             {
-                return StatusCode(500, new { status = HttpStatusCode.InternalServerError, result, message = "Something went wrong" }); ;
+                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Message = "Something went wrong";
+                return StatusCode(500, responseContent);
             }
         }
 
         [HttpGet("{key}")]
         public ActionResult<Entity> Get(Key key)
         {
+            ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
+
+            if (key == null)
+            {
+                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Message = "The request is incomplete or incorrect";
+                return BadRequest(responseContent);
+            }
+
             var result = repository.Get(key);
+
             if (result != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, message = "Data found" });
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
             }
             else
             {
-                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data not found" });
+                responseContent.Status = HttpStatusCode.NotFound;
+                responseContent.Message = "Something went wrong";
+                return NotFound(responseContent);
             }
         }
 
         [HttpPost]
         public ActionResult Post(Entity entity)
         {
+            ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
+
+            if (entity == null)
+            {
+                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Message = "The data entered is incomplete or incorrect";
+                return BadRequest(responseContent);
+            }
+
             var result = repository.Insert(entity);
+
             if (result > 0)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = "", message = "Successfully created new data" });
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data created successfully";
+                return Ok(responseContent);
             }
             else
             {
-                return StatusCode(500, new { status = HttpStatusCode.InternalServerError, message = "Unable to create new data" });
+                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Message = "Unable to create new data";
+                return StatusCode(500, responseContent);
             }
         }
 
         [HttpDelete("{key}")]
         public ActionResult Delete(Key key)
         {
+            ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
+
+            if (key == null)
+            {
+                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Message = "The request is incomplete or incorrect";
+                return BadRequest(responseContent);
+            }
+
             var result = repository.Delete(key);
+
             if (result > 0)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = "", message = "Successfully deleted data" });
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data deleted successfully";
+                return Ok(responseContent);
             }
             else
             {
-                return StatusCode(500, new { status = HttpStatusCode.InternalServerError, message = "Could not successfully delete data" });
+                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Message = "Unable to delete data";
+                return StatusCode(500, responseContent);
             }
         }
 
         [HttpPut]
         public ActionResult Put(Entity entity)
         {
+            ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
+
             if (entity == null)
             {
-                return BadRequest(new { status = HttpStatusCode.BadRequest, message = "The data entered is incomplete or incorrect" });
+                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Message = "The data entered is incomplete or incorrect";
+                return BadRequest(responseContent);
             }
 
             var result = repository.Update(entity);
 
             if (result > 0)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = "", message = "Data updated successfully" });
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data updated successfully";
+                return Ok(responseContent);
             }
             else
             {
-                return StatusCode(500, new { status = HttpStatusCode.InternalServerError, message = "Data not updated successfully" });
+                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Message = "Unable to update data";
+                return StatusCode(500, responseContent);
             }
         }
     }
