@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210317041855_CreateDB")]
-    partial class CreateDB
+    [Migration("20210317055917_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,9 +59,6 @@ namespace API.Migrations
                     b.Property<DateTime>("ApprovalDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CompensationRequestRequestID")
-                        .HasColumnType("int");
-
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
 
@@ -73,9 +70,9 @@ namespace API.Migrations
 
                     b.HasKey("ApprovalID");
 
-                    b.HasIndex("CompensationRequestRequestID");
-
                     b.HasIndex("DepartmentID");
+
+                    b.HasIndex("RequestID");
 
                     b.HasIndex("StatusID");
 
@@ -110,20 +107,17 @@ namespace API.Migrations
                     b.Property<int>("CompensationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmployeeNIK")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NIK")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RequestID");
 
                     b.HasIndex("CompensationID");
 
-                    b.HasIndex("EmployeeNIK");
+                    b.HasIndex("NIK");
 
                     b.ToTable("TB_T_CompensationRequest");
                 });
@@ -150,9 +144,6 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompensationRequestRequestID")
-                        .HasColumnType("int");
-
                     b.Property<string>("DocumentName")
                         .HasColumnType("nvarchar(max)");
 
@@ -167,7 +158,7 @@ namespace API.Migrations
 
                     b.HasKey("DocumentID");
 
-                    b.HasIndex("CompensationRequestRequestID");
+                    b.HasIndex("RequestID");
 
                     b.ToTable("TB_M_Document");
                 });
@@ -286,13 +277,15 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Approval", b =>
                 {
-                    b.HasOne("API.Models.CompensationRequest", "CompensationRequest")
-                        .WithMany("Approvals")
-                        .HasForeignKey("CompensationRequestRequestID");
-
                     b.HasOne("API.Models.Department", "Department")
                         .WithMany("Approvals")
                         .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.CompensationRequest", "CompensationRequest")
+                        .WithMany("Approvals")
+                        .HasForeignKey("RequestID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -319,7 +312,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Employee", "Employee")
                         .WithMany("CompensationRequests")
-                        .HasForeignKey("EmployeeNIK");
+                        .HasForeignKey("NIK");
 
                     b.Navigation("Compensation");
 
@@ -330,7 +323,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.CompensationRequest", "CompensationRequest")
                         .WithMany("Documents")
-                        .HasForeignKey("CompensationRequestRequestID");
+                        .HasForeignKey("RequestID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CompensationRequest");
                 });

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -160,10 +160,9 @@ namespace API.Migrations
                 {
                     RequestID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NIK = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CompensationID = table.Column<int>(type: "int", nullable: false),
-                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EmployeeNIK = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,8 +174,8 @@ namespace API.Migrations
                         principalColumn: "CompensationID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TB_T_CompensationRequest_TB_M_Employee_EmployeeNIK",
-                        column: x => x.EmployeeNIK,
+                        name: "FK_TB_T_CompensationRequest_TB_M_Employee_NIK",
+                        column: x => x.NIK,
                         principalTable: "TB_M_Employee",
                         principalColumn: "NIK",
                         onDelete: ReferentialAction.Restrict);
@@ -191,18 +190,17 @@ namespace API.Migrations
                     DocumentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UploadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestID = table.Column<int>(type: "int", nullable: false),
-                    CompensationRequestRequestID = table.Column<int>(type: "int", nullable: true)
+                    RequestID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_M_Document", x => x.DocumentID);
                     table.ForeignKey(
-                        name: "FK_TB_M_Document_TB_T_CompensationRequest_CompensationRequestRequestID",
-                        column: x => x.CompensationRequestRequestID,
+                        name: "FK_TB_M_Document_TB_T_CompensationRequest_RequestID",
+                        column: x => x.RequestID,
                         principalTable: "TB_T_CompensationRequest",
                         principalColumn: "RequestID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,8 +212,7 @@ namespace API.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
                     RequestID = table.Column<int>(type: "int", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CompensationRequestRequestID = table.Column<int>(type: "int", nullable: true)
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -233,17 +230,17 @@ namespace API.Migrations
                         principalColumn: "StatusID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TB_T_Approval_TB_T_CompensationRequest_CompensationRequestRequestID",
-                        column: x => x.CompensationRequestRequestID,
+                        name: "FK_TB_T_Approval_TB_T_CompensationRequest_RequestID",
+                        column: x => x.RequestID,
                         principalTable: "TB_T_CompensationRequest",
                         principalColumn: "RequestID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_M_Document_CompensationRequestRequestID",
+                name: "IX_TB_M_Document_RequestID",
                 table: "TB_M_Document",
-                column: "CompensationRequestRequestID");
+                column: "RequestID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_M_Employee_ManagerNIK",
@@ -266,14 +263,14 @@ namespace API.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_T_Approval_CompensationRequestRequestID",
-                table: "TB_T_Approval",
-                column: "CompensationRequestRequestID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TB_T_Approval_DepartmentID",
                 table: "TB_T_Approval",
                 column: "DepartmentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_Approval_RequestID",
+                table: "TB_T_Approval",
+                column: "RequestID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_T_Approval_StatusID",
@@ -286,9 +283,9 @@ namespace API.Migrations
                 column: "CompensationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_T_CompensationRequest_EmployeeNIK",
+                name: "IX_TB_T_CompensationRequest_NIK",
                 table: "TB_T_CompensationRequest",
-                column: "EmployeeNIK");
+                column: "NIK");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
