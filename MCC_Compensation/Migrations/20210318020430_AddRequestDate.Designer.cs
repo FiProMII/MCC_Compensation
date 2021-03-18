@@ -10,8 +10,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
+<<<<<<< HEAD:MCC_Compensation/Migrations/20210318020430_AddRequestDate.Designer.cs
     [Migration("20210318020430_AddRequestDate")]
     partial class AddRequestDate
+=======
+    [Migration("20210318010848_FixDB")]
+    partial class FixDB
+>>>>>>> Randika:MCC_Compensation/Migrations/20210318010848_FixDB.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -155,9 +160,6 @@ namespace API.Migrations
 
                     b.Property<int>("RequestID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("DocumentID");
 

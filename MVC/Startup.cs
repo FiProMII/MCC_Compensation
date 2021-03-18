@@ -24,6 +24,15 @@ namespace MVC
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler();
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

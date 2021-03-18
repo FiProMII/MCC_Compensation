@@ -154,9 +154,6 @@ namespace API.Migrations
                     b.Property<int>("RequestID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("DocumentID");
 
                     b.HasIndex("RequestID");
