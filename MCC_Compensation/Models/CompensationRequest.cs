@@ -20,7 +20,6 @@ namespace API.Models
 
         [DataType(DataType.Date)]
         public DateTime EventDate { get; set; }
-        public DateTime RequestDate { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime RequestDate { get; set; }
