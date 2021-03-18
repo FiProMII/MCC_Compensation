@@ -1,4 +1,4 @@
 # Documentation Final Project
 ## Entity Relationship Diagram
 
-![Database Diagrams](Entity-Relationship-Diagram.png)
+![Database Diagrams](MCC_ERD.png)
