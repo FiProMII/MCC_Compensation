@@ -1,10 +1,10 @@
 # Documentation Final Project
 
 ### Entity Relationship Diagram
-![Database Diagrams](Documentation/ERD/Entity Relationship Diagram.png)
+![Database Diagrams](Documentation/ERD/Entity_Relationship_Diagram.png)
 
 ### Use Case Diagram
-![Use Case Diagram](Documentation/Use Case Diagram/Use Case Diagram.png)
+![Use Case Diagram](Documentation/Use Case Diagram/Use_Case_Diagram.png)
 
 ### Business Process Model and Notation
 ![BPMN](Documentation/BPMN/BPMN.png)
