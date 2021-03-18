@@ -4,7 +4,7 @@
 ![Database Diagrams](Documentation/ERD/Entity_Relationship_Diagram.png)
 
 ### Use Case Diagram
-![Use Case Diagram](Documentation/Use Case Diagram/Use_Case_Diagram.png)
+![Use Case Diagram](Documentation/Use_Case/Use_Case_Diagram.png)
 
 ### Business Process Model and Notation
 ![BPMN](Documentation/BPMN/BPMN.png)
