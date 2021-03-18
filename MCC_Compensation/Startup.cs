@@ -44,12 +44,6 @@ namespace MCC_Compensation
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
 
-            services.AddDbContext<MyContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MyContext")));
-
-            services.AddDbContext<MyContext>(options =>
-                options.UseLazyLoadingProxies());
-
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRoleRepository>();
             services.AddScoped<ApprovalRepository>();
@@ -61,6 +55,10 @@ namespace MCC_Compensation
             services.AddScoped<PositionRepository>();
             services.AddScoped<RoleRepository>();
             services.AddScoped<StatusRepository>();
+
+            services.AddDbContext<MyContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MyContext"))
+                .UseLazyLoadingProxies());
 
             services.AddSwaggerGen(c =>
             {

@@ -41,10 +41,8 @@ namespace API.Models
 
         public string ManagerNIK { get; set; }
 
-        [JsonIgnore]
         public virtual Position Position { get; set; }
 
-        [JsonIgnore]
         public virtual Employee Manager { get; set; }
 
         [JsonIgnore]

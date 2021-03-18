@@ -1,10 +1,10 @@
 ﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Department";
+    ViewBag.Title = "Employee";
 }
 
 <div class="container">
     <h2 class="page-header">
-        Data Department
+        Data Employee
     </h2>
 
     <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
@@ -16,8 +16,15 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>ID</th>
+                    <th>NIK</th>
                     <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Birth</th>
+                    <th>Join Date</th>
+                    <th>Position</th>
+                    <th>Manager</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,8 +33,15 @@
             <tfoot>
                 <tr>
                     <th>No.</th>
-                    <th>ID</th>
+                    <th>NIK</th>
                     <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Birth</th>
+                    <th>Join Date</th>
+                    <th>Employee</th>
+                    <th>Manager</th>
                     <th>Actions</th>
                 </tr>
             </tfoot>
@@ -39,18 +53,55 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Department</h4>
+                <h4 class="modal-title">Employee</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="Readonly()">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
                     <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="DepartmentID" id="DepartmentID" hidden>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="nik" class="col-form-label">NIK</label>
+                                <input type="text" class="form-control" name="NIK" id="NIK">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeName" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" name="EmployeeName" id="EmployeeName">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control" name="Email" id="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Phone</label>
+                                <input type="text" class="form-control" name="Phone" id="Phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="col-form-label">Address</label>
+                                <input type="text" class="form-control" name="Address" id="Address">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="firstName" class="col-form-label">Department Name</label>
-                            <input type="text" class="form-control" name="DepartmentName" id="DepartmentName">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="birthPlace" class="col-form-label">Birth Place</label>
+                                <input type="text" class="form-control" name="BirthPlace" id="BirthPlace">
+                            </div>
+                            <div class="form-group">
+                                <label for="birthDate" class="col-form-label">Birth Date</label>
+                                <input type="date" class="form-control" name="BirthDate" id="BirthDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="joinDate" class="col-form-label">Join Date</label>
+                                <input type="date" class="form-control" name="JoinDate" id="JoinDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="positionID" class="col-form-label">Position</label>
+                                <select class="form-control" id="PositionID" name="PositionID"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="managerNIK" class="col-form-label">Manager</label>
+                                <input type="text" class="form-control" name="ManagerNIK" id="ManagerNIK">
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -68,6 +119,19 @@
     <script>
         var isUpdate = 0;
         $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: '/position/get',
+                success: function (result) {
+                    var data = result['result']
+                    var s = '<option value="-1">Please Select a Position</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
+                    }
+                    $("#PositionID").html(s);
+                }
+            });
+
             table = $('#table_id').DataTable({
                 responsive: true,
                 dom: '<"top"lBf>rtip<"bottom">',
@@ -105,7 +169,7 @@
                         "visible": false,
                     },
                     {
-                        "targets": [0, 3],
+                        "targets": [0],
                         "orderable": false,
                     }
                 ],
@@ -118,13 +182,30 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": 'departmentID' },
-                    { "data": 'departmentName' },
+                    { "data": 'nik' },
+                    { "data": 'employeeName' },
+                    { "data": 'email' },
+                    { "data": 'phone' },
+                    { "data": 'address' },
                     {
-                        "data": 'departmentID',
+                        "data": 'birth',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['departmentID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['departmentID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return row['birthPlace'] + ', ' + moment(row['birthDate']).format('L')
+                        }
+                    },
+                    {
+                        "data": 'joinDate',
+                        "render": function (data) {
+                            return moment(data).format('L')
+                        }
+                    },
+                    { "data": 'position.positionName' },
+                    { "data": 'manager.employeeName' },
+                    {
+                        "data": 'nik',
+                        "render": function (data, type, row, meta) {
+                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['nik'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
+                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['nik'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
                         }
                     }
                 ]
@@ -132,16 +213,36 @@
         });
 
         function Readonly() {
-            $('#departmentID').attr('readonly', false);
+            $('#employeeID').attr('readonly', false);
             validator.resetForm();
         }
 
         var validator = $("#form").validate({
             rules: {
-                DepartmentName: "required"
+                EmployeeName: "required",
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Phone: {
+                    required: true,
+                    number: true,
+                    minlength: 10
+                },
+                Address: "required",
+                BirthPlace: "required",
+                BirthDate: {
+                    required: true,
+                    date: true
+                },
+                JoinDate: {
+                    required: true,
+                    date: true
+                },
+                Position: "required"
             },
             messages: {
-                DepartmentName: "Please enter department name"
+                EmployeeName: "Please enter employee name"
             },
             submitHandler: function (form) {
                 var form = $(form);
@@ -158,7 +259,7 @@
                         $('#modal').modal('hide');
                         table.ajax.reload();
                         Swal.fire({
-                            position: 'center',
+                            employee: 'center',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -190,8 +291,17 @@
                 success: function (result) {
                     $('#modal').modal('show');
                     var data = result["result"];
-                    $('#DepartmentID').val(data.departmentID);
-                    $('#DepartmentName').val(data.departmentName);
+                    console.log(data)
+                    $('#NIK').val(data.nik);
+                    $('#EmployeeName').val(data.employeeName);
+                    $('#Email').val(data.email);
+                    $('#Phone').val(data.phone);
+                    $('#Address').val(data.address);
+                    $('#BirthPlace').val(data.birthPlace);
+                    $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
+                    $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#PositionID').val(data.positionID);
+                    $('#ManagerNIK').val(data.manager.nik)
                     isUpdate = 1;
                 }
             });

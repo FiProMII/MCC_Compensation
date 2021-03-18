@@ -1,22 +1,24 @@
 ﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Compensation";
+    ViewBag.Title = "Position";
 }
 
 <div class="container">
     <h2 class="page-header">
-        Data Compensation
+        Data Position
     </h2>
+
     <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
         <i class="fas fa-user-plus"></i> Create
     </button>
+
     <div>
         <table id="table_id" class="table table-sm table-striped table-bordered m-2">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th>No.</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Cost</th>
+                    <th>Department</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -24,53 +26,71 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No</th>
+                    <th>No.</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Cost</th>
+                    <th>Department</th>
                     <th>Actions</th>
                 </tr>
             </tfoot>
         </table>
     </div>
-    <div id="chart"></div>
-    <div id="chart2"></div>
 </div>
 
 <div class="modal fade" role="dialog" id="modal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Compensation</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Position</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="Readonly()">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
-                    <input type="hidden" class="form-control" name="CompensationID" id="CompensationID">
-                    <div class="form-group">
-                        <label for="compensationName" class="col-form-label">Compensation Name</label>
-                        <input type="text" class="form-control" name="CompensationName" id="CompensationName">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="PositionID" id="PositionID" hidden>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="cost" class="col-form-label">Cost</label>
-                        <input type="text" class="form-control" name="Cost" id="Cost">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="col-form-label">Position Name</label>
+                            <input type="text" class="form-control" name="PositionName" id="PositionName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departmentID" class="col-form-label">Department</label>
+                            <select class="form-control" id="DepartmentID" name="DepartmentID"></select>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Sumbit">Submit</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
+                <button class="btn btn-primary" type="submit" form="form" id="Submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
 @section scripts
 {
     <script>
-        var isUpdate;
+        var isUpdate = 0;
         $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: '/department/get',
+                success: function (result) {
+                    var data = result['result']
+                    var s = '<option value="-1">Please Select a Department</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].departmentID + '">' + data[i].departmentName + '</option>';
+                    }
+                    $("#DepartmentID").html(s);
+                }
+            });
+
             table = $('#table_id').DataTable({
                 responsive: true,
                 dom: '<"top"lBf>rtip<"bottom">',
@@ -78,19 +98,19 @@
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     'colvis'
@@ -99,11 +119,8 @@
                 "orderMulti": false,
                 "ajax": {
                     "url": "get",
-                    "type": "Get",
-                    "dataSrc": "result",
-                    "beforeSend": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
+                    "type": "get",
+                    "dataSrc": "result"
                 },
                 "columnDefs": [
                     {
@@ -111,7 +128,7 @@
                         "visible": false,
                     },
                     {
-                        "targets": [2, 4],
+                        "targets": [0, 3],
                         "orderable": false,
                     }
                 ],
@@ -124,37 +141,31 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": 'compensationID' },
-                    { "data": 'compensationName' },
+                    { "data": 'positionID' },
+                    { "data": 'positionName' },
+                    { "data": 'department.departmentName' },
                     {
-                        "data": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
-                    },
-                    {
-                        "data": 'compensationID',
+                        "data": 'positionID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['compensationID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['compensationID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['positionID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
+                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['positionID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
                         }
                     }
                 ]
             });
         });
 
+        function Readonly() {
+            $('#positionID').attr('readonly', false);
+            validator.resetForm();
+        }
+
         var validator = $("#form").validate({
             rules: {
-                CompensationName: "required",
-                Cost: {
-                    required: true,
-                    digits: true
-                }
+                PositionName: "required"
             },
             messages: {
-                CompensationName: "Please enter Compensation Name",
-                Cost: {
-                    required: "Please type the Cost",
-                    number: "Please type only numbers"
-                }
+                PositionName: "Please enter position name"
             },
             submitHandler: function (form) {
                 var form = $(form);
@@ -166,9 +177,6 @@
                 $.ajax({
                     type: "POST",
                     url: urlString,
-                    headers: {
-                        Authorization: sessionStorage.token
-                    },
                     data: form.serialize(),
                     success: function (data) {
                         $('#modal').modal('hide');
@@ -198,28 +206,23 @@
             $('#form').trigger('reset');
         }
 
-        function Get(compensationID) {
-            debugger;
+        function Get(id) {
             $.ajax({
-                url: "getById",
+                url: "GetById",
                 type: "GET",
-                data: { 'key': compensationID },
-                headers: {
-                    Authorization: sessionStorage.token
-                },
+                data: { 'key': id },
                 success: function (result) {
                     $('#modal').modal('show');
-                    var data = result['result'];
-                    $('#CompensationID').val(data.compensationID);
-                    $('#CompensationName').val(data.compensationName);
-                    $('#Cost').val(data.cost);
+                    var data = result["result"];
+                    $('#PositionID').val(data.positionID);
+                    $('#PositionName').val(data.positionName);
+                    $('#DepartmentID').val(data.department.departmentID)
                     isUpdate = 1;
                 }
             });
         }
 
-        function Delete(compensationID) {
-            debugger;
+        function Delete(id) {
             swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -233,10 +236,7 @@
                     $.ajax({
                         type: "POST",
                         url: "delete",
-                        data: { 'key': compensationID },
-                        headers: {
-                            Authorization: sessionStorage.token
-                        },
+                        data: { 'key': id },
                         success: function (data) {
                             table.ajax.reload();
                             Swal.fire(
