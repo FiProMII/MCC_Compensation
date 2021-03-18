@@ -1,8 +1,14 @@
 # Documentation Final Project
 
 ### Entity Relationship Diagram
-![Database Diagrams](Documentation/MCC_ERD.png)
+![Database Diagrams](Documentation/ERD/Entity Relationship Diagram.png)
+
+### Use Case Diagram
+![Use Case Diagram](Documentation/Use Case Diagram/Use Case Diagram.png)
+
+### Business Process Model and Notation
+![BPMN](Documentation/BPMN/BPMN.png)
 
 ### Activity Diagram
 #### Employee Activity
-![Employee Approval Activity Diagram](https://user-images.githubusercontent.com/44109733/111560635-74093680-87c5-11eb-9ecd-b1e10156002d.png)
+
