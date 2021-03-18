@@ -1,7 +1,7 @@
 # Documentation Final Project
 
 ### Entity Relationship Diagram
-![Database Diagrams](MCC_ERD.png)
+![Database Diagrams](Documentation/MCC_ERD.png)
 
 ### Activity Diagram
 #### Employee Activity
