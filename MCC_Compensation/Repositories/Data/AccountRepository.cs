@@ -30,14 +30,17 @@ namespace API.Repositories.Data
             _parameters.Add("@Email", loginVM.Email);
             _parameters.Add("@Password", loginVM.Password);
             var result = _userRepository.MultipleGet("SP_RetrieveLogin", _parameters);
-
-            LoginVM loginResult = new LoginVM
+            LoginVM loginResult = new LoginVM();
+            try
             {
-                Email = result.FirstOrDefault().Email,
-                EmployeeName = result.FirstOrDefault().EmployeeName,
-                Roles = result.Select(x => x.RoleName)
-            };
-
+                loginResult.Email = result.FirstOrDefault().Email;
+                loginResult.EmployeeName = result.FirstOrDefault().EmployeeName;
+                loginResult.Roles = result.Select(x => x.RoleName);
+            } 
+            catch
+            {
+                    return null;
+            }
             return loginResult;
         }
     }

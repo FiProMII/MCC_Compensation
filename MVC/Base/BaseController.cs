@@ -1,5 +1,6 @@
 ﻿using API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,59 +27,64 @@ namespace MVC.Base
 
         public ViewResult Index() => View();
 
-        public async Task<JsonResult> Get()
+        public async Task<IActionResult> Get()
         {
-            var header = Request.Headers["Authorization"];
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var response = await httpClient.GetAsync(typeof(Entity).Name);
-            string apiResponse = await response.Content.ReadAsStringAsync();
+            var apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<Entity>>>(apiResponse);
-            return new JsonResult(result);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
         }
 
-        public async Task<JsonResult> GetById(Key key)
+        public async Task<IActionResult> GetById(Key key)
         {
-            var header = Request.Headers["Authorization"];
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var response = await httpClient.GetAsync(typeof(Entity).Name + "/" + key);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
-            return new JsonResult(result);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Post(Entity entity)
+        public async Task<IActionResult> Post(Entity entity)
         {
-            var header = Request.Headers["Authorization"];
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync(typeof(Entity).Name, content);
             string apiResponse = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<Entity>(apiResponse);
-            return new JsonResult(result);
+            var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Put(Entity entity)
+        public async Task<IActionResult> Put(Entity entity)
         {
-            var header = Request.Headers["Authorization"];
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
             var response = await httpClient.PutAsync(typeof(Entity).Name, content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
-            return new JsonResult(result);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Delete(Key key)
+        public async Task<IActionResult> Delete(Key key)
         {
-            var header = Request.Headers["Authorization"];
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             using var response = await httpClient.DeleteAsync(typeof(Entity).Name + '/' + key);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
-            return Json(result);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
         }
     }
 }

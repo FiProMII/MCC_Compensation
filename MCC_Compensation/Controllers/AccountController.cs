@@ -32,7 +32,7 @@ namespace API.Controllers
         public IActionResult Login(LoginVM login)
         {
             var result = _accountRepository.Login(login);
-            ResponseVM<LoginVM> responseContent = new ResponseVM<LoginVM>();
+            ResponseVM<string> responseContent = new ResponseVM<string>();
             if (result != null)
             {
                 var jwt = new JwtServices(_configuration);
@@ -40,9 +40,7 @@ namespace API.Controllers
 
                 responseContent.Status = HttpStatusCode.OK;
                 responseContent.Message = "Sign In successful";
-
-                HttpContext.Response.Headers.Add("Token", token);
-                
+                responseContent.Result = token;
                 return Ok(responseContent);
             }
             else
