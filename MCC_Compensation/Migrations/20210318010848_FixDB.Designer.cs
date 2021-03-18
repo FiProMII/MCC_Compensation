@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210317055917_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20210318010848_FixDB")]
+    partial class FixDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,6 +113,9 @@ namespace API.Migrations
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("RequestID");
 
                     b.HasIndex("CompensationID");
@@ -152,9 +155,6 @@ namespace API.Migrations
 
                     b.Property<int>("RequestID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("DocumentID");
 

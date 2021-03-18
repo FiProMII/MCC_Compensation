@@ -77,3 +77,13 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.cspr
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dll
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.Views.dll
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.Views.pdb
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorAssemblyInfo.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorAssemblyInfo.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.input.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.output.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorCoreGenerate.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorTargetAssemblyInfo.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.Views.pdb

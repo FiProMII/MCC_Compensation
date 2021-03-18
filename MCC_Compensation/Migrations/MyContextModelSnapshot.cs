@@ -111,6 +111,9 @@ namespace API.Migrations
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("RequestID");
 
                     b.HasIndex("CompensationID");
@@ -150,9 +153,6 @@ namespace API.Migrations
 
                     b.Property<int>("RequestID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("DocumentID");
 

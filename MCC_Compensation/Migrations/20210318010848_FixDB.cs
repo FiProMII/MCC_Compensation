@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class FixDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,7 +162,8 @@ namespace API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CompensationID = table.Column<int>(type: "int", nullable: false),
-                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,7 +190,6 @@ namespace API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DocumentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UploadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
