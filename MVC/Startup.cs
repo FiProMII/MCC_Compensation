@@ -34,16 +34,17 @@ namespace MVC
 
             app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseRouting();
+
             app.UseAuthorization();
+
             app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

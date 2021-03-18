@@ -70,7 +70,7 @@
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "Role/Get",
+                    "url": "Get",
                     "type": "Get",
                     "dataSrc": "result",
                     "beforeSend": function (xhr) {
@@ -120,9 +120,9 @@
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "Role/Put"
+                    urlString = "Put"
                 else
-                    urlString = "Role/Post"
+                    urlString = "Post"
                 $.ajax({
                     type: "POST",
                     url: urlString,
@@ -161,7 +161,7 @@
         function Get(roleID) {
             debugger;
             $.ajax({
-                url: "Role/GetById",
+                url: "GetById",
                 type: "GET",
                 data: { 'key': roleID },
                 headers: {
@@ -191,7 +191,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "Compensation/Delete",
+                        url: "Delete",
                         data: { 'key': roleID },
                         headers: {
                             Authorization: sessionStorage.token

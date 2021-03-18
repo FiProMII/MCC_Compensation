@@ -45,10 +45,8 @@ namespace MCC_Compensation
                 );
 
             services.AddDbContext<MyContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MyContext")));
-
-            services.AddDbContext<MyContext>(options =>
-                options.UseLazyLoadingProxies());
+                options.UseSqlServer(Configuration.GetConnectionString("MyContext"))
+                .UseLazyLoadingProxies());
 
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRoleRepository>();

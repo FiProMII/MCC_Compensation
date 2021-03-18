@@ -1,7 +1,81 @@
-﻿@{ Layout = "_Layout"; ViewBag.Title = "Login";}
+﻿@{ ViewBag.Title = "Login";}
 
-@section scripts {
-    <script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="mt-auto py-3 bg-transparent">
+        <div style="position: relative; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center">
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="flex-md-wrap container col-4 align-content-center">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center m-0">
+                        <a href="" class="logo logo-admin">
+                            <img src="~/src/images/mii-logo.png" height="50" alt="logo" />
+                            CA
+                        </a>
+                    </h3>
+                    <div class="p-3">
+                        <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
+                        <p class="text-muted text-center">Sign in to continue to CA</p>
+                        <form id="loginForm" name="loginForm">
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control" name="Email" id="Email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">Password</label>
+                                <input type="password" class="form-control" name="Password" id="password-field" placeholder="Enter Password" autocomplete="off">
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                            <div class="form-group row m-t-20">
+                                <div class="col-sm-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customControlInline" />
+                                        <label class="custom-control-label" for="customControlInline">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <button class="btn btn-primary" type="submit">Sign in</button>
+                                </div>
+                            </div>
+                            <div class="form-group m-t-10 mb-0 row">
+                                <div class="col-12 m-t-20">
+                                    <a href="" class="text-muted"><i class="fas fa-lock"></i> Forgot your password?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-auto py-3 bg-transparent">
+        <div style="position: fixed; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center; color:black">
+            &copy; 2021 PT Mitra Integrasi Informatika. All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
         $("#loginForm").submit(function (e) {
 
             e.preventDefault();
@@ -18,24 +92,16 @@
             });
 
         })
-    </script>
-}
 
-<h2>Login</h2>
-<form id="loginForm">
-    <div class="form-group">
-        <div class="row">
-            <label class="col col-2">Email</label>
-            <input class="col form-control" name="Email" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label class="col col-2">Password</label>
-            <input class="col form-control" name="Password" />
-        </div>
-    </div>
-    <div class="panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Login</button>
-    </div>
-</form>
+        $(".toggle-password").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+
+</script>
