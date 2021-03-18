@@ -19,6 +19,9 @@ namespace API.Models
         [DataType(DataType.Date)]
         public DateTime EventDate { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime RequestDate { get; set; }
+
         [JsonIgnore]
         public virtual Employee Employee { get; set; }
         [JsonIgnore]

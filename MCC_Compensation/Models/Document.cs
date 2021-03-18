@@ -16,9 +16,6 @@ namespace API.Models
         public string DocumentName { get; set; }
         public string Link { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime UploadDate { get; set; }
-
         [Required]
         public int RequestID { get; set; }
 
