@@ -1,0 +1,221 @@
+﻿@{ Layout = "_Layout";
+    ViewBag.Title = "Role";
+}
+
+<div class="container">
+    <h2 class="page-header">
+        Role Data
+    </h2>
+    <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
+        <i class="fas fa-user-plus"></i> Create
+    </button>
+    <div>
+        <table id="table_id" class="table table-sm table-striped table-bordered m-2">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="chart"></div>
+    <div id="chart2"></div>
+</div>
+
+<div class="modal fade" role="dialog" id="modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Role</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" name="form">
+                    <input type="hidden" class="form-control" name="RoleID" id="RoleID">
+                    <div class="form-group">
+                        <label for="roleName" class="col-form-label"> Name</label>
+                        <input type="text" class="form-control" name="RoleName" id="RoleName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" type="submit" form="form" id="Sumbit">Submit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section scripts
+{
+    <script>
+        var isUpdate;
+        $(document).ready(function () {
+            table = $('#table_id').DataTable({
+                responsive: true,
+                "filter": true,
+                "orderMulti": false,
+                "ajax": {
+                    "url": "Role/Get",
+                    "type": "Get",
+                    "dataSrc": "result",
+                    "beforeSend": function (xhr) {
+                        xhr.setRequestHeader('Authorization', sessionStorage.token);
+                    },
+                },
+                "columnDefs": [
+                    {
+                        "targets": [1],
+                        "visible": false,
+                    },
+                    {
+                        "targets": [3],
+                        "orderable": false,
+                    }
+                ],
+                "columns": [
+                    {
+                        "data": null,
+                        "name": "no",
+                        "autowidth": true,
+                        "render": function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    { "data": 'roleID'},
+                    { "data": 'roleName' },
+                    {
+                        "data": 'roleID',
+                        "render": function (data, type, row, meta) {
+                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['roleID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
+                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['roleID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                        }
+                    }
+                ]
+            });
+        });
+
+        var validator = $("#form").validate({
+            rules: {
+                roleName: "required",
+            },
+            messages: {
+                roleName: "Please enter Role Name",
+            },
+            submitHandler: function (form) {
+                var form = $(form);
+                var urlString;
+                if (isUpdate == 1)
+                    urlString = "Role/Put"
+                else
+                    urlString = "Role/Post"
+                $.ajax({
+                    type: "POST",
+                    url: urlString,
+                    headers: {
+                        Authorization: sessionStorage.token
+                    },
+                    data: form.serialize(),
+                    success: function (data) {
+                        $('#modal').modal('hide');
+                        table.ajax.reload();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Your data has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    },
+                    error: function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            footer: '<a href>Your Work cannot be saved</a>'
+                        })
+                    }
+                });
+            }
+        });
+
+        function reset() {
+            isUpdate = 0;
+            $('#form').trigger('reset');
+        }
+
+        function Get(roleID) {
+            debugger;
+            $.ajax({
+                url: "Role/GetById",
+                type: "GET",
+                data: { 'key': roleID },
+                headers: {
+                    Authorization: sessionStorage.token
+                },
+                success: function (result) {
+                    $('#modal').modal('show');
+                    var data = result['result'];
+                    $('#RoleID').val(data.roleID);
+                    $('#RoleName').val(data.roleName);
+                    isUpdate = 1;
+                }
+            });
+        }
+
+        function Delete(roleID) {
+            debugger;
+            swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "Compensation/Delete",
+                        data: { 'key': roleID },
+                        headers: {
+                            Authorization: sessionStorage.token
+                        },
+                        success: function (data) {
+                            table.ajax.reload();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your data has been deleted.',
+                                'success'
+                            )
+                        },
+                        error: function (error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href>Your Work cannot be saved</a>'
+                            })
+                        },
+                    });
+                }
+            });
+        }
+
+    </script>
+}
