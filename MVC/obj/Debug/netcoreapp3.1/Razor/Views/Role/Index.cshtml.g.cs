@@ -91,7 +91,7 @@ namespace AspNetCore
                 ""filter"": true,
                 ""orderMulti"": false,
                 ""ajax"": {
-                    ""url"": ""get"",
+                    ""url"": ""Get"",
                     ""type"": ""Get"",
                     ""dataSrc"": ""result"",
                     ""beforeSend"": function (xhr) {
@@ -143,9 +143,9 @@ namespace AspNetCore
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = ""put""
+                    urlString = ""Put""
                 else
-                    urlString = ""post""
+                    urlString = ""Post""
                 $.ajax({
                     type: ""POST"",
                     url: urlString,
@@ -216,12 +216,12 @@ namespace AspNetCore
                 if (result.isConfirmed) {
                     $.ajax({
                         type: ""POST"",
-                        url: ""Compensation/Delete"",
+                        url: ""Delete"",
                         data: { 'key': roleID },
                         headers: {
                             Authorization: sessionStorage.token
-  ");
-                WriteLiteral(@"                      },
+               ");
+                WriteLiteral(@"         },
                         success: function (data) {
                             table.ajax.reload();
                             Swal.fire(
