@@ -14,14 +14,6 @@ namespace MVC.Controllers
 {
     public class RequestController : BaseController<CompensationRequest, int>
     {
-        [HttpGet]
-        [Route("Request/GetRequest")]
-        public async Task<JsonResult> CompensationRequest()
-        {
-            using var response = await httpClient.GetAsync("CompensationRequest/Request");
-            string apiResponse = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<RequestVM>>>(apiResponse);
-            return new JsonResult(result);
-        }
+        
     }
 }

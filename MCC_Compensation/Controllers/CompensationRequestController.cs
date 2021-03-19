@@ -18,28 +18,9 @@ namespace API.Controllers
 
     public class CompensationRequestController : BaseController<CompensationRequest, CompensationRequestRepository, int>
     {
-        private readonly CompensationRequestRepository _requestRepository;
-        private readonly IConfiguration _configuration;
-
-        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository, IConfiguration configuration) : base(compensationRequestRepository)
+        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository) : base(compensationRequestRepository)
         {
-            _requestRepository = compensationRequestRepository;
-            _configuration = configuration;
-        }
-
-        [HttpGet("Request")]
-        public IActionResult CompensationRequest()
-        {
-            var result = _requestRepository.Request();
-
-            if (result != null)
-            {
-                return Ok(new { status = HttpStatusCode.OK, result, message = "Data Found" });
-            }
-            else
-            {
-                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Not Found", result = "" });
-            }
+            
         }
     }
 }

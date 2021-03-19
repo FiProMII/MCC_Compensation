@@ -15,10 +15,10 @@
                     <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Compensation Name</th>
+                    <th>Submission</th>
                     <th>Event Date</th>
                     <th>Request Date</th>
-                    <th>Actions</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +30,10 @@
                     <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Compensation Name</th>
+                    <th>Submission</th>
                     <th>Event Date</th>
                     <th>Request Date</th>
-                    <th>Actions</th>
+                    <th>Details</th>
                 </tr>
             </tfoot>
         </table>
@@ -97,7 +97,6 @@
         $(document).ready(function () {
             debugger;
             table = $('#table_id').DataTable({
-                responsive: true,
                 dom: "<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
@@ -121,10 +120,11 @@
                         }
                     }
                 ],
+                "responsive": true,
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "GetRequest",
+                    "url": "Get",
                     "type": "Get",
                     "dataSrc": "result"
                 },
@@ -134,8 +134,12 @@
                         "visible": false,
                     },
                     {
-                        "targets": [0],
+                        "targets": [0, 8],
                         "orderable": false,
+                    },
+                    {
+                        "targets": [0, 1, 3, 5, 6, 7, 8],
+                        "className": "text-center",
                     }
                 ],
                 "columns": [
@@ -148,15 +152,15 @@
                         }
                     },
                     { "data": 'requestID' },
-                    { "data": 'applicantsName' },
+                    { "data": 'employee.employeeName' },
                     {
-                        "data": 'joinDate',
+                        "data": 'employee.joinDate',
                         "render": function (data, type, row) {
                             return moment(data).format('DD/MM/YYYY');
                         }
                     },
-                    { "data": 'manager' },
-                    { "data": 'compensationName' },
+                    { "data": 'employee.manager.employeeName' },
+                    { "data": 'compensation.compensationName' },
                     {
                         "data": 'eventDate',
                         "render": function (data, type, row) {
@@ -172,88 +176,15 @@
                     {
                         "data": 'requestID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Details"  onclick="Get(\'' + row['requestID'] + '\')"><i class="fas fa-info-circle"></i> Details</a> '      
+                            return '<a class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" title="Detail Document"  onclick="GetDocument(\'' + row['requestID'] + '\')"><i class="fas fa-file"></i> Document</a> ' +
+                                '<a class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="Approval Status"  onclick="GetStatus(\'' + row['requestID'] + '\')"><i class="fas fa-history"></i> Status</a> '
                         }
                     }
                 ]
             });
         });
 
-        function Readonly() {
-            $('#NIK').attr('readonly', false);
-            $('#Email').attr('readonly', false);
-            validator.resetForm();
-        }
-
-        var validator = $("#form").validate({
-            rules: {
-                EmployeeName: "required",
-                Email: {
-                    required: true,
-                    email: true
-                },
-                Phone: {
-                    required: true,
-                    number: true,
-                    minlength: 10
-                },
-                Address: "required",
-                BirthPlace: "required",
-                BirthDate: {
-                    required: true,
-                    date: true
-                },
-                JoinDate: {
-                    required: true,
-                    date: true
-                },
-                Position: "required"
-            },
-            messages: {
-                EmployeeName: "Please enter employee name"
-            },
-            submitHandler: function (form) {
-                var form = $(form);
-                var urlString;
-                if (isUpdate == 1)
-                    urlString = "put"
-                else
-                    urlString = "post"
-                $.ajax({
-                    type: "POST",
-                    url: urlString,
-                    data: form.serialize(),
-                    success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
-                        Swal.fire({
-                            employee: 'center',
-                            icon: 'success',
-                            title: 'Your data has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    },
-                    error: function (error) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            footer: '<a href>Your Work cannot be saved</a>'
-                        })
-                    }
-                });
-            }
-        });
-
-        function reset() {
-            isUpdate = 0;
-            $('#form').trigger('reset');
-        }
-
-        function Get(id) {
-            $('#NIK').attr('readonly', true);
-            $('#Email').attr('readonly', true);
+        function GetDocument(requestID) {
             $.ajax({
                 url: "GetById",
                 type: "GET",
@@ -274,38 +205,23 @@
             });
         }
 
-        function Delete(id) {
-            swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "POST",
-                        url: "delete",
-                        data: { 'key': id },
-                        success: function (data) {
-                            table.ajax.reload();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your data has been deleted.',
-                                'success'
-                            )
-                        },
-                        error: function (error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!',
-                                footer: '<a href>Your Work cannot be saved</a>'
-                            })
-                        },
-                    });
+        function GetStatus(requestID) {
+            $.ajax({
+                url: "GetById",
+                type: "GET",
+                data: { 'key': id },
+                success: function (result) {
+                    $('#modal').modal('show');
+                    var data = result["result"];
+                    console.log(data)
+                    $('#RequesetID').val(data.requestID);
+                    $('#EmployeeName').val(data.employee.employeeName);
+                    $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#Manager').val(data.manager.employeeName);
+                    $('#CompensationName').val(data.compensation.compensationName);
+                    $('#EventDate').val(moment(data.eventDate).format('YYYY-MM-DD'));
+                    $('#RequestDate').val(moment(data.requestDate).format('YYYY-MM-DD'));
+                    isUpdate = 1;
                 }
             });
         }
