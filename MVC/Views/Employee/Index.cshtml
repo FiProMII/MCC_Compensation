@@ -80,6 +80,9 @@
                                 <label for="address" class="col-form-label">Address</label>
                                 <input type="text" class="form-control" name="Address" id="Address">
                             </div>
+                            <div class="form-check" id="roleCheckbox">
+                                <label for="role" class="form-check-label">Role</label>
+                            </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -95,12 +98,16 @@
                                 <input type="date" class="form-control" name="JoinDate" id="JoinDate">
                             </div>
                             <div class="form-group">
+                                <label for="departmentDropdown" class="col-form-label">Department</label>
+                                <select class="form-control" id="DepartmentDropdown" name="DepartmentDropdown"></select>
+                            </div>
+                            <div class="form-group">
                                 <label for="positionID" class="col-form-label">Position</label>
                                 <select class="form-control" id="PositionID" name="PositionID"></select>
                             </div>
                             <div class="form-group">
                                 <label for="managerNIK" class="col-form-label">Manager</label>
-                                <input type="text" class="form-control" name="ManagerNIK" id="ManagerNIK">
+                                <select class="form-control" id="ManagerNIK" name="ManagerNIK"></select>
                             </div>
                         </div>
                     </div>
@@ -121,15 +128,71 @@
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: '/position/get',
+                url: '/role/get',
                 success: function (result) {
                     var data = result['result']
-                    var s = '<option value="-1">Please Select a Position</option>';
                     for (var i = 0; i < data.length; i++) {
-                        s += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
+                        var roleCheckbox = '<br><input type="checkbox" class="form-check-input" name="' + data[i].roleName + '"value="' + data[i].roleID + '"> ' + data[i].roleName;
+                        $("#roleCheckbox").append(roleCheckbox);
                     }
-                    $("#PositionID").html(s);
                 }
+            });
+
+            var departmentDropdown = '<option value="-1">Please select a department</option>';
+            $.ajax({
+                type: "GET",
+                url: '/department/get',
+                success: function (result) {
+                    var data = result['result']
+                    for (var i = 0; i < data.length; i++) {
+                        departmentDropdown += '<option value="' + data[i].departmentID + '">' + data[i].departmentName + '</option>';
+                        $("#DepartmentDropdown").html(departmentDropdown);
+                    }
+                }
+            });
+
+            $("select#DepartmentDropdown").on('change', function () {
+                var selectedDepartment = $('#DepartmentDropdown option:selected').val();
+                $.ajax({
+                    type: "GET",
+                    url: '/position/get',
+                    success: function (result) {
+                        var positionDropdown = '<option value="-1">Please select a position</option>';
+                        var data = result['result']
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].departmentID == selectedDepartment) {
+                                positionDropdown += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
+                                $("#PositionID").html(positionDropdown);
+                            }
+                        }
+                    }
+                });
+
+
+                $("select#PositionID").on('change', function () {
+                    var selectedPosition = $('#PositionID option:selected').text();
+                    console.log(selectedPosition)
+                    $.ajax({
+                        type: "GET",
+                        url: '/employee/get',
+                        success: function (result) {
+                            var managerDropdown = '<option value="-1">Please select a manager</option>';
+                            var data = result['result']
+                            if (selectedPosition != "RM" && selectedPosition != "RM ") {
+                                managerDropdown = '<option value="-1">Please select a manager</option>';
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].position.departmentID == selectedDepartment) {
+                                        managerDropdown += '<option value="' + data[i].employeeNIK + '">' + data[i].employeeName + '</option>';
+                                        $("#ManagerNIK").html(managerDropdown);
+                                    }
+                                }
+                            } else {
+                                managerDropdown = '< option value = "-1" > Please select a manager</option >';
+                                $("#ManagerNIK").html(managerDropdown);
+                            }
+                        }
+                    });
+                })
             });
 
             table = $('#table_id').DataTable({
@@ -200,7 +263,14 @@
                         }
                     },
                     { "data": 'position.positionName' },
-                    { "data": 'manager.employeeName' },
+                    {
+                        "data": 'manager',
+                        "render": function (data) {
+                            if (data!= null)
+                                return data.employeeName
+                            return ''
+                        }
+                    },
                     {
                         "data": 'nik',
                         "render": function (data, type, row, meta) {
@@ -251,6 +321,7 @@
                     urlString = "put"
                 else
                     urlString = "post"
+
                 $.ajax({
                     type: "POST",
                     url: urlString,
@@ -281,6 +352,7 @@
         function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
+            $('#PositionID').empty();
         }
 
         function Get(id) {
@@ -291,7 +363,6 @@
                 success: function (result) {
                     $('#modal').modal('show');
                     var data = result["result"];
-                    console.log(data)
                     $('#NIK').val(data.nik);
                     $('#EmployeeName').val(data.employeeName);
                     $('#Email').val(data.email);
@@ -300,6 +371,7 @@
                     $('#BirthPlace').val(data.birthPlace);
                     $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
                     $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#DepartmentDropdown').val(data.position.departmentID).change();
                     $('#PositionID').val(data.positionID);
                     $('#ManagerNIK').val(data.manager.nik)
                     isUpdate = 1;
