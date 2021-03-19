@@ -1,4 +1,4 @@
-﻿using API.Repositories.Interface;
+﻿using API.Repository.Interface;
 using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

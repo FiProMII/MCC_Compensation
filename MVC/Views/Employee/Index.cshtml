@@ -40,7 +40,7 @@
                     <th>Address</th>
                     <th>Birth</th>
                     <th>Join Date</th>
-                    <th>Employee</th>
+                    <th>Position</th>
                     <th>Manager</th>
                     <th>Actions</th>
                 </tr>
@@ -134,7 +134,9 @@
 
             table = $('#table_id').DataTable({
                 responsive: true,
-                dom: '<"top"lBf>rtip<"bottom">',
+                dom: "<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
                 buttons: [
                     {
                         extend: 'csv',
@@ -153,8 +155,7 @@
                         exportOptions: {
                             columns: [0, 2]
                         }
-                    },
-                    'colvis'
+                    }
                 ],
                 "filter": true,
                 "orderMulti": false,
@@ -169,7 +170,7 @@
                         "visible": false,
                     },
                     {
-                        "targets": [0],
+                        "targets": [0, 4, 10],
                         "orderable": false,
                     }
                 ],
@@ -190,13 +191,13 @@
                     {
                         "data": 'birth',
                         "render": function (data, type, row, meta) {
-                            return row['birthPlace'] + ', ' + moment(row['birthDate']).format('L')
+                            return row['birthPlace'] + ', ' + moment(row['birthDate']).format('DD/MM/YYYY')
                         }
                     },
                     {
                         "data": 'joinDate',
-                        "render": function (data) {
-                            return moment(data).format('L')
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
                         }
                     },
                     { "data": 'position.positionName' },
@@ -213,7 +214,8 @@
         });
 
         function Readonly() {
-            $('#employeeID').attr('readonly', false);
+            $('#NIK').attr('readonly', false);
+            $('#Email').attr('readonly', false);
             validator.resetForm();
         }
 
@@ -284,6 +286,8 @@
         }
 
         function Get(id) {
+            $('#NIK').attr('readonly', true);
+            $('#Email').attr('readonly', true);
             $.ajax({
                 url: "GetById",
                 type: "GET",
@@ -301,7 +305,7 @@
                     $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
                     $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
                     $('#PositionID').val(data.positionID);
-                    $('#ManagerNIK').val(data.manager.nik)
+                    $('#ManagerNIK').val(data.manager.nik);
                     isUpdate = 1;
                 }
             });

@@ -11,7 +11,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Repositories.Data
+namespace API.Repository.Data
 {
     public class AccountRepository : GeneralRepository<MyContext, Account, string>
     {

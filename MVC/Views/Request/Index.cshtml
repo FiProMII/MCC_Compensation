@@ -1,112 +1,132 @@
 ﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Compensation";
+    ViewBag.Title = "Compensation Request";
 }
 
 <div class="container">
     <h2 class="page-header">
-        Data Compensation
+        Compensation Request
     </h2>
     <div>
         <table id="table_id" class="table table-sm table-striped table-bordered m-2">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Applicant's Name</th>
+                    <th>No.</th>
+                    <th>Request ID</th>
+                    <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Application Request</th>
+                    <th>Compensation Name</th>
                     <th>Event Date</th>
                     <th>Request Date</th>
-                    <th>Approval Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No</th>
-                    <th>Applicant's Name</th>
+                    <th>No.</th>
+                    <th>Request ID</th>
+                    <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Application Request</th>
+                    <th>Compensation Name</th>
                     <th>Event Date</th>
                     <th>Request Date</th>
-                    <th>Approval Status</th>
+                    <th>Actions</th>
                 </tr>
             </tfoot>
         </table>
     </div>
-    <div id="chart"></div>
-    <div id="chart2"></div>
 </div>
 
 <div class="modal fade" role="dialog" id="modal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Compensation</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Employee</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="Readonly()">&times;</span></button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
-                    <input type="hidden" class="form-control" name="CompensationID" id="CompensationID">
-                    <div class="form-group">
-                        <label for="compensationName" class="col-form-label">Compensation Name</label>
-                        <input type="text" class="form-control" name="CompensationName" id="CompensationName">
-                    </div>
-                    <div class="form-group">
-                        <label for="cost" class="col-form-label">Cost</label>
-                        <input type="text" class="form-control" name="Cost" id="Cost">
+                    <div class="form-row">
+                        <div class="col-6">
+                            <input type="hidden" class="form-control" name="RequestID" id="RequestID" />
+                            <div class="form-group">
+                                <label for="employeeName" class="col-form-label">Applicant's Name</label>
+                                <input type="text" class="form-control" name="EmployeeName" id="EmployeeName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="joinDate" class="col-form-label">Join Date</label>
+                                <input type="date" class="form-control" name="JoinDate" id="JoinDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="manager" class="col-form-label">Manager</label>
+                                <input type="text" class="form-control" name="Manager" id="Manager">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="compensationName" class="col-form-label">Compensation Name</label>
+                                <input type="text" class="form-control" name="CompensationName" id="CompensastionName">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDate" class="col-form-label">Event Date</label>
+                                <input type="date" class="form-control" name="EventDate" id="EventDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="RequestDate" class="col-form-label">Request Date</label>
+                                <input type="date" class="form-control" name="RequestDate" id="RequestDate">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Sumbit">Submit</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
+                <button class="btn btn-primary" type="submit" form="form" id="Submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
 @section scripts
 {
     <script>
-        var isUpdate;
+        var isUpdate = 0;
         $(document).ready(function () {
+            debugger;
             table = $('#table_id').DataTable({
                 responsive: true,
-                dom: '<"top"lBf>rtip<"bottom">',
+                dom: "<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
                 buttons: [
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
-                    },
-                    'colvis'
+                    }
                 ],
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "Get",
+                    "url": "GetRequest",
                     "type": "Get",
-                    "dataSrc": "result",
-                    "beforeSend": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
+                    "dataSrc": "result"
                 },
                 "columnDefs": [
                     {
@@ -114,7 +134,7 @@
                         "visible": false,
                     },
                     {
-                        "targets": [2, 4],
+                        "targets": [0],
                         "orderable": false,
                     }
                 ],
@@ -127,57 +147,87 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": 'compensationID' },
+                    { "data": 'requestID' },
+                    { "data": 'applicantsName' },
+                    {
+                        "data": 'joinDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    { "data": 'manager' },
                     { "data": 'compensationName' },
                     {
-                        "data": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
+                        "data": 'eventDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
                     },
                     {
-                        "data": 'compensationID',
+                        "data": 'requestDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    {
+                        "data": 'requestID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['compensationID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['compensationID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Details"  onclick="Get(\'' + row['requestID'] + '\')"><i class="fas fa-info-circle"></i> Details</a> '      
                         }
                     }
                 ]
             });
         });
 
+        function Readonly() {
+            $('#NIK').attr('readonly', false);
+            $('#Email').attr('readonly', false);
+            validator.resetForm();
+        }
+
         var validator = $("#form").validate({
             rules: {
-                CompensationName: "required",
-                Cost: {
+                EmployeeName: "required",
+                Email: {
                     required: true,
-                    digits: true
-                }
+                    email: true
+                },
+                Phone: {
+                    required: true,
+                    number: true,
+                    minlength: 10
+                },
+                Address: "required",
+                BirthPlace: "required",
+                BirthDate: {
+                    required: true,
+                    date: true
+                },
+                JoinDate: {
+                    required: true,
+                    date: true
+                },
+                Position: "required"
             },
             messages: {
-                CompensationName: "Please enter Compensation Name",
-                Cost: {
-                    required: "Please type the Cost",
-                    number: "Please type only numbers"
-                }
+                EmployeeName: "Please enter employee name"
             },
             submitHandler: function (form) {
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "Put"
+                    urlString = "put"
                 else
-                    urlString = "Post"
+                    urlString = "post"
                 $.ajax({
                     type: "POST",
                     url: urlString,
-                    headers: {
-                        Authorization: sessionStorage.token
-                    },
                     data: form.serialize(),
                     success: function (data) {
                         $('#modal').modal('hide');
                         table.ajax.reload();
                         Swal.fire({
-                            position: 'center',
+                            employee: 'center',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -201,28 +251,30 @@
             $('#form').trigger('reset');
         }
 
-        function Get(compensationID) {
-            debugger;
+        function Get(id) {
+            $('#NIK').attr('readonly', true);
+            $('#Email').attr('readonly', true);
             $.ajax({
                 url: "GetById",
                 type: "GET",
-                data: { 'key': compensationID },
-                headers: {
-                    Authorization: sessionStorage.token
-                },
+                data: { 'key': id },
                 success: function (result) {
                     $('#modal').modal('show');
-                    var data = result['result'];
-                    $('#CompensationID').val(data.compensationID);
-                    $('#CompensationName').val(data.compensationName);
-                    $('#Cost').val(data.cost);
+                    var data = result["result"];
+                    console.log(data)
+                    $('#RequesetID').val(data.requestID);
+                    $('#EmployeeName').val(data.employee.employeeName);
+                    $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#Manager').val(data.manager.employeeName);
+                    $('#CompensationName').val(data.compensation.compensationName);
+                    $('#EventDate').val(moment(data.eventDate).format('YYYY-MM-DD'));
+                    $('#RequestDate').val(moment(data.requestDate).format('YYYY-MM-DD'));
                     isUpdate = 1;
                 }
             });
         }
 
-        function Delete(compensationID) {
-            debugger;
+        function Delete(id) {
             swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -235,11 +287,8 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "Delete",
-                        data: { 'key': compensationID },
-                        headers: {
-                            Authorization: sessionStorage.token
-                        },
+                        url: "delete",
+                        data: { 'key': id },
                         success: function (data) {
                             table.ajax.reload();
                             Swal.fire(

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Repositories.Interface
+namespace API.Repository.Interface
 {
     public interface IDapperRepository<Entity> where Entity : class
     {
