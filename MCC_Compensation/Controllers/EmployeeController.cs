@@ -1,6 +1,6 @@
 ﻿using API.Base.Controller;
 using API.Models;
-using API.Repositories.Data;
+using API.Repository.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

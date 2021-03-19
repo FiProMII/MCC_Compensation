@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b", @"/Views/Account/Login.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"df6a72fa479be4f1b817342d7a0bfa9241e67de5", @"/Views/Account/Login.cshtml")]
     public class Views_Account_Login : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/css/bootstrap.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -21,6 +21,7 @@ namespace AspNetCore
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_3 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("height", new global::Microsoft.AspNetCore.Html.HtmlString("50"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_4 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString("logo"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_5 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/js/bootstrap.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_6 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         #line hidden
         #pragma warning disable 0649
         private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
@@ -48,14 +49,14 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Login.cshtml"
-   ViewBag.Title = "Login";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Login.cshtml"
+   ViewBag.Title = "CA-LOGIN";
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b5225", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df6a72fa479be4f1b817342d7a0bfa9241e67de55612", async() => {
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>");
 #nullable restore
 #line 8 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Login.cshtml"
@@ -65,7 +66,7 @@ namespace AspNetCore
 #line hidden
 #nullable disable
                 WriteLiteral("</title>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b5796", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "df6a72fa479be4f1b817342d7a0bfa9241e67de56181", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -92,7 +93,7 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b7797", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df6a72fa479be4f1b817342d7a0bfa9241e67de58182", async() => {
                 WriteLiteral(@"
     <header class=""mt-auto py-3 bg-transparent"">
         <div style=""position: relative; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center"">
@@ -105,10 +106,10 @@ namespace AspNetCore
                 <div class=""card-body"">
                     <h3 class=""text-center m-0"">
                         <a");
-                BeginWriteAttribute("href", " href=\"", 828, "\"", 835, 0);
+                BeginWriteAttribute("href", " href=\"", 831, "\"", 838, 0);
                 EndWriteAttribute();
                 WriteLiteral(" class=\"logo logo-admin\">\r\n                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b8734", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "df6a72fa479be4f1b817342d7a0bfa9241e67de59119", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -137,9 +138,14 @@ namespace AspNetCore
                             </div>
                             <div class=""form-group"">
                                 <label for=""password"" class=""col-form-label"">Password</label>
-                                <input type=""password"" class=""form-control"" name=""Password"" id=""password-field"" placeholder=""Enter Password"" autocomplete=""off"">
+                                <input type=""password"" class=""form-control"" name=""password"" id=""password-field"" placeholder=""Enter Password"" autocomplete=""off"">
                                 ");
-                WriteLiteral(@"<span toggle=""#password-field"" class=""fa fa-fw fa-eye field-icon toggle-password""></span>
+                WriteLiteral(@"<div class=""form-group"">
+                                    <span class=""float-right"">
+                                        <input type=""checkbox"" onclick=""myFunction()""> Show Password
+                                    </span>
+                                </div>
+                                <br />
                             </div>
                             <div class=""form-group row m-t-20"">
                                 <div class=""col-sm-6"">
@@ -149,13 +155,14 @@ namespace AspNetCore
                                     </div>
                                 </div>
                                 <div class=""col-sm-6 text-right"">
-                                    <button class=""btn btn-primary"" type=""submit"">Sign in</button>
+                                    <button class=""btn btn-primary"" type=");
+                WriteLiteral(@"""submit"">Sign in</button>
                                 </div>
                             </div>
                             <div class=""form-group m-t-10 mb-0 row"">
-                                <div class=""col-12 m-");
-                WriteLiteral("t-20\">\r\n                                    <a");
-                BeginWriteAttribute("href", " href=\"", 3047, "\"", 3054, 0);
+                                <div class=""col-12 m-t-20"">
+                                    <a");
+                BeginWriteAttribute("href", " href=\"", 3276, "\"", 3283, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" class=""text-muted""><i class=""fas fa-lock""></i> Forgot your password?</a>
                                 </div>
@@ -184,7 +191,7 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n</html>\r\n\r\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17fb4d95cfc7dfab4051b8ca36a55cfa7169c27b13787", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df6a72fa479be4f1b817342d7a0bfa9241e67de514401", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -197,24 +204,36 @@ namespace AspNetCore
             }
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral("\r\n");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df6a72fa479be4f1b817342d7a0bfa9241e67de515441", async() => {
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_6);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(@"
 <link rel=""stylesheet"" href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"" />
-<script src=""https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js""></script>
-<script src=""https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js""></script>
 <script src=""https://cdn.jsdelivr.net/npm/sweetalert2@10""></script>
 
 <script>
-        $(""#loginForm"").submit(function (e) {
+   $(""#loginForm"").submit(function (e) {
 
-            e.preventDefault();
+        e.preventDefault();
 
-            var form = $(this)
-            $.ajax({
-                type: ""POST"",
-                url: ""account/loginaction"",
-                data: form.serialize(),
-                success: function (data) {
-                    console.log(data['result'])
+        var form = $(this)
+        $.ajax({
+            type: ""POST"",
+            url: ""Account/LoginAction"",
+            data: form.serialize(),
+            success: function (data) {
+            console.log(data['result'])
                     //window.location.href = """);
 #nullable restore
 #line 90 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Login.cshtml"
@@ -224,21 +243,19 @@ namespace AspNetCore
 #line hidden
 #nullable disable
             WriteLiteral(@""";
-                }
-            });
-
-        })
-
-        $("".toggle-password"").click(function () {
-
-            $(this).toggleClass(""fa-eye fa-eye-slash"");
-            var input = $($(this).attr(""toggle""));
-            if (input.attr(""type"") == ""password"") {
-                input.attr(""type"", ""text"");
-            } else {
-                input.attr(""type"", ""password"");
             }
         });
+
+   })
+
+    function myFunction() {
+        var x = document.getElementById(""password-field"");
+        if (x.type === ""password"") {
+            x.type = ""text"";
+        } else {
+            x.type = ""password"";
+        }
+    }
 
 </script>
 ");

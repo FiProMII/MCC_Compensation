@@ -19,7 +19,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Employee\Index.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Employee\Index.cshtml"
    Layout = "_Layout";
     ViewBag.Title = "Employee";
 
@@ -66,7 +66,7 @@ namespace AspNetCore
                     <th>Address</th>
                     <th>Birth</th>
                     <th>Join Date</th>
-                    <th>Employee</th>
+                    <th>Position</th>
                     <th>Manager</th>
                     <th>Actions</th>
                 </tr>
@@ -252,11 +252,14 @@ namespace AspNetCore
 
             table = $('#table_id').DataTable({
                 responsive: true,
-                dom: '<""top""lBf>rtip<""bottom"">',
+                dom: ""<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>"" +
+                    ""<'row'<'col-sm-12'tr>>"" +
+                    ""<'row'<'col-sm-6'i><'col-sm-6'p>>"",
                 buttons: [
                     {
                         extend: 'csv',
-                        exportOptions: {
+                     ");
+                WriteLiteral(@"   exportOptions: {
                             columns: [0, 2]
                         }
                     },
@@ -270,10 +273,8 @@ namespace AspNetCore
                         extend: 'pdf',
                         exportOptions: {
                             columns: [0, 2]
-                    ");
-                WriteLiteral(@"    }
-                    },
-                    'colvis'
+                        }
+                    }
                 ],
                 ""filter"": true,
                 ""orderMulti"": false,
@@ -288,8 +289,9 @@ namespace AspNetCore
                         ""visible"": false,
                     },
                     {
-                        ""targets"": [0],
-                        ""orderable"": false,
+                        ""targets"": [0, 4, 10],
+                   ");
+                WriteLiteral(@"     ""orderable"": false,
                     }
                 ],
                 ""columns"": [
@@ -310,13 +312,14 @@ namespace AspNetCore
                     {
                         ""data"": 'birth',
                         ""render"": function (data, type, row, meta) {
-                            return row['birthPlace'] + ', ' + moment(row['birthDate']).format('L')
+                            return row['birthPlace'] + ', ' + moment(row['birthDate']).format('DD/MM/YYYY')
                         }
                     },
                     {
-                        ""data"": 'joinDate',
-                        ""render"": function (data) {
-                            return moment(data).format('L')
+                        ""data"": 'joinDate',");
+                WriteLiteral(@"
+                        ""render"": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
                         }
                     },
                     { ""data"": 'position.positionName' },
@@ -341,7 +344,9 @@ namespace AspNetCore
         });
 
         function Readonly() {
-            $('#employeeID').attr('readonly', false);
+            $('#NIK').attr('readonly', f");
+                WriteLiteral(@"alse);
+            $('#Email').attr('readonly', false);
             validator.resetForm();
         }
 
@@ -388,7 +393,6 @@ namespace AspNetCore
                     urlString = ""put""
                 else
                     urlString = ""post""
-
                 $.ajax({
                     type: ""POST"",
                     url: urlString,
@@ -422,7 +426,8 @@ namespace AspNetCore
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Something went wrong!',
+                            t");
+                WriteLiteral(@"ext: 'Something went wrong!',
                             footer: '<a href>Your Work cannot be saved</a>'
                         })
                     }
@@ -437,6 +442,8 @@ namespace AspNetCore
         }
 
         function Get(id) {
+            $('#NIK').attr('readonly', true);
+            $('#Email').attr('readonly', true);
             $.ajax({
                 url: ""GetById"",
                 type: ""GE");
@@ -450,12 +457,13 @@ namespace AspNetCore
                     $('#Email').val(data.email);
                     $('#Phone').val(data.phone);
                     $('#Address').val(data.address);
-                    $('#BirthPlace').val(data.birthPlace);
+          ");
+                WriteLiteral(@"          $('#BirthPlace').val(data.birthPlace);
                     $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
                     $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
                     $('#DepartmentDropdown').val(data.position.departmentID).change();
                     $('#PositionID').val(data.positionID);
-                    $('#ManagerNIK').val(data.manager.nik)
+                    $('#ManagerNIK').val(data.manager.nik);
                     isUpdate = 1;
                 }
             });
@@ -476,7 +484,8 @@ namespace AspNetCore
                     $.ajax({
                         type: ""POST"",
                         url: ""delete"",
-                        data: { 'key': id },
+                        data: { ");
+                WriteLiteral(@"'key': id },
                         success: function (data) {
                             table.ajax.reload();
                             Swal.fire(

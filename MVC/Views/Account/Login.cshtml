@@ -1,4 +1,4 @@
-﻿@{ ViewBag.Title = "Login";}
+﻿@{ ViewBag.Title = "CA-LOGIN";}
 
 <!DOCTYPE html>
 
@@ -35,8 +35,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="col-form-label">Password</label>
-                                <input type="password" class="form-control" name="Password" id="password-field" placeholder="Enter Password" autocomplete="off">
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <input type="password" class="form-control" name="password" id="password-field" placeholder="Enter Password" autocomplete="off">
+                                <div class="form-group">
+                                    <span class="float-right">
+                                        <input type="checkbox" onclick="myFunction()"> Show Password
+                                    </span>
+                                </div>
+                                <br />
                             </div>
                             <div class="form-group row m-t-20">
                                 <div class="col-sm-6">
@@ -70,38 +75,35 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
-        $("#loginForm").submit(function (e) {
+   $("#loginForm").submit(function (e) {
 
-            e.preventDefault();
+        e.preventDefault();
 
-            var form = $(this)
-            $.ajax({
-                type: "POST",
-                url: "account/loginaction",
-                data: form.serialize(),
-                success: function (data) {
-                    console.log(data['result'])
+        var form = $(this)
+        $.ajax({
+            type: "POST",
+            url: "Account/LoginAction",
+            data: form.serialize(),
+            success: function (data) {
+            console.log(data['result'])
                     //window.location.href = "@Url.Action("Index", "Person")";
-                }
-            });
-
-        })
-
-        $(".toggle-password").click(function () {
-
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
             }
         });
+
+   })
+
+    function myFunction() {
+        var x = document.getElementById("password-field");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
 </script>

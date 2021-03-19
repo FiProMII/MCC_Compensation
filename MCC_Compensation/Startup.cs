@@ -1,5 +1,5 @@
 using API.Context;
-using API.Repositories.Data;
+using API.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,8 +57,10 @@ namespace MCC_Compensation
             services.AddScoped<StatusRepository>();
 
             services.AddDbContext<MyContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MyContext"))
-                .UseLazyLoadingProxies());
+                options.UseSqlServer(Configuration.GetConnectionString("MyContext")).UseLazyLoadingProxies());
+
+           /* services.AddDbContext<MyContext>(options =>
+                options.UseLazyLoadingProxies());*/
 
             services.AddSwaggerGen(c =>
             {

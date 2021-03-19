@@ -1,6 +1,6 @@
 ﻿using API.Base.Controller;
 using API.Models;
-using API.Repositories.Data;
+using API.Repository.Data;
 using API.Services;
 using API.ViewModels;
 using Microsoft.AspNetCore.Authorization;

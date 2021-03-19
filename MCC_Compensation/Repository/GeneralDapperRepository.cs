@@ -1,4 +1,4 @@
-using API.Repositories.Interface;
+using API.Repository.Interface;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Repositories
+namespace API.Repository
 {
     public class GeneralDapperRepository<Entity> : IDapperRepository<Entity> where Entity : class
     {

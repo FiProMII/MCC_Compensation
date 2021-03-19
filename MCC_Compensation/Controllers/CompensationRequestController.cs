@@ -1,11 +1,14 @@
 ﻿using API.Base.Controller;
 using API.Models;
-using API.Repositories.Data;
+using API.Repository.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -17,7 +20,7 @@ namespace API.Controllers
     {
         public CompensationRequestController(CompensationRequestRepository compensationRequestRepository) : base(compensationRequestRepository)
         {
-
+            
         }
     }
 }

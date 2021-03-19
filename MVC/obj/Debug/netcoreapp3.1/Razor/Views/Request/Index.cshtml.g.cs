@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"858605e1f28864e33a942f2b0d2a6fe03b4cf7f7", @"/Views/Request/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ce34fa54d10da807c2e28437f889d26e36c9304c", @"/Views/Request/Index.cshtml")]
     public class Views_Request_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -21,7 +21,7 @@ namespace AspNetCore
 #nullable restore
 #line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Request\Index.cshtml"
    Layout = "_Layout";
-    ViewBag.Title = "Compensation";
+    ViewBag.Title = "Compensation Request";
 
 #line default
 #line hidden
@@ -29,113 +29,129 @@ namespace AspNetCore
             WriteLiteral(@"
 <div class=""container"">
     <h2 class=""page-header"">
-        Data Compensation
+        Compensation Request
     </h2>
     <div>
         <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Applicant's Name</th>
+                    <th>No.</th>
+                    <th>Request ID</th>
+                    <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Application Request</th>
+                    <th>Submission</th>
                     <th>Event Date</th>
                     <th>Request Date</th>
-                    <th>Approval Status</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No</th>
-                    <th>Applicant's Name</th>
+                    <th>No.</th>
+                    <th>Request ID</th>
+                    <th>Applicants Name</th>
                     <th>Join Date</th>
                     <th>Manager</th>
-                    <th>Application Request</th>
+                    <th>Submission</th>
                     <th>Event Date</th>
-                    <th>Request Date</th>
-                    <th>App");
-            WriteLiteral(@"roval Status</th>
+           ");
+            WriteLiteral(@"         <th>Request Date</th>
+                    <th>Details</th>
                 </tr>
             </tfoot>
         </table>
     </div>
-    <div id=""chart""></div>
-    <div id=""chart2""></div>
 </div>
 
 <div class=""modal fade"" role=""dialog"" id=""modal"">
-    <div class=""modal-dialog modal-sm"">
+    <div class=""modal-dialog"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"">Compensation</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"">&times;</span></button>
+                <h4 class=""modal-title"">Employee</h4>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"" onclick=""Readonly()"">&times;</span></button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
-                    <input type=""hidden"" class=""form-control"" name=""CompensationID"" id=""CompensationID"">
-                    <div class=""form-group"">
-                        <label for=""compensationName"" class=""col-form-label"">Compensation Name</label>
-                        <input type=""text"" class=""form-control"" name=""CompensationName"" id=""CompensationName"">
-                    <");
-            WriteLiteral(@"/div>
-                    <div class=""form-group"">
-                        <label for=""cost"" class=""col-form-label"">Cost</label>
-                        <input type=""text"" class=""form-control"" name=""Cost"" id=""Cost"">
+                    <div class=""form-row"">
+                        <div class=""col-6"">
+                            <input type=""hidden"" class=""form-control"" name=""RequestID"" id=""RequestID"" />
+                            <div class=""form-group"">
+                                <label for=""employeeName"" class=""col-form-label"">Applicant's Name</label>
+                               ");
+            WriteLiteral(@" <input type=""text"" class=""form-control"" name=""EmployeeName"" id=""EmployeeName"" />
+                            </div>
+                            <div class=""form-group"">
+                                <label for=""joinDate"" class=""col-form-label"">Join Date</label>
+                                <input type=""date"" class=""form-control"" name=""JoinDate"" id=""JoinDate"">
+                            </div>
+                            <div class=""form-group"">
+                                <label for=""manager"" class=""col-form-label"">Manager</label>
+                                <input type=""text"" class=""form-control"" name=""Manager"" id=""Manager"">
+                            </div>
+                        </div>
+                        <div class=""col-6"">
+                            <div class=""form-group"">
+                                <label for=""compensationName"" class=""col-form-label"">Compensation Name</label>
+                                <input type=""text"" class=""form-control"" name=""Compensat");
+            WriteLiteral(@"ionName"" id=""CompensastionName"">
+                            </div>
+                            <div class=""form-group"">
+                                <label for=""eventDate"" class=""col-form-label"">Event Date</label>
+                                <input type=""date"" class=""form-control"" name=""EventDate"" id=""EventDate"">
+                            </div>
+                            <div class=""form-group"">
+                                <label for=""RequestDate"" class=""col-form-label"">Request Date</label>
+                                <input type=""date"" class=""form-control"" name=""RequestDate"" id=""RequestDate"">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-");
+                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button");
+            WriteLiteral(">\r\n            </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
-        var isUpdate;
+        var isUpdate = 0;
         $(document).ready(function () {
+            debugger;
             table = $('#table_id').DataTable({
-                responsive: true,
-                dom: '<""top""lBf>rtip<""bottom"">',
+                dom: ""<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>"" +
+                    ""<'row'<'col-sm-12'tr>>"" +
+                    ""<'row'<'col-sm-6'i><'col-sm-6'p>>"",
                 buttons: [
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2]
                         }
-                    },
-                    'colvis'
+                    }
                 ],
+                ""responsiv");
+                WriteLiteral(@"e"": true,
                 ""filter"": true,
                 ""orderMulti"": false,
-                ""ajax");
-                WriteLiteral(@""": {
+                ""ajax"": {
                     ""url"": ""Get"",
                     ""type"": ""Get"",
-                    ""dataSrc"": ""result"",
-                    ""beforeSend"": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
+                    ""dataSrc"": ""result""
                 },
                 ""columnDefs"": [
                     {
@@ -143,8 +159,12 @@ namespace AspNetCore
                         ""visible"": false,
                     },
                     {
-                        ""targets"": [2, 4],
+                        ""targets"": [0, 8],
                         ""orderable"": false,
+                    },
+                    {
+                        ""targets"": [0, 1, 3, 5, 6, 7, 8],
+                        ""className"": ""text-center"",
                     }
                 ],
                 ""columns"": [
@@ -153,142 +173,90 @@ namespace AspNetCore
                         ""name"": ""no"",
                         ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
+                            return meta.row + meta.settings.");
+                WriteLiteral(@"_iDisplayStart + 1;
                         }
                     },
-                    { ""data");
-                WriteLiteral(@""": 'compensationID' },
-                    { ""data"": 'compensationName' },
+                    { ""data"": 'requestID' },
+                    { ""data"": 'employee.employeeName' },
                     {
-                        ""data"": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
+                        ""data"": 'employee.joinDate',
+                        ""render"": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    { ""data"": 'employee.manager.employeeName' },
+                    { ""data"": 'compensation.compensationName' },
+                    {
+                        ""data"": 'eventDate',
+                        ""render"": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
                     },
                     {
-                        ""data"": 'compensationID',
+                        ""data"": 'requestDate',
+                        ""render"": function (data, type, row) {
+                            return moment(data).format('DD/MM/Y");
+                WriteLiteral(@"YYY');
+                        }
+                    },
+                    {
+                        ""data"": 'requestID',
                         ""render"": function (data, type, row, meta) {
-                            return '<a class=""btn btn-success"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class =""far fa-edit""></i> Edit</a> ' +
-                                '<button class=""btn btn-danger"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['compensationID'] + '\')""><i class =""far fa-trash-alt""></i> Delete</button>'
+                            return '<a class=""btn btn-outline-info"" data-toggle=""tooltip"" data-placement=""top"" title=""Detail Document""  onclick=""GetDocument(\'' + row['requestID'] + '\')""><i class=""fas fa-file""></i> Document</a> ' +
+                                '<a class=""btn btn-outline-success"" data-toggle=""tooltip"" data-placement=""top"" title=""Approval Status""  onclick=""GetStatus(\'' + row['requestID'] + '\')""><i class=""fas fa-history""></i> Status</a> '
                         }
                     }
                 ]
             });
         });
 
-        var validator = $(""#form"").validate({
-            rules: {
-                Compensa");
-                WriteLiteral(@"tionName: ""required"",
-                Cost: {
-                    required: true,
-                    digits: true
-                }
-            },
-            messages: {
-                CompensationName: ""Please enter Compensation Name"",
-                Cost: {
-                    required: ""Please type the Cost"",
-                    number: ""Please type only numbers""
-                }
-            },
-            submitHandler: function (form) {
-                var form = $(form);
-                var urlString;
-                if (isUpdate == 1)
-                    urlString = ""Put""
-                else
-                    urlString = ""Post""
-                $.ajax({
-                    type: ""POST"",
-                    url: urlString,
-                    headers: {
-                        Authorization: sessionStorage.token
-                    },
-                    data: form.serialize(),
-                    success: function (data) {
-                        $('#modal').modal('hi");
-                WriteLiteral(@"de');
-                        table.ajax.reload();
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Your data has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    },
-                    error: function (error) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            footer: '<a href>Your Work cannot be saved</a>'
-                        })
-                    }
-                });
-            }
-        });
-
-        function reset() {
-            isUpdate = 0;
-            $('#form').trigger('reset');
-        }
-
-        function Get(compensationID) {
-            debugger;
+        function GetDocument(requestID) {
             $.ajax({
-                ur");
-                WriteLiteral(@"l: ""GetById"",
+                url: ""GetById"",
                 type: ""GET"",
-                data: { 'key': compensationID },
-                headers: {
-                    Authorization: sessionStorage.token
-                },
+                data: { 'key': id },
                 success: function (result) {
                     $('#modal').modal('show');
-                    var data = result['result'];
-                    $('#CompensationID').val(data.compensationID);
-                    $('#CompensationName').val(data.compensationName);
-                    $('#Cost').val(data.cost);
+");
+                WriteLiteral(@"                    var data = result[""result""];
+                    console.log(data)
+                    $('#RequesetID').val(data.requestID);
+                    $('#EmployeeName').val(data.employee.employeeName);
+                    $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#Manager').val(data.manager.employeeName);
+                    $('#CompensationName').val(data.compensation.compensationName);
+                    $('#EventDate').val(moment(data.eventDate).format('YYYY-MM-DD'));
+                    $('#RequestDate').val(moment(data.requestDate).format('YYYY-MM-DD'));
                     isUpdate = 1;
                 }
             });
         }
 
-        function Delete(compensationID) {
-            debugger;
-            swal.fire({
-                title: 'Are you sure?',
-                text: ""You won't be able to revert this!"",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete i");
-                WriteLiteral(@"t!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: ""POST"",
-                        url: ""Delete"",
-                        data: { 'key': compensationID },
-                        headers: {
-                            Authorization: sessionStorage.token
-                        },
-                        success: function (data) {
-                            table.ajax.reload();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your data has been deleted.',
-                                'success'
-                            )
-                        },
-                        error: function (error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!',
-                                foote");
-                WriteLiteral("r: \'<a href>Your Work cannot be saved</a>\'\r\n                            })\r\n                        },\r\n                    });\r\n                }\r\n            });\r\n        }\r\n\r\n    </script>\r\n");
+        function GetStatus(requestID) {
+            $.ajax({
+                url: ""GetById"",
+                type: ""GET"",
+                data: { 'key': id },
+                success: function (result) {
+                    $('#modal').modal('show');
+                    var data = result[""result""");
+                WriteLiteral(@"];
+                    console.log(data)
+                    $('#RequesetID').val(data.requestID);
+                    $('#EmployeeName').val(data.employee.employeeName);
+                    $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
+                    $('#Manager').val(data.manager.employeeName);
+                    $('#CompensationName').val(data.compensation.compensationName);
+                    $('#EventDate').val(moment(data.eventDate).format('YYYY-MM-DD'));
+                    $('#RequestDate').val(moment(data.requestDate).format('YYYY-MM-DD'));
+                    isUpdate = 1;
+                }
+            });
+        }
+
+    </script>
+");
             }
             );
         }
