@@ -86,5 +86,18 @@ namespace MVC.Base
                 return Ok(result);
             return BadRequest(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostFromBody([FromBody] Entity entity)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(typeof(Entity).Name, content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

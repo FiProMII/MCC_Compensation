@@ -124,6 +124,27 @@
 @section scripts
 {
     <script>
+        function tes() {
+            var myCheckboxes = new Array();
+            $("input:checked").each(function () {
+                myCheckboxes.push(parseInt($(this).val()));
+            });
+
+            for (var i = 0; i < myCheckboxes.length; i++) {
+                var role = new Object();
+                role.nik = "108";
+                role.roleID = myCheckboxes[i]
+
+                $.ajax({
+                    type: "POST",
+                    url: "/AccountRole/Post",
+                    data: JSON.stringify(role),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                });
+            }
+            
+        }
         var isUpdate = 0;
         $(document).ready(function () {
             $.ajax({
@@ -171,7 +192,6 @@
 
                 $("select#PositionID").on('change', function () {
                     var selectedPosition = $('#PositionID option:selected').text();
-                    console.log(selectedPosition)
                     $.ajax({
                         type: "GET",
                         url: '/employee/get',
@@ -182,7 +202,7 @@
                                 managerDropdown = '<option value="-1">Please select a manager</option>';
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].position.departmentID == selectedDepartment) {
-                                        managerDropdown += '<option value="' + data[i].employeeNIK + '">' + data[i].employeeName + '</option>';
+                                        managerDropdown += '<option value="' + data[i].nik + '">' + data[i].employeeName + '</option>';
                                         $("#ManagerNIK").html(managerDropdown);
                                     }
                                 }
@@ -316,6 +336,13 @@
             },
             submitHandler: function (form) {
                 var form = $(form);
+
+                var nikValue = $('#NIK').val()
+                var myCheckboxes = new Array();
+                $("input:checked").each(function () {
+                    myCheckboxes.push(parseInt($(this).val()));
+                });
+
                 var urlString;
                 if (isUpdate == 1)
                     urlString = "put"
@@ -330,12 +357,25 @@
                         $('#modal').modal('hide');
                         table.ajax.reload();
                         Swal.fire({
-                            employee: 'center',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
                             timer: 1500
                         })
+
+                        for (var i = 0; i < myCheckboxes.length; i++) {
+                            var role = new Object();
+                            role.nik = nikValue;
+                            role.roleID = myCheckboxes[i]
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/AccountRole/PostFromBody",
+                                data: JSON.stringify(role),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json"
+                            });
+                        }
                     },
                     error: function (error) {
                         Swal.fire({
