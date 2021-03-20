@@ -436,7 +436,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "delete",
+                        url: "/Account/Delete",
                         data: { 'key': id },
                         success: function (data) {
                             table.ajax.reload();
