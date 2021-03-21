@@ -4,7 +4,7 @@
 
 <div class="container">
     <h2 class="page-header">
-        Data Department
+        Departments
     </h2>
 
     <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
@@ -36,7 +36,7 @@
 </div>
 
 <div class="modal fade" role="dialog" id="modal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Department</h4>
@@ -70,7 +70,9 @@
         $(document).ready(function () {
             table = $('#table_id').DataTable({
                 responsive: true,
-                dom: '<"top"lBf>rtip<"bottom">',
+                dom: "<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
                 buttons: [
                     {
                         extend: 'csv',
@@ -89,8 +91,7 @@
                         exportOptions: {
                             columns: [0, 2]
                         }
-                    },
-                    'colvis'
+                    }
                 ],
                 "filter": true,
                 "orderMulti": false,

@@ -31,7 +31,8 @@ namespace API.Context
             modelBuilder.Entity<Account>()
                 .HasOne(a => a.Employee)
                 .WithOne(e => e.Account)
-                .HasForeignKey<Employee>(a => a.NIK);
+                .HasForeignKey<Employee>(a => a.NIK)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Position)
@@ -39,7 +40,9 @@ namespace API.Context
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Manager)
-                .WithMany();
+                .WithMany()
+                .HasForeignKey(e => e.ManagerNIK)
+                .IsRequired(false);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.CompensationRequests)
@@ -56,7 +59,8 @@ namespace API.Context
             modelBuilder.Entity<AccountRole>()
                 .HasOne(a => a.Account)
                 .WithMany(ar => ar.AccountRoles)
-                .HasForeignKey(a => a.NIK);
+                .HasForeignKey(a => a.NIK)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<AccountRole>()
                 .HasOne(r => r.Role)
@@ -83,7 +87,8 @@ namespace API.Context
 
             modelBuilder.Entity<Department>()
                 .HasMany(a => a.Approvals)
-                .WithOne(a => a.Department);
+                .WithOne(a => a.Department)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
