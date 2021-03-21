@@ -2,7 +2,7 @@
     ViewBag.Title = "Employee";
 }
 
-<div class="container">
+<div class="container" id="employee">
     <h2 class="page-header">
         Data Employee
     </h2>
@@ -416,7 +416,7 @@
                     $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
                     $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
                     $('#DepartmentDropdown').val(data.position.departmentID).change();
-                    $('#PositionID').val(data.positionID);
+                    $('#PositionID').val(data.positionID).change();
                     $('#ManagerNIK').val(data.manager.nik);
                     isUpdate = 1;
                 }
