@@ -40,7 +40,9 @@ namespace API.Context
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Manager)
-                .WithMany();
+                .WithMany()
+                .HasForeignKey(e => e.ManagerNIK)
+                .IsRequired(false);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.CompensationRequests)
