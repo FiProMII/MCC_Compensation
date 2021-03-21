@@ -38,7 +38,7 @@ namespace MVC.Base
             return BadRequest(result);
         }
 
-        public async Task<IActionResult> GetById(Key key)
+        public virtual async Task<IActionResult> GetById(Key key)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var response = await httpClient.GetAsync(typeof(Entity).Name + "/" + key);
@@ -50,7 +50,7 @@ namespace MVC.Base
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Entity entity)
+        public virtual async Task<IActionResult> Post(Entity entity)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
@@ -80,19 +80,6 @@ namespace MVC.Base
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             using var response = await httpClient.DeleteAsync(typeof(Entity).Name + '/' + key);
-            string apiResponse = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
-            if (response.IsSuccessStatusCode)
-                return Ok(result);
-            return BadRequest(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostFromBody([FromBody] Entity entity)
-        {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
-            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(typeof(Entity).Name, content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Entity>>(apiResponse);
             if (response.IsSuccessStatusCode)

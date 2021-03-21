@@ -44,7 +44,7 @@ namespace API.Base.Controller
         }
 
         [HttpGet("{key}")]
-        public ActionResult<Entity> Get(Key key)
+        public virtual ActionResult<Entity> Get(Key key)
         {
             ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
 
