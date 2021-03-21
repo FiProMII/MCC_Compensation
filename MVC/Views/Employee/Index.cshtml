@@ -63,6 +63,7 @@
                             <div class="form-group">
                                 <label for="nik" class="col-form-label">NIK</label>
                                 <input type="text" class="form-control" name="NIK" id="NIK">
+                                <span id="ValidationNIK" style="display: none; color: red">NIK already exist</span>
                             </div>
                             <div class="form-group">
                                 <label for="employeeName" class="col-form-label">Name</label>
@@ -71,6 +72,7 @@
                             <div class="form-group">
                                 <label for="email" class="col-form-label">Email</label>
                                 <input type="email" class="form-control" name="Email" id="Email">
+                                <span id="ValidationEmail" style="display:none; color:red">Email already exist</span>
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Phone</label>
@@ -306,11 +308,56 @@
         function Readonly() {
             $('#NIK').attr('readonly', false);
             $('#Email').attr('readonly', false);
+            $('#ValidationNIK').hide();
+            $('#ValidationEmail').hide();
             validator.resetForm();
         }
 
+        $('#NIK').change(function () {
+            var nik = this.value;
+            $.ajax({
+                url: "Validation",
+                type: "POST",
+                data: { 'Params': nik },
+                success: function (result) {
+                    if (result.status == 200) {
+                        $('#ValidationNIK').show();
+                        $('#NIK').focus(
+                            function () {
+                                $(this).val('');
+                                $('#ValidationNIK').hide();
+                            });
+                    } else {
+                        $('#ValidationNIK').hide();
+                    }
+                }
+            });
+        })
+
+        $('#Email').change(function () {
+            var email = this.value;
+            $.ajax({
+                url: "Validation",
+                type: "POST",
+                data: { 'Params': email },
+                success: function (result) {
+                    if (result.status == 200) {
+                        $('#ValidationEmail').show();
+                        $('#NIK').focus(
+                            function () {
+                                $(this).val('');
+                                $('#ValidationEmail').hide();
+                            });
+                    } else {
+                        $('#ValidationEmail').hide();
+                    }
+                }
+            });
+        })
+
         var validator = $("#form").validate({
             rules: {
+                NIK: "required",
                 EmployeeName: "required",
                 Email: {
                     required: true,
@@ -334,7 +381,28 @@
                 Position: "required"
             },
             messages: {
-                EmployeeName: "Please enter employee name"
+                NIK: "<p style='color:red'>Please enter NIK</p>",
+                EmployeeName: "<p style='color:red'>Please enter employee name</p>",
+                Email: {
+                    required: "<p style='color:red'>Please enter your email</p>",
+                    email: "<p style='color:red'>Please enter a valid email</p>"
+                },
+                Phone: {
+                    required: "<p style='color:red'>Please enter your phone number</p>",
+                    number: "<p style='color:red'>Please enter only numbers</p>",
+                    minlength: "<p style='color:red'>Minimum required 10 digits</p>"
+                },
+                Address: "<p style='color:red'>Please enter your address</p>",
+                BirthPlace: "<p stryle='color:red'>Please enter your place of birth</p>",
+                BirthDate: {
+                    required: "<p style='color:red'>please select the date you were born</p>",
+                    date: "<p stryle='color:red'>Please enter the correct date of birth</p>"
+                },
+                JoinDate: {
+                    required: "<p style='color:red'>please select the date you joined</p>",
+                    date: "<p style='color:red'>Please choose the correct date when you join</p>"
+                },
+                Position: "<p style='color:red'>please determine your current position</p>"
             },
             submitHandler: function (form) {
                 var form = $(form);
