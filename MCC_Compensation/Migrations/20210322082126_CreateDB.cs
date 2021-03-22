@@ -210,7 +210,7 @@ namespace API.Migrations
                     ApprovalID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StatusID = table.Column<int>(type: "int", nullable: false),
-                    DepartmentID = table.Column<int>(type: "int", nullable: false),
+                    NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RequestID = table.Column<int>(type: "int", nullable: false),
                     ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -218,10 +218,10 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_TB_T_Approval", x => x.ApprovalID);
                     table.ForeignKey(
-                        name: "FK_TB_T_Approval_TB_M_Department_DepartmentID",
-                        column: x => x.DepartmentID,
-                        principalTable: "TB_M_Department",
-                        principalColumn: "DepartmentID");
+                        name: "FK_TB_T_Approval_TB_M_Employee_NIK",
+                        column: x => x.NIK,
+                        principalTable: "TB_M_Employee",
+                        principalColumn: "NIK");
                     table.ForeignKey(
                         name: "FK_TB_T_Approval_TB_M_Status_StatusID",
                         column: x => x.StatusID,
@@ -262,9 +262,9 @@ namespace API.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_T_Approval_DepartmentID",
+                name: "IX_TB_T_Approval_NIK",
                 table: "TB_T_Approval",
-                column: "DepartmentID");
+                column: "NIK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_T_Approval_RequestID",

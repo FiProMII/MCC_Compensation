@@ -45,7 +45,7 @@
                 <br />
                 <div class="card m-auto">
                     <div class="card-header">Compensation Request Detail</div>
-                    <form>
+                    <form id="form">
                         <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Requester Number</label>
@@ -79,9 +79,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-12 text-right pr-5">
-                                <button class="btn btn-success" type="submit">Approve</button>
-                                <button class="btn btn-danger" type="submit">Reject</button>
+                            <div class="col-12 text-right pr-5" id="button">
+                                <button class="btn btn-success" value="2" type="submit">Approve</button>
+                                <button class="btn btn-danger" value="3" type="submit">Reject</button>
                             </div>
                         </div>
                     </form>
@@ -94,6 +94,8 @@
 @section scripts
 {
     <script>
+        var managerNIK;
+        var requestID;
         $.urlParam = function (name) {
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
             if (results == null) {
@@ -112,6 +114,8 @@
                     success: function (result) {
                         $('#modal').modal('show');
                         var data = result["result"];
+                        managerNIK = data.employee.manager.nik
+                        requestID = data.requestID
                         $('#Requester').html(data.employee.employeeName)
                         $('#DepartmentName').html(data.employee.position.department.departmentName)
                         $('#PositionName').html(data.employee.position.positionName)
@@ -131,5 +135,25 @@
                 })
             }
         });
+
+        var statusID;
+        $('.btn').click(function () {
+            statusID = parseInt($(this).val())
+        })
+
+        $('#form').submit(function (event) {
+            event.preventDefault()
+            var Approval = new Object();
+            Approval.statusID = statusID;
+            Approval.nik = managerNIK
+            Approval.requestID = requestID
+            $.ajax({
+                type: "POST",
+                url: "/Approval/Post",
+                data: JSON.stringify(Approval),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        })
     </script>
 }
