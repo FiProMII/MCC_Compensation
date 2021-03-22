@@ -11,5 +11,6 @@ namespace API.Repository.Interface
     {
         Entity SingleGet(string query, DynamicParameters parameters);
         IEnumerable<Entity> MultipleGet(string query, DynamicParameters parameters);
+        int Execute(string query, DynamicParameters parameters);
     }
 }
