@@ -226,8 +226,10 @@ namespace AspNetCore
                         url: '/employee/get',
                         success: function (result) {
                             var managerDropdown = '<option value=""-1"">Please select a manager</option>';
-                            var data = result['result']
-                            if (selectedPosition != ""RM"" && selectedPosition != ""RM "") {
+  ");
+                WriteLiteral(@"                          var data = result['result']
+                            if (selectedPosition != ""RM"") {
+                                $('#ManagerNIK').removeAttr(""disabled"");
                                 managerDropdown = '<option value=""-1"">Please select a manager</option>';
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].position.departmentID == selectedDepartment) {

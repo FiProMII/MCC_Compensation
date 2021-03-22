@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using MVC.Base;
 using Newtonsoft.Json;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace MVC.Controllers
 {
