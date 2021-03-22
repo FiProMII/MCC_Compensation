@@ -101,7 +101,7 @@ namespace API.Base.Controller
         }
 
         [HttpDelete("{key}")]
-        public ActionResult Delete(Key key)
+        public virtual ActionResult Delete(Key key)
         {
             ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
 

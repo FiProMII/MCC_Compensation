@@ -34,5 +34,11 @@ namespace API.Repository
             return result;
         }
 
+        public int Execute(string query, DynamicParameters parameters)
+        {
+            var result = _connection.Execute(query, parameters, commandType: CommandType.StoredProcedure);
+            return result;
+        }
+
     }
 }

@@ -27,5 +27,14 @@ namespace API.Repository.Data
             var result = _accountRoleRepository.MultipleGet("SP_RetrieveAccountRoleByID", _parameters);
             return result;
         }
+
+        public int DeleteAccountRoleByID(string key)
+        {
+            var _accountRoleRepository = new GeneralDapperRepository<AccountRole>(_configuration);
+
+            _parameters.Add("@nik", key);
+            var result = _accountRoleRepository.Execute("SP_DeleteAccountRoleByID", _parameters);
+            return result;
+        }
     }
 }

@@ -47,5 +47,33 @@ namespace API.Controllers
                 return StatusCode(500, responseContent);
             }
         }
+
+        [HttpDelete("{key}")]
+        public override ActionResult Delete(string key)
+        {
+            ResponseVM<AccountRole> responseContent = new ResponseVM<AccountRole>();
+
+            if (key == null)
+            {
+                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Message = "The request is incomplete or incorrect";
+                return BadRequest(responseContent);
+            }
+
+            var result = _accountRoleRepository.DeleteAccountRoleByID(key);
+
+            if (result > 0)
+            {
+                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Message = "Data deleted successfully";
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = HttpStatusCode.NotFound;
+                responseContent.Message = "Nothing changed";
+                return Ok(responseContent);
+            }
+        }
     }
 }

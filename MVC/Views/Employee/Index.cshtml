@@ -126,27 +126,24 @@
 @section scripts
 {
     <script>
+
         function tes() {
-            var myCheckboxes = new Array();
-            $("input:checked").each(function () {
-                myCheckboxes.push(parseInt($(this).val()));
+            var nik = "117104"
+            $.ajax({
+                type: "POST",
+                url: "/AccountRole/Delete",
+                data: { 'key':  nik}
             });
-
-            for (var i = 0; i < myCheckboxes.length; i++) {
-                var role = new Object();
-                role.nik = "108";
-                role.roleID = myCheckboxes[i]
-
-                $.ajax({
-                    type: "POST",
-                    url: "/AccountRole/Post",
-                    data: JSON.stringify(role),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                });
-            }
-            
         }
+
+        function selectCheckbox(value) {
+            $("[name=" + 'roles' + "]").each(function () {
+                if ($(this).val() == value) {
+                    $(this).attr('checked', true);
+                }
+            });
+        }
+
         var isUpdate = 0;
         $(document).ready(function () {
             $.ajax({
@@ -155,7 +152,7 @@
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
-                        var roleCheckbox = '<br><input type="checkbox" class="form-check-input" name="' + data[i].roleName + '"value="' + data[i].roleID + '"> ' + data[i].roleName;
+                        var roleCheckbox = '<br><input type="checkbox" class="form-check-input" name="roles" value="' + data[i].roleID + '"> ' + data[i].roleName;
                         $("#roleCheckbox").append(roleCheckbox);
                     }
                 }
@@ -200,7 +197,8 @@
                         success: function (result) {
                             var managerDropdown = '<option value="-1">Please select a manager</option>';
                             var data = result['result']
-                            if (selectedPosition != "RM" && selectedPosition != "RM ") {
+                            if (selectedPosition != "RM") {
+                                $('#ManagerNIK').removeAttr("disabled");
                                 managerDropdown = '<option value="-1">Please select a manager</option>';
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].position.departmentID == selectedDepartment) {
@@ -211,6 +209,7 @@
                             } else {
                                 managerDropdown = '< option value = "-1" > Please select a manager</option >';
                                 $("#ManagerNIK").html(managerDropdown);
+                                $('#ManagerNIK').prop("disabled", true);
                             }
                         }
                     });
@@ -433,6 +432,15 @@
                             timer: 1500
                         })
 
+                        if (isUpdate == 1) {
+                            var nik = "117104"
+                            $.ajax({
+                                type: "POST",
+                                url: "/AccountRole/Delete",
+                                data: { 'key': nikValue }
+                            });
+                        }
+
                         for (var i = 0; i < myCheckboxes.length; i++) {
                             var role = new Object();
                             role.nik = nikValue;
@@ -462,18 +470,33 @@
         function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
-            $('#PositionID').empty();
+            $('input:checkbox').removeAttr('checked');
         }
 
         function Get(id) {
             $('#NIK').attr('readonly', true);
             $('#Email').attr('readonly', true);
+
+            $.ajax({
+                url: "/AccountRole/GetById",
+                type: "GET",
+                data: { 'key': id },
+                success: function (result) {
+                    $('#modal').modal('show');
+                    var data = result["result"];
+
+                    $('input:checkbox').removeAttr('checked');
+                    for (var i = 0; i < data.length; i++) {
+                        selectCheckbox(data[i].roleID)
+                    }
+                }
+            });
+
             $.ajax({
                 url: "GetById",
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {
-                    $('#modal').modal('show');
                     var data = result["result"];
                     $('#NIK').val(data.nik);
                     $('#EmployeeName').val(data.employeeName);
@@ -483,9 +506,10 @@
                     $('#BirthPlace').val(data.birthPlace);
                     $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
                     $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
-                    $('#DepartmentDropdown').val(data.position.departmentID).change();
-                    $('#PositionID').val(data.positionID).change();
-                    $('#ManagerNIK').val(data.manager.nik);
+                    $('#DepartmentDropdown').val(data.position.departmentID).trigger("change");
+                    $('#PositionID').val(data.positionID).trigger("change");
+                    if (data.manager != null)
+                        $('#ManagerNIK').val(data.manager.nik).trigger("change");
                     isUpdate = 1;
                 }
             });
