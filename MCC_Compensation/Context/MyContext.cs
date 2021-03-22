@@ -85,9 +85,10 @@ namespace API.Context
                 .HasMany(s => s.Approvals)
                 .WithOne(a => a.Status);
 
-            modelBuilder.Entity<Department>()
-                .HasMany(a => a.Approvals)
-                .WithOne(a => a.Department)
+            modelBuilder.Entity<Approval>()
+                .HasOne(e => e.Employee)
+                .WithMany(a => a.Approvals)
+                .HasForeignKey(a => a.NIK)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

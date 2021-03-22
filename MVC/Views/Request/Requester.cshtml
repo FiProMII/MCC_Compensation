@@ -77,11 +77,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Upload Requirement Files <br /> 
-                                <span style="color:red; font-size:12px">Allowed extensions .jpg | .jpeg | .pdf</span>
+                                <label class="col-md-4 col-form-label">
+                                    Upload Requirement Files <br />
+                                    <span style="color:red; font-size:12px">Allowed extensions .jpg | .jpeg | .pdf</span>
                                 </label>
-                                <div class="col-md-7 col-form-label">
-                                    <input type="file" name="file" class="custom-file" />
+                                <div class="col-md-7 col-form-label bag">
+                                    <div class='element' id='div_1'>
+                                        <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
+                                        <span class="add btn btn-sm btn-outline-success">Add Document</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,18 +106,36 @@
     <script>
         $(document).ready(function () {
 
-            $.ajax({
-                type: "GET",
-                url: '/Employee/GET',
-                success: function (result) {
-                    var data = result["result"];
-                    $('#Requester').val(data.nik + '-' + data.employeeName);
-                    $('#DepartmentName').val(data.position.departmentName);
-                    $('#PositionName').val(data.positionName);
-                    $('#ManagerName').val(data.manager.employeeName);
+            $(".add").click(function () {
+
+                var total_element = $(".element").length;
+
+                var lastid = $(".element:last").attr("id");
+                var split_id = lastid.split("_");
+                var nextindex = Number(split_id[1]) + 1;
+
+                var max = 2;
+
+                if (total_element < max) {
+
+                    $(".element:last").after("<div class='element' id='div_" + nextindex + "'></div>");
+
+                    $("#div_" + nextindex).append("<br/><input type='file' name='file' class='custom-file' id='txt_"
+                        + nextindex + "' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_"
+                        + nextindex + "' class='remove btn btn-sm btn-outline-danger'>Abort</span>");
                 }
+
             });
 
+            $('.bag').on('click', '.remove', function () {
+
+                var id = this.id;
+                var split_id = id.split("_");
+                var deleteindex = split_id[1];
+
+                $("#div_" + deleteindex).remove();
+
+            });
         });
     </script>
 }

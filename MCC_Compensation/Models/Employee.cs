@@ -50,5 +50,8 @@ namespace API.Models
 
         [JsonIgnore]
         public virtual ICollection<CompensationRequest> CompensationRequests { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

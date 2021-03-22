@@ -476,15 +476,12 @@
         function Get(id) {
             $('#NIK').attr('readonly', true);
             $('#Email').attr('readonly', true);
-
             $.ajax({
                 url: "/AccountRole/GetById",
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {
-                    $('#modal').modal('show');
                     var data = result["result"];
-
                     $('input:checkbox').removeAttr('checked');
                     for (var i = 0; i < data.length; i++) {
                         selectCheckbox(data[i].roleID)
@@ -497,6 +494,7 @@
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {
+                    $('#modal').modal('show');
                     var data = result["result"];
                     $('#NIK').val(data.nik);
                     $('#EmployeeName').val(data.employeeName);
