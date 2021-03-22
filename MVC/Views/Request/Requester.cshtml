@@ -1,0 +1,119 @@
+﻿@{ Layout = "_Layout";
+    ViewBag.Title = "Compensation Request";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-title">
+                <br /><h4 class="card-title"><i class="fas fa-clipboard-list"></i> Compensation Request</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex-md-wrap">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-auto">
+                    <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
+                        <br />
+                        <h4>Requester Information</h4>
+                        <hr />
+                        <div class="form-group row">
+                            <label class="col-md-4">Requester</label>
+                            <span class="col-md-7" id="Requester"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Department</label>
+                            <span class="col-md-7" id="DepartmentName"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Position</label>
+                            <span class="col-md-7" id="PositionName"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Relation Manager</label>
+                            <span class="col-md-7" id="ManagerName"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">Join Date</label>
+                            <span class="col-md-7" id="ManagerName"></span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="card m-auto">
+                    <div class="card-header">Compensation Request</div>
+                    <form>
+                        <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Requester Number</label>
+                                <div class="col-md-7 col-form-label">
+                                    <span>Request ID</span>
+                                    <input type="hidden" value="requestID" name="RequestID" id="RequestID" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Compensation Type</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" id="groupType" name="groupType">
+                                        <!-- <option value="">Compensation Name</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Event Date</label>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" name="EventDate" id="EventDate">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Document Requirements</label>
+                                <div class="col-md-7 col-form-label">
+                                    <span>1. Wedding Gift: KK & KTP</span><br />
+                                    <span>2. Baby Gift: KK</span><br />
+                                    <span>3. Duka: KK</span><br />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">Upload Requirement Files <br /> 
+                                <span style="color:red; font-size:12px">Allowed extensions .jpg | .jpeg | .pdf</span>
+                                </label>
+                                <div class="col-md-7 col-form-label">
+                                    <input type="file" name="file" class="custom-file" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 text-right pr-5">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: '/Employee/GET',
+                success: function (result) {
+                    var data = result["result"];
+                    $('#Requester').val(data.nik + '-' + data.employeeName);
+                    $('#DepartmentName').val(data.position.departmentName);
+                    $('#PositionName').val(data.positionName);
+                    $('#ManagerName').val(data.manager.employeeName);
+                }
+            });
+
+        });
+    </script>
+}

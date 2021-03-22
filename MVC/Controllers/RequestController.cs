@@ -14,6 +14,8 @@ namespace MVC.Controllers
 {
     public class RequestController : BaseController<CompensationRequest, int>
     {
-        
+        public ViewResult Requester() => View();
+
+        public ViewResult Approval() => View();
     }
 }
