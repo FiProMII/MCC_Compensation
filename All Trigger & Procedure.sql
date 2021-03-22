@@ -1,5 +1,5 @@
 
-//set managerNIK to null when manager is deleted
+-- set managerNIK to null when manager is deleted
 CREATE OR ALTER   TRIGGER [dbo].[T_DeleteManager] ON [dbo].[TB_M_Account]
 INSTEAD OF DELETE AS
 BEGIN
@@ -15,9 +15,10 @@ BEGIN
 	ELSE
 		DELETE FROM TB_M_Account WHERE NIK = @nik
 END
+GO
 
-//insert account with default pass before inserting to employee
-CREATE OR ALTER   TRIGGER [dbo].[T_Employee] ON [dbo].[TB_M_Employee]
+-- insert account with default pass before inserting to employee
+CREATE OR ALTER TRIGGER [dbo].[T_Employee] ON [dbo].[TB_M_Employee]
 INSTEAD OF INSERT AS
 BEGIN
 	INSERT TB_M_Account
@@ -28,24 +29,29 @@ BEGIN
 	SELECT *
 	FROM inserted
 END
+Go
 
-//Delete all accountrole by id
+-- Delete all accountrole by id
 CREATE OR ALTER PROCEDURE [dbo].[SP_DeleteAccountRoleByID]
 @nik nvarchar(450)
 AS
 BEGIN
 	DELETE FROM TB_T_AccountRole WHERE NIK = @nik
 END
+GO
 
-//get all accountrole by id
-ALTER PROCEDURE [dbo].[SP_RetrieveAccountRoleByID]
+-- get all accountrole by id
+CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveAccountRoleByID]
 @nik nvarchar(450)
 AS
+BEGIN
 SELECT * FROM TB_T_AccountRole
 WHERE NIK = @nik
+END
+GO
 
-//SP login
-CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveLogin]
+-- SP login
+CREATE OR ALTER PROCEDURE SP_RetrieveLogin
 	@Email nvarchar(max),
 	@Password nvarchar(max)
 AS
@@ -70,11 +76,11 @@ BEGIN
 	WHERE E.NIK = @Id and A.Password = @Password
 END
 
-//get nik & email for validation
-ALTER   PROCEDURE [dbo].[SP_RetrieveNIKEmail]
+-- get nik & email for validation
+CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
 @Params varchar(max)
 AS
 BEGIN
 	SELECT * FROM TB_M_Employee WHERE Email = @Params OR NIK = @Params
 END
-
+GO
