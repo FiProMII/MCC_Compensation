@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4">Join Date</label>
-                            <span class="col-md-7" id="ManagerName"></span>
+                            <span class="col-md-7" id="JoinDate"></span>
                         </div>
                     </div>
                 </div>
@@ -50,33 +50,31 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Requester Number</label>
                                 <div class="col-md-7 col-form-label">
-                                    <span>Request ID</span>
+                                    <span id="RequestIDText"></span>
                                     <input type="hidden" value="requestID" name="RequestID" id="RequestID" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Compensation Type</label>
                                 <div class="col-md-5">
-                                    <span>Compensation Name</span>
+                                    <span id="CompensationName"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Event Data</label>
                                 <div class="col-md-5">
-                                    <span>Event Date</span>
+                                    <span id="EventDate"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Request Date</label>
                                 <div class="col-md-5">
-                                    <span>Request Date</span>
+                                    <span id="RequestDate"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Document Requirements</label>
-                                <div class="col-md-7 col-form-label">
-                                    <span>KK</span><br />
-                                    <span>KTP</span><br />
+                                <div class="col-md-7 col-form-label" id="Document">
                                 </div>
                             </div>
                         </div>
@@ -95,5 +93,43 @@
 
 @section scripts
 {
+    <script>
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results == null) {
+                return null;
+            }
+            return decodeURI(results[1]) || 0;
+        }
 
+        $(document).ready(function () {
+            var id = $.urlParam('id')
+            if (id != null) {
+                $.ajax({
+                    url: "/Request/GetById",
+                    type: "GET",
+                    data: { 'key': id },
+                    success: function (result) {
+                        $('#modal').modal('show');
+                        var data = result["result"];
+                        $('#Requester').html(data.employee.employeeName)
+                        $('#DepartmentName').html(data.employee.position.department.departmentName)
+                        $('#PositionName').html(data.employee.position.positionName)
+                        $('#ManagerName').html(data.employee.manager.employeeName)
+                        $('#JoinDate').html(moment(data.employee.joinDate).format('DD/MM/YYYY'))
+                        $('#RequestID').html(data.requestID)
+                        $('#RequestIDText').html(data.requestID)
+                        $('#CompensationName').html(data.compensation.compensationName)
+                        $('#EventDate').html(moment(data.eventDate).format('DD/MM/YYYY'))
+                        $('#RequestDate').html(moment(data.requestDate).format('DD/MM/YYYY'))
+                        
+                        for (var i = 0; i < data.documents.length; i++) {
+                            var documentList = '<a href="' + data.documents[i].link +'">' + data.documents[i].documentName + '</a><br>'
+                            $('#Document').append(documentList)
+                        }
+                    }
+                })
+            }
+        });
+    </script>
 }
