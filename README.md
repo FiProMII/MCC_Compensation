@@ -1,7 +1,7 @@
 # Documentation Final Project
 
 ## Entity Relationship Diagram
-![Database Diagrams](doc/ERD/Entity_Relationship_Diagram.png)
+![Database Diagrams](doc/ERD/ERD.png)
 
 ## Use Case Diagram
 ![Use Case Diagram](doc/Use_Case/Use_Case_Diagram.png)
