@@ -15,11 +15,8 @@ namespace MVC.Controllers
 {
     public class AccountController : BaseController<Account, string>
     {
-        [Route("Account/Signin")]
-        public ViewResult Signin() => View();
-
         [HttpPost]
-        [Route("Account/SigninAction")]
+        [Route("~/Account/SigninAction")]
         public async Task<JsonResult> Signin(LoginVM loginVM)
         {
 

@@ -90,7 +90,7 @@
 {
     <script>
         //nanti diganti pake session
-        var currentNIK = "117100"
+        var currentNIK = "1234"
         var compensationID
 
         let compensationValue = new Map()
@@ -129,37 +129,27 @@
                 }
             });
 
-            
-
             $(".add").click(function () {
-
                 var total_element = $(".element").length;
-
                 var lastid = $(".element:last").attr("id");
                 var split_id = lastid.split("_");
                 var nextindex = Number(split_id[1]) + 1;
-
                 var max = 2;
 
                 if (total_element < max) {
-
                     $(".element:last").after("<div class='element' id='div_" + nextindex + "'></div>");
-
                     $("#div_" + nextindex).append("<br/><input type='file' name='file' class='custom-file' id='txt_"
                         + nextindex + "' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_"
                         + nextindex + "' class='remove btn btn-sm btn-outline-danger'>Abort</span>");
                 }
-
             });
 
             $('.bag').on('click', '.remove', function () {
-
                 var id = this.id;
                 var split_id = id.split("_");
                 var deleteindex = split_id[1];
 
                 $("#div_" + deleteindex).remove();
-
             });
         });
 
