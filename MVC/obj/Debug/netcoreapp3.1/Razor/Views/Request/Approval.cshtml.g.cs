@@ -19,7 +19,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
    Layout = "_Layout";
     ViewBag.Title = "Compensation Request";
 
@@ -155,8 +155,8 @@ namespace AspNetCore
                         $('#RequestID').html(data.requestID)
                         $('#RequestIDText').html(data.requestID)
                         $('#CompensationName').html(data.compensation.compensationName)
-                        $('#EventDate').html(moment(data.eventDate).format('DD/MM/YYYY'))
-                        $('#RequestDate').html(moment(data.requestDate).format('DD/MM/YYYY'))
+                        $('#EventDate').html(moment(data.eventDate).format('DD-MM-YYYY'))
+                        $('#RequestDate').html(moment(data.requestDate).format('DD-MM-YYYY'))
                         
                         for (var i = 0; i < data.documents.length; i++) {
                             var documentList = '<a href=""' + data.documents[i].link +'"">' + data.documents[i].documentName + '</a><br>'

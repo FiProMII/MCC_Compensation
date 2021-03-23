@@ -10,7 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
+<<<<<<< HEAD:MCC_Compensation/Migrations/20210322082126_CreateDB.Designer.cs
     [Migration("20210322082126_CreateDB")]
+=======
+    [Migration("20210322081322_CreateDB")]
+>>>>>>> Randika:MCC_Compensation/Migrations/20210322081322_CreateDB.Designer.cs
     partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

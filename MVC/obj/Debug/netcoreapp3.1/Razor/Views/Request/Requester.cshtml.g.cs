@@ -103,7 +103,8 @@ namespace AspNetCore
                                     <span>2. Baby Gift: KK</span><br />
                                     <span>3. Duka: KK</span><br />
                                 </div>
-                            </div>");
+                            </div>
+");
             WriteLiteral(@"
                             <div class=""form-group row"">
                                 <label class=""col-md-4 col-form-label"">

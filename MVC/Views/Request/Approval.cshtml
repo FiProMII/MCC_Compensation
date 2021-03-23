@@ -120,16 +120,23 @@
                         $('#DepartmentName').html(data.employee.position.department.departmentName)
                         $('#PositionName').html(data.employee.position.positionName)
                         $('#ManagerName').html(data.employee.manager.employeeName)
-                        $('#JoinDate').html(moment(data.employee.joinDate).format('DD/MM/YYYY'))
+                        $('#JoinDate').html(moment(data.employee.joinDate).format('DD-MM-YYYY'))
                         $('#RequestID').html(data.requestID)
                         $('#RequestIDText').html(data.requestID)
                         $('#CompensationName').html(data.compensation.compensationName)
-                        $('#EventDate').html(moment(data.eventDate).format('DD/MM/YYYY'))
-                        $('#RequestDate').html(moment(data.requestDate).format('DD/MM/YYYY'))
+                        $('#EventDate').html(moment(data.eventDate).format('DD-MM-YYYY'))
+                        $('#RequestDate').html(moment(data.requestDate).format('DD-MM-YYYY'))
                         
                         for (var i = 0; i < data.documents.length; i++) {
-                            var documentList = '<a href="' + data.documents[i].link +'">' + data.documents[i].documentName + '</a><br>'
-                            $('#Document').append(documentList)
+                            debugger;
+                            if (data.documents[i].link.search(/(.*?)\.(pdf|PDF)$/)) {
+                                var documentList = '<a target="_blank" href="' + data.documents[i].link
+                                    + '"><img src="/src/images/pdf.png" width="50">' + data.documents[i].documentName + '</><br/>'
+                            } else if (data.documents[i].link.search(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
+                                var documentList = '<a target="_blank" href="' + data.documents[i].link
+                                    + '"><img src="/src/images/images.png" width="50">' + data.documents[i].documentName + '</><br/>'
+                            }
+                            $('#Document').append(documentList);
                         }
                     }
                 })
