@@ -129,10 +129,10 @@
                         $('#RequestDate').html(moment(data.requestDate).format('DD-MM-YYYY'))
                         
                         for (var i = 0; i < data.documents.length; i++) {
-                            if (data.documents[i].link.search(/(.*?)\.(pdf|PDF)$/)) {
+                            if (data.documents[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
                                 var documentList = '<a target="_blank" href="' + data.documents[i].link
-                                    + '"><img src="/src/images/images.png" width="50">' + data.documents[i].documentName + '</>'
-                            } else if (data.documents[i].link.search(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
+                                    + '"><img src="/src/images/pdf.png" width="50">' + data.documents[i].documentName + '</><br/>'
+                            } else if (data.documents[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
                                 var documentList = '<a target="_blank" href="' + data.documents[i].link
                                     + '"><img src="/src/images/pdf.png" width="50">' + data.documents[i].documentName + '</>'
                             }

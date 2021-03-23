@@ -19,5 +19,19 @@ namespace MVC.Controllers
         public ViewResult Requester() => View();
 
         public ViewResult Approval() => View();
+
+        [HttpPost]
+        public override async Task<IActionResult> Post([FromBody] CompensationRequest compensationRequest)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            compensationRequest.RequestDate = DateTime.Now;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(compensationRequest), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("CompensationRequest", content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<CompensationRequest>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

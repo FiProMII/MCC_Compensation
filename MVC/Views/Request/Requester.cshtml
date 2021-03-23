@@ -38,42 +38,27 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4">Join Date</label>
-                            <span class="col-md-7" id="ManagerName"></span>
+                            <span class="col-md-7" id="JoinDate"></span>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="card m-auto">
                     <div class="card-header">Compensation Request</div>
-                    <form>
+                    <form id="form">
                         <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Requester Number</label>
-                                <div class="col-md-7 col-form-label">
-                                    <span>Request ID</span>
-                                    <input type="hidden" value="requestID" name="RequestID" id="RequestID" />
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Compensation Type</label>
                                 <div class="col-md-3">
-                                    <select class="form-control" id="groupType" name="groupType">
-                                        <!-- <option value="">Compensation Name</option>-->
-                                    </select>
+                                    <select class="form-control" id="CompensationID" name="CompensationID"></select>
                                 </div>
+                            </div>
+                            <div class="form-group row" id="compensationDetail">
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Event Date</label>
                                 <div class="col-md-3">
                                     <input type="date" class="form-control" name="EventDate" id="EventDate">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Document Requirements</label>
-                                <div class="col-md-7 col-form-label">
-                                    <span>1. Wedding Gift: KK & KTP</span><br />
-                                    <span>2. Baby Gift: KK</span><br />
-                                    <span>3. Duka: KK</span><br />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -104,7 +89,47 @@
 @section scripts
 {
     <script>
+        //nanti diganti pake session
+        var currentNIK = "117100"
+        var compensationID
+
+        let compensationValue = new Map()
+        let compensationRequirement = new Map()
+
         $(document).ready(function () {
+            $.ajax({
+                url: "/Employee/GetById",
+                type: "GET",
+                data: { 'key': currentNIK },
+                success: function (result) {
+                    var data = result["result"];
+                    $('#Requester').html(data.employeeName)
+                    $('#DepartmentName').html(data.position.department.departmentName)
+                    $('#PositionName').html(data.position.positionName)
+                    $('#ManagerName').html(data.manager.employeeName)
+                    $('#JoinDate').html(moment(data.joinDate).format('DD-MM-YYYY'))
+                }
+            });
+
+            compensationRequirement.set("Wedding", "KK & KTP")
+            compensationRequirement.set("Baby Gift", "KK")
+            compensationRequirement.set("Grief", "KK")
+
+            var compensationDropdown = '<option value="-1">Please select a compensation type</option>';
+            $.ajax({
+                type: "GET",
+                url: '/compensation/get',
+                success: function (result) {
+                    var data = result['result']
+                    for (var i = 0; i < data.length; i++) {
+                        compensationDropdown += '<option value="' + data[i].compensationID + '">' + data[i].compensationName + '</option>';
+                        $("#CompensationID").html(compensationDropdown);
+                        compensationValue.set(data[i].compensationName, data[i].cost)
+                    }
+                }
+            });
+
+            
 
             $(".add").click(function () {
 
@@ -137,5 +162,34 @@
 
             });
         });
+
+
+
+        $("select#CompensationID").on('change', function () {
+            var selectedCompensationText = $('#CompensationID option:selected').text();
+            compensationID = parseInt($('#CompensationID option:selected').val());
+            var compensationDetail = '<label class="col-md-4 col-form-label">Document Details</label>' +
+                '<div class="col-md-7 col-form-label" >' +
+                '<span>Requirement: ' + compensationRequirement.get(selectedCompensationText) + '</span><br />' +
+                '<span>Value: ' + compensationValue.get(selectedCompensationText) + '</span></div>'
+            $('#compensationDetail').html(compensationDetail)
+        })
+
+        $('#form').submit(function (event) {
+            event.preventDefault()
+            var CompensationRequest = new Object();
+            CompensationRequest.nik = currentNIK;
+            CompensationRequest.compensationID = compensationID
+            CompensationRequest.eventDate = $('#EventDate').val();
+            console.log(CompensationRequest)
+            $.ajax({
+                type: "POST",
+                url: "/Request/Post",
+                data: JSON.stringify(CompensationRequest),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        })
+
     </script>
 }
