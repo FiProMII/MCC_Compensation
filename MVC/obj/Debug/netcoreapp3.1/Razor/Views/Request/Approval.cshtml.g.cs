@@ -75,7 +75,7 @@ namespace AspNetCore
                     <form id=""form"">
                         <div class=""card-body"" style=""padding-left: 100px; padding-right: 100px;"">
                             <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Requester Number</label>
+                                <label class=""col-md-4 col-form-label"">Request Number</label>
                                 <div class=""col-md-7 col-form-label"">
                                     <span id=""RequestIDText""></span>
                                     <input type=""hidden"" value=""requestID"" name=""RequestID"" id=""RequestID"" />
@@ -135,6 +135,7 @@ namespace AspNetCore
         }
 
         $(document).ready(function () {
+            debugger;
             var id = $.urlParam('id')
             if (id != null) {
                 $.ajax({

@@ -48,7 +48,7 @@
                     <form id="form">
                         <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Requester Number</label>
+                                <label class="col-md-4 col-form-label">Request Number</label>
                                 <div class="col-md-7 col-form-label">
                                     <span id="RequestIDText"></span>
                                     <input type="hidden" value="requestID" name="RequestID" id="RequestID" />
@@ -105,6 +105,7 @@
         }
 
         $(document).ready(function () {
+            debugger;
             var id = $.urlParam('id')
             if (id != null) {
                 $.ajax({
@@ -131,10 +132,10 @@
                             debugger;
                             if (data.documents[i].link.search(/(.*?)\.(pdf|PDF)$/)) {
                                 var documentList = '<a target="_blank" href="' + data.documents[i].link
-                                    + '"><img src="/src/images/pdf.png" width="50">' + data.documents[i].documentName + '</><br/>'
+                                    + '"><img src="/src/images/images.png" width="50">' + data.documents[i].documentName + '</><br/>'
                             } else if (data.documents[i].link.search(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
                                 var documentList = '<a target="_blank" href="' + data.documents[i].link
-                                    + '"><img src="/src/images/images.png" width="50">' + data.documents[i].documentName + '</><br/>'
+                                    + '"><img src="/src/images/pdf.png" width="50">' + data.documents[i].documentName + '</><br/>'
                             }
                             $('#Document').append(documentList);
                         }

@@ -36,7 +36,7 @@
 	AFTER INSERT AS
 	BEGIN
 		DECLARE @StatusID INT
-		DECLARE @NIK varchar(450)
+		DECLARE @NIK nvarchar(450)
 		SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
 		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
 
@@ -67,7 +67,7 @@
 	GO
 
 	-- SP login
-	CREATE OR ALTER PROCEDURE SP_RetrieveLogin
+	CREATE PROCEDURE SP_RetrieveLogin
 		@Email nvarchar(max),
 		@Password nvarchar(max)
 	AS
