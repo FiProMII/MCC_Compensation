@@ -177,18 +177,39 @@
 
         $('#form').submit(function (event) {
             event.preventDefault()
-            var CompensationRequest = new Object();
-            CompensationRequest.nik = currentNIK;
-            CompensationRequest.compensationID = compensationID
-            CompensationRequest.eventDate = $('#EventDate').val();
-            console.log(CompensationRequest)
+            //var CompensationRequest = new Object();
+            //CompensationRequest.nik = currentNIK;
+            //CompensationRequest.compensationID = compensationID
+            //CompensationRequest.eventDate = $('#EventDate').val();
+
+
+            var formData = new FormData($(this)[0]);
+            formData.append('nik', currentNIK)
+            console.log(formData)
+
             $.ajax({
-                type: "POST",
-                url: "/Request/Post",
-                data: JSON.stringify(CompensationRequest),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                url: '/Document/Post',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function (response) {
+                }
             });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Request/Post",
+            //    data: JSON.stringify(CompensationRequest),
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (result) {
+
+            //    }
+            //});
         })
 
     </script>
