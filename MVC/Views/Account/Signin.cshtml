@@ -22,7 +22,6 @@
                     <h3 class="text-center m-0">
                         <a href="" class="logo logo-admin">
                             <img src="~/src/images/mii-logo.png" height="50" alt="logo" />
-                            CA
                         </a>
                     </h3>
                     <div class="p-3">
@@ -51,12 +50,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 text-right">
-                                    <button class="btn btn-primary" type="submit">Sign in</button>
+                                    <button class="btn btn-primary" type="submit">SignIn</button>
                                 </div>
                             </div>
                             <div class="form-group m-t-10 mb-0 row">
                                 <div class="col-12 m-t-20">
-                                    <a href="" class="text-muted"><i class="fas fa-lock"></i> Forgot your password?</a>
+                                    <a href="@Url.Action("ForgotPassword","Account")" class="text-muted"><i class="fas fa-lock"></i> Forgot your password?</a>
                                 </div>
                             </div>
                         </form>
@@ -87,7 +86,7 @@
         var form = $(this)
         $.ajax({
             type: "POST",
-            url: "Account/LoginAction",
+            url: "Account/SigninAction",
             data: form.serialize(),
             success: function (data) {
             console.log(data['result'])

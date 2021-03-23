@@ -15,11 +15,12 @@ namespace MVC.Controllers
 {
     public class AccountController : BaseController<Account, string>
     {
-        public ViewResult Login() => View();
+        [Route("Account/Signin")]
+        public ViewResult Signin() => View();
 
         [HttpPost]
-        [Route("Account/LoginAction")]
-        public async Task<JsonResult> Login(LoginVM loginVM)
+        [Route("Account/SigninAction")]
+        public async Task<JsonResult> Signin(LoginVM loginVM)
         {
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginVM), Encoding.UTF8, "application/json");
@@ -29,5 +30,9 @@ namespace MVC.Controllers
             HttpContext.Session.SetString("Token", result.Result);
             return Json(result);
         }
+
+        public ViewResult ForgotPassword() => View();
+
+        public ViewResult ChangePassword() => View();
     }
 }

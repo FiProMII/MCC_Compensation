@@ -175,7 +175,6 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\scopedcs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.input.cache
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.output.cache
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorCoreGenerate.cache
-C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Compensation\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Department\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
@@ -195,3 +194,6 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Approval.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Approval.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Requester.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Signin.cshtml.g.cs

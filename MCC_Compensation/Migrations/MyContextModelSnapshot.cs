@@ -4,20 +4,14 @@ using API.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-<<<<<<< HEAD:MCC_Compensation/Migrations/20210322082126_CreateDB.Designer.cs
-    [Migration("20210322082126_CreateDB")]
-=======
-    [Migration("20210322081322_CreateDB")]
->>>>>>> Randika:MCC_Compensation/Migrations/20210322081322_CreateDB.Designer.cs
-    partial class CreateDB
+    partial class MyContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
