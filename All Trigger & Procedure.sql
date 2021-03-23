@@ -1,4 +1,3 @@
-
 -- set managerNIK to null when manager is deleted
 CREATE OR ALTER   TRIGGER [dbo].[T_DeleteManager] ON [dbo].[TB_M_Account]
 INSTEAD OF DELETE AS
@@ -29,7 +28,7 @@ BEGIN
 	SELECT *
 	FROM inserted
 END
-Go
+GO
 
 -- Delete all accountrole by id
 CREATE OR ALTER PROCEDURE [dbo].[SP_DeleteAccountRoleByID]
@@ -75,6 +74,7 @@ BEGIN
 				ON AR.RoleID = R.RoleID
 	WHERE E.NIK = @Id and A.Password = @Password
 END
+GO
 
 -- get nik & email for validation
 CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
@@ -82,5 +82,20 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
 AS
 BEGIN
 	SELECT * FROM TB_M_Employee WHERE Email = @Params OR NIK = @Params
+END
+GO
+
+-- Insert to TB_T_Approval first as status pending
+CREATE OR ALTER TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
+AFTER INSERT AS
+BEGIN
+	DECLARE @StatusID INT
+	DECLARE @NIK varchar(450)
+	SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
+	SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
+
+	INSERT TB_T_Approval 
+	SELECT @StatusID,@NIK,RequestID,GETDATE()
+	FROM inserted
 END
 GO
