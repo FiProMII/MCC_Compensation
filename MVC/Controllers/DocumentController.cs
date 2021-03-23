@@ -23,6 +23,8 @@ namespace MVC.Controllers
         {
             var files = documentVM.File;
             var content = new MultipartFormDataContent();
+            var nik = documentVM.NIK;
+            var date = DateTime.Now.ToString("dd-MM-yy");
 
             foreach (var file in files)
             {
@@ -30,6 +32,7 @@ namespace MVC.Controllers
                     continue;
 
                 var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                fileName = nik + "_" + date + "_" + fileName;
 
                 content.Add(new StreamContent(file.OpenReadStream())
                 {
@@ -41,7 +44,7 @@ namespace MVC.Controllers
                 }, "Files", fileName);
             }
 
-            var response = await httpClient.PostAsync("Document/Upload", content);
+            var response = await httpClient.PostAsync("Document/Upload/" + documentVM.RequestID, content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<CompensationRequest>>(apiResponse);
             if (response.IsSuccessStatusCode)

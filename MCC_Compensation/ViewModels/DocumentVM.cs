@@ -9,7 +9,7 @@ namespace API.ViewModels
     public class DocumentVM
     {
         public string NIK { get; set; }
-        public string DocumentName { get; set; }
         public IEnumerable<IFormFile> File { get; set; }
+        public int RequestID { get; set; }
     }
 }
