@@ -16,10 +16,8 @@ namespace MVC.Controllers
     public class AccountController : BaseController<Account, string>
     {
         [HttpPost]
-        [Route("~/Account/SigninAction")]
         public async Task<JsonResult> Signin(LoginVM loginVM)
         {
-
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginVM), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync("Account/Login", content);
             string apiResponse = await response.Content.ReadAsStringAsync();

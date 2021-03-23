@@ -86,7 +86,7 @@
         var form = $(this)
         $.ajax({
             type: "POST",
-            url: "Account/SigninAction",
+            url: "Signin",
             data: form.serialize(),
             success: function (data) {
             console.log(data['result'])
