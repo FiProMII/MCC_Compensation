@@ -95,6 +95,11 @@ namespace MCC_Compensation
                     {basicSecurityScheme, new string[] { }}
                 });
             });
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44309"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,6 +113,8 @@ namespace MCC_Compensation
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options.WithOrigins("https://localhost:44309"));
 
             app.UseAuthorization();
 

@@ -28,6 +28,6 @@ namespace MVC.Controllers
 
         public ViewResult ForgotPassword() => View();
 
-        public ViewResult ChangePassword() => View();
+        public ViewResult RecoverPassword() => View();
     }
 }
