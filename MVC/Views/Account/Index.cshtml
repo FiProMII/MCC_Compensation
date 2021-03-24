@@ -1,81 +1,126 @@
-﻿@{ ViewBag.Title = "CA 1 | Sign in";}
+﻿@{ 
+    ViewBag.Title = "CA 1 | Sign in";
+    Layout = null;    
+}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/bootstrap/assets/images/favicon.ico">
     <title>@ViewBag.Title</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/bootstrap/css/style.css" rel="stylesheet" />
+    <!-- You can change the theme colors from here -->
+    <link href="~/bootstrap/css/purple-dark.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="" class="h1"><b>Compen</b>sation</a>
-            </div>
-            <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
 
-                <form id="loginForm">
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-                <p class="mb-1">
-                    <a href="/Account/ForgotPassword">I forgot my password</a>
-                </p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
     </div>
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image: url(/bootstrap/assets/images/background/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="loginform" action="index.html">
+                        <h3 class="box-title m-b-20">Sign In</h3>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" required="" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" required="" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="checkbox checkbox-primary pull-left p-t-0">
+                                    <input id="checkbox-signup" type="checkbox">
+                                    <label for="checkbox-signup"> Remember me </label>
+                                </div> <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
+                            </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" id="recoverform" action="index.html">
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <h3>Recover Password</h3>
+                                <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" required="" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="~/bootstrap/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/bootstrap/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/bootstrap/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/bootstrap/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/bootstrap/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="~/bootstrap/assets/plugins/sticky-kit-master/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/bootstrap/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="~/bootstrap/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
+
 </html>
 
 <script>
