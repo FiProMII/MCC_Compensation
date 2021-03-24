@@ -90,7 +90,7 @@
 {
     <script>
         //nanti diganti pake session
-        var currentNIK = "1234"
+        var currentNIK = "117100"
         var compensationID
 
         let compensationValue = new Map()
@@ -174,8 +174,9 @@
 
 
             var formData = new FormData($(this)[0]);
-            formData.append('nik', currentNIK)
-            console.log(formData)
+            formData.append('nik', currentNIK);
+            formData.append('compensationID', compensationID)
+            formData.append('eventDate', $('#EventDate').val())
 
             $.ajax({
                 url: '/Document/Post',

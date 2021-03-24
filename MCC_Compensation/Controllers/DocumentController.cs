@@ -29,12 +29,12 @@ namespace API.Controllers
             _documentRepository = documentRepository;
         }
 
-        [HttpPost("Upload/{key}")]
-        public async Task<IActionResult> Upload(IEnumerable<IFormFile> Files, int key)
+        [HttpPost("Upload")]
+        public async Task<IActionResult> Upload(IEnumerable<IFormFile> Files)
         {
             ResponseVM<Document> responseContent = new ResponseVM<Document>();
             string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-            var isSuccess = true;
+            List<Document> documents = new List<Document>();
             foreach (var file in Files)
             {
                 if (file.Length > 0)
@@ -45,32 +45,15 @@ namespace API.Controllers
                     fileStream.Close();
 
                     Document document = new Document();
+
                     document.DocumentName = file.FileName;
                     document.Link = filePath;
-                    document.RequestID = key;
 
-                    var result = _documentRepository.Insert(document);
-
-                    if (result <= 0)
-                    {
-                        isSuccess = false;
-                        break;
-                    }
+                    documents.Add(document);
                 }
             }
 
-            if (isSuccess)
-            {
-                responseContent.Status = HttpStatusCode.OK;
-                responseContent.Message = "Data created successfully";
-                return Ok(responseContent);
-            }
-            else
-            {
-                responseContent.Status = HttpStatusCode.InternalServerError;
-                responseContent.Message = "Unable to create new data";
-                return StatusCode(500, responseContent);
-            }
+            return Ok(documents);
         }
     }
 }

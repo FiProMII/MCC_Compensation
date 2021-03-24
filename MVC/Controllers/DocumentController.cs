@@ -23,8 +23,9 @@ namespace MVC.Controllers
         {
             var files = documentVM.File;
             var content = new MultipartFormDataContent();
-            var nik = documentVM.NIK;
+            
             var date = DateTime.Now.ToString("dd-MM-yy");
+            var nik = documentVM.NIK;
 
             foreach (var file in files)
             {
@@ -44,7 +45,19 @@ namespace MVC.Controllers
                 }, "Files", fileName);
             }
 
-            var response = await httpClient.PostAsync("Document/Upload/" + documentVM.RequestID, content);
+            var documentResponse = await httpClient.PostAsync("Document/Upload", content);
+            string documentApiResponse = await documentResponse.Content.ReadAsStringAsync();
+            var Documents = JsonConvert.DeserializeObject<List<Document>>(documentApiResponse);
+
+            CompensationRequest compensationRequest = new CompensationRequest();
+            compensationRequest.NIK = nik;
+            compensationRequest.CompensationID = documentVM.CompensationID;
+            compensationRequest.EventDate = documentVM.EventDate;
+            compensationRequest.RequestDate = DateTime.Now;
+            compensationRequest.Documents = Documents;
+
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(compensationRequest), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("CompensationRequest", stringContent);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<CompensationRequest>>(apiResponse);
             if (response.IsSuccessStatusCode)
