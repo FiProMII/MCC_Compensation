@@ -181,7 +181,6 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Position\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Role\Index.cshtml.g.cs
-C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Status\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorTargetAssemblyInfo.cache
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorTargetAssemblyInfo.cs
@@ -198,5 +197,5 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Details.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\RecoverPassword.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs

@@ -1,76 +1,92 @@
-﻿@{ Layout = "_Layout2";
+﻿@{ Layout = "_LayoutAdmin";
     ViewData["Title"] = "Compensation";
 }
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>DataTables</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
-                                <i class="fas fa-user-plus"></i> Create
-                            </button>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="table_id" class="table table-sm table-striped table-bordered m-2" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Cost</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Cost</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <button class="btn pull-right hidden-sm-down btn-success" data-toggle="modal" data-target=".bs-modal-sm"><i class="mdi mdi-plus-circle"></i> Create</button>
+            <div class="dropdown pull-right m-r-10 hidden-sm-down">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    January 2017
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">February 2017</a>
+                    <a class="dropdown-item" href="#">March 2017</a>
+                    <a class="dropdown-item" href="#">April 2017</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Data Export</h4>
+                    <h6 class="card-subtitle">Export data CSV, Excel, PDF</h6>
+                    <div class="table-responsive m-t-40">
+                        <table id="table_id" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Cost</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Cost</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
 </div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 
-<div class="modal fade" role="dialog" id="modal">
+<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Compensation</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Add ViewData["Title"]</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
@@ -86,24 +102,42 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Sumbit">Submit</button>
+                <button class="btn btn-secondary waves-effect waves-light" data-dismiss="modal" aria-hidden="true" onclick="reset()">Close</button>
+                <button class="btn btn-primary waves-effect waves-light" type="submit" form="form" id="Sumbit">Submit</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 @section scripts
 {
     <script>
         var isUpdate;
         $(document).ready(function () {
-            table = $('#table_id').DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "filter": true,
-                "orderMulti": false,
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 2, 3]
+                        }
+                    }
+                ],
                 "ajax": {
                     "url": "/Compensation/Get",
                     "type": "Get",
@@ -140,8 +174,8 @@
                     {
                         "data": 'compensationID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['compensationID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['compensationID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['compensationID'] + '\')"><i class="mdi mdi-table-edit"></i> Edit</button> ' +
+                                '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['compensationID'] + '\')"><i class="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
                 ]
@@ -150,15 +184,15 @@
 
         var validator = $("#form").validate({
             rules: {
-                CompensationName: "required",
-                Cost: {
+                compensationName: "required",
+                cost: {
                     required: true,
                     digits: true
                 }
             },
             messages: {
-                CompensationName: "Please enter Compensation Name",
-                Cost: {
+                compensationName: "Please enter Compensation Name",
+                cost: {
                     required: "Please type the Cost",
                     number: "Please type only numbers"
                 }
@@ -167,9 +201,9 @@
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "Put"
+                    urlString = "/Compensation/Put"
                 else
-                    urlString = "Post"
+                    urlString = "/Compensation/Post"
                 $.ajax({
                     type: "POST",
                     url: urlString,
@@ -178,10 +212,10 @@
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-sm').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
-                            position: 'center',
+                            position: 'top-end',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -206,16 +240,15 @@
         }
 
         function Get(compensationID) {
-            debugger;
             $.ajax({
-                url: "GetById",
+                url: "/Compensation/GetById",
                 type: "GET",
                 data: { 'key': compensationID },
                 headers: {
                     Authorization: sessionStorage.token
                 },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result['result'];
                     $('#CompensationID').val(data.compensationID);
                     $('#CompensationName').val(data.compensationName);
@@ -239,13 +272,13 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "Delete",
+                        url: "/Compensation/Delete",
                         data: { 'key': compensationID },
                         headers: {
                             Authorization: sessionStorage.token
                         },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',

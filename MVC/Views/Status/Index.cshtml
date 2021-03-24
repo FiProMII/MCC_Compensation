@@ -1,52 +1,90 @@
-﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Status";
+﻿@{ Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Management Status";
 }
 
-<div class="container">
-    <br />
-    <div class="col-sm-12 text-right">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Status</li>
-        </ol>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <button class="btn pull-right hidden-sm-down btn-success" data-toggle="modal" data-target=".bs-modal-sm" onclick="reset()"><i class="mdi mdi-plus-circle"></i> Create</button>
+            <div class="dropdown pull-right m-r-10 hidden-sm-down">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    January 2017
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">February 2017</a>
+                    <a class="dropdown-item" href="#">March 2017</a>
+                    <a class="dropdown-item" href="#">April 2017</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <h2 class="page-header">
-        <i class="fas fa-history"></i> Application Status
-    </h2>
-    <br />
-    <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
-        <i class="fas fa-user-plus"></i> Create
-    </button>
-    <div>
-        <table id="table_id" class="table table-sm table-striped table-bordered m-2">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Data Export</h4>
+                    <h6 class="card-subtitle">Export data CSV, Excel, PDF</h6>
+                    <div class="table-responsive m-t-40">
+                        <table id="table_id" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
     </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
 </div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 
-<div class="modal fade" role="dialog" id="modal">
+<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Status</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="Readonly()">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Add @ViewData["Title"]</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
@@ -62,8 +100,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Submit">Submit</button>
+                <button class="btn btn-secondary waves-effect waves-ligh" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
+                <button class="btn btn-primary waves-effect waves-ligh" type="submit" form="form" id="Submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -74,9 +112,9 @@
     <script>
         var isUpdate = 0;
         $(document).ready(function () {
-            table = $('#table_id').DataTable({
+            $('#table_id').DataTable({
                 responsive: true,
-                dom: '<"top"lBf>rtip<"bottom">',
+                dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'csv',
@@ -95,13 +133,12 @@
                         exportOptions: {
                             columns: [0, 2]
                         }
-                    },
-                    'colvis'
+                    }
                 ],
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "get",
+                    "url": "/Status/Get",
                     "type": "get",
                     "dataSrc": "result"
                 },
@@ -129,8 +166,8 @@
                     {
                         "data": 'statusID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['statusID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['statusID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['statusID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
+                                '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['statusID'] + '\')"><i class ="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
                 ]
@@ -153,16 +190,16 @@
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "put"
+                    urlString = "/Status/Put"
                 else
-                    urlString = "post"
+                    urlString = "/Status/Post"
                 $.ajax({
                     type: "POST",
                     url: urlString,
                     data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-sm').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -190,11 +227,11 @@
 
         function Get(id) {
             $.ajax({
-                url: "GetById",
+                url: "/Status/GetById",
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result["result"];
                     $('#StatusID').val(data.statusID);
                     $('#StatusName').val(data.statusName);
@@ -216,10 +253,10 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "delete",
+                        url: "/Status/Delete",
                         data: { 'key': id },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',
