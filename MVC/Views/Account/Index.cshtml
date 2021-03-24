@@ -1,82 +1,82 @@
-﻿@{ ViewBag.Title = "CA-LOGIN";}
+﻿@{ ViewBag.Title = "CA 1 | Sign in";}
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
-<body>
-    <header class="footer mt-auto py-3 bg-transparent">
-        <div style="position: fixed; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center; color:black">
-            
-        </div>
-    </header>
-    <div class="container-fluid">
-        <div class="flex-md-wrap container col-lg-4 align-content-center">
-            <div class="card-container">
-                <div class="card-body">
-                    <h3 class="text-center m-0">
-                        <a href="" class="logo logo-admin">
-                            <img src="~/src/images/mii-logo.png" height="50" alt="logo" />
-                        </a>
-                    </h3>
-                    <div class="p-3">
-                        <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
-                        <p class="text-muted text-center">Sign in to continue to CA</p>
-                        <form id="loginForm" name="loginForm">
-                            <div class="form-group">
-                                <label for="email" class="col-form-label">Email</label>
-                                <input type="email" class="form-control" name="Email" id="Email" placeholder="Enter Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password-field" placeholder="Enter Password" autocomplete="off">
-                                <div class="form-group">
-                                    <span class="float-right">
-                                        <input type="checkbox" onclick="myFunction()"> Show Password
-                                    </span>
-                                </div>
-                                <br />
-                            </div>
-                            <div class="form-group row m-t-20">
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customControlInline" />
-                                        <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    <button class="btn btn-primary" type="submit">SignIn</button>
-                                </div>
-                            </div>
-                            <div class="form-group m-t-10 mb-0 row">
-                                <div class="col-12 m-t-20">
-                                    <a href="@Url.Action("ForgotPassword","Account")" class="text-muted"><i class="fas fa-lock"></i> Forgot your password?</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="" class="h1"><b>Compen</b>sation</a>
             </div>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form id="loginForm">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <p class="mb-1">
+                    <a href="/Account/ForgotPassword">I forgot my password</a>
+                </p>
+            </div>
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
-    <footer class="footer mt-auto py-3 bg-transparent">
-        <div style="position: fixed; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center; color:black">
-            &copy; 2021 PT Mitra Integrasi Informatika. All Rights Reserved.
-        </div>
-    </footer>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
 </body>
 </html>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
-<script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
    $("#loginForm").submit(function (e) {
@@ -95,14 +95,5 @@
         });
 
    })
-
-    function myFunction() {
-        var x = document.getElementById("password-field");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
 
 </script>

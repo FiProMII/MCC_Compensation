@@ -8,6 +8,7 @@
     <Folder Include="Base\Controller\" />
     <Folder Include="Middleware\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
   <ItemGroup>
