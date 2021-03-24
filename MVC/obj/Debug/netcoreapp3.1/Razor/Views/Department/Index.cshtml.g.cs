@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"81359502496c8a51e9fb25cf1f546f787233a35e", @"/Views/Department/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"479d0a9c83179c100d16cb7893f9a58a8d0352ae", @"/Views/Department/Index.cshtml")]
     public class Views_Department_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -28,14 +28,20 @@ namespace AspNetCore
 #nullable disable
             WriteLiteral(@"
 <div class=""container"">
+    <br />
+    <div class=""col-sm-12 text-right"">
+        <ol class=""breadcrumb float-sm-right"">
+            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
+            <li class=""breadcrumb-item active"">Department</li>
+        </ol>
+    </div>
     <h2 class=""page-header"">
-        Departments
+        <i class=""fas fa-suitcase""></i> Departments
     </h2>
-
+    <br />
     <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
         <i class=""fas fa-user-plus""></i> Create
     </button>
-
     <div>
         <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
             <thead>
@@ -50,7 +56,8 @@ namespace AspNetCore
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No.</th>
+                    <th>No.</");
+            WriteLiteral(@"th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Actions</th>
@@ -62,8 +69,7 @@ namespace AspNetCore
 
 <div class=""modal fade"" role=""dialog"" id=""modal"">
     <div class=""modal-dialog modal-sm"">
-        <d");
-            WriteLiteral(@"iv class=""modal-content"">
+        <div class=""modal-content"">
             <div class=""modal-header"">
                 <h4 class=""modal-title"">Department</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"" onclick=""Readonly()"">&times;</span></button>
@@ -75,14 +81,14 @@ namespace AspNetCore
                             <input type=""text"" class=""form-control"" name=""DepartmentID"" id=""DepartmentID"" hidden>
                         </div>
                         <div class=""form-group"">
-                            <label for=""firstName"" class=""col-form-label"">Department Name</label>
+                            <label for=""firs");
+            WriteLiteral(@"tName"" class=""col-form-label"">Department Name</label>
                             <input type=""text"" class=""form-control"" name=""DepartmentName"" id=""DepartmentName"">
                         </div>
                     </div>
                 </form>
             </div>
-            <div class=""mo");
-            WriteLiteral(@"dal-footer"">
+            <div class=""modal-footer"">
                 <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
                 <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
             </div>

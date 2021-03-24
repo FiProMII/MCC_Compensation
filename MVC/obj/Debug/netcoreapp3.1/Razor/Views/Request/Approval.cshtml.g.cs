@@ -19,7 +19,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
    Layout = "_Layout";
     ViewBag.Title = "Compensation Request";
 
@@ -184,10 +184,10 @@ namespace AspNetCore
             event.preventDefault()
             var Approval = new Object();
             Approval.statusID = statusID;
-            Approval.nik = managerNIK
-            Approval.requestID = requestID");
+            Approval.nik = managerNIK;
+            Approval.requestID = requestID;
+            $.ajax({");
                 WriteLiteral(@"
-            $.ajax({
                 type: ""POST"",
                 url: ""/Approval/Post"",
                 data: JSON.stringify(Approval),

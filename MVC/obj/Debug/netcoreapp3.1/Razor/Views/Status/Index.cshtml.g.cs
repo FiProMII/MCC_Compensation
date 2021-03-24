@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f6cfa42dcffb58e96cdeb5504eaceab2e4156dc6", @"/Views/Status/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d4fb78ff33ee0ce482e7f4509167582ec21076dd", @"/Views/Status/Index.cshtml")]
     public class Views_Status_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -28,14 +28,20 @@ namespace AspNetCore
 #nullable disable
             WriteLiteral(@"
 <div class=""container"">
+    <br />
+    <div class=""col-sm-12 text-right"">
+        <ol class=""breadcrumb float-sm-right"">
+            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
+            <li class=""breadcrumb-item active"">Status</li>
+        </ol>
+    </div>
     <h2 class=""page-header"">
-        Application Status
+        <i class=""fas fa-history""></i> Application Status
     </h2>
-
+    <br />
     <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
         <i class=""fas fa-user-plus""></i> Create
     </button>
-
     <div>
         <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
             <thead>
@@ -50,7 +56,8 @@ namespace AspNetCore
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No.</th>
+                    <th>No.");
+            WriteLiteral(@"</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Actions</th>
@@ -62,8 +69,7 @@ namespace AspNetCore
 
 <div class=""modal fade"" role=""dialog"" id=""modal"">
     <div class=""modal-dialog modal-sm"">
-   ");
-            WriteLiteral(@"     <div class=""modal-content"">
+        <div class=""modal-content"">
             <div class=""modal-header"">
                 <h4 class=""modal-title"">Status</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"" onclick=""Readonly()"">&times;</span></button>
@@ -75,15 +81,15 @@ namespace AspNetCore
                             <input type=""text"" class=""form-control"" name=""StatusID"" id=""StatusID"" hidden>
                         </div>
                         <div class=""form-group"">
-                            <label for=""firstName"" class=""col-form-label"">Status Name</label>
+                            <label for=""firstName"" cla");
+            WriteLiteral(@"ss=""col-form-label"">Status Name</label>
                             <input type=""text"" class=""form-control"" name=""StatusName"" id=""StatusName"">
                         </div>
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
-   ");
-            WriteLiteral(@"             <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
                 <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
             </div>
         </div><!-- /.modal-content -->

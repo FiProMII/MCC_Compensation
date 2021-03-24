@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9f85000a2ad8dcbcfb61f18eb7f1a437e88d7b09", @"/Views/Position/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4bf726e3aa72181bb4028ace047b3b6d08126ae0", @"/Views/Position/Index.cshtml")]
     public class Views_Position_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -28,14 +28,20 @@ namespace AspNetCore
 #nullable disable
             WriteLiteral(@"
 <div class=""container"">
+    <br />
+    <div class=""col-sm-12 text-right"">
+        <ol class=""breadcrumb float-sm-right"">
+            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
+            <li class=""breadcrumb-item active"">Position</li>
+        </ol>
+    </div>
     <h2 class=""page-header"">
-        Positions
+        <i class=""fas fa-user-friends""></i> Position
     </h2>
-
+    <br />
     <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
         <i class=""fas fa-user-plus""></i> Create
     </button>
-
     <div>
         <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
             <thead>
@@ -50,7 +56,8 @@ namespace AspNetCore
             <tbody>
             </tbody>
             <tfoot>
-                <tr>
+           ");
+            WriteLiteral(@"     <tr>
                     <th>No.</th>
                     <th>ID</th>
                     <th>Name</th>
@@ -62,8 +69,7 @@ namespace AspNetCore
     </div>
 </div>
 
-<div class=""modal fade");
-            WriteLiteral(@""" role=""dialog"" id=""modal"">
+<div class=""modal fade"" role=""dialog"" id=""modal"">
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
@@ -76,12 +82,12 @@ namespace AspNetCore
                         <div class=""form-group"">
                             <input type=""text"" class=""form-control"" name=""PositionID"" id=""PositionID"" hidden>
                         </div>
-                    </div>
+                   ");
+            WriteLiteral(@" </div>
                     <div class=""form-row"">
                         <div class=""form-group"">
                             <label for=""departmentID"" class=""col-form-label"">Department</label>
-                            <select class=""form-control"" id=""DepartmentID"" name=""DepartmentID""></se");
-            WriteLiteral(@"lect>
+                            <select class=""form-control"" id=""DepartmentID"" name=""DepartmentID""></select>
                         </div>
                     </div>
                     <div class=""form-row"">
@@ -94,13 +100,8 @@ namespace AspNetCore
             </div>
             <div class=""modal-footer"">
                 <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-");
+                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button>");
+            WriteLiteral("\r\n            </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>

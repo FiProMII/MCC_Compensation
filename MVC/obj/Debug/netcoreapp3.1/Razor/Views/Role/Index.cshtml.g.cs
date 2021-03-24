@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7aeb5cd5c23e7d595e09b652e728283af01e6bff", @"/Views/Role/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"40da8e812d000bb1fc52ef9701b681175a8d620f", @"/Views/Role/Index.cshtml")]
     public class Views_Role_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -28,9 +28,17 @@ namespace AspNetCore
 #nullable disable
             WriteLiteral(@"
 <div class=""container"">
+    <br />
+    <div class=""col-sm-12 text-right"">
+        <ol class=""breadcrumb float-sm-right"">
+            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
+            <li class=""breadcrumb-item active"">Role</li>
+        </ol>
+    </div>
     <h2 class=""page-header"">
-        Authentication Roles
+        <i class=""fas fa-user-tag""></i> Authentication Roles
     </h2>
+    <br />
     <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
         <i class=""fas fa-user-plus""></i> Create
     </button>
@@ -48,7 +56,8 @@ namespace AspNetCore
             </tbody>
             <tfoot>
                 <tr>
-                    <th>No</th>
+                    <th>No<");
+            WriteLiteral(@"/th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Actions</th>
@@ -60,8 +69,7 @@ namespace AspNetCore
     <div id=""chart2""></div>
 </div>
 
-<div class=""modal fade"" role=""dialog"" id=""");
-            WriteLiteral(@"modal"">
+<div class=""modal fade"" role=""dialog"" id=""modal"">
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
@@ -73,14 +81,21 @@ namespace AspNetCore
                     <input type=""hidden"" class=""form-control"" name=""RoleID"" id=""RoleID"">
                     <div class=""form-group"">
                         <label for=""roleName"" class=""col-form-label""> Name</label>
-                        <input type=""text"" class=""form-control"" name=""RoleName"" id=""RoleName"">
+                        <input type=""text"" class=""form-control"" name=""RoleName"" id=""");
+            WriteLiteral(@"RoleName"">
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
                 <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""S");
-            WriteLiteral("umbit\">Submit</button>\r\n            </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n\r\n");
+                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
