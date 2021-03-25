@@ -73,7 +73,7 @@ namespace API.Base.Controller
         }
 
         [HttpPost]
-        public ActionResult Post(Entity entity)
+        public virtual ActionResult Post(Entity entity)
         {
             ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
 
