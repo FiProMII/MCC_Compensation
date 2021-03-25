@@ -12,78 +12,129 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d9a5f4b5d2272d475f58fc834019f8e5b3102703", @"/Views/Compensation/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"47da2ccea7fa31664a3f012596bf2b55076760b3", @"/Views/Compensation/Index.cshtml")]
     public class Views_Compensation_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
-   Layout = "_Layout";
-    ViewBag.Title = "Compensation";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+   Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Compensation";
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral(@"
-<div class=""container"">
-    <br />
-    <div class=""col-sm-12 text-right"">
-        <ol class=""breadcrumb float-sm-right"">
-            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
-            <li class=""breadcrumb-item active"">Compensation</li>
-        </ol>
-    </div>
-    <h2 class=""page-header"">
-        <i class=""fas fa-hand-holding-heart""></i> Compensations
-    </h2>
-    <br />
-    <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
-        <i class=""fas fa-user-plus""></i> Create
-    </button>
-    <div>
-        <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-   ");
-            WriteLiteral(@"             <tr>
-                    <th>No</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div id=""chart""></div>
-    <div id=""chart2""></div>
-</div>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class=""container-fluid"">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class=""row page-titles"">
+        <div class=""col-md-6 col-8 align-self-center"">
+            <h3 class=""text-themecolor m-b-0 m-t-0"">");
+#nullable restore
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+                                               Write(ViewData["Title"]);
 
-<div class=""modal fade"" role=""dialog"" id=""modal"">
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+#nullable restore
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</li>
+            </ol>
+        </div>
+        <div class=""col-md-6 col-4 align-self-center"">
+            <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm""><i class=""mdi mdi-plus-circle""></i> Create</button>
+            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
+                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+                    January 2017
+                </button>
+                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
+                    <a class=""dropdown-item"" href=""#"">February 2017</a>
+                    <a class=""dropdown-item"" href=""#"">March 2017</a>
+                    <a class=""dropdown-item"" href=""#"">April 2017</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- E");
+            WriteLiteral(@"nd Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class=""row"">
+        <div class=""col-12"">
+            <div class=""card"">
+                <div class=""card-body"">
+                    <h4 class=""card-title"">Data Export</h4>
+                    <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
+                    <div class=""table-responsive m-t-40"">
+                        <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                   ");
+            WriteLiteral(@"                 <th>Cost</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Cost</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ======================================================");
+            WriteLiteral(@"======== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+
+<div class=""modal fade bs-modal-sm"" tabindex=""-1"" role=""dialog"" aria-labelledby=""mySmallModalLabel"" aria-hidden=""true"" style=""display: none;"">
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"">Compensation</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"">&times;</span></button>
+                <h4 class=""modal-title"" id=""mySmallModalLabel"">Add ViewData[""Title""]</h4>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <input type=""hidden"" class=""form-control"" name=""CompensationID"" id=""CompensationID"">
                     <div class=""form-group"">
-                        <label for=""compensationName"" class=""co");
-            WriteLiteral(@"l-form-label"">Compensation Name</label>
+                        <label for=""compensationName"" class=""col-form-label"">Compensation Na");
+            WriteLiteral(@"me</label>
                         <input type=""text"" class=""form-control"" name=""CompensationName"" id=""CompensationName"">
                     </div>
                     <div class=""form-group"">
@@ -93,13 +144,14 @@ namespace AspNetCore
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
+                <button class=""btn btn-secondary waves-effect waves-light"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">Close</button>
+                <button class=""btn btn-primary waves-effect waves-light"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 ");
             DefineSection("scripts", async() => {
@@ -107,40 +159,35 @@ namespace AspNetCore
     <script>
         var isUpdate;
         $(document).ready(function () {
-            table = $('#table_id').DataTable({
-                responsive: true,
-                dom: ""<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>"" +
-                    ""<'row'<'col-sm-12'tr>>"" +
-                    ""<'row'<'col-sm-6'i><'col-sm-6'p>>"",
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2, 3]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2, 3]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2, 4, 5, 6, 7]
+                            columns: [0, 2, 3]
                         }
                     }
-  ");
-                WriteLiteral(@"              ],
-                ""filter"": true,
-                ""orderMulti"": false,
+                ],
                 ""ajax"": {
-                    ""url"": ""Get"",
+                    ""url"": ""/Compensation/Get"",
                     ""type"": ""Get"",
                     ""dataSrc"": ""result"",
                     ""beforeSend"": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
+      ");
+                WriteLiteral(@"                  xhr.setRequestHeader('Authorization', sessionStorage.token);
                     },
                 },
                 ""columnDefs"": [
@@ -159,39 +206,39 @@ namespace AspNetCore
                         ""name"": ""no"",
                         ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
-                            return meta.row + met");
-                WriteLiteral(@"a.settings._iDisplayStart + 1;
+                            return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     { ""data"": 'compensationID' },
                     { ""data"": 'compensationName' },
                     {
                         ""data"": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
+                        render: $.fn");
+                WriteLiteral(@".dataTable.render.number(',', '.', 2, 'Rp. ')
                     },
                     {
                         ""data"": 'compensationID',
                         ""render"": function (data, type, row, meta) {
-                            return '<a class=""btn btn-success"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class =""far fa-edit""></i> Edit</a> ' +
-                                '<button class=""btn btn-danger"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['compensationID'] + '\')""><i class =""far fa-trash-alt""></i> Delete</button>'
+                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-table-edit""></i> Edit</button> ' +
+                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
-            });");
-                WriteLiteral(@"
+            }).buttons().container().appendTo('#table_id_wrapper .col-md-6:eq(0)');
         });
 
         var validator = $(""#form"").validate({
             rules: {
-                CompensationName: ""required"",
-                Cost: {
+                compensationName: ""required"",
+         ");
+                WriteLiteral(@"       cost: {
                     required: true,
                     digits: true
                 }
             },
             messages: {
-                CompensationName: ""Please enter Compensation Name"",
-                Cost: {
+                compensationName: ""Please enter Compensation Name"",
+                cost: {
                     required: ""Please type the Cost"",
                     number: ""Please type only numbers""
                 }
@@ -200,22 +247,22 @@ namespace AspNetCore
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = ""Put""
+                    urlString = ""/Compensation/Put""
                 else
-                    urlString = ""Post""
+                    urlString = ""/Compensation/Post""
                 $.ajax({
                     type: ""POST"",
                     url: urlString,
                     headers: {
                         Authorization: sessionStorage.token
                     },
-                    data: fo");
-                WriteLiteral(@"rm.serialize(),
+                    data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-sm').modal('");
+                WriteLiteral(@"hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
-                            position: 'center',
+                            position: 'top-end',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -237,20 +284,19 @@ namespace AspNetCore
         function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
-      ");
-                WriteLiteral(@"  }
+        }
 
         function Get(compensationID) {
-            debugger;
             $.ajax({
-                url: ""GetById"",
+                u");
+                WriteLiteral(@"rl: ""/Compensation/GetById"",
                 type: ""GET"",
                 data: { 'key': compensationID },
                 headers: {
                     Authorization: sessionStorage.token
                 },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result['result'];
                     $('#CompensationID').val(data.compensationID);
                     $('#CompensationName').val(data.compensationName);
@@ -267,21 +313,21 @@ namespace AspNetCore
                 text: ""You won't be able to revert this!"",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonCo");
-                WriteLiteral(@"lor: '#3085d6',
+                confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButto");
+                WriteLiteral(@"nText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: ""POST"",
-                        url: ""Delete"",
+                        url: ""/Compensation/Delete"",
                         data: { 'key': compensationID },
                         headers: {
                             Authorization: sessionStorage.token
                         },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',
@@ -291,19 +337,9 @@ namespace AspNetCore
                         error: function (error) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oo");
-                WriteLiteral(@"ps...',
-                                text: 'Something went wrong!',
-                                footer: '<a href>Your Work cannot be saved</a>'
-                            })
-                        },
-                    });
-                }
-            });
-        }
-
-    </script>
-");
+                                title: 'Oops...',
+                                text: 'Someth");
+                WriteLiteral("ing went wrong!\',\r\n                                footer: \'<a href>Your Work cannot be saved</a>\'\r\n                            })\r\n                        },\r\n                    });\r\n                }\r\n            });\r\n        }\r\n\r\n    </script>\r\n");
             }
             );
         }

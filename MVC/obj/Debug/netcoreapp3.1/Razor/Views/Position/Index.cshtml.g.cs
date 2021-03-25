@@ -12,69 +12,130 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4bf726e3aa72181bb4028ace047b3b6d08126ae0", @"/Views/Position/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d87649855ace5f3434b58f1f0939858e6cbab36e", @"/Views/Position/Index.cshtml")]
     public class Views_Position_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
-   Layout = "_Layout";
-    ViewBag.Title = "Position";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
+   Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Position";
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral(@"
-<div class=""container"">
-    <br />
-    <div class=""col-sm-12 text-right"">
-        <ol class=""breadcrumb float-sm-right"">
-            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
-            <li class=""breadcrumb-item active"">Position</li>
-        </ol>
-    </div>
-    <h2 class=""page-header"">
-        <i class=""fas fa-user-friends""></i> Position
-    </h2>
-    <br />
-    <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
-        <i class=""fas fa-user-plus""></i> Create
-    </button>
-    <div>
-        <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-           ");
-            WriteLiteral(@"     <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class=""container-fluid"">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class=""row page-titles"">
+        <div class=""col-md-6 col-8 align-self-center"">
+            <h3 class=""text-themecolor m-b-0 m-t-0"">");
+#nullable restore
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
+                                               Write(ViewData["Title"]);
 
-<div class=""modal fade"" role=""dialog"" id=""modal"">
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+#nullable restore
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
+                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</li>
+            </ol>
+        </div>
+        <div class=""col-md-6 col-4 align-self-center"">
+            <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm""><i class=""mdi mdi-plus-circle""></i> Create</button>
+            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
+                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
+                    January 2017
+                </button>
+                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
+                    <a class=""dropdown-item"" href=""#"">February 2017</a>
+                    <a class=""dropdown-item"" href=""#"">March 2017</a>
+                    <a class=""dropdown-item"" href=""#"">April 2017</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- E");
+            WriteLiteral(@"nd Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class=""row"">
+        <div class=""col-12"">
+            <div class=""card"">
+                <div class=""card-body"">
+                    <h4 class=""card-title"">Data Export</h4>
+                    <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
+                    <div class=""table-responsive m-t-40"">
+                        <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                  ");
+            WriteLiteral(@"                  <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ========================================");
+            WriteLiteral(@"====================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+
+<div class=""modal fade bs-modal-sm"" tabindex=""-1"" role=""dialog"" aria-labelledby=""mySmallModalLabel"" aria-hidden=""true"" style=""display: none;"">
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"">Position</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"" onclick=""Readonly()"">&times;</span></button>
+                <h4 class=""modal-title"" id=""mySmallModalLabel"">Add ");
+#nullable restore
+#line 88 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
+                                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</h4>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
@@ -82,8 +143,7 @@ namespace AspNetCore
                         <div class=""form-group"">
                             <input type=""text"" class=""form-control"" name=""PositionID"" id=""PositionID"" hidden>
                         </div>
-                   ");
-            WriteLiteral(@" </div>
+                    </div>
                     <div class=""form-row"">
                         <div class=""form-group"">
                             <label for=""departmentID"" class=""col-form-label"">Department</label>
@@ -92,16 +152,22 @@ namespace AspNetCore
                     </div>
                     <div class=""form-row"">
                         <div class=""form-group"">
-                            <label for=""firstName"" class=""col-form-label"">Position Name</label>
+                            <label for=""firstName"" class=""col-form-label"">P");
+            WriteLiteral(@"osition Name</label>
                             <input type=""text"" class=""form-control"" name=""PositionName"" id=""PositionName"">
                         </div>
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Submit"">Submit</button>");
-            WriteLiteral("\r\n            </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
+                <button class=""btn btn-secondary waves-effect waves-ligh"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                <button class=""btn btn-primary waves-effect waves-ligh"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
@@ -109,7 +175,7 @@ namespace AspNetCore
         $(document).ready(function () {
             $.ajax({
                 type: ""GET"",
-                url: '/department/get',
+                url: '/Department/Get',
                 success: function (result) {
                     var data = result['result']
                     var s = '<option value=""-1"">Please Select a Department</option>';
@@ -120,29 +186,27 @@ namespace AspNetCore
                 }
             });
 
-            table = $('#table_id').DataTable({
+            $('#table_id').DataTable({
                 responsive: true,
-                dom: ""<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>"" +
-                    ""<'row'<'col-sm-12'tr>>"" +
-                    ""<'row'<'col-sm-6'i><'col-sm-6'p>>"",
+                dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'csv',
-           ");
-                WriteLiteral(@"             exportOptions: {
-                            columns: [0, 2]
+                        exportOptions: {
+                            columns: [0, 2, 3]
                         }
                     },
                     {
-                        extend: 'excel',
+              ");
+                WriteLiteral(@"          extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2]
+                            columns: [0, 2, 3]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2]
+                            columns: [0, 2, 3]
                         }
                     }
                 ],
@@ -160,13 +224,13 @@ namespace AspNetCore
                     },
                     {
                         ""targets"": [0, 4],
-             ");
-                WriteLiteral(@"           ""orderable"": false,
+                        ""orderable"": false,
                     }
                 ],
                 ""columns"": [
                     {
-                        ""data"": null,
+                        ""data""");
+                WriteLiteral(@": null,
                         ""name"": ""no"",
                         ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
@@ -179,9 +243,9 @@ namespace AspNetCore
                     {
                         ""data"": 'positionID',
                         ""render"": function (data, type, row, meta) {
-                            return '<a class=""btn btn-success"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['positionID'] + '\')""><i class =""far fa-edit""></i> Edit</a> ' +
-                                '<button class=""btn btn-danger"" da");
-                WriteLiteral(@"ta-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['positionID'] + '\')""><i class =""far fa-trash-alt""></i> Delete</button>'
+                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['positionID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' +");
+                WriteLiteral(@" row['positionID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
@@ -204,17 +268,17 @@ namespace AspNetCore
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = ""put""
+                    urlString = ""/Position/Put""
                 else
-                    urlString = ""post""
+                    urlString = ""/Position/Post""
                 $.ajax({
                     type: ""POST"",
                     url: urlString,
                     data: form.serialize(),
-         ");
-                WriteLiteral(@"           success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                    success: function (data) {
+                    ");
+                WriteLiteral(@"    $('.bs-modal-sm').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -240,14 +304,14 @@ namespace AspNetCore
             $('#form').trigger('reset');
         }
 
-        function Ge");
-                WriteLiteral(@"t(id) {
+        function Get(id) {
             $.ajax({
-                url: ""GetById"",
+ ");
+                WriteLiteral(@"               url: ""/Position/GetById"",
                 type: ""GET"",
                 data: { 'key': id },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result[""result""];
                     $('#PositionID').val(data.positionID);
                     $('#PositionName').val(data.positionName);
@@ -268,13 +332,13 @@ namespace AspNetCore
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-          ");
-                WriteLiteral(@"          $.ajax({
+                    $.ajax");
+                WriteLiteral(@"({
                         type: ""POST"",
-                        url: ""delete"",
+                        url: ""/Position/Delete"",
                         data: { 'key': id },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',

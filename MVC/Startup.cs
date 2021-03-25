@@ -44,7 +44,7 @@ namespace MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Index}/{id?}");
+                    pattern: "{controller=Compensation}/{action=Index}/{id?}");
             });
         }
     }

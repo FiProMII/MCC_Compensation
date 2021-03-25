@@ -1,66 +1,104 @@
-﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Employee";
+﻿@{ Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Employee";
 }
 
-<div class="container" id="employee">
-    <br />
-    <div class="col-sm-12 text-right">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Workers</li>
-        </ol>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <button class="btn pull-right hidden-sm-down btn-success" data-toggle="modal" data-target=".bs-modal-lg" onclick="reset()"><i class="mdi mdi-plus-circle"></i> Create</button>
+            <div class="dropdown pull-right m-r-10 hidden-sm-down">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    January 2017
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">February 2017</a>
+                    <a class="dropdown-item" href="#">March 2017</a>
+                    <a class="dropdown-item" href="#">April 2017</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <h2 class="page-header">
-        <i class="fas fa-user-tie"></i> Workers
-    </h2>
-    <br />
-    <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
-        <i class="fas fa-user-plus"></i> Create
-    </button>
-    <div>
-        <table id="table_id" class="table table-sm table-striped table-bordered m-2">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>NIK</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Birth</th>
-                    <th>Join Date</th>
-                    <th>Position</th>
-                    <th>Manager</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No.</th>
-                    <th>NIK</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Birth</th>
-                    <th>Join Date</th>
-                    <th>Position</th>
-                    <th>Manager</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Data Export</h4>
+                    <h6 class="card-subtitle">Export data CSV, Excel, PDF</h6>
+                    <div class="table-responsive m-t-40">
+                        <table id="table_id" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Birth</th>
+                                    <th>Join Date</th>
+                                    <th>Position</th>
+                                    <th>Manager</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>NIK</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Birth</th>
+                                    <th>Join Date</th>
+                                    <th>Position</th>
+                                    <th>Manager</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
     </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
 </div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 
-<div class="modal fade" role="dialog" id="modal">
-    <div class="modal-dialog">
+<div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Employee</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="Readonly()">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Add @ViewData["Title"]</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
@@ -122,8 +160,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Submit">Submit</button>
+                <button class="btn btn-secondary waves-effect waves-ligh" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
+                <button class="btn btn-primary waves-effect waves-ligh" type="submit" form="form" id="Submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -138,7 +176,7 @@
             $.ajax({
                 type: "POST",
                 url: "/AccountRole/Delete",
-                data: { 'key':  nik}
+                data: { 'key': nik }
             });
         }
 
@@ -154,7 +192,7 @@
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: '/role/get',
+                url: '/Role/Get',
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -167,7 +205,7 @@
             var departmentDropdown = '<option value="-1">Please select a department</option>';
             $.ajax({
                 type: "GET",
-                url: '/department/get',
+                url: '/Department/Get',
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -181,7 +219,7 @@
                 var selectedDepartment = $('#DepartmentDropdown option:selected').val();
                 $.ajax({
                     type: "GET",
-                    url: '/position/get',
+                    url: '/Position/Get',
                     success: function (result) {
                         var positionDropdown = '<option value="-1">Please select a position</option>';
                         var data = result['result']
@@ -199,7 +237,7 @@
                     var selectedPosition = $('#PositionID option:selected').text();
                     $.ajax({
                         type: "GET",
-                        url: '/employee/get',
+                        url: '/Employee/Get',
                         success: function (result) {
                             var managerDropdown = '<option value="-1">Please select a manager</option>';
                             var data = result['result']
@@ -222,28 +260,25 @@
                 })
             });
 
-            table = $('#table_id').DataTable({
-                responsive: true,
-                dom: "<'row'<'col-sm-5'l><'col-sm-4 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 2]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 2]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 2]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     }
                 ],
@@ -294,7 +329,7 @@
                     {
                         "data": 'manager',
                         "render": function (data) {
-                            if (data!= null)
+                            if (data != null)
                                 return data.employeeName
                             return ''
                         }
@@ -302,8 +337,8 @@
                     {
                         "data": 'nik',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['nik'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['nik'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['nik'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
+                                '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['nik'] + '\')"><i class ="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
                 ]
@@ -420,17 +455,17 @@
 
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "put"
+                    urlString = "/Employee/Put"
                 else
-                    urlString = "post"
+                    urlString = "/Employee/Post"
 
                 $.ajax({
                     type: "POST",
                     url: urlString,
                     data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-lg').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             icon: 'success',
                             title: 'Your data has been saved',
@@ -495,11 +530,11 @@
             });
 
             $.ajax({
-                url: "GetById",
+                url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-lg').modal('show');
                     var data = result["result"];
                     $('#NIK').val(data.nik);
                     $('#EmployeeName').val(data.employeeName);
@@ -534,7 +569,7 @@
                         url: "/Account/Delete",
                         data: { 'key': id },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',

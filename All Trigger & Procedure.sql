@@ -67,7 +67,7 @@
 	GO
 
 	-- SP login
-	CREATE PROCEDURE SP_RetrieveLogin
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveLogin]
 		@Email nvarchar(max),
 		@Password nvarchar(max)
 	AS
@@ -93,13 +93,27 @@
 	END
 	GO
 
-	-- get nik & email for validation
+	-- Get nik & email for validation
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
 		@Params varchar(max)
 	AS
 	BEGIN
 		SELECT * FROM TB_M_Employee WHERE Email = @Params OR NIK = @Params
 	END
+	GO
+
+	-- Get Compensation for Chart
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveCompensation]
+	AS
+	BEGIN
+		SELECT 
+		SUM(CASE WHEN CompensationID = 1 THEN CompensationID ELSE 0 END) AS [Wedding],
+		SUM(CASE WHEN CompensationID = 2 THEN CompensationID ELSE 0 END) AS [Baby Gift],
+		SUM(CASE WHEN CompensationID = 3 THEN CompensationID ELSE 0 END) AS [Duka],
+		YEAR(RequestDate) AS [Year]
+		FROM TB_T_CompensationRequest GROUP BY YEAR(RequestDate)
+	END
+	GO
 	GO
 	
 	--get email manager

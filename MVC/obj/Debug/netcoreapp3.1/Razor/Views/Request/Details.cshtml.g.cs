@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dd66882538841bc1c95c9c3e2e9fbdfa56e0e2c9", @"/Views/Request/Details.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"af30eb08a26f4ffe1720ae02303d3a11230714c6", @"/Views/Request/Details.cshtml")]
     public class Views_Request_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -69,7 +69,8 @@ namespace AspNetCore
                         <div class=""form-group row"">
                             <label class=""col-md-4"">Relation Manager</label>
                             <span class=""col-md-7"" id=""ManagerName""></span>
-                        </div>");
+                        </div>
+");
             WriteLiteral(@"
                         <div class=""form-group row"">
                             <label class=""col-md-4"">Join Date</label>
@@ -163,7 +164,7 @@ namespace AspNetCore
                             } else if (data.documents[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPE");
                 WriteLiteral(@"G)$/)) {
                                 var documentList = '<a target=""_blank"" href=""' + data.documents[i].link
-                                    + '""><img src=""/src/images/pdf.png"" width=""50"">' + data.documents[i].documentName + '</>'
+                                    + '""><img src=""/src/images/images.png"" width=""50"">' + data.documents[i].documentName + '</>'
                             }
                             $('#Document').append(documentList);
                         }
