@@ -84,12 +84,15 @@ namespace API.Controllers
         }
 
         [HttpPost("ForgotPassword")]
-        public IActionResult ForgotPassword(string email)
+        public IActionResult ForgotPassword(LoginVM loginVM)
         {
-            var result = _accountRepository.ForgotPassword(email);
+            var result = _accountRepository.ForgotPassword(loginVM.Email);
             ResponseVM<string> responseContent = new ResponseVM<string>();
-            if (result)
+            if (result != null)
             {
+                EmailController emailController = new EmailController();
+                emailController.SendEmail(loginVM.Email, EmailController.EmailType.TemporaryPassword, result);
+
                 responseContent.Status = ResponseVM<string>.StatusType.Success;
                 responseContent.Message = "New password sent";
                 return Ok(responseContent);

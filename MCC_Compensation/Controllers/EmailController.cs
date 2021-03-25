@@ -46,7 +46,7 @@ namespace API.Controllers
             message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);  
             System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123");
+            System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123456");
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;

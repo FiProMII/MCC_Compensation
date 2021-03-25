@@ -33,7 +33,7 @@ namespace API.Repository.Data
             var isTemp = false;
             var employee = employees.Include("Account")
                 .SingleOrDefault(e => e.Email == loginVM.Email);
-            //BC.EnhancedVerify(loginVM.Password, employee.Account.Password, BCrypt.Net.HashType.SHA384)
+
             LoginVM loginResult = new LoginVM();
             if (employee != null)
             {
@@ -41,7 +41,7 @@ namespace API.Repository.Data
                 if (regex.IsMatch(employee.Account.Password))
                 {
                     isTemp = true;
-                    regex.Replace(employee.Account.Password, "");
+                    employee.Account.Password = regex.Replace(employee.Account.Password, "");
                 }
 
                 if (BC.EnhancedVerify(loginVM.Password, employee.Account.Password, BCrypt.Net.HashType.SHA384))
@@ -66,19 +66,19 @@ namespace API.Repository.Data
             return loginResult;
         }
 
-        public bool ForgotPassword(string email)
+        public string ForgotPassword(string email)
         {
             var employee = employees.SingleOrDefault(x => x.Email == email);
             if (employee != null)
             {
-                Guid g = Guid.NewGuid();
-                var tempPassword = BC.EnhancedHashPassword(g.ToString());
+                var tempPassword = Guid.NewGuid().ToString();
                 Account account = new Account();
                 account.NIK = employee.NIK;
-                account.Password = 'n' + tempPassword;
-                return true;
+                account.Password = 'n' + BC.EnhancedHashPassword(tempPassword);
+                Update(account);
+                return tempPassword;
             }
-            return false;
+            return null;
         }
     }
 }
