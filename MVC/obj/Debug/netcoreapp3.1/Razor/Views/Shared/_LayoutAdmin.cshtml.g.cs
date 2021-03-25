@@ -15,20 +15,20 @@ namespace AspNetCore
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"494a1743a5ee9834abfca8c88c9645c38dfa1b3e", @"/Views/Shared/_LayoutAdmin.cshtml")]
     public class Views_Shared__LayoutAdmin : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/bootstrap/css/bootstrap.min.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/bootstrap/css/bootstrap.min.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_2 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/css/style.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_3 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/css/colors/purple-dark.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_4 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/jquery/jquery.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_5 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/bootstrap/js/popper.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_6 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/bootstrap/js/bootstrap.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_7 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/js/jquery.slimscroll.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_8 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/js/waves.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_9 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/js/sidebarmenu.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_10 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/sticky-kit-master/sticky-kit.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_11 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/js/custom.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_12 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/datatables/jquery.dataTables.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_13 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/bootstrap/assets/plugins/styleswitcher/jQuery.style.switcher.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_2 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/css/style.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_3 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/css/colors/purple-dark.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_4 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/jquery/jquery.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_5 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/bootstrap/js/popper.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_6 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/bootstrap/js/bootstrap.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_7 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/js/jquery.slimscroll.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_8 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/js/waves.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_9 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/js/sidebarmenu.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_10 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/sticky-kit-master/sticky-kit.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_11 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/js/custom.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_12 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/datatables/jquery.dataTables.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_13 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/assets/plugins/styleswitcher/jQuery.style.switcher.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_14 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("fix-header fix-sidebar card-no-border"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         #line hidden
         #pragma warning disable 0649
@@ -64,7 +64,7 @@ namespace AspNetCore
                 WriteLiteral(">\r\n    <meta name=\"author\"");
                 BeginWriteAttribute("content", " content=\"", 335, "\"", 345, 0);
                 EndWriteAttribute();
-                WriteLiteral(">\r\n    <!-- Favicon icon -->\r\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/bootstrap/assets/images/favicon.ico\">\r\n    <title>");
+                WriteLiteral(">\r\n    <!-- Favicon icon -->\r\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/lib/assets/images/favicon.ico\">\r\n    <title>");
 #nullable restore
 #line 13 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Shared\_LayoutAdmin.cshtml"
       Write(ViewData["Title"]);
@@ -168,18 +168,18 @@ namespace AspNetCore
                         <b>
                             <!--You can put here icon as well // <i class=""wi wi-sunset""></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src=""/bootstrap/assets/images/logo-icon.png"" alt=""homepage"" class=""dark-logo"" />
+                            <img src=""/lib/assets/images/logo-icon.png"" alt=""homepage"" class=""dark-logo"" />
                             <!-- Light Logo icon -->
-                            <img src=""/bootstrap/assets/images/logo-light-icon.png"" alt=""homepage"" class=""light-logo"" />
+                            <img src=""/lib/assets/images/logo-light-icon.png"" alt=""homepage"" class=""light-logo"" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span>
-                            <!-- dark");
-                WriteLiteral(@" Logo text -->
-                            <img src=""/bootstrap/assets/images/logo-text.png"" alt=""homepage"" class=""dark-logo"" />
+                            <!-- dark Logo text -");
+                WriteLiteral(@"->
+                            <img src=""/lib/assets/images/logo-text.png"" alt=""homepage"" class=""dark-logo"" />
                             <!-- Light Logo text -->
-                            <img src=""/bootstrap/assets/images/logo-light-text.png"" class=""light-logo"" alt=""homepage"" />
+                            <img src=""/lib/assets/images/logo-light-text.png"" class=""light-logo"" alt=""homepage"" />
                         </span>
                     </a>
                 </div>
@@ -192,8 +192,8 @@ namespace AspNetCore
                     <!-- ============================================================== -->
                     <ul class=""navbar-nav mr-auto mt-md-0 "">
                         <!-- This is  -->
-                        <li clas");
-                WriteLiteral(@"s=""nav-item""> <a class=""nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"" href=""javascript:void(0)""><i class=""ti-menu""></i></a> </li>
+                        <li class=""nav-item""> <a class=""");
+                WriteLiteral(@"nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"" href=""javascript:void(0)""><i class=""ti-menu""></i></a> </li>
                         <li class=""nav-item""> <a class=""nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"" href=""javascript:void(0)""><i class=""icon-arrow-left-circle""></i></a> </li>
                         <!-- ============================================================== -->
                     </ul>
@@ -203,27 +203,27 @@ namespace AspNetCore
                     <ul class=""navbar-nav my-lg-0"">
                         <li class=""nav-item hidden-sm-down"">
                             <form class=""app-search"">
-                                <input type=""text"" class=""form-control"" placeholder=""Search for...""> <a class=""srh-btn""><i class");
-                WriteLiteral("=\"ti-search\"></i></a>\r\n                            </form>\r\n                        </li>\r\n                        <li class=\"nav-item dropdown\">\r\n                            <a class=\"nav-link dropdown-toggle text-muted waves-effect waves-dark\"");
-                BeginWriteAttribute("href", " href=\"", 5891, "\"", 5898, 0);
+                                <input type=""text"" class=""form-control"" placeholder=""Search for...""> <a class=""srh-btn""><i class=""ti-search""></i></a>
+ ");
+                WriteLiteral("                           </form>\r\n                        </li>\r\n                        <li class=\"nav-item dropdown\">\r\n                            <a class=\"nav-link dropdown-toggle text-muted waves-effect waves-dark\"");
+                BeginWriteAttribute("href", " href=\"", 5843, "\"", 5850, 0);
                 EndWriteAttribute();
-                WriteLiteral(@" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false""><img src=""/bootstrap/assets/images/users/1.jpg"" alt=""user"" class=""profile-pic"" /></a>
+                WriteLiteral(@" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false""><img src=""/lib/assets/images/users/user.png"" alt=""user"" class=""profile-pic"" /></a>
                             <div class=""dropdown-menu dropdown-menu-right animated flipInY"">
                                 <ul class=""dropdown-user"">
                                     <li>
                                         <div class=""dw-user-box"">
-                                            <div class=""u-img""><img src=""/bootstrap/assets/images/users/1.jpg"" alt=""user""></div>
+                                            <div class=""u-img""><img src=""/lib/assets/images/users/user.png"" alt=""user""></div>
                                             <div class=""u-text"">
                                                 <h4>Steave Jobs</h4>
                                                 <p class=""text-muted"">varun@gmail.com</p><a href=""profile.html"" class=""btn btn-rounded btn-danger btn-sm"">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
-                          ");
-                WriteLiteral(@"          <li role=""separator"" class=""divider""></li>
+                                ");
+                WriteLiteral(@"    <li role=""separator"" class=""divider""></li>
                                     <li><a href=""#""><i class=""ti-user""></i> My Profile</a></li>
-                                    <li><a href=""#""><i class=""ti-wallet""></i> My Balance</a></li>
-                                    <li><a href=""#""><i class=""ti-email""></i> Inbox</a></li>
+                                    <li><a href=""#""><i class=""ti-agenda""></i> My Request</a></li>
                                     <li role=""separator"" class=""divider""></li>
                                     <li><a href=""#""><i class=""ti-settings""></i> Account Setting</a></li>
                                     <li role=""separator"" class=""divider""></li>
@@ -240,6 +240,8 @@ namespace AspNetCore
  ");
                 WriteLiteral(@"       <!-- ============================================================== -->
         <!-- ============================================================== -->
+        <!-- ======");
+                WriteLiteral(@"======================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         <aside class=""left-sidebar"">
@@ -248,15 +250,14 @@ namespace AspNetCore
                 <!-- User profile -->
                 <div class=""user-profile"">
                     <!-- User profile image -->
-                    <div class=""profile-img""> <img src=""/bootstrap/assets/images/users/1.jpg"" alt=""user"" /> </div>
+                    <div class=""profile-img""> <img src=""/lib/assets/images/users/user.png"" alt=""user"" /> </div>
                     <!-- User profile text-->
                     <div class=""profile-text"">
                         <a href=""#"" class=""dropdown-toggle link u-dropdown"" data-toggle=""dropdown"" role=""button"" aria-haspopup=""true"" aria-expanded=""true"">Markarn Doe <span class=""caret""></span></a>
-                        <div class=""dropdown-menu anim");
-                WriteLiteral(@"ated flipInY"">
-                            <a href=""#"" class=""dropdown-item""><i class=""ti-user""></i> My Profile</a>
-                            <a href=""#"" class=""dropdown-item""><i class=""ti-wallet""></i> My Balance</a>
-                            <a href=""#"" class=""dropdown-item""><i class=""ti-email""></i> Inbox</a>
+                        <div class=""dropdown-menu animated flipInY"">
+                            <a href=""#"" class=""dropdown-item""><i class=""ti-user""></i> ");
+                WriteLiteral(@"My Profile</a>
+                            <a href=""/Request/Index"" class=""dropdown-item""><i class=""ti-agenda""></i> My Request</a>
                             <div class=""dropdown-divider""></div> <a href=""#"" class=""dropdown-item""><i class=""ti-settings""></i> Account Setting</a>
                             <div class=""dropdown-divider""></div> <a href=""login.html"" class=""dropdown-item""><i class=""fa fa-power-off""></i> Logout</a>
                         </div>
@@ -269,7 +270,7 @@ namespace AspNetCore
                         <li class=""nav-small-cap"">PERSONAL</li>
                         <li>
                             <a");
-                BeginWriteAttribute("class", " class=\"", 9976, "\"", 9984, 0);
+                BeginWriteAttribute("class", " class=\"", 9741, "\"", 9749, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" href=""#"" aria-expanded=""false""><i class=""mdi mdi-gauge""></i><span class=""hide-menu"">Dashboard</span></a>
                         </li>
@@ -291,7 +292,7 @@ namespace AspNetCore
                         </li>
                         <li>
                             <a");
-                BeginWriteAttribute("class", " class=\"", 11285, "\"", 11293, 0);
+                BeginWriteAttribute("class", " class=\"", 11050, "\"", 11058, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" href=""/Role/Index"" aria-expanded=""false""><i class=""mdi mdi-account-key""></i><span class=""hide-menu"">User Role</span></a>
                         </li>
@@ -299,9 +300,9 @@ namespace AspNetCore
                         <li class=""nav-small-cap"">Compensation Request</li>
                         <li>
                             <a");
-                BeginWriteAttribute("class", " class=\"", 11640, "\"", 11648, 0);
+                BeginWriteAttribute("class", " class=\"", 11405, "\"", 11413, 0);
                 EndWriteAttribute();
-                WriteLiteral(@" href=""/Request/Index"" aria-expanded=""false""><i class=""mdi mdi-clipboard-check""></i><span class=""hide-menu"">Detail Requests</span></a>
+                WriteLiteral(@" href=""/Request/Index"" aria-expanded=""false""><i class=""mdi mdi-clipboard-flow""></i><span class=""hide-menu"">Detail Requests</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -312,13 +313,13 @@ namespace AspNetCore
             <div class=""sidebar-footer"">
                 <!-- item-->
                 <a");
-                BeginWriteAttribute("href", " href=\"", 12101, "\"", 12108, 0);
+                BeginWriteAttribute("href", " href=\"", 11865, "\"", 11872, 0);
                 EndWriteAttribute();
                 WriteLiteral(" class=\"link\" data-toggle=\"tooltip\" title=\"Settings\"><i class=\"ti-settings\"></i></a>\r\n                <!-- item-->\r\n                <a");
-                BeginWriteAttribute("href", " href=\"", 12243, "\"", 12250, 0);
+                BeginWriteAttribute("href", " href=\"", 12007, "\"", 12014, 0);
                 EndWriteAttribute();
                 WriteLiteral(" class=\"link\" data-toggle=\"tooltip\" title=\"Email\"><i class=\"mdi mdi-gmail\"></i></a>\r\n                <!-- item-->\r\n                <a");
-                BeginWriteAttribute("href", " href=\"", 12384, "\"", 12391, 0);
+                BeginWriteAttribute("href", " href=\"", 12148, "\"", 12155, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" class=""link"" data-toggle=""tooltip"" title=""Logout""><i class=""mdi mdi-power""></i></a>
             </div>

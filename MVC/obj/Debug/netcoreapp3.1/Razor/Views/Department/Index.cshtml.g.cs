@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1076321e2aed8f03b4e8cb27f5307bbe7260b3db", @"/Views/Department/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"844daecd5029423b678647ddeb0dedcdd71582d2", @"/Views/Department/Index.cshtml")]
     public class Views_Department_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -57,20 +57,9 @@ namespace AspNetCore
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
             <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm"" onclick=""reset()""><i class=""mdi mdi-plus-circle""></i> Create</button>
-            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
-                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
-                    January 2017
-                </button>
-                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
-                    <a class=""dropdown-item"" href=""#"">February 2017</a>
-                    <a class=""dropdown-item"" href=""#"">March 2017</a>
-                    <a class=""dropdown-item"" href=""#"">April 2017</a>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- ============================================================");
-            WriteLiteral(@"== -->
+    <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
@@ -82,15 +71,15 @@ namespace AspNetCore
                 <div class=""card-body"">
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
-                    <div class=""table-responsive m-t-40"">
+                    <div class=""table-responsiv");
+            WriteLiteral(@"e m-t-40"">
                         <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>ID</th>
                                     <th>Name</th>
-");
-            WriteLiteral(@"                                    <th>Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +94,8 @@ namespace AspNetCore
                             </tfoot>
                         </table>
                     </div>
-                    <!-- /.card-body -->
+                 ");
+            WriteLiteral(@"   <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
             </div>
@@ -115,8 +105,7 @@ namespace AspNetCore
     <!-- End PAge Content -->
     <!-- ============================================================== -->
 </div>
-<!-- =======================================================");
-            WriteLiteral(@"======= -->
+<!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
 
@@ -124,7 +113,7 @@ namespace AspNetCore
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""mySmallModalLabel"">Add ");
+                <h4 class=""modal-title"" id=""mySmallModalLabel"">");
 #nullable restore
 #line 86 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Department\Index.cshtml"
                                                               Write(ViewData["Title"]);

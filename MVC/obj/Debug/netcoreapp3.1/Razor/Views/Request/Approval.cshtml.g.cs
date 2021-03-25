@@ -19,98 +19,185 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
-   Layout = "_Layout";
-    ViewBag.Title = "Compensation Request";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
+   Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Approval Request";
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral(@"
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
 <div class=""container-fluid"">
-    <div class=""row"">
-        <div class=""col-sm-12"">
-            <div class=""card-title"">
-                <br /><h4 class=""card-title""><i class=""fas fa-clipboard-list""></i> Compensation Request</h4>
-            </div>
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class=""row page-titles"">
+        <div class=""col-md-6 col-8 align-self-center"">
+            <h3 class=""text-themecolor m-b-0 m-t-0"">");
+#nullable restore
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
+                                               Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+#nullable restore
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Approval.cshtml"
+                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</li>
+            </ol>
         </div>
     </div>
-</div>
-<div class=""flex-md-wrap"">
-    <div class=""container-fluid"">
-        <div class=""row"">
-            <div class=""col-12"">
-                <div class=""card m-auto"">
-                    <div class=""card-body"" style=""padding-left: 100px; padding-right: 100px;"">
-                        <br />
-                        <h4>Requester Information</h4>
-                        <hr />
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Requester</label>
-                            <span class=""col-md-7"" id=""Requester""></span>
-                        </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Department");
-            WriteLiteral(@"</label>
-                            <span class=""col-md-7"" id=""DepartmentName""></span>
-                        </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Position</label>
-                            <span class=""col-md-7"" id=""PositionName""></span>
-                        </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Relation Manager</label>
-                            <span class=""col-md-7"" id=""ManagerName""></span>
-                        </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Join Date</label>
-                            <span class=""col-md-7"" id=""JoinDate""></span>
-                        </div>
-                    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class=""row"">
+        <div class=""col-lg-12"">
+            <div class=""card card-outline-info"">
+                <div class=""card-header"">
+                    <h4 class=""m-b-0 text-white"">Approval Request</h4>
                 </div>
-                <br />
-                <div class=""card m-auto"">
-                    <div class=""card-header"">Compensation Request Detail</div");
-            WriteLiteral(@">
-                    <form id=""form"">
-                        <div class=""card-body"" style=""padding-left: 100px; padding-right: 100px;"">
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Request Number</label>
-                                <div class=""col-md-7 col-form-label"">
-                                    <span id=""RequestIDText""></span>
-                                    <input type=""hidden"" value=""requestID"" name=""RequestID"" id=""RequestID"" />
+                <div class=""card-body"">
+                    <form class=""form-horizontal"" role=""form"">
+                        <div class=""form-body"">
+                            <h3 class=""box-title"">Person Info</h3>
+                            <hr class=""m-t-0 m-b-40"">
+                            <div class=""row"">
+     ");
+            WriteLiteral(@"                           <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Requester:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""Requester""></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Compensation Type</label>
-                                <div class=""col-md-5"">
-                                    <span id=""CompensationName""></span>
+                            <!--/row-->
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Department:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""Departm");
+            WriteLiteral(@"entName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Relation Manager:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""ManagerName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+       ");
+            WriteLiteral(@"                                 <label class=""control-label text-right col-md-4"">Position:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""PositionName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Join Date:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""JoinDate""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+              ");
+            WriteLiteral(@"              </div>
+                            <!--/row-->
+                            <h3 class=""box-title"">Compensation Request</h3>
+                            <hr class=""m-t-0 m-b-40"">
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Number:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""RequestID""></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class=""f");
-            WriteLiteral(@"orm-group row"">
-                                <label class=""col-md-4 col-form-label"">Event Data</label>
-                                <div class=""col-md-5"">
-                                    <span id=""EventDate""></span>
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""con");
+            WriteLiteral(@"trol-label text-right col-md-4"">Event Date:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""EventDate""></p>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Compensation Type:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""CompensationName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
                             </div>
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Request Date</label>
-                                <div class=""col-md-5"">
-                                    <span id=""RequestDate""></span>
+             ");
+            WriteLiteral(@"               <!--/row-->
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Request Date:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""RequestDate""></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Document Requirements</label>
-                                <div class=""col-md-7 col-form-label"" id=""Document"">
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Document:</label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""Do");
+            WriteLiteral(@"cument""></p>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!--/span-->
                             </div>
                         </div>
-              ");
-            WriteLiteral(@"          <div class=""form-group row"">
-                            <div class=""col-12 text-right pr-5"" id=""button"">
-                                <button class=""btn btn-success"" value=""2"" type=""submit"">Approve</button>
-                                <button class=""btn btn-danger"" value=""3"" type=""submit"">Reject</button>
+                        <div class=""form-actions"">
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""row"">
+                                        <div class=""col-md-offset-3 col-md-8"" id=""button"">
+                                            <button type=""submit"" value=""2"" class=""btn btn-outline-success""> <i class=""mdi mdi-checkbox-marked-circle-outline""></i> Approve</button>
+                                            <button type=""submit"" value=""3"" class=""btn btn-outline-danger""><i class=""mdi mdi-alert-octagram""></i> Reject</button>
+                                        </div>
+                                    </div>
+                         ");
+            WriteLiteral(@"       </div>
                             </div>
                         </div>
                     </form>
@@ -118,7 +205,14 @@ namespace AspNetCore
             </div>
         </div>
     </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
 </div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 
 ");
             DefineSection("scripts", async() => {
@@ -142,14 +236,13 @@ namespace AspNetCore
                     type: ""GET"",
                     data: { 'key': id },
                     success: function (result) {
-                        $('#modal').modal('show');
                         var data = result[""result""];
                         managerNIK = data.employee.manager.nik
                         requestID = data.requestID
                         $('#Requester').html(data.employee.employeeName)
-                        $('#DepartmentName').html(data.employee.position.dep");
-                WriteLiteral(@"artment.departmentName)
-                        $('#PositionName').html(data.employee.position.positionName)
+                        $('#DepartmentName').html(data.employee.position.department.departmentName)
+                        $('");
+                WriteLiteral(@"#PositionName').html(data.employee.position.positionName)
                         $('#ManagerName').html(data.employee.manager.employeeName)
                         $('#JoinDate').html(moment(data.employee.joinDate).format('DD-MM-YYYY'))
                         $('#RequestID').html(data.requestID)
@@ -157,15 +250,15 @@ namespace AspNetCore
                         $('#CompensationName').html(data.compensation.compensationName)
                         $('#EventDate').html(moment(data.eventDate).format('DD-MM-YYYY'))
                         $('#RequestDate').html(moment(data.requestDate).format('DD-MM-YYYY'))
-                        
+
                         for (var i = 0; i < data.documents.length; i++) {
                             if (data.documents[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
                                 var documentList = '<a target=""_blank"" href=""' + data.documents[i].link
-                                    ");
-                WriteLiteral(@"+ '""><img src=""/src/images/pdf.png"" width=""50"">' + data.documents[i].documentName + '</><br/>'
+                                    + '""><img src=""/bootstrap/assets/images/pdf.png"" width=""30"">' + data.documen");
+                WriteLiteral(@"ts[i].documentName + '</><br/>'
                             } else if (data.documents[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
                                 var documentList = '<a target=""_blank"" href=""' + data.documents[i].link
-                                    + '""><img src=""/src/images/images.png"" width=""50"">' + data.documents[i].documentName + '</>'
+                                    + '""><img src=""/bootstrap/assets/images/images.png"" width=""30"">' + data.documents[i].documentName + '</>'
                             }
                             $('#Document').append(documentList);
                         }
@@ -185,17 +278,10 @@ namespace AspNetCore
             Approval.statusID = statusID;
             Approval.nik = managerNIK;
             Approval.requestID = requestID;
-            $.aja");
-                WriteLiteral(@"x({
+            $.ajax({
                 type: ""POST"",
-                url: ""/Approval/Post"",
-                data: JSON.stringify(Approval),
-                contentType: ""application/json; charset=utf-8"",
-                dataType: ""json""
-            });
-        })
-    </script>
-");
+              ");
+                WriteLiteral("  url: \"/Approval/Post\",\r\n                data: JSON.stringify(Approval),\r\n                contentType: \"application/json; charset=utf-8\",\r\n                dataType: \"json\"\r\n            });\r\n        })\r\n    </script>\r\n");
             }
             );
         }

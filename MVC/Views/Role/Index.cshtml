@@ -1,54 +1,80 @@
-﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Role";
+﻿@{ Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Role";
 }
 
-<div class="container">
-    <br />
-    <div class="col-sm-12 text-right">
-        <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Role</li>
-        </ol>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <button class="btn pull-right hidden-sm-down btn-success" data-toggle="modal" data-target=".bs-modal-sm" onclick="reset()"><i class="mdi mdi-plus-circle"></i> Create</button>
+        </div>
     </div>
-    <h2 class="page-header">
-        <i class="fas fa-user-tag"></i> Authentication Roles
-    </h2>
-    <br />
-    <button type="button" class="mb-3 btn btn-primary text-center" data-toggle="modal" data-target="#modal" onclick="reset()">
-        <i class="fas fa-user-plus"></i> Create
-    </button>
-    <div>
-        <table id="table_id" class="table table-sm table-striped table-bordered m-2">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">User Role</h4>
+                    <h6 class="card-subtitle">Managements</h6>
+                    <div class="table-responsive m-t-40">
+                        <table id="table_id" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
     </div>
-    <div id="chart"></div>
-    <div id="chart2"></div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
 </div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 
-<div class="modal fade" role="dialog" id="modal">
+<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Role</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">@ViewData["Title"]</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
@@ -60,8 +86,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary" type="submit" form="form" id="Sumbit">Submit</button>
+                <button class="btn btn-secondary waves-effect waves-ligh" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
+                <button class="btn btn-primary waves-effect waves-ligh" type="submit" form="form" id="Submit">Submit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -73,12 +99,12 @@
     <script>
         var isUpdate;
         $(document).ready(function () {
-            table = $('#table_id').DataTable({
+            $('#table_id').DataTable({
                 responsive: true,
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "Get",
+                    "url": "/Role/Get",
                     "type": "Get",
                     "dataSrc": "result",
                     "beforeSend": function (xhr) {
@@ -104,13 +130,13 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": 'roleID'},
+                    { "data": 'roleID' },
                     { "data": 'roleName' },
                     {
                         "data": 'roleID',
                         "render": function (data, type, row, meta) {
-                            return '<a class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['roleID'] + '\')"><i class ="far fa-edit"></i> Edit</a> ' +
-                                '<button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['roleID'] + '\')"><i class ="far fa-trash-alt"></i> Delete</button>'
+                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['roleID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
+                                '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['roleID'] + '\')"><i class ="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
                 ]
@@ -128,9 +154,9 @@
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = "Put"
+                    urlString = "/Role/Put"
                 else
-                    urlString = "Post"
+                    urlString = "/Role/Post"
                 $.ajax({
                     type: "POST",
                     url: urlString,
@@ -139,8 +165,8 @@
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-sm').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -169,14 +195,14 @@
         function Get(roleID) {
             debugger;
             $.ajax({
-                url: "GetById",
+                url: "/Role/GetById",
                 type: "GET",
                 data: { 'key': roleID },
                 headers: {
                     Authorization: sessionStorage.token
                 },
                 success: function (result) {
-                    $('#modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result['result'];
                     $('#RoleID').val(data.roleID);
                     $('#RoleName').val(data.roleName);
@@ -199,7 +225,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "Delete",
+                        url: "/Role/Delete",
                         data: { 'key': roleID },
                         headers: {
                             Authorization: sessionStorage.token

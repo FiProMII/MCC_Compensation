@@ -12,7 +12,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2bc83d4766bce91fd9663ef05eb193576364da5", @"/Views/Status/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"034a6e5c42affdf9de5e2c61612aa4b2fa67430d", @"/Views/Status/Index.cshtml")]
     public class Views_Status_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
@@ -57,20 +57,9 @@ namespace AspNetCore
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
             <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm"" onclick=""reset()""><i class=""mdi mdi-plus-circle""></i> Create</button>
-            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
-                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
-                    January 2017
-                </button>
-                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
-                    <a class=""dropdown-item"" href=""#"">February 2017</a>
-                    <a class=""dropdown-item"" href=""#"">March 2017</a>
-                    <a class=""dropdown-item"" href=""#"">April 2017</a>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- ============================================================");
-            WriteLiteral(@"== -->
+    <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
@@ -82,15 +71,15 @@ namespace AspNetCore
                 <div class=""card-body"">
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
-                    <div class=""table-responsive m-t-40"">
+                    <div class=""table-responsiv");
+            WriteLiteral(@"e m-t-40"">
                         <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>ID</th>
                                     <th>Name</th>
-");
-            WriteLiteral(@"                                    <th>Actions</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +94,8 @@ namespace AspNetCore
                             </tfoot>
                         </table>
                     </div>
-                    <!-- /.card-body -->
+                 ");
+            WriteLiteral(@"   <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
             </div>
@@ -115,8 +105,7 @@ namespace AspNetCore
     <!-- End PAge Content -->
     <!-- ============================================================== -->
 </div>
-<!-- =======================================================");
-            WriteLiteral(@"======= -->
+<!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
 

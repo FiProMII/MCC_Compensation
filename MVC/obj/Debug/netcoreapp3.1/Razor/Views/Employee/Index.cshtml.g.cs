@@ -57,20 +57,9 @@ namespace AspNetCore
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
             <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-lg"" onclick=""reset()""><i class=""mdi mdi-plus-circle""></i> Create</button>
-            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
-                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
-                    January 2017
-                </button>
-                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
-                    <a class=""dropdown-item"" href=""#"">February 2017</a>
-                    <a class=""dropdown-item"" href=""#"">March 2017</a>
-                    <a class=""dropdown-item"" href=""#"">April 2017</a>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- ============================================================");
-            WriteLiteral(@"== -->
+    <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
@@ -82,13 +71,15 @@ namespace AspNetCore
                 <div class=""card-body"">
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
-                    <div class=""table-responsive m-t-40"">
+                    <div class=""table-responsiv");
+            WriteLiteral(@"e m-t-40"">
                         <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>NIK</th>
-                                    <th>Name</th>");
+                                    <th>Name</th>
+");
             WriteLiteral(@"
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -103,7 +94,8 @@ namespace AspNetCore
                             <tbody>
                             </tbody>
                             <tfoot>
-                                <tr>
+                      ");
+            WriteLiteral(@"          <tr>
                                     <th>No.</th>
                                     <th>NIK</th>
                                     <th>Name</th>
@@ -128,7 +120,8 @@ namespace AspNetCore
     </div>
     <!-- ============================================================== -->
     <!-- End PAge Content -->
-    <!-- ============================================================== -->
+    <!-- =========================");
+            WriteLiteral(@"===================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
@@ -496,7 +489,8 @@ namespace AspNetCore
                 },
                 Address: ""<p style='color:red'>Please enter your address</p>"",
                 BirthPlace: ""<p stryle='color:red'>Please enter your place of birth</p>"",
-                BirthDate: {");
+                BirthDate: {
+");
                 WriteLiteral(@"
                     required: ""<p style='color:red'>please select the date you were born</p>"",
                     date: ""<p stryle='color:red'>Please enter the correct date of birth</p>""
@@ -519,7 +513,8 @@ namespace AspNetCore
                 var urlString;
                 if (isUpdate == 1)
                     urlString = ""/Employee/Put""
-                else");
+                else
+");
                 WriteLiteral(@"
                     urlString = ""/Employee/Post""
 

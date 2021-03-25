@@ -19,103 +19,121 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
-   Layout = "_Layout";
-    ViewBag.Title = "Compensation Request";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
+   Layout = "_LayoutAdmin";
+    ViewBag.Title = "New Request";
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"
-<div class=""container-fluid"">
-    <div class=""row"">
-        <div class=""col-sm-12"">
-            <div class=""card-title"">
-                <br /><h4 class=""card-title""><i class=""fas fa-clipboard-list""></i> Compensation Request</h4>
+            WriteLiteral("\r\n<!-- Row -->\r\n<div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n        <div class=\"card card-outline-info\">\r\n            <div class=\"card-header\">\r\n                <h4 class=\"m-b-0 text-white\">");
+#nullable restore
+#line 10 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
+                                        Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</h4>
             </div>
-        </div>
-    </div>
-</div>
-<div class=""flex-md-wrap"">
-    <div class=""container-fluid"">
-        <div class=""row"">
-            <div class=""col-12"">
-                <div class=""card m-auto"">
-                    <div class=""card-body"" style=""padding-left: 100px; padding-right: 100px;"">
-                        <br />
-                        <h4>Requester Information</h4>
-                        <hr />
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Requester</label>
-                            <span class=""col-md-7"" id=""Requester""></span>
+            <div class=""card-body"">
+                <form action=""#"">
+                    <div class=""form-body"">
+                        <h3 class=""card-title"">Person Info</h3>
+                        <hr>
+                        <div class=""row p-t-20"">
+                            <div class=""col-md-12"">
+                                <div class=""form-group"">
+                                    <label class=""control-label"">Requester Name</label>
+                                    <input type=""text"" id=""EmployeeName"" class=""form-control"" disabled>
+                                </div>
+                            </div>
                         </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Department");
-            WriteLiteral(@"</label>
-                            <span class=""col-md-7"" id=""DepartmentName""></span>
+                        <!--/row-->
+                        <div class=""row"">
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label class=""control-label"">Department</label>
+                                    <input type");
+            WriteLiteral(@"=""text"" id=""DepartmentName"" class=""form-control"" disabled>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label class=""control-label"">Relational Manager</label>
+                                    <input type=""text"" id=""ManagerName"" class=""form-control"" placeholder=""dd/mm/yyyy"">
+                                </div>
+                            </div>
+                            <!--/span-->
                         </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Position</label>
-                            <span class=""col-md-7"" id=""PositionName""></span>
+                        <!--/row-->
+                        <div class=""row"">
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label class=""control-label"">Position</label>
+                                    <input type=""text"" id=""PositionName"" class=""form-control"" disabl");
+            WriteLiteral(@"ed>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label class=""control-label"">Join Date</label>
+                                    <input type=""text"" id=""JoinDate"" class=""form-control"" placeholder=""dd/mm/yyyy"">
+                                </div>
+                            </div>
+                            <!--/span-->
                         </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Relation Manager</label>
-                            <span class=""col-md-7"" id=""ManagerName""></span>
+                        <!--/row-->
+                        <h3 class=""box-title m-t-40"">New Request</h3>
+                        <hr>
+                        <div class=""row"">
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label>Compensation Type</label>
+                                    <select class=""form-control custom-select"" ");
+            WriteLiteral(@"id=""CompensationID"" name=""CompensationID""></select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class=""col-md-6"">
+                                <div class=""form-group"">
+                                    <label>Event Date</label>
+                                    <input type=""text"" class=""form-control"" id=""EventDate"" name=""EventDate"">
+                                </div>
+                            </div>
+                            <!--/span-->
                         </div>
-                        <div class=""form-group row"">
-                            <label class=""col-md-4"">Join Date</label>
-                            <span class=""col-md-7"" id=""JoinDate""></span>
+                        <div class=""row"">
+                            <div class=""col-md-6"">
+                                <div class=""form-group"" id=""compensationDetail"">
+                                </div>
+                            </div>
+                        </div>
+                        <div class=""row"">
+                            <div class=""col-md-6 bag"">
+                                <div");
+            WriteLiteral(@" class='element' id='div_1'>
+                                    <input type=""file"" name=""file"" class=""custom-file"" id=""txt_1"" accept=""image/jpg, image/jpeg, .pdf"" />
+                                    <span class=""add btn btn-sm btn-outline-success"">Add Document</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br />
-                <div class=""card m-auto"">
-                    <div class=""card-header"">Compensation Request</div>
-    ");
-            WriteLiteral(@"                <form id=""form"">
-                        <div class=""card-body"" style=""padding-left: 100px; padding-right: 100px;"">
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Compensation Type</label>
-                                <div class=""col-md-3"">
-                                    <select class=""form-control"" id=""CompensationID"" name=""CompensationID""></select>
-                                </div>
-                            </div>
-                            <div class=""form-group row"" id=""compensationDetail"">
-                            </div>
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">Event Date</label>
-                                <div class=""col-md-3"">
-                                    <input type=""date"" class=""form-control"" name=""EventDate"" id=""EventDate"">
-                                </div>
-           ");
-            WriteLiteral(@"                 </div>
-                            <div class=""form-group row"">
-                                <label class=""col-md-4 col-form-label"">
-                                    Upload Requirement Files <br />
-                                    <span style=""color:red; font-size:12px"">Allowed extensions .jpg | .jpeg | .pdf</span>
-                                </label>
-                                <div class=""col-md-7 col-form-label bag"">
-                                    <div class='element' id='div_1'>
-                                        <input type=""file"" name=""file"" class=""custom-file"" id=""txt_1"" accept=""image/jpg, image/jpeg, .pdf"" />
-                                        <span class=""add btn btn-sm btn-outline-success"">Add Document</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=""form-group row"">
-                            <d");
-            WriteLiteral(@"iv class=""col-12 text-right pr-5"">
-                                <button class=""btn btn-primary"" type=""submit"">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <div class=""form-actions"">
+                        <button type=""submit"" class=""btn btn-success""> <i class=""fa fa-check""></i> Save</button>
+                        <button type=""button"" class=""btn btn-inverse"">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+<!-- Row -->
 
 ");
+            WriteLiteral("\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
@@ -149,8 +167,9 @@ namespace AspNetCore
             var compensationDropdown = '<option value=""-1"">Please select a compensation type</option>';
             $.ajax({
                 type: ""GET"",
-                url: '/compensation/get',
-                success: function (result) {
+                url: '/Compensation/Get',
+                success");
+                WriteLiteral(@": function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
                         compensationDropdown += '<option value=""' + data[i].compensationID + '"">' + data[i].compensationName + '</option>';
@@ -160,6 +179,11 @@ namespace AspNetCore
                 }
             });
 
+            compensationRequirement.set(""Wedding"", ""KK & KTP"")
+            compensationRequirement.set(""Baby Gift"", ""KK"")
+            compensationRequirement.set(""Grief"", ""KK"")
+
+            //Document Upload
             $("".add"").click(function () {
                 var total_element = $("".element"").length;
                 var lastid = $("".element:last"").attr(""id"");
@@ -168,7 +192,8 @@ namespace AspNetCore
                 WriteLiteral(@"dex = Number(split_id[1]) + 1;
                 var max = 2;
 
-                if (total_element < max) {
+           ");
+                WriteLiteral(@"     if (total_element < max) {
                     $("".element:last"").after(""<div class='element' id='div_"" + nextindex + ""'></div>"");
                     $(""#div_"" + nextindex).append(""<br/><input type='file' name='file' class='custom-file' id='txt_""
                         + nextindex + ""' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_""
@@ -184,8 +209,6 @@ namespace AspNetCore
                 $(""#div_"" + deleteindex).remove();
             });
         });
-
-
 
         $(""select#CompensationID"").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();

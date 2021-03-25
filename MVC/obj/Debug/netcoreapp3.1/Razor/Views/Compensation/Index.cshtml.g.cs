@@ -57,21 +57,10 @@ namespace AspNetCore
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
             <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm""><i class=""mdi mdi-plus-circle""></i> Create</button>
-            <div class=""dropdown pull-right m-r-10 hidden-sm-down"">
-                <button class=""btn btn-secondary dropdown-toggle"" type=""button"" id=""dropdownMenuButton"" data-toggle=""dropdown"" aria-haspopup=""true"" aria-expanded=""false"">
-                    January 2017
-                </button>
-                <div class=""dropdown-menu"" aria-labelledby=""dropdownMenuButton"">
-                    <a class=""dropdown-item"" href=""#"">February 2017</a>
-                    <a class=""dropdown-item"" href=""#"">March 2017</a>
-                    <a class=""dropdown-item"" href=""#"">April 2017</a>
-                </div>
-            </div>
         </div>
     </div>
     <!-- ============================================================== -->
-    <!-- E");
-            WriteLiteral(@"nd Bread crumb and right sidebar toggle -->
+    <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -83,14 +72,14 @@ namespace AspNetCore
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
                     <div class=""table-responsive m-t-40"">
-                        <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+      ");
+            WriteLiteral(@"                  <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>ID</th>
                                     <th>Name</th>
-                   ");
-            WriteLiteral(@"                 <th>Cost</th>
+                                    <th>Cost</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -104,7 +93,8 @@ namespace AspNetCore
                                     <th>Cost</th>
                                     <th>Actions</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot");
+            WriteLiteral(@">
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -115,8 +105,7 @@ namespace AspNetCore
     </div>
     <!-- ============================================================== -->
     <!-- End PAge Content -->
-    <!-- ======================================================");
-            WriteLiteral(@"======== -->
+    <!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
@@ -126,15 +115,22 @@ namespace AspNetCore
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""mySmallModalLabel"">Add ViewData[""Title""]</h4>
+                <h4 class=""modal-title"" id=""mySmallModalLabel"">");
+#nullable restore
+#line 78 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+                                                          Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <input type=""hidden"" class=""form-control"" name=""CompensationID"" id=""CompensationID"">
                     <div class=""form-group"">
-                        <label for=""compensationName"" class=""col-form-label"">Compensation Na");
-            WriteLiteral(@"me</label>
+                        <label for=""compensationName"" class=""col-form-label"">Compensation Name</label>
                         <input type=""text"" class=""form-control"" name=""CompensationName"" id=""CompensationName"">
                     </div>
                     <div class=""form-group"">
@@ -144,7 +140,8 @@ namespace AspNetCore
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn btn-secondary waves-effect waves-light"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">Close</button>
+                <button class=""btn btn-secondary waves-effect waves-l");
+            WriteLiteral(@"ight"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">Close</button>
                 <button class=""btn btn-primary waves-effect waves-light"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
             </div>
         </div>

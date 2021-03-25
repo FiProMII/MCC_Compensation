@@ -12,101 +12,145 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"40da8e812d000bb1fc52ef9701b681175a8d620f", @"/Views/Role/Index.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b3bb903a3ccfbeeffd8af7aa43918bbd14bf900f", @"/Views/Role/Index.cshtml")]
     public class Views_Role_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
-   Layout = "_Layout";
-    ViewBag.Title = "Role";
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+   Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Role";
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral(@"
-<div class=""container"">
-    <br />
-    <div class=""col-sm-12 text-right"">
-        <ol class=""breadcrumb float-sm-right"">
-            <li class=""breadcrumb-item""><a href=""#"">Home</a></li>
-            <li class=""breadcrumb-item active"">Role</li>
-        </ol>
-    </div>
-    <h2 class=""page-header"">
-        <i class=""fas fa-user-tag""></i> Authentication Roles
-    </h2>
-    <br />
-    <button type=""button"" class=""mb-3 btn btn-primary text-center"" data-toggle=""modal"" data-target=""#modal"" onclick=""reset()"">
-        <i class=""fas fa-user-plus""></i> Create
-    </button>
-    <div>
-        <table id=""table_id"" class=""table table-sm table-striped table-bordered m-2"">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No<");
-            WriteLiteral(@"/th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div id=""chart""></div>
-    <div id=""chart2""></div>
-</div>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class=""container-fluid"">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class=""row page-titles"">
+        <div class=""col-md-6 col-8 align-self-center"">
+            <h3 class=""text-themecolor m-b-0 m-t-0"">");
+#nullable restore
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+                                               Write(ViewData["Title"]);
 
-<div class=""modal fade"" role=""dialog"" id=""modal"">
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+#nullable restore
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</li>
+            </ol>
+        </div>
+        <div class=""col-md-6 col-4 align-self-center"">
+            <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm"" onclick=""reset()""><i class=""mdi mdi-plus-circle""></i> Create</button>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class=""row"">
+        <div class=""col-12"">
+            <div class=""card"">
+                <div class=""card-body"">
+                    <h4 class=""card-title"">User Role</h4>
+                    <h6 class=""card-subtitle"">Managements</h6>
+                    <div class=""table-responsive m-t-40"">
+      ");
+            WriteLiteral(@"                  <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-bod");
+            WriteLiteral(@"y -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+
+<div class=""modal fade bs-modal-sm"" tabindex=""-1"" role=""dialog"" aria-labelledby=""mySmallModalLabel"" aria-hidden=""true"" style=""display: none;"">
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"">Role</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-label=""Close""><span aria-hidden=""true"">&times;</span></button>
+                <h4 class=""modal-title"" id=""mySmallModalLabel"">");
+#nullable restore
+#line 76 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+                                                          Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</h4>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <input type=""hidden"" class=""form-control"" name=""RoleID"" id=""RoleID"">
                     <div class=""form-group"">
                         <label for=""roleName"" class=""col-form-label""> Name</label>
-                        <input type=""text"" class=""form-control"" name=""RoleName"" id=""");
-            WriteLiteral(@"RoleName"">
+                        <input type=""text"" class=""form-control"" name=""RoleName"" id=""RoleName"">
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn"" data-dismiss=""modal"" aria-hidden=""true"">Close</button>
-                <button class=""btn btn-primary"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
+                <button class=""btn btn-secondary waves-effect waves-ligh"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                <button class=""btn btn-primary waves-effect waves-ligh"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
             </div>
         </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-");
+    </div><!-- /.modal-d");
+            WriteLiteral("ialog -->\r\n</div><!-- /.modal -->\r\n\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
         var isUpdate;
         $(document).ready(function () {
-            table = $('#table_id').DataTable({
+            $('#table_id').DataTable({
                 responsive: true,
                 ""filter"": true,
                 ""orderMulti"": false,
                 ""ajax"": {
-                    ""url"": ""Get"",
+                    ""url"": ""/Role/Get"",
                     ""type"": ""Get"",
                     ""dataSrc"": ""result"",
                     ""beforeSend"": function (xhr) {
@@ -127,28 +171,28 @@ namespace AspNetCore
                     {
                         ""data"": null,
                         ""name"": ""no"",
-                     ");
-                WriteLiteral(@"   ""autowidth"": true,
+                       ");
+                WriteLiteral(@" ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { ""data"": 'roleID'},
+                    { ""data"": 'roleID' },
                     { ""data"": 'roleName' },
                     {
                         ""data"": 'roleID',
                         ""render"": function (data, type, row, meta) {
-                            return '<a class=""btn btn-success"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['roleID'] + '\')""><i class =""far fa-edit""></i> Edit</a> ' +
-                                '<button class=""btn btn-danger"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['roleID'] + '\')""><i class =""far fa-trash-alt""></i> Delete</button>'
+                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['roleID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['roleID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
-            });
+       ");
+                WriteLiteral(@"     });
         });
 
         var validator = $(""#form"").validate({
-      ");
-                WriteLiteral(@"      rules: {
+            rules: {
                 roleName: ""required"",
             },
             messages: {
@@ -158,9 +202,9 @@ namespace AspNetCore
                 var form = $(form);
                 var urlString;
                 if (isUpdate == 1)
-                    urlString = ""Put""
+                    urlString = ""/Role/Put""
                 else
-                    urlString = ""Post""
+                    urlString = ""/Role/Post""
                 $.ajax({
                     type: ""POST"",
                     url: urlString,
@@ -169,14 +213,14 @@ namespace AspNetCore
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('#modal').modal('hide');
-                        table.ajax.reload();
+                        $('.bs-modal-sm').modal('hide');
+                        $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
-                            position: 'center',
+                            position: 'center',");
+                WriteLiteral(@"
                             icon: 'success',
                             title: 'Your data has been saved',
-     ");
-                WriteLiteral(@"                       showConfirmButton: false,
+                            showConfirmButton: false,
                             timer: 1500
                         })
                     },
@@ -200,15 +244,15 @@ namespace AspNetCore
         function Get(roleID) {
             debugger;
             $.ajax({
-                url: ""GetById"",
+                url: ""/Role/GetById"",
                 type: ""GET"",
                 data: { 'key': roleID },
                 headers: {
-                    Authorization: sessionStorage.token
+                    Auth");
+                WriteLiteral(@"orization: sessionStorage.token
                 },
                 success: function (result) {
-                    $('#");
-                WriteLiteral(@"modal').modal('show');
+                    $('.bs-modal-sm').modal('show');
                     var data = result['result'];
                     $('#RoleID').val(data.roleID);
                     $('#RoleName').val(data.roleName);
@@ -231,12 +275,12 @@ namespace AspNetCore
                 if (result.isConfirmed) {
                     $.ajax({
                         type: ""POST"",
-                        url: ""Delete"",
-                        data: { 'key': roleID },
+                        url: ""/Role/Delete"",
+                        data: {");
+                WriteLiteral(@" 'key': roleID },
                         headers: {
                             Authorization: sessionStorage.token
-               ");
-                WriteLiteral(@"         },
+                        },
                         success: function (data) {
                             table.ajax.reload();
                             Swal.fire(
