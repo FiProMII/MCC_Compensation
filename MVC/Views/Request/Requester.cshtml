@@ -1,8 +1,107 @@
-﻿@{ Layout = "_Layout";
-    ViewBag.Title = "Compensation Request";
+﻿@{ Layout = "_LayoutAdmin";
+    ViewBag.Title = "New Request";
 }
 
-<div class="container-fluid">
+<!-- Row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-outline-info">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">@ViewData["Title"]</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Person Info</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Requester Name</label>
+                                    <input type="text" id="EmployeeName" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Department</label>
+                                    <input type="text" id="DepartmentName" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Relational Manager</label>
+                                    <input type="text" id="ManagerName" class="form-control" placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Position</label>
+                                    <input type="text" id="PositionName" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Join Date</label>
+                                    <input type="text" id="JoinDate" class="form-control" placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title m-t-40">New Request</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Compensation Type</label>
+                                    <select class="form-control custom-select" id="CompensationID" name="CompensationID"></select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Event Date</label>
+                                    <input type="text" class="form-control" id="EventDate" name="EventDate">
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" id="compensationDetail">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 bag">
+                                <div class='element' id='div_1'>
+                                    <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
+                                    <span class="add btn btn-sm btn-outline-success">Add Document</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                        <button type="button" class="btn btn-inverse">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+
+@*<div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <div class="card-title">
@@ -84,13 +183,13 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 @section scripts
 {
     <script>
         //nanti diganti pake session
-        var currentNIK = "1234"
+        var currentNIK = "12345"
         var compensationID
 
         let compensationValue = new Map()
@@ -111,14 +210,9 @@
                 }
             });
 
-            compensationRequirement.set("Wedding", "KK & KTP")
-            compensationRequirement.set("Baby Gift", "KK")
-            compensationRequirement.set("Grief", "KK")
-
-            var compensationDropdown = '<option value="-1">Please select a compensation type</option>';
             $.ajax({
                 type: "GET",
-                url: '/compensation/get',
+                url: '/Compensation/Get',
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -129,6 +223,11 @@
                 }
             });
 
+            compensationRequirement.set("Wedding", "KK & KTP")
+            compensationRequirement.set("Baby Gift", "KK")
+            compensationRequirement.set("Grief", "KK")
+
+            //Document Upload
             $(".add").click(function () {
                 var total_element = $(".element").length;
                 var lastid = $(".element:last").attr("id");
@@ -152,8 +251,6 @@
                 $("#div_" + deleteindex).remove();
             });
         });
-
-
 
         $("select#CompensationID").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();

@@ -146,3 +146,4 @@ C:\Users\Acer\source\repos\MCC_Compensation\MCC_Compensation\obj\Debug\netcoreap
 C:\Users\Acer\source\repos\MCC_Compensation\MCC_Compensation\obj\Debug\netcoreapp3.1\API.RazorTargetAssemblyInfo.cache
 C:\Users\Acer\source\repos\MCC_Compensation\MCC_Compensation\obj\Debug\netcoreapp3.1\API.csproj.CopyComplete
 C:\Users\Acer\source\repos\MCC_Compensation\MCC_Compensation\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MCC_Compensation\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache
