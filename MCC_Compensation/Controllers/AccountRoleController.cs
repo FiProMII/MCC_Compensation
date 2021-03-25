@@ -35,14 +35,14 @@ namespace API.Controllers
 
             if (result != null)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<IEnumerable<AccountRole>>.StatusType.Success;
                 responseContent.Message = "Data found";
                 responseContent.Result = result;
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<IEnumerable<AccountRole>>.StatusType.Failed;
                 responseContent.Message = "Something went wrong";
                 return StatusCode(500, responseContent);
             }
@@ -55,7 +55,7 @@ namespace API.Controllers
 
             if (key == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<AccountRole>.StatusType.Failed;
                 responseContent.Message = "The request is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -64,13 +64,13 @@ namespace API.Controllers
 
             if (result > 0)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<AccountRole>.StatusType.Success;
                 responseContent.Message = "Data deleted successfully";
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.NotFound;
+                responseContent.Status = ResponseVM<AccountRole>.StatusType.Failed;
                 responseContent.Message = "Nothing changed";
                 return Ok(responseContent);
             }

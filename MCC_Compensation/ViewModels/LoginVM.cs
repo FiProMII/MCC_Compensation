@@ -8,6 +8,7 @@ namespace API.ViewModels
 {
     public class LoginVM
     {
+        public string NIK { get; set; }
         [DataType(DataType.EmailAddress)]
         public string Email { set; get; }
 
@@ -15,8 +16,6 @@ namespace API.ViewModels
         public string Password { set; get; }
         public string EmployeeName { get; set; }
         public IEnumerable<string> Roles { set; get; }
-
-        public string RoleName { set; get; }
-
+        public bool IsTemp { set; get; }
     }
 }

@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace API.Repository.Data
 {
@@ -17,40 +19,66 @@ namespace API.Repository.Data
     {
         private readonly MyContext _myContext;
         private readonly DbSet<Employee> employees;
-        private readonly DbSet<Account> accounts;
         private readonly DbSet<AccountRole> accountRoles;
-        private readonly DbSet<Role> roles;
 
         public AccountRepository(MyContext myContext) : base(myContext)
         {
             _myContext = myContext;
             employees = _myContext.Set<Employee>();
-            accounts = _myContext.Set<Account>();
             accountRoles = _myContext.Set<AccountRole>();
-            roles = _myContext.Set<Role>();
-    }
+        }
 
         public LoginVM Login(LoginVM loginVM)
         {
-
-            //var _userRepository = new GeneralDapperRepository<LoginVM>(_configuration);
-
-            //_parameters.Add("@Email", loginVM.Email);
-            //_parameters.Add("@Password", loginVM.Password);
-            //var result = _userRepository.MultipleGet("SP_RetrieveLogin", _parameters);
-
+            var isTemp = false;
+            var employee = employees.Include("Account")
+                .SingleOrDefault(e => e.Email == loginVM.Email);
+            //BC.EnhancedVerify(loginVM.Password, employee.Account.Password, BCrypt.Net.HashType.SHA384)
             LoginVM loginResult = new LoginVM();
-            //try
-            //{
-            //    loginResult.Email = result.FirstOrDefault().Email;
-            //    loginResult.EmployeeName = result.FirstOrDefault().EmployeeName;
-            //    loginResult.Roles = result.Select(x => x.RoleName);
-            //} 
-            //catch
-            //{
-            //        return null;
-            //}
+            if (employee != null)
+            {
+                Regex regex = new Regex("^n");
+                if (regex.IsMatch(employee.Account.Password))
+                {
+                    isTemp = true;
+                    regex.Replace(employee.Account.Password, "");
+                }
+
+                if (BC.EnhancedVerify(loginVM.Password, employee.Account.Password, BCrypt.Net.HashType.SHA384))
+                {
+                    var roles = accountRoles.Include("Role")
+                        .Where(ar => ar.NIK == employee.NIK)
+                        .Select(ar => ar.Role.RoleName);
+                    try
+                    {
+                        loginResult.NIK = employee.NIK;
+                        loginResult.Email = employee.Email;
+                        loginResult.EmployeeName = employee.EmployeeName;
+                        loginResult.Roles = roles;
+                        loginResult.IsTemp = isTemp;
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+            }
             return loginResult;
+        }
+
+        public bool ForgotPassword(string email)
+        {
+            var employee = employees.SingleOrDefault(x => x.Email == email);
+            if (employee != null)
+            {
+                Guid g = Guid.NewGuid();
+                var tempPassword = BC.EnhancedHashPassword(g.ToString());
+                Account account = new Account();
+                account.NIK = employee.NIK;
+                account.Password = 'n' + tempPassword;
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace API.Controllers
 
             if (compensationRequest == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Failed;
                 responseContent.Message = "The data entered is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -42,7 +42,7 @@ namespace API.Controllers
 
             if (result > 0)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
                 EmailController emailController = new EmailController();
                 emailController.SendEmail("tes", EmailController.EmailType.CompensationRequest, "a");
@@ -50,7 +50,7 @@ namespace API.Controllers
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Failed;
                 responseContent.Message = "Unable to create new data";
                 return StatusCode(500, responseContent);
             }

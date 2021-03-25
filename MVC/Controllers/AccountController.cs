@@ -28,6 +28,17 @@ namespace MVC.Controllers
 
         public ViewResult ForgotPassword() => View();
 
+        [HttpPost]
+        public async Task<JsonResult> ForgotPassword(string email)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("Account/ForgotPassword", content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<string>>(apiResponse);
+            HttpContext.Session.SetString("Token", result.Result);
+            return Json(result);
+        }
+
         public ViewResult RecoverPassword() => View();
     }
 }

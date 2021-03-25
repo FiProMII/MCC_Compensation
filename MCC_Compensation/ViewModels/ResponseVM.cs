@@ -8,8 +8,15 @@ namespace API.ViewModels
 {
     public class ResponseVM<Entity>
     {
-        public HttpStatusCode Status { get; set; }
+        public StatusType Status { get; set; }
         public string Message { get; set; }
         public Entity Result { get; set; }
+
+        public enum StatusType
+        {
+            Success,
+            Warning,
+            Failed
+        }
     }
 }
