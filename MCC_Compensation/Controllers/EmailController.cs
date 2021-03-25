@@ -13,7 +13,7 @@ namespace API.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        public const string RequestSubject = "Compensation Request #";
+        public const string RequestSubject = "Compensation Request";
         public const string TemporaryPasswordSubject = "New Temporary Password";
         public const string RequestBody = "Please verify this compensation request by clicking this link: ";
         public const string TemporaryPasswordBody = "Login with your new temporary password: ";
@@ -24,12 +24,7 @@ namespace API.Controllers
             TemporaryPassword
         }
 
-        public void SendEmail (string recipient)
-        {
-
-        }
-
-        public void SendEmail(string recipient, EmailType emailType, string bodyParam, string subjectParam)
+        public void SendEmail(string recipient, EmailType emailType, string bodyParam)
         {
             string to = recipient;   
             string from = "mekarbunga2021@gmail.com";
@@ -51,7 +46,7 @@ namespace API.Controllers
             message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);  
             System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123");
+            System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123456");
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;

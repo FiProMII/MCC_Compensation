@@ -1,4 +1,5 @@
 using API.Context;
+using API.Middleware;
 using API.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -59,9 +60,6 @@ namespace MCC_Compensation
             services.AddDbContext<MyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyContext")).UseLazyLoadingProxies());
 
-           /* services.AddDbContext<MyContext>(options =>
-                options.UseLazyLoadingProxies());*/
-
             services.AddSwaggerGen(c =>
             {
                 var securityScheme = new OpenApiSecurityScheme
@@ -96,6 +94,8 @@ namespace MCC_Compensation
                 });
             });
 
+            services.AddTokenAuthentication(Configuration);
+
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44309"));
@@ -115,6 +115,8 @@ namespace MCC_Compensation
             app.UseRouting();
 
             app.UseCors(options => options.WithOrigins("https://localhost:44309"));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

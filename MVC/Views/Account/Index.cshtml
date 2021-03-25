@@ -17,11 +17,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="~/bootstrap/assets/images/favicon.ico">
     <title>@ViewBag.Title</title>
     <!-- Bootstrap Core CSS -->
-    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/bootstrap/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="~/bootstrap/css/style.css" rel="stylesheet" />
     <!-- You can change the theme colors from here -->
-    <link href="~/bootstrap/css/purple-dark.css" rel="stylesheet" />
+    <link href="~/bootstrap/css/colors/purple-dark.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,16 +46,16 @@
         <div class="login-register" style="background-image: url(/bootstrap/assets/images/background/login-register.jpg);">
             <div class="login-box card">
                 <div class="card-body">
-                    <form class="form-horizontal form-material" id="loginform" action="index.html">
+                    <form class="form-horizontal form-material" id="loginForm" action="index.html">
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username">
+                                <input class="form-control" type="text" id="Email" name="Email" required="" placeholder="Username">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password">
+                                <input class="form-control" type="password"id="Password" name="Password" required="" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,6 +69,7 @@
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
                                 <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" onclick="tes()">Tes</button>
                             </div>
                         </div>
                     </form>
@@ -124,6 +125,21 @@
 </html>
 
 <script>
+
+    function tes() {
+        var loginVM = new Object();
+        loginVM.email = "mekar.bunga.a.r@gmail.com";
+        $.ajax({
+            type: "POST",
+            url: "/Account/ForgotPassword",
+            data: JSON.stringify(loginVM),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            }
+        });
+    }
+
    $("#loginForm").submit(function (e) {
 
         e.preventDefault();
@@ -134,8 +150,7 @@
             url: "Signin",
             data: form.serialize(),
             success: function (data) {
-            console.log(data['result'])
-                    //window.location.href = "@Url.Action("Index", "Person")";
+                sessionStorage.token = (data['result']);
             }
         });
 

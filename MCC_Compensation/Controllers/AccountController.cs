@@ -13,6 +13,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace API.Controllers
 {
@@ -38,17 +39,71 @@ namespace API.Controllers
                 var jwt = new JwtServices(_configuration);
                 var token = jwt.GenerateSecurityToken(result);
 
-                responseContent.Status = HttpStatusCode.OK;
+                if (result.IsTemp)
+                    responseContent.Status = ResponseVM<string>.StatusType.Warning;
+                responseContent.Status = ResponseVM<string>.StatusType.Success;
                 responseContent.Message = "Sign In successful";
                 responseContent.Result = token;
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.Unauthorized;
+                responseContent.Status = ResponseVM<string>.StatusType.Failed;
                 responseContent.Message = "Sign in failed";
                 return BadRequest(responseContent);
             }
         }
+
+        [HttpPut]
+        public override ActionResult Put(Account account)
+        {
+            ResponseVM<Account> responseContent = new ResponseVM<Account>();
+
+            if (account == null)
+            {
+                responseContent.Status = ResponseVM<Account>.StatusType.Failed;
+                responseContent.Message = "The data entered is incomplete or incorrect";
+                return BadRequest(responseContent);
+            }
+
+            account.Password = BC.EnhancedHashPassword(account.Password);
+            var result = _accountRepository.Update(account);
+
+            if (result > 0)
+            {
+                responseContent.Status = ResponseVM<Account>.StatusType.Success;
+                responseContent.Message = "Data updated successfully";
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<Account>.StatusType.Failed;
+                responseContent.Message = "Unable to update data";
+                return StatusCode(500, responseContent);
+            }
+        }
+
+        [HttpPost("ForgotPassword")]
+        public IActionResult ForgotPassword(LoginVM loginVM)
+        {
+            var result = _accountRepository.ForgotPassword(loginVM.Email);
+            ResponseVM<string> responseContent = new ResponseVM<string>();
+            if (result != null)
+            {
+                EmailController emailController = new EmailController();
+                emailController.SendEmail(loginVM.Email, EmailController.EmailType.TemporaryPassword, result);
+
+                responseContent.Status = ResponseVM<string>.StatusType.Success;
+                responseContent.Message = "New password sent";
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<string>.StatusType.Failed;
+                responseContent.Message = "Email is not found";
+                return NotFound(responseContent);
+            }
+        }
+
     }
 }

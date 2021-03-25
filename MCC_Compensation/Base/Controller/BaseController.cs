@@ -30,14 +30,14 @@ namespace API.Base.Controller
 
             if (result != null)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<IEnumerable<Entity>>.StatusType.Success;
                 responseContent.Message = "Data found";
                 responseContent.Result = result;
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<IEnumerable<Entity>>.StatusType.Failed;
                 responseContent.Message = "Something went wrong";
                 return StatusCode(500, responseContent);
             }
@@ -50,7 +50,7 @@ namespace API.Base.Controller
 
             if (key == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "The request is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -59,27 +59,27 @@ namespace API.Base.Controller
 
             if (result != null)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Success;
                 responseContent.Message = "Data found";
                 responseContent.Result = result;
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.NotFound;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "Something went wrong";
                 return NotFound(responseContent);
             }
         }
 
         [HttpPost]
-        public ActionResult Post(Entity entity)
+        public virtual ActionResult Post(Entity entity)
         {
             ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
 
             if (entity == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "The data entered is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -88,13 +88,13 @@ namespace API.Base.Controller
 
             if (result > 0)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "Unable to create new data";
                 return StatusCode(500, responseContent);
             }
@@ -107,7 +107,7 @@ namespace API.Base.Controller
 
             if (key == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "The request is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -116,26 +116,26 @@ namespace API.Base.Controller
 
             if (result > 0)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Success;
                 responseContent.Message = "Data deleted successfully";
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "Unable to delete data";
                 return StatusCode(500, responseContent);
             }
         }
 
         [HttpPut]
-        public ActionResult Put(Entity entity)
+        public virtual ActionResult Put(Entity entity)
         {
             ResponseVM<Entity> responseContent = new ResponseVM<Entity>();
 
             if (entity == null)
             {
-                responseContent.Status = HttpStatusCode.BadRequest;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "The data entered is incomplete or incorrect";
                 return BadRequest(responseContent);
             }
@@ -144,13 +144,13 @@ namespace API.Base.Controller
 
             if (result > 0)
             {
-                responseContent.Status = HttpStatusCode.OK;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Success;
                 responseContent.Message = "Data updated successfully";
                 return Ok(responseContent);
             }
             else
             {
-                responseContent.Status = HttpStatusCode.InternalServerError;
+                responseContent.Status = ResponseVM<Entity>.StatusType.Failed;
                 responseContent.Message = "Unable to update data";
                 return StatusCode(500, responseContent);
             }
