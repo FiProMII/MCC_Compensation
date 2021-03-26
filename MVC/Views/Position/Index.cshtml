@@ -75,7 +75,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="mySmallModalLabel">@ViewData["Title"]</h4>
+                <h4 class="modal-title" id="mySmallModalLabel"><i class="icon-people"></i> @ViewData["Title"] Management</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
@@ -87,13 +87,13 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="departmentID" class="col-form-label">Department</label>
+                            <label for="departmentID" class="col-form-label">Department <span class="text-danger">*</span></label>
                             <select class="form-control" id="DepartmentID" name="DepartmentID"></select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstName" class="col-form-label">Position Name</label>
+                            <label for="firstName" class="col-form-label">Position Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="PositionName" id="PositionName">
                         </div>
                     </div>
@@ -126,7 +126,6 @@
             });
 
             $('#table_id').DataTable({
-                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     {
@@ -148,6 +147,7 @@
                         }
                     }
                 ],
+                "responsive": true,
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
@@ -180,7 +180,7 @@
                     {
                         "data": 'positionID',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['positionID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
+                            return '<button class="btn btn-sm btn-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['positionID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
                                 '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['positionID'] + '\')"><i class ="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
@@ -198,7 +198,7 @@
                 PositionName: "required"
             },
             messages: {
-                PositionName: "Please enter position name"
+                PositionName: "<small class='text-danger'>Please enter <code>Position Name.</code></small>"
             },
             submitHandler: function (form) {
                 var form = $(form);

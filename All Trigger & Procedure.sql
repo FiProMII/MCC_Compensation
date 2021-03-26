@@ -114,7 +114,6 @@
 		FROM TB_T_CompensationRequest GROUP BY YEAR(RequestDate)
 	END
 	GO
-	GO
 	
 	--get email manager
 	CREATE OR ALTER PROCEDURE SP_RetrieveManagerEmail

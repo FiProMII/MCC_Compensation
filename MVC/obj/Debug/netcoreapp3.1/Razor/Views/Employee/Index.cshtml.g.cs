@@ -79,8 +79,6 @@ namespace AspNetCore
                                     <th>No.</th>
                                     <th>NIK</th>
                                     <th>Name</th>
-");
-            WriteLiteral(@"
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Address</th>
@@ -103,8 +101,7 @@ namespace AspNetCore
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Birth</th>
-      ");
-            WriteLiteral(@"                              <th>Join Date</th>
+                                    <th>Join Date</th>
                                     <th>Position</th>
                                     <th>Manager</th>
                                     <th>Actions</th>
@@ -127,90 +124,177 @@ namespace AspNetCore
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
 
+<!-- sample modal content -->
 <div class=""modal fade bs-modal-lg"" tabindex=""-1"" role=""dialog"" aria-labelledby=""myLargeModalLabel"" aria-hidden=""true"" style=""display: none;"">
-    <div ");
-            WriteLiteral("class=\"modal-dialog modal-sm\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h4 class=\"modal-title\" id=\"mySmallModalLabel\">Add ");
+    <div class=""modal-dialog modal-lg"">
+        <div class=""modal-content"">
+            <div class=""modal-header"">
+                <h4 class=""modal-title"" id=""myLargeModalLabel""><i class=""icon-user-follow""></i> ");
 #nullable restore
-#line 100 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Employee\Index.cshtml"
-                                                              Write(ViewData["Title"]);
+#line 91 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Employee\Index.cshtml"
+                                                                                           Write(ViewData["Title"]);
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
+            WriteLiteral(@" Management</h4>
+                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
-                    <div class=""form-row"">
-                        <div class=""col-6"">
-                            <div class=""form-group"">
-                                <label for=""nik"" class=""col-form-label"">NIK</label>
-                                <input type=""text"" class=""form-control"" name=""NIK"" id=""NIK"">
-                                <span id=""ValidationNIK"" style=""display: none; color: red"">NIK already exist</span>
+                    <div class=""form"">
+                        <div class=""form-body"">
+                            <div class=""row p-t-20"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""nik"" class=""control-label"">NIK <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""text"" class=""form-control"" name=""NIK"" id=""NIK"" placeholder=""NIK"" required data-validation-required-message=""This field is required"">
+                                                <div class=""input-group-addon""><");
+            WriteLiteral(@"i class=""ti-id-badge""></i></div>
+                                            </div>
+                                        </div>
+                                        <span id=""ValidationNIK"" style=""display: none; color: red"">NIK already exist</span>
+                                    </div>
+                                </div>
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""employeeName"" class=""control-label"">Name <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""text"" class=""form-control"" name=""EmployeeName"" id=""EmployeeName"" placeholder=""Name"" required data-validation-required-message=""This field is required"">
+                                                <div class=""input-group-addon");
+            WriteLiteral(@"""><i class=""ti-user""></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class=""form-group"">
-                                <label for=""employeeName"" class=""col-form-label"">Name</label>
-                                <input type=""text"" class=""form-control"" name=""EmployeeName"" id=""EmployeeName"">
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""email"" class=""control-label"">Email <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""email"" class=""form-control"" name=""Email"" id=""Email"" placeholder=""Enter Email Address"" required data-validation-required-message=""This field is required"">
+                                                <div class=""input-group-addon""><i class=""ti-email""></i></div>
+             ");
+            WriteLiteral(@"                               </div>
+                                        </div>
+                                    </div>
+                                    <span id=""ValidationEmail"" style=""display:none; color:red"">Email already exist</span>
+                                </div>
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""phone"" class=""control-label"">Phone <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <span class=""input-group-addon"">(+62)</span>
+                                                <input type=""number"" class=""form-control"" name=""Phone"" id=""Phone"" placeholder=""Enter Phone Number"" required data-validation-containsnumber-regex=""(\d)+"" data-validation-containsnumber-message=""No Characte");
+            WriteLiteral(@"rs Allowed, Only Numbers"">
+                                                <div class=""input-group-addon""><i class=""ti-mobile""></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                   ");
-            WriteLiteral(@"         <div class=""form-group"">
-                                <label for=""email"" class=""col-form-label"">Email</label>
-                                <input type=""email"" class=""form-control"" name=""Email"" id=""Email"">
-                                <span id=""ValidationEmail"" style=""display:none; color:red"">Email already exist</span>
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""birthPlace"" class=""control-label"">Birth Place <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""text"" class=""form-control"" name=""BirthPlace"" id=""BirthPlace"" placeholder=""Birth Place"" required data-validation-required-message=""This field is required"">
+     ");
+            WriteLiteral(@"                                           <div class=""input-group-addon""><i class=""ti-location-pin""></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""birthPlace"" class=""control-label"">Birth Date <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""text"" class=""form-control"" name=""BirthDate"" id=""BirthDate"" placeholder=""dd/mm/yyyy"" required data-validation-required-message=""This field is required"">
+                                                <span class=""input-group-addon""><i class=""icon-calender""></i></span>
+ ");
+            WriteLiteral(@"                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class=""form-group"">
-                                <label for=""phone"" class=""col-form-label"">Phone</label>
-                                <input type=""text"" class=""form-control"" name=""Phone"" id=""Phone"">
+                            <div class=""row"">
+                                <div class=""col-md-12"">
+                                    <div class=""form-group"">
+                                        <label for=""address"" class=""control-label"">Address <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <textarea type=""text"" class=""form-control"" name=""Address"" id=""Address"" required placeholder=""Enter Address""></textarea>
+                                                <div class=""input-group-addon""><i class=""ti-map-alt""></i></div>
+                                            </div>
+                                   ");
+            WriteLiteral(@"     </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class=""form-group"">
-                                <label for=""address"" class=""col-form-label"">Address</label>
-                                <input type=""text"" class=""form-control"" name=""Address"" id=""Address"">
-                            </div>
-                            <div class=""form-check"" id=""roleCheckbox"">
-            ");
-            WriteLiteral(@"                    <label for=""role"" class=""form-check-label"">Role</label>
-                            </div>
-                        </div>
-                        <div class=""col-6"">
-                            <div class=""form-group"">
-                                <label for=""birthPlace"" class=""col-form-label"">Birth Place</label>
-                                <input type=""text"" class=""form-control"" name=""BirthPlace"" id=""BirthPlace"">
-                            </div>
-                            <div class=""form-group"">
-                                <label for=""birthDate"" class=""col-form-label"">Birth Date</label>
-                                <input type=""date"" class=""form-control"" name=""BirthDate"" id=""BirthDate"">
-                            </div>
-                            <div class=""form-group"">
-                                <label for=""joinDate"" class=""col-form-label"">Join Date</label>
-                                <input type=""date"" class=""form-control"" name=""JoinDate"" id=""");
-            WriteLiteral(@"JoinDate"">
-                            </div>
-                            <div class=""form-group"">
-                                <label for=""departmentDropdown"" class=""col-form-label"">Department</label>
-                                <select class=""form-control"" id=""DepartmentDropdown"" name=""DepartmentDropdown""></select>
-                            </div>
-                            <div class=""form-group"">
-                                <label for=""positionID"" class=""col-form-label"">Position</label>
-                                <select class=""form-control"" id=""PositionID"" name=""PositionID""></select>
-                            </div>
-                            <div class=""form-group"">
-                                <label for=""managerNIK"" class=""col-form-label"">Manager</label>
-                                <select class=""form-control"" id=""ManagerNIK"" name=""ManagerNIK""></select>
+                            <hr class=""m-t-0 m-b-40"">
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""birthPlace"" class=""control-label"">Join Date <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <div class=""input-group"">
+                                                <input type=""text"" class=""form-control"" name=""JoinDate"" id=""JoinDate"" placeholder=""dd/mm/yyyy"" required data-validation-required-message=""This field is required"">
+                                                <span class=""input-group-addon""><i class=""icon-calender""></i></span>
+                                            </div>
+              ");
+            WriteLiteral(@"                          </div>
+                                    </div>
+                                    <div class=""form-group"" id=""formCheckbox"">
+                                        <label>User Role <span class=""text-danger"">*</span></label>
+                                        <div class=""input-group"" id=""ulCheckbox"">
+                                            <ul class=""icheck-list"" id=""roleCheckbox"">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label for=""departmentDropdown"" class=""control-label"">Department <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <select class=""form-control custom-s");
+            WriteLiteral(@"elect"" id=""DepartmentDropdown"" name=""DepartmentDropdown"" required data-validation-required-message=""This field is required""></select>
+                                        </div>
+                                    </div>
+                                    <div class=""form-group"">
+                                        <label for=""positionID"" class=""control-label"">Position <span class=""text-danger"">*</span></label>
+                                        <div class=""controls"">
+                                            <select class=""form-control custom-select"" id=""PositionID"" name=""PositionID"" required data-validation-required-message=""This field is required""></select>
+                                        </div>
+                                    </div>
+                                    <div class=""form-group"">
+                                        <label for=""managerNIK"" class=""control-label"">Manager <span class=""text-blue"">(optional)</span></label>
+                                  ");
+            WriteLiteral(@"      <select class=""form-control custom-select"" id=""ManagerNIK"" name=""ManagerNIK""></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-            ");
-            WriteLiteral(@"    </form>
+                    <div class=""modal-footer"">
+                        <button class=""btn btn-secondary btn-rounded waves-effect waves-light"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                        <button class=""btn btn-success btn-rounded waves-effect waves-light"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
+                    </div>
+                </form>
             </div>
-            <div class=""modal-footer"">
-                <button class=""btn btn-secondary waves-effect waves-ligh"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
-                <button class=""btn btn-primary waves-effect waves-ligh"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 ");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
@@ -241,14 +325,25 @@ namespace AspNetCore
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
-                        var roleCheckbox = '<br><input type=""checkbox"" class=""form-check-input"" name=""roles"" value=""' + data[i].roleID + '""> ' + data[i].roleName;
-                        $(""#roleCheckbox"").append(roleChe");
-                WriteLiteral(@"ckbox);
+                        if (i >= 8) {
+                            var roleCheckbox = '<div class=""input-group"" id=""ulCheckbox""><ul class=""icheck-list"" id=""roleCheckbox""><li><input type=""checkbox"" class=""check"" data-check");
+                WriteLiteral(@"box=""icheckbox_line-red"" value=""' + data[i].roleID + '""> ' + data[i].roleName + ' </li></ul ></div>';
+                            $(""#formCheckbox"").append(roleCheckbox);
+                        }
+                        else if (i <= 3) {
+                            var roleCheckbox = '<li><input type=""checkbox"" class=""check"" data-checkbox=""icheckbox_line-red"" value=""' + data[i].roleID + '""> ' + data[i].roleName + ' </li>';
+                            $(""#roleCheckbox"").append(roleCheckbox);
+                        }
+                        else {
+                            var roleCheckbox = '<ul class=""icheck-list"" id=""roleCheckbox""><li><input type=""checkbox"" class=""check"" data-checkbox=""icheckbox_line-red"" value=""' + data[i].roleID + '""> ' + data[i].roleName + ' </li></ul >';
+                            $(""#ulCheckbox"").append(roleCheckbox);
+                        }
                     }
                 }
             });
 
-            var departmentDropdown = '<option value=""-1"">Please select a department</option>';
+            var departmentDropdown = '<option value=""-1"">Please sel");
+                WriteLiteral(@"ect a department</option>';
             $.ajax({
                 type: ""GET"",
                 url: '/Department/Get',
@@ -267,10 +362,10 @@ namespace AspNetCore
                     type: ""GET"",
                     url: '/Position/Get',
                     success: function (result) {
-                       ");
-                WriteLiteral(@" var positionDropdown = '<option value=""-1"">Please select a position</option>';
+                        var positionDropdown = '<option value=""-1"">Please select a position</option>';
                         var data = result['result']
-                        for (var i = 0; i < data.length; i++) {
+   ");
+                WriteLiteral(@"                     for (var i = 0; i < data.length; i++) {
                             if (data[i].departmentID == selectedDepartment) {
                                 positionDropdown += '<option value=""' + data[i].positionID + '"">' + data[i].positionName + '</option>';
                                 $(""#PositionID"").html(positionDropdown);
@@ -287,10 +382,10 @@ namespace AspNetCore
                         url: '/Employee/Get',
                         success: function (result) {
                             var managerDropdown = '<option value=""-1"">Please select a manager</option>';
-  ");
-                WriteLiteral(@"                          var data = result['result']
+                            var data = result['result']
                             if (selectedPosition != ""RM"") {
-                                $('#ManagerNIK').removeAttr(""disabled"");
+                     ");
+                WriteLiteral(@"           $('#ManagerNIK').removeAttr(""disabled"");
                                 managerDropdown = '<option value=""-1"">Please select a manager</option>';
                                 for (var i = 0; i < data.length; i++) {
                                     if (data[i].position.departmentID == selectedDepartment) {
@@ -301,13 +396,13 @@ namespace AspNetCore
                             } else {
                                 managerDropdown = '< option value = ""-1"" > Please select a manager</option >';
                                 $(""#ManagerNIK"").html(managerDropdown);
-                                $('#ManagerN");
-                WriteLiteral(@"IK').prop(""disabled"", true);
+                                $('#ManagerNIK').prop(""disabled"", true);
                             }
                         }
                     });
                 })
-            });
+    ");
+                WriteLiteral(@"        });
 
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
@@ -331,13 +426,14 @@ namespace AspNetCore
                         }
                     }
                 ],
+                ""responsive"": true,
                 ""filter"": true,
                 ""orderMulti"": false,
-              ");
-                WriteLiteral(@"  ""ajax"": {
-                    ""url"": ""get"",
-                    ""type"": ""get"",
-                    ""dataSrc"": ""result""
+                ""ajax"": {
+                    ""url"": ""/Employee/Get"",
+                    ""type"": ""GET"",
+      ");
+                WriteLiteral(@"              ""dataSrc"": ""result""
                 },
                 ""columnDefs"": [
                     {
@@ -362,10 +458,10 @@ namespace AspNetCore
                     { ""data"": 'employeeName' },
                     { ""data"": 'email' },
                     { ""data"": 'phone' },
-      ");
-                WriteLiteral(@"              { ""data"": 'address' },
+                    { ""data"": 'address' },
                     {
-                        ""data"": 'birth',
+                        ""data");
+                WriteLiteral(@""": 'birth',
                         ""render"": function (data, type, row, meta) {
                             return row['birthPlace'] + ', ' + moment(row['birthDate']).format('DD/MM/YYYY')
                         }
@@ -373,7 +469,7 @@ namespace AspNetCore
                     {
                         ""data"": 'joinDate',
                         ""render"": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
+                            return moment(data).format('DD-MM-YYYY');
                         }
                     },
                     { ""data"": 'position.positionName' },
@@ -387,9 +483,9 @@ namespace AspNetCore
                     },
                     {
                         ""data"": 'nik',
- ");
-                WriteLiteral(@"                       ""render"": function (data, type, row, meta) {
-                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['nik'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                        ""render"": function (data, type, row, meta) {
+                     ");
+                WriteLiteral(@"       return '<button class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['nik'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
                                 '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['nik'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
@@ -408,10 +504,10 @@ namespace AspNetCore
         $('#NIK').change(function () {
             var nik = this.value;
             $.ajax({
-");
-                WriteLiteral(@"                url: ""Validation"",
+                url: ""/Employee/Validation"",
                 type: ""POST"",
-                data: { 'Params': nik },
+             ");
+                WriteLiteral(@"   data: { 'Params': nik },
                 success: function (result) {
                     if (result.status == 200) {
                         $('#ValidationNIK').show();
@@ -430,16 +526,16 @@ namespace AspNetCore
         $('#Email').change(function () {
             var email = this.value;
             $.ajax({
-                url: ""Validation"",
+                url: ""/Employee/Validation"",
                 type: ""POST"",
                 data: { 'Params': email },
                 success: function (result) {
                     if (result.status == 200) {
                         $('#ValidationEmail').show();
-                    ");
-                WriteLiteral(@"    $('#NIK').focus(
+                        $('#NIK').focus(
                             function () {
-                                $(this).val('');
+     ");
+                WriteLiteral(@"                           $(this).val('');
                                 $('#ValidationEmail').hide();
                             });
                     } else {
@@ -449,126 +545,74 @@ namespace AspNetCore
             });
         })
 
-        var validator = $(""#form"").validate({
-            rules: {
-                NIK: ""required"",
-                EmployeeName: ""required"",
-                Email: {
-                    required: true,
-                    email: true
-                },
-                Phone: {
-                    required: true,
-                    number: true,
-                    minlength: 10
-                },
-                Address: ""required"",
-                BirthPlace: ""required"",
-                BirthDate: {
-                    required: true,
-                    date: true
-                },
-                JoinDate: {
-             ");
-                WriteLiteral(@"       required: true,
-                    date: true
-                },
-                Position: ""required""
-            },
-            messages: {
-                NIK: ""<p style='color:red'>Please enter NIK</p>"",
-                EmployeeName: ""<p style='color:red'>Please enter employee name</p>"",
-                Email: {
-                    required: ""<p style='color:red'>Please enter your email</p>"",
-                    email: ""<p style='color:red'>Please enter a valid email</p>""
-                },
-                Phone: {
-                    required: ""<p style='color:red'>Please enter your phone number</p>"",
-                    number: ""<p style='color:red'>Please enter only numbers</p>"",
-                    minlength: ""<p style='color:red'>Minimum required 10 digits</p>""
-                },
-                Address: ""<p style='color:red'>Please enter your address</p>"",
-                BirthPlace: ""<p stryle='color:red'>Please enter your place of birth</p>"",
-                BirthDate: {
-");
-                WriteLiteral(@"
-                    required: ""<p style='color:red'>please select the date you were born</p>"",
-                    date: ""<p stryle='color:red'>Please enter the correct date of birth</p>""
-                },
-                JoinDate: {
-                    required: ""<p style='color:red'>please select the date you joined</p>"",
-                    date: ""<p style='color:red'>Please choose the correct date when you join</p>""
-                },
-                Position: ""<p style='color:red'>please determine your current position</p>""
-            },
-            submitHandler: function (form) {
-                var form = $(form);
+ 
+        $('#form').submit(function (event) {
+            event.preventDefault();
+            var form = $(form);
 
-                var nikValue = $('#NIK').val()
-                var myCheckboxes = new Array();
-                $(""input:checked"").each(function () {
-                    myCheckboxes.push(parseInt($(this).val()));
-                });
+            var nikValue = $('#NIK').val()
+            var myCheckboxes = new Array();
+            $(""input:checked"").each(function () {
+                myCheckboxes.push(parseInt($(this).val()));
+            });
 
-                var urlString;
-                if (isUpdate == 1)
-                    urlString = ""/Employee/Put""
-                else
-");
-                WriteLiteral(@"
-                    urlString = ""/Employee/Post""
+            var urlString;
+            if (isUpdate == 1)
+                urlString = ""/Employee/Put""
+            else
+                urlString = ""/Employee/Post""
 
-                $.ajax({
-                    type: ""POST"",
-                    url: urlString,
-                    data: form.serialize(),
-                    success: function (data) {
-                        $('.bs-modal-lg').modal('hide');
-                        $('#table_id').DataTable().ajax.reload();
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Your data has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+            $.ajax({
+                type: ""POST"",
+                url: urlString,
+                data: form.serialize(),
+                success: function (data) {
+                    $('.bs-modal-lg').moda");
+                WriteLiteral(@"l('hide');
+                    $('#table_id').DataTable().ajax.reload();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your data has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
-                        if (isUpdate == 1) {
-                            $.ajax({
-                                type: ""POST"",
-                                url: ""/AccountRole/Delete"",
-                                data: { 'key': nikValue }
-                            });
-                        }
-
-                        for (var i = 0; i < myCheckboxes.length; i++)");
-                WriteLiteral(@" {
-                            var role = new Object();
-                            role.nik = nikValue;
-                            role.roleID = myCheckboxes[i]
-
-                            $.ajax({
-                                type: ""POST"",
-                                url: ""/AccountRole/Post"",
-                                data: JSON.stringify(role),
-                                contentType: ""application/json; charset=utf-8"",
-                                dataType: ""json""
-                            });
-                        }
-                    },
-                    error: function (error) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            footer: '<a href>Your Work cannot be saved</a>'
-                        })
+                    if (isUpdate == 1) {
+                        var nik = ""117104""
+                        $.ajax({
+                            type: ""POST"",
+                            url: ""/AccountRole/Delete"",
+                            data: { 'key': nikValue }
+                        });
                     }
-                });
-            }
-        });
 
-        function rese");
-                WriteLiteral(@"t() {
+                    for (var i = 0; i < myCheckboxes.length; i++) {
+                        var role = new Object();
+                        role.nik = nikValue;
+                        role.roleID = myCheckboxes[i]
+
+                        $.ajax({
+                            type: ""POST"",
+                            url: ""/AccountRole/Post"",
+                 ");
+                WriteLiteral(@"           data: JSON.stringify(role),
+                            contentType: ""application/json; charset=utf-8"",
+                            dataType: ""json""
+                        });
+                    }
+                },
+                error: function (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Your Work cannot be saved</a>'
+                    })
+                }
+            })
+        })
+
+        function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
             $('input:checkbox').removeAttr('checked');
@@ -581,7 +625,8 @@ namespace AspNetCore
                 url: ""/AccountRole/GetById"",
                 type: ""GET"",
                 data: { 'key': id },
-                success: function (result) {
+  ");
+                WriteLiteral(@"              success: function (result) {
                     var data = result[""result""];
                     $('input:checkbox').removeAttr('checked');
                     for (var i = 0; i < data.length; i++) {
@@ -596,8 +641,7 @@ namespace AspNetCore
                 data: { 'key': id },
                 success: function (result) {
                     $('.bs-modal-lg').modal('show');
-                    var data = result[""result""];");
-                WriteLiteral(@"
+                    var data = result[""result""];
                     $('#NIK').val(data.nik);
                     $('#EmployeeName').val(data.employeeName);
                     $('#Email').val(data.email);
@@ -618,8 +662,7 @@ namespace AspNetCore
         function Delete(id) {
             swal.fire({
                 title: 'Are you sure?',
-                text: ""You won't be able");
-                WriteLiteral(@" to revert this!"",
+                text: ""You won't be able to revert this!"",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -642,8 +685,7 @@ namespace AspNetCore
                         error: function (error) {
                             Swal.fire({
                                 icon: 'error',
-                           ");
-                WriteLiteral(@"     title: 'Oops...',
+                                title: 'Oops...',
                                 text: 'Something went wrong!',
                                 footer: '<a href>Your Work cannot be saved</a>'
                             })
@@ -653,8 +695,12 @@ namespace AspNetCore
             });
         }
 
-    </script>
-");
+        // Date Picker
+        jQuery('#BirthDate').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }");
+                WriteLiteral(");\r\n\r\n        // Date Picker\n        jQuery(\'#JoinDate\').datepicker({\n            autoclose: true,\n            todayHighlight: true\n        });\r\n    </script>\r\n");
             }
             );
         }

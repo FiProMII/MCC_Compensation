@@ -26,114 +26,170 @@ namespace AspNetCore
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\r\n<!-- Row -->\r\n<div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n        <div class=\"card card-outline-info\">\r\n            <div class=\"card-header\">\r\n                <h4 class=\"m-b-0 text-white\">");
+            WriteLiteral(@"
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class=""container-fluid"">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class=""row page-titles"">
+        <div class=""col-md-6 col-8 align-self-center"">
+            <h3 class=""text-themecolor m-b-0 m-t-0"">");
 #nullable restore
-#line 10 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
-                                        Write(ViewData["Title"]);
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
+                                               Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+#nullable restore
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
+                                              Write(ViewData["Title"]);
+
+#line default
+#line hidden
+#nullable disable
+            WriteLiteral(@"</li>
+            </ol>
+        </div>
+        <div class=""col-md-6 col-4 align-self-center"">
+            <a href=""/Request/Index"" class=""btn pull-right hidden-sm-down btn-outline-secondary""><i class=""mdi mdi-keyboard-backspace""></i> Back</a>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class=""row"">
+        <div class=""col-lg-12"">
+            <div class=""card card-outline-info"">
+                <div class=""card-header"">
+                    <h4 class=""m-b-0 text-white"">");
+#nullable restore
+#line 35 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Request\Requester.cshtml"
+                                            Write(ViewData["Title"]);
 
 #line default
 #line hidden
 #nullable disable
             WriteLiteral(@"</h4>
-            </div>
-            <div class=""card-body"">
-                <form action=""#"">
-                    <div class=""form-body"">
-                        <h3 class=""card-title"">Person Info</h3>
-                        <hr>
-                        <div class=""row p-t-20"">
-                            <div class=""col-md-12"">
-                                <div class=""form-group"">
-                                    <label class=""control-label"">Requester Name</label>
-                                    <input type=""text"" id=""EmployeeName"" class=""form-control"" disabled>
+                </div>
+                <div class=""card-body"">
+                    <form class=""form-horizontal"" role=""form"">
+                        <div class=""form-body"">
+                            <h3 class=""box-title"">Person Info</h3>
+                            <hr class=""m-t-0 m-b-40"">
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Requester Name: </label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""Requester""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <div class=""row"">
+                ");
+            WriteLiteral(@"                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Department: </label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""DepartmentName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Relational Manager: </label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""ManagerName""></p>
+                                        </div>
+             ");
+            WriteLiteral(@"                       </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">Position: </label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""PositionName""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group row"">
+                                        <label class=""control-label text-right col-md-4"">");
+            WriteLiteral(@"Join Date: </label>
+                                        <div class=""col-md-8"">
+                                            <p class=""form-control-static"" id=""JoinDate""></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <h3 class=""box-title m-t-40"">New Request</h3>
+                            <hr>
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label>Compensation Type</label>
+                                        <select class=""form-control custom-select"" id=""CompensationID"" name=""CompensationID""></select>
+                                    </div>
+                                </div>
+                     ");
+            WriteLiteral(@"           <!--/span-->
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"">
+                                        <label>Event Date</label>
+                                        <input type=""date"" class=""form-control"" id=""EventDate"" name=""EventDate"" onchange=""validateDED()"">
+                                        <small class=""text-danger"" id=""errorMessage""></small>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class=""row"">
+                                <div class=""col-md-6"">
+                                    <div class=""form-group"" id=""compensationDetail"">
+                                    </div>
+                                </div>
+                                <div class=""col-md-6 bag"">
+                                    <div class='element' id='div_1'>
+           ");
+            WriteLiteral(@"                             <div class=""input-group"">
+                                            <input type=""file"" name=""file"" class=""custom-file"" id=""txt_1"" accept=""image/jpg, image/jpeg, .pdf"" />
+                                            <span class=""add btn btn-sm btn-outline-success pull-right"">Add File</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--/row-->
-                        <div class=""row"">
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label class=""control-label"">Department</label>
-                                    <input type");
-            WriteLiteral(@"=""text"" id=""DepartmentName"" class=""form-control"" disabled>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label class=""control-label"">Relational Manager</label>
-                                    <input type=""text"" id=""ManagerName"" class=""form-control"" placeholder=""dd/mm/yyyy"">
-                                </div>
-                            </div>
-                            <!--/span-->
+                        <div class=""card-footer"">
+                            <button type=""submit"" class=""btn btn-success""> <i class=""fa fa-check""></i> Send Request</button>
+                            <button type=""button"" class=""btn btn-inverse"">Cancel</button>
                         </div>
-                        <!--/row-->
-                        <div class=""row"">
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label class=""control-label"">Position</label>
-                                    <input type=""text"" id=""PositionName"" class=""form-control"" disabl");
-            WriteLiteral(@"ed>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label class=""control-label"">Join Date</label>
-                                    <input type=""text"" id=""JoinDate"" class=""form-control"" placeholder=""dd/mm/yyyy"">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <!--/row-->
-                        <h3 class=""box-title m-t-40"">New Request</h3>
-                        <hr>
-                        <div class=""row"">
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label>Compensation Type</label>
-                                    <select class=""form-control custom-select"" ");
-            WriteLiteral(@"id=""CompensationID"" name=""CompensationID""></select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class=""col-md-6"">
-                                <div class=""form-group"">
-                                    <label>Event Date</label>
-                                    <input type=""text"" class=""form-control"" id=""EventDate"" name=""EventDate"">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <div class=""row"">
-                            <div class=""col-md-6"">
-                                <div class=""form-group"" id=""compensationDetail"">
-                                </div>
-                            </div>
-                        </div>
-                        <div class=""row"">
-                            <div class=""col-md-6 bag"">
-                                <div");
-            WriteLiteral(@" class='element' id='div_1'>
-                                    <input type=""file"" name=""file"" class=""custom-file"" id=""txt_1"" accept=""image/jpg, image/jpeg, .pdf"" />
-                                    <span class=""add btn btn-sm btn-outline-success"">Add Document</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=""form-actions"">
-                        <button type=""submit"" class=""btn btn-success""> <i class=""fa fa-check""></i> Save</button>
-                        <button type=""button"" class=""btn btn-inverse"">Cancel</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Row -->
 </div>
-<!-- Row -->
 
 ");
-            WriteLiteral("\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
@@ -160,8 +216,8 @@ namespace AspNetCore
             });
 
             compensationRequirement.set(""Wedding"", ""KK & KTP"")
-            compensationRequirement.set(""Baby Gift"", ");
-                WriteLiteral(@"""KK"")
+            compensationRequirement.set(""Baby Gift"", """);
+                WriteLiteral(@"KK"")
             compensationRequirement.set(""Grief"", ""KK"")
 
             var compensationDropdown = '<option value=""-1"">Please select a compensation type</option>';
@@ -179,25 +235,19 @@ namespace AspNetCore
                 }
             });
 
-            compensationRequirement.set(""Wedding"", ""KK & KTP"")
-            compensationRequirement.set(""Baby Gift"", ""KK"")
-            compensationRequirement.set(""Grief"", ""KK"")
-
-            //Document Upload
             $("".add"").click(function () {
                 var total_element = $("".element"").length;
                 var lastid = $("".element:last"").attr(""id"");
                 var split_id = lastid.split(""_"");
-                var nextin");
-                WriteLiteral(@"dex = Number(split_id[1]) + 1;
+                var nextind");
+                WriteLiteral(@"ex = Number(split_id[1]) + 1;
                 var max = 2;
 
-           ");
-                WriteLiteral(@"     if (total_element < max) {
+                if (total_element < max) {
                     $("".element:last"").after(""<div class='element' id='div_"" + nextindex + ""'></div>"");
-                    $(""#div_"" + nextindex).append(""<br/><input type='file' name='file' class='custom-file' id='txt_""
+                    $(""#div_"" + nextindex).append(""<br/><div class='input-group'><input type='file' name='file' class='custom-file' id='txt_""
                         + nextindex + ""' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_""
-                        + nextindex + ""' class='remove btn btn-sm btn-outline-danger'>Abort</span>"");
+                        + nextindex + ""' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</span></div>"");
                 }
             });
 
@@ -210,54 +260,47 @@ namespace AspNetCore
             });
         });
 
+        function ValidateDED() {
+            var dateString = new Date($('#EventDate').val());
+            var dateNow = new Da");
+                WriteLiteral(@"te();
+            if ($('#EventDate').val() == """") {
+                $('#EventDate').focus();
+                $('#messageError').html(""The date is <code>Incorrect.</code>"");
+            } else if (dateNow.getFullYear() - dateString.getFullYear() == 0) {
+                alert('Please set another Date');
+                $('#EventDate').val('');
+                $('#messageError').html(""The date is <code>Incorrect.</code>"");
+            }
+            $('#messageError').html("""");
+        }
+
         $(""select#CompensationID"").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();
-            co");
-                WriteLiteral(@"mpensationID = parseInt($('#CompensationID option:selected').val());
+            compensationID = parseInt($('#CompensationID option:selected').val());
             var compensationDetail = '<label class=""col-md-4 col-form-label"">Document Details</label>' +
                 '<div class=""col-md-7 col-form-label"" >' +
                 '<span>Requirement: ' + compensationRequirement.get(selectedCompensationText) + '</span><br />' +
-                '<span>Value: ' + compensationValue.get(selectedCompensationText) + '</span></div>'
+    ");
+                WriteLiteral(@"            '<span>Value: ' + compensationValue.get(selectedCompensationText) + '</span></div>'
             $('#compensationDetail').html(compensationDetail)
         })
 
         $('#form').submit(function (event) {
+            debugger;
             event.preventDefault()
-            //var CompensationRequest = new Object();
-            //CompensationRequest.nik = currentNIK;
-            //CompensationRequest.compensationID = compensationID
-            //CompensationRequest.eventDate = $('#EventDate').val();
-
-
-            var formData = new FormData($(this)[0]);
-            formData.append('nik', currentNIK);
-            formData.append('compensationID', compensationID)");
-                WriteLiteral(@"
-            formData.append('eventDate', $('#EventDate').val())
-
+            var CompensationRequest = new Object();
+            CompensationRequest.nik = currentNIK;
+            CompensationRequest.compensationID = compensationID
+            CompensationRequest.eventDate = $('#EventDate').val();
+            console.log(CompensationRequest)
             $.ajax({
-                url: '/Document/Post',
-                type: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                enctype: 'multipart/form-data',
-                processData: false,
-                success: function (response) {
-                }
+                type: ""POST"",
+                url: ""/Request/Post"",
+                data: JSON.stringify(CompensationRequest),
+                contentType: ""application/json; charset=utf-8"",
+                dataType: ""json""
             });
-
-            //$.ajax({
-            //    type: ""POST"",
-            //    url: ""/Request/Post"",
-            //    data: JSON.stringify(CompensationRequest),
-            //    contentType: ""application/json; charset=utf-8"",
-            //    dataType: ""json"",
-            //    success: function (result) {
-
-            //    }
-            //});
         })
 
     </script>

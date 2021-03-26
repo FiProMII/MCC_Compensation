@@ -113,41 +113,34 @@ namespace AspNetCore
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""mySmallModalLabel"">Add ");
-#nullable restore
-#line 86 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Status\Index.cshtml"
-                                                              Write(ViewData["Title"]);
-
-#line default
-#line hidden
-#nullable disable
-            WriteLiteral(@"</h4>
+                <h4 class=""modal-title"" id=""mySmallModalLabel""><i class=""icon-check""></i> Status Management</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
-            <div class=""modal-body"">
+    ");
+            WriteLiteral(@"        <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <div class=""form-row"">
                         <div class=""form-group"">
                             <input type=""text"" class=""form-control"" name=""StatusID"" id=""StatusID"" hidden>
                         </div>
                         <div class=""form-group"">
-                            <label for=""firstName"" class=""col-form-label"">Status Name</label>
+                            <label for=""firstName"" class=""col-form-label"">Status Name <span class=""text-danger"">*</span></label>
                             <input type=""text"" class=""form-control"" name=""StatusName"" id=""StatusName"">
                         </div>
                     </div>
                 </form>
             </div>
             <div class=""modal-footer"">
-                <button class=""btn btn-secondary waves-effect waves-ligh"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
-             ");
-            WriteLiteral("   <button class=\"btn btn-primary waves-effect waves-ligh\" type=\"submit\" form=\"form\" id=\"Submit\">Submit</button>\r\n            </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
+                <button class=""btn btn-secondary waves-effect waves-light"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
+                <button class=""btn btn-primary waves-effect waves-light"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
+    ");
+            WriteLiteral("        </div>\r\n        </div><!-- /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
         var isUpdate = 0;
         $(document).ready(function () {
             $('#table_id').DataTable({
-                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     {
@@ -169,13 +162,14 @@ namespace AspNetCore
                         }
                     }
                 ],
+                ""responsive"": true,
                 ""filter"": true,
                 ""orderMulti"": false,
                 ""ajax"": {
                     ""url"": ""/Status/Get"",
-                    ""type"": ""get"",
-    ");
-                WriteLiteral(@"                ""dataSrc"": ""result""
+                    ""type"": ""GET"",
+  ");
+                WriteLiteral(@"                  ""dataSrc"": ""result""
                 },
                 ""columnDefs"": [
                     {
@@ -201,8 +195,8 @@ namespace AspNetCore
                     {
                         ""data"": 'statusID',
                         ""render"": function (data, type, row, meta) {
-                            return '<butt");
-                WriteLiteral(@"on class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['statusID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                            return '<bu");
+                WriteLiteral(@"tton class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['statusID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
                                 '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['statusID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
@@ -220,12 +214,12 @@ namespace AspNetCore
                 StatusName: ""required""
             },
             messages: {
-                FirstName: ""Please enter status name""
+                FirstName: ""<small class='text-danger'>Please enter <code>Status Name.</code></small>""
             },
             submitHandler: function (form) {
-                var form = $(form);
-                var ur");
-                WriteLiteral(@"lString;
+        ");
+                WriteLiteral(@"        var form = $(form);
+                var urlString;
                 if (isUpdate == 1)
                     urlString = ""/Status/Put""
                 else
@@ -248,9 +242,9 @@ namespace AspNetCore
                     error: function (error) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Oops...',
-                          ");
-                WriteLiteral(@"  text: 'Something went wrong!',
+                      ");
+                WriteLiteral(@"      title: 'Oops...',
+                            text: 'Something went wrong!',
                             footer: '<a href>Your Work cannot be saved</a>'
                         })
                     }
@@ -281,10 +275,10 @@ namespace AspNetCore
         function Delete(id) {
             swal.fire({
                 title: 'Are you sure?',
-                text: ""You won't be able to revert this!"",
+                text: ""You won't be able to revert t");
+                WriteLiteral(@"his!"",
                 icon: 'warning',
- ");
-                WriteLiteral(@"               showCancelButton: true,
+                showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
@@ -305,9 +299,9 @@ namespace AspNetCore
                         error: function (error) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
-                                ");
-                WriteLiteral(@"text: 'Something went wrong!',
+                                title: '");
+                WriteLiteral(@"Oops...',
+                                text: 'Something went wrong!',
                                 footer: '<a href>Your Work cannot be saved</a>'
                             })
                         },

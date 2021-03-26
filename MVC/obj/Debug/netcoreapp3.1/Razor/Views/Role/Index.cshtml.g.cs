@@ -113,22 +113,22 @@ namespace AspNetCore
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""mySmallModalLabel"">");
+                <h4 class=""modal-title"" id=""mySmallModalLabel""><i class=""icon-key""></i> ");
 #nullable restore
 #line 76 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
-                                                          Write(ViewData["Title"]);
+                                                                                   Write(ViewData["Title"]);
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"</h4>
+            WriteLiteral(@" Management</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <input type=""hidden"" class=""form-control"" name=""RoleID"" id=""RoleID"">
                     <div class=""form-group"">
-                        <label for=""roleName"" class=""col-form-label""> Name</label>
+                        <label for=""roleName"" class=""col-form-label""> Name <span class=""text-danger"">*</span></label>
                         <input type=""text"" class=""form-control"" name=""RoleName"" id=""RoleName"">
                     </div>
                 </form>
@@ -137,16 +137,15 @@ namespace AspNetCore
                 <button class=""btn btn-secondary waves-effect waves-ligh"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""Readonly()"">Close</button>
                 <button class=""btn btn-primary waves-effect waves-ligh"" type=""submit"" form=""form"" id=""Submit"">Submit</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-d");
-            WriteLiteral("ialog -->\r\n</div><!-- /.modal -->\r\n\r\n\r\n");
+        </div><!--");
+            WriteLiteral(" /.modal-content -->\r\n    </div><!-- /.modal-dialog -->\r\n</div><!-- /.modal -->\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
         var isUpdate;
         $(document).ready(function () {
             $('#table_id').DataTable({
-                responsive: true,
+                ""responsive"": true,
                 ""filter"": true,
                 ""orderMulti"": false,
                 ""ajax"": {
@@ -171,8 +170,8 @@ namespace AspNetCore
                     {
                         ""data"": null,
                         ""name"": ""no"",
-                       ");
-                WriteLiteral(@" ""autowidth"": true,
+                     ");
+                WriteLiteral(@"   ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
@@ -182,13 +181,13 @@ namespace AspNetCore
                     {
                         ""data"": 'roleID',
                         ""render"": function (data, type, row, meta) {
-                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['roleID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                            return '<button class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['roleID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
                                 '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['roleID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
-       ");
-                WriteLiteral(@"     });
+     ");
+                WriteLiteral(@"       });
         });
 
         var validator = $(""#form"").validate({
@@ -196,7 +195,7 @@ namespace AspNetCore
                 roleName: ""required"",
             },
             messages: {
-                roleName: ""Please enter Role Name"",
+                roleName: ""<small class='text-danger'>Please enter <code>Role Name.</code></small>"",
             },
             submitHandler: function (form) {
                 var form = $(form);
@@ -215,9 +214,9 @@ namespace AspNetCore
                     success: function (data) {
                         $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
-                        Swal.fire({
-                            position: 'center',");
-                WriteLiteral(@"
+                        Swal.fire");
+                WriteLiteral(@"({
+                            position: 'center',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -247,9 +246,9 @@ namespace AspNetCore
                 url: ""/Role/GetById"",
                 type: ""GET"",
                 data: { 'key': roleID },
-                headers: {
-                    Auth");
-                WriteLiteral(@"orization: sessionStorage.token
+ ");
+                WriteLiteral(@"               headers: {
+                    Authorization: sessionStorage.token
                 },
                 success: function (result) {
                     $('.bs-modal-sm').modal('show');
@@ -275,14 +274,14 @@ namespace AspNetCore
                 if (result.isConfirmed) {
                     $.ajax({
                         type: ""POST"",
-                        url: ""/Role/Delete"",
-                        data: {");
-                WriteLiteral(@" 'key': roleID },
+                        ur");
+                WriteLiteral(@"l: ""/Role/Delete"",
+                        data: { 'key': roleID },
                         headers: {
                             Authorization: sessionStorage.token
                         },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',
@@ -299,11 +298,8 @@ namespace AspNetCore
                         },
                     });
                 }
-            });
-        }
-
-    </script>
-");
+           ");
+                WriteLiteral(" });\r\n        }\r\n\r\n    </script>\r\n");
             }
             );
         }

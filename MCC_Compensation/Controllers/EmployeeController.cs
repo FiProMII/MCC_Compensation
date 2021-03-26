@@ -27,6 +27,7 @@ namespace API.Controllers
             _employeeRepository = employeeRepository;
             _configuration = configuration;
         }
+        
         [HttpPost]
         public override ActionResult Post(Employee employee)
         {
@@ -76,8 +77,6 @@ namespace API.Controllers
                 responseContent.Message = "Sign in failed";
                 return BadRequest(responseContent);
             }
-
-            
         }
     }
 }

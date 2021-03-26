@@ -79,8 +79,7 @@ namespace AspNetCore
                                     <th>No.</th>
                                     <th>ID</th>
                                     <th>Name</th>
-");
-            WriteLiteral(@"                                    <th>Department</th>
+                                    <th>Department</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -106,8 +105,7 @@ namespace AspNetCore
     </div>
     <!-- ============================================================== -->
     <!-- End PAge Content -->
-    <!-- ======================");
-            WriteLiteral(@"======================================== -->
+    <!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
@@ -117,15 +115,15 @@ namespace AspNetCore
     <div class=""modal-dialog modal-sm"">
         <div class=""modal-content"">
             <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""mySmallModalLabel"">");
+                <h4 class=""modal-title"" id=""mySmallModalLabel""><i class=""icon-people""></i> ");
 #nullable restore
-#line 88 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
-                                                              Write(ViewData["Title"]);
+#line 78 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Position\Index.cshtml"
+                                                                                      Write(ViewData["Title"]);
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"</h4>
+            WriteLiteral(@" Management</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
@@ -137,14 +135,14 @@ namespace AspNetCore
                     </div>
                     <div class=""form-row"">
                         <div class=""form-group"">
-                            <label for=""departmentID"" class=""col-form-label"">Department</label>
+                            <label for=""departmentID"" class=""col-form-label"">Department <span class=""text-danger"">*</span></label>
                             <select class=""form-control"" id=""DepartmentID"" name=""DepartmentID""></select>
                         </div>
                     </div>
                     <div class=""form-row"">
                         <div class=""form-group"">
-                            <label for=""firstName"" class=""col-form-label"">P");
-            WriteLiteral(@"osition Name</label>
+                            <");
+            WriteLiteral(@"label for=""firstName"" class=""col-form-label"">Position Name <span class=""text-danger"">*</span></label>
                             <input type=""text"" class=""form-control"" name=""PositionName"" id=""PositionName"">
                         </div>
                     </div>
@@ -178,7 +176,6 @@ namespace AspNetCore
             });
 
             $('#table_id').DataTable({
-                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     {
@@ -188,9 +185,9 @@ namespace AspNetCore
                         }
                     },
                     {
-              ");
-                WriteLiteral(@"          extend: 'excel',
-                        exportOptions: {
+                        extend: 'excel',
+       ");
+                WriteLiteral(@"                 exportOptions: {
                             columns: [0, 2, 3]
                         }
                     },
@@ -201,6 +198,7 @@ namespace AspNetCore
                         }
                     }
                 ],
+                ""responsive"": true,
                 ""filter"": true,
                 ""orderMulti"": false,
                 ""ajax"": {
@@ -220,8 +218,8 @@ namespace AspNetCore
                 ],
                 ""columns"": [
                     {
-                        ""data""");
-                WriteLiteral(@": null,
+                        ""dat");
+                WriteLiteral(@"a"": null,
                         ""name"": ""no"",
                         ""autowidth"": true,
                         ""render"": function (data, type, row, meta) {
@@ -234,9 +232,9 @@ namespace AspNetCore
                     {
                         ""data"": 'positionID',
                         ""render"": function (data, type, row, meta) {
-                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['positionID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
-                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' +");
-                WriteLiteral(@" row['positionID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
+                            return '<button class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['positionID'] + '\')""><i class =""mdi mdi-table-edit""></i> Edit</button> ' +
+                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\''");
+                WriteLiteral(@" + row['positionID'] + '\')""><i class =""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
@@ -253,7 +251,7 @@ namespace AspNetCore
                 PositionName: ""required""
             },
             messages: {
-                PositionName: ""Please enter position name""
+                PositionName: ""<small class='text-danger'>Please enter <code>Position Name.</code></small>""
             },
             submitHandler: function (form) {
                 var form = $(form);
@@ -266,9 +264,9 @@ namespace AspNetCore
                     type: ""POST"",
                     url: urlString,
                     data: form.serialize(),
-                    success: function (data) {
-                    ");
-                WriteLiteral(@"    $('.bs-modal-sm').modal('hide');
+                 ");
+                WriteLiteral(@"   success: function (data) {
+                        $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
@@ -295,10 +293,10 @@ namespace AspNetCore
             $('#form').trigger('reset');
         }
 
-        function Get(id) {
+");
+                WriteLiteral(@"        function Get(id) {
             $.ajax({
- ");
-                WriteLiteral(@"               url: ""/Position/GetById"",
+                url: ""/Position/GetById"",
                 type: ""GET"",
                 data: { 'key': id },
                 success: function (result) {
@@ -322,9 +320,9 @@ namespace AspNetCore
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax");
-                WriteLiteral(@"({
+                if");
+                WriteLiteral(@" (result.isConfirmed) {
+                    $.ajax({
                         type: ""POST"",
                         url: ""/Position/Delete"",
                         data: { 'key': id },

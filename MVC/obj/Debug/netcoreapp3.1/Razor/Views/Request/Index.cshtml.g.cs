@@ -56,7 +56,7 @@ namespace AspNetCore
             </ol>
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
-            <a href=""#"" class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target=""#modal"" id=""create""><i class=""mdi mdi-plus-circle""></i>Create</a>
+            <a href=""/Request/Requester"" class=""btn pull-right hidden-sm-down btn-success""><i class=""mdi mdi-plus-circle""></i>Create</a>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -72,8 +72,8 @@ namespace AspNetCore
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
                     <div class=""table-responsive m-t-40"">
-  ");
-            WriteLiteral(@"                      <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+                        <table id=""tab");
+            WriteLiteral(@"le_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -92,9 +92,9 @@ namespace AspNetCore
                             <tfoot>
                                 <tr>
                                     <th>No.</th>
-                      ");
-            WriteLiteral(@"              <th>Request ID</th>
-                                    <th>Applicants Name</th>
+                                    <th>Request ID</th>
+ ");
+            WriteLiteral(@"                                   <th>Applicants Name</th>
                                     <th>Join Date</th>
                                     <th>Manager</th>
                                     <th>Submission</th>
@@ -117,57 +117,12 @@ namespace AspNetCore
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
-<!-- ==");
-            WriteLiteral(@"============================================================ -->
-
-<!-- sample modal content -->
-<div id=""modal"" class=""modal fade"" tabindex=""-1"" role=""dialog"" aria-labelledby=""myModalLabel"" aria-hidden=""true"">
-    <div class=""modal-dialog"">
-        <div class=""modal-content"">
-            <div class=""modal-header"">
-                <h4 class=""modal-title"" id=""myModalLabel"">New Request</h4>
-                <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"">×</button>
-            </div>
-            <div class=""modal-body"">
-                <form id=""form"">
-                    <div class=""form-group row"">
-                        <label class=""col-md-4 col-form-label"">Compensation Type</label>
-                        <div class=""col-md-3"">
-                            <select class=""form-control"" id=""CompensationID"" name=""CompensationID""></select>
-                        </div>
-                    </div>
-                    <div class=""form-group row"" id=""compensationDetail""");
-            WriteLiteral(@">
-                    </div>
-                    <div class=""form-group row"">
-                        <label class=""col-md-4 col-form-label"">Event Date</label>
-                        <div class=""col-md-3"">
-                            <input type=""date"" class=""form-control"" name=""EventDate"" id=""EventDate"">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class=""modal-footer"">
-                <button type=""button"" class=""btn btn-info waves-effect"" data-dismiss=""modal"">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-");
+<!-- ======================================");
+            WriteLiteral("======================== -->\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
     <script>
-        var currentNIK = ""12345""
-        var compensationID
-
-        let compensationValue = new Map()
-        let compensationRequirement = new Map()
-
-        var isUpdate;
+        var isUpdate = 0;
         $(document).ready(function () {
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
@@ -191,12 +146,13 @@ namespace AspNetCore
                         }
                     }
                 ],
-                ""responsiv");
-                WriteLiteral(@"e"": true,
+                ""responsive"": true,
                 ""filter"": true,
+                ""orderMulti"": false,
                 ""ajax"": {
                     ""url"": ""/Request/Get"",
-                    ""type"": ""Get"",
+ ");
+                WriteLiteral(@"                   ""type"": ""Get"",
                     ""dataSrc"": ""result""
                 },
                 ""columnDefs"": [
@@ -207,6 +163,10 @@ namespace AspNetCore
                     {
                         ""targets"": [0, 8],
                         ""orderable"": false,
+                    },
+                    {
+                        ""targets"": [0, 1, 3, 5, 6, 7, 8],
+                        ""className"": ""texUrl-center"",
                     },
                     {
                         ""order"": [[2, 'asc']]
@@ -220,14 +180,14 @@ namespace AspNetCore
                         ""render"": function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
-                    },
-                    { ");
-                WriteLiteral(@"""data"": 'requestID' },
+ ");
+                WriteLiteral(@"                   },
+                    { ""data"": 'requestID' },
                     { ""data"": 'employee.employeeName' },
                     {
                         ""data"": 'employee.joinDate',
                         ""render"": function (data, type, row) {
-                            return moment(data).format('DD-MM-YYYY');
+                            return moment(data).format('DD/MM/YYYY');
                         }
                     },
                     { ""data"": 'employee.manager.employeeName' },
@@ -235,72 +195,66 @@ namespace AspNetCore
                     {
                         ""data"": 'eventDate',
                         ""render"": function (data, type, row) {
-                            return moment(data).format('DD-MM-YYYY');
+                            return moment(data).format('DD/MM/YYYY');
                         }
                     },
                     {
                         ""data"": 'requestDate',
                         ""render"": function (data, type, row) {
-                            return moment(data).format('DD-MM-YYYY');
+                            return moment(data).format('DD/MM/YYYY');
                         }
-                    },
+              ");
+                WriteLiteral(@"      },
                     {
-            ");
-                WriteLiteral(@"            ""data"": 'requestID',
+                        ""data"": 'requestID',
                         ""render"": function (data, type, row, meta) {
-                            return '<a class=""btn btn-sm btn-info waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Detail Information""  href=""/Request/Details/?id=' + row['requestID'] + '""><i class=""mdi mdi-information""></i> Details</a> '
+                            return '<button class=""btn btn-outline-info"" data-toggle=""tooltip"" data-placement=""top"" title=""Detail Information""  href=""/Request/Details/?id=' + row['requestID'] + '""><i class=""fas fa-info-circle""></i> Details</button> '
                         }
                     }
                 ]
-            })
-        });
+            });
 
-        $('#create').on('click', function () {
-            $.ajax({
-                type: ""GET"",
-                url: '/Compensation/Get',
-                success: function (result) {
-                    var data = result['result']
-                    for (var i = 0; i < data.length; i++) {
-                        compensationDropdown += '<option value=""' + data[i].compensationID + '"">' + data[i].compensationName + '</option>';
-                        $(""#CompensationID"").html(compensationDropdown);
-                        compensationVal");
-                WriteLiteral(@"ue.set(data[i].compensationName, data[i].cost)
+            // Array to track the ids of the details displayed rows
+            var detailRows = [];
+
+            $('#table_id tbody').on('click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dt.row(tr);
+                var idx = $.inArray(tr.attr('id'), detailRows);
+
+                if (row.child.isShown()) {
+                    tr.removeClass('details');
+                    row.child.hide();
+
+                    // Remove from the 'open' array
+    ");
+                WriteLiteral(@"                detailRows.splice(idx, 1);
+                }
+                else {
+                    tr.addClass('details');
+                    row.child(format(row.data())).show();
+
+                    // Add to the 'open' array
+                    if (idx === -1) {
+                        detailRows.push(tr.attr('id'));
                     }
                 }
             });
 
-            compensationRequirement.set(""Wedding"", ""KK & KTP"")
-            compensationRequirement.set(""Baby Gift"", ""KK"")
-            compensationRequirement.set(""Grief"", ""KK"")
-        })
-
-        $(""select#CompensationID"").on('change', function () {
-            var selectedCompensationText = $('#CompensationID option:selected').text();
-            compensationID = parseInt($('#CompensationID option:selected').val());
-            var compensationDetail = '<label class=""col-md-4 col-form-label"">Document Details</label>' +
-                '<div class=""col-md-7 col-form-label"" >' +
-                '<span>Requirement: ' + compensationRequirement.get(selectedCompensationText) + '</span><br />' +
-                '<span>Value: ' + compensationValue.get(selectedCompensationText) + '</span></div>'
-            $('#compensationDetail').html(compensationDetail)
-        })
-
-        $('#form').submit(");
-                WriteLiteral(@"function (event) {
-            event.preventDefault()
-            var CompensationRequest = new Object();
-            CompensationRequest.nik = currentNIK;
-            CompensationRequest.compensationID = compensationID
-            CompensationRequest.eventDate = $('#EventDate').val();
-            console.log(CompensationRequest)
-            $.ajax({
-                type: ""POST"",
-                url: ""/Request/Post"",
-                data: JSON.stringify(CompensationRequest),
-                contentType: ""application/json; charset=utf-8"",
-                dataType: ""json""
+            // On each draw, loop over the `detailRows` array and show any child rows
+            dt.on('draw', function () {
+                $.each(detailRows, function (i, id) {
+                    $('#' + id + ' td.details-control').trigger('click');
+                });
             });
-        })
+        });
+
+        function format(d) {
+            return 'Full name: ' + d.requestID + '<br>' +
+                'Salary: ' + d.eventDate + '<br>' +
+                'The child row can contain any data you wish, including links, images, inner tables etc.';
+        }
+
     </script>
 ");
             }
