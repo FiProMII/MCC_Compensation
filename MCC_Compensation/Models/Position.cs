@@ -14,9 +14,9 @@ namespace API.Models
         [Key][Required]
         public int PositionID { get; set; }
         public string PositionName { get; set; }
-        public int DepartmentID { get; set; }
 
-        [JsonIgnore]
+        [Required]
+        public int DepartmentID { get; set; }
         public virtual Department Department { get; set; }
         [JsonIgnore]
         public virtual ICollection<Employee> Employees { get; set; }

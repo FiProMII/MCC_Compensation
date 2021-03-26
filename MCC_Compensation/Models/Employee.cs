@@ -36,14 +36,13 @@ namespace API.Models
         [DataType(DataType.Date)]
         public DateTime JoinDate { get; set; }
 
+        [Required]
         public int PositionID {get;set;}
 
         public string ManagerNIK { get; set; }
 
-        [JsonIgnore]
         public virtual Position Position { get; set; }
 
-        [JsonIgnore]
         public virtual Employee Manager { get; set; }
 
         [JsonIgnore]
@@ -51,5 +50,8 @@ namespace API.Models
 
         [JsonIgnore]
         public virtual ICollection<CompensationRequest> CompensationRequests { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

@@ -17,8 +17,5 @@ namespace API.Models
 
         [JsonIgnore]
         public virtual ICollection<Position> Positions { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace API.Models
         public string StatusName { get; set; }
 
         [JsonIgnore]
-        public ICollection<Approval> Approvals { get; set; }
+        public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

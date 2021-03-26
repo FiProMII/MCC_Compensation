@@ -14,7 +14,7 @@ namespace API.Models
         [Key][Required]
         public int ApprovalID { get; set; }
         public int StatusID { get; set; }
-        public int DepartmentID { get; set; }
+        public string NIK { get; set; }
         public int RequestID { get; set; }
 
         [DataType(DataType.Date)]
@@ -23,7 +23,7 @@ namespace API.Models
         [JsonIgnore]
         public virtual Status Status { get; set; }
         [JsonIgnore]
-        public virtual Department Department { get; set; }
+        public virtual Employee Employee { get; set; }
         [JsonIgnore]
         public virtual CompensationRequest CompensationRequest { get; set; }
     }
