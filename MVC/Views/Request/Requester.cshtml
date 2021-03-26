@@ -202,7 +202,8 @@
                 data: { 'key': currentNIK },
                 success: function (result) {
                     var data = result["result"];
-                    $('#Requester').html(data.employeeName)
+                    console.log(data)
+                    $('#EmployeeName').val(data.employeeName)
                     $('#DepartmentName').html(data.position.department.departmentName)
                     $('#PositionName').html(data.position.positionName)
                     $('#ManagerName').html(data.manager.employeeName)
@@ -216,6 +217,7 @@
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
+                        var compensationDropdown = '<option value="-1">Please select a compensation type</option>'
                         compensationDropdown += '<option value="' + data[i].compensationID + '">' + data[i].compensationName + '</option>';
                         $("#CompensationID").html(compensationDropdown);
                         compensationValue.set(data[i].compensationName, data[i].cost)
@@ -264,11 +266,6 @@
 
         $('#form').submit(function (event) {
             event.preventDefault()
-            //var CompensationRequest = new Object();
-            //CompensationRequest.nik = currentNIK;
-            //CompensationRequest.compensationID = compensationID
-            //CompensationRequest.eventDate = $('#EventDate').val();
-
 
             var formData = new FormData($(this)[0]);
             formData.append('nik', currentNIK);
@@ -287,17 +284,6 @@
                 success: function (response) {
                 }
             });
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Request/Post",
-            //    data: JSON.stringify(CompensationRequest),
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    success: function (result) {
-
-            //    }
-            //});
         })
 
     </script>
