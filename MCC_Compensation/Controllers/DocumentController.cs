@@ -46,7 +46,7 @@ namespace API.Controllers
                     Document document = new Document();
 
                     document.DocumentName = file.FileName;
-                    document.Link = filePath;
+                    document.Link = "~/uploads/" + file.FileName;
 
                     documents.Add(document);
                 }

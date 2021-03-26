@@ -42,6 +42,6 @@ namespace MVC.Controllers
             return BadRequest(result);
         }
 
-        public ViewResult RecoverPassword() => View();
+        public ViewResult ChangePassword() => View();
     }
 }

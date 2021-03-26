@@ -38,7 +38,6 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Micros
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
@@ -48,14 +47,9 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Security.Principal.Windows.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
@@ -66,15 +60,8 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtim
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.csprojAssemblyReference.cache
@@ -91,9 +78,7 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\scoped
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.input.cache
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.TagHelpers.output.cache
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.RazorCoreGenerate.cache
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\RecoverPassword.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Compensation\Index.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Department\Index.cshtml.g.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
@@ -114,3 +99,4 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
