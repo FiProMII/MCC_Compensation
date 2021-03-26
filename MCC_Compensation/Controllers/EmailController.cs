@@ -26,7 +26,7 @@ namespace API.Controllers
 
         public void SendEmail(string recipient, EmailType emailType, string bodyParam)
         {
-            string to = recipient;   
+            string to = recipient;
             string from = "mekarbunga2021@gmail.com";
             MailMessage message = new MailMessage(from, to);
 
@@ -44,7 +44,7 @@ namespace API.Controllers
 
             message.BodyEncoding = Encoding.UTF8;
             message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);  
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             System.Net.NetworkCredential basicCredential1 = new
             System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123456");
             client.EnableSsl = true;

@@ -31,7 +31,7 @@ namespace MVC.Controllers
         public ViewResult ForgotPassword() => View();
 
         [HttpPost]
-        public async Task<IActionResult> ForgotPassword([FromBody]LoginVM loginVM)
+        public async Task<IActionResult> ForgotPassword([FromBody] LoginVM loginVM)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginVM), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync("Account/ForgotPassword", content);

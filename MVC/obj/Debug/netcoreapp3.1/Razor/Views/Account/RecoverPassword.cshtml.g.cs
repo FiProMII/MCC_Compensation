@@ -12,10 +12,16 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4d89dc903fb03db5f8734a44b700a0f4cd03ee47", @"/Views/Account/RecoverPassword.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f2c0ad6bf5826560df380f7a714ddd0da56a2b18", @"/Views/Account/RecoverPassword.cshtml")]
     public class Views_Account_RecoverPassword : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("hold-transition login-page"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/css/bootstrap.css"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("rel", new global::Microsoft.AspNetCore.Html.HtmlString("stylesheet"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_2 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/src/images/mii-logo.png"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_3 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("height", new global::Microsoft.AspNetCore.Html.HtmlString("50"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_4 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString("logo"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_5 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/js/bootstrap.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_6 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         #line hidden
         #pragma warning disable 0649
         private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
@@ -37,6 +43,7 @@ namespace AspNetCore
             }
         }
         private global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.HeadTagHelper __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_HeadTagHelper;
+        private global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper;
         private global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.BodyTagHelper __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_BodyTagHelper;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
@@ -58,17 +65,22 @@ namespace AspNetCore
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral(@"</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel=""stylesheet"" href=""https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"">
-    <!-- Font Awesome -->
-    <link rel=""stylesheet"" href=""../../plugins/fontawesome-free/css/all.min.css"">
-    <!-- icheck bootstrap -->
-    <link rel=""stylesheet"" href=""../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"">
-    <!-- Theme style -->
-    <link rel=""stylesheet"" href=""../../dist/css/adminlte.min.css"">
-");
+                WriteLiteral("</title>\r\n    ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2c0ad6bf5826560df380f7a714ddd0da56a2b186265", async() => {
+                }
+                );
+                __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+                __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_0);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_1);
+                await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+                if (!__tagHelperExecutionContext.Output.IsContentModified)
+                {
+                    await __tagHelperExecutionContext.SetOutputContentAsync();
+                }
+                Write(__tagHelperExecutionContext.Output);
+                __tagHelperExecutionContext = __tagHelperScopeManager.End();
+                WriteLiteral("\r\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css\" rel=\"stylesheet\" />\r\n");
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_HeadTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.HeadTagHelper>();
@@ -81,59 +93,109 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d89dc903fb03db5f8734a44b700a0f4cd03ee475207", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f2c0ad6bf5826560df380f7a714ddd0da56a2b188266", async() => {
                 WriteLiteral(@"
-    <div class=""login-box"">
-        <div class=""card card-outline card-primary"">
-            <div class=""card-header text-center"">
-                <a href=""../../index2.html"" class=""h1""><b>Compen</b>sation</a>
-            </div>
-            <div class=""card-body"">
-                <p class=""login-box-msg"">You are only one step a way from your new password, recover your password now.</p>
-                <form action=""login.html"" method=""post"">
-                    <div class=""input-group mb-3"">
-                        <input type=""password"" class=""form-control"" placeholder=""Password"">
-                        <div class=""input-group-append"">
-                            <div class=""input-group-text"">
-                                <span class=""fas fa-lock""></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=""input-group mb-3"">
-                        <input type=""password"" class=""form-control"" placeholder=""Confirm P");
-                WriteLiteral(@"assword"" id=""confirmPassword"">
-                        <div class=""input-group-append"">
-                            <div class=""input-group-text"">
-                                <span class=""fas fa-lock""></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-12"">
-                            <button type=""submit"" class=""btn btn-primary btn-block"">Change password</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
+    <header class=""footer mt-auto py-3 bg-transparent"">
+        <div style=""position: fixed; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center; color:black"">
 
-                <p class=""mt-3 mb-1"">
-                    <a href=""/Account/Index"">Login</a>
-                </p>
+        </div>
+    </header>
+    <div class=""container-fluid"">
+        <div class=""flex-md-wrap container col-lg-4 align-content-center"">
+            <div class=""card-container"">
+                <div class=""card-body"">
+                    <h3 class=""text-center m-0"">
+                        <a");
+                BeginWriteAttribute("href", " href=\"", 875, "\"", 882, 0);
+                EndWriteAttribute();
+                WriteLiteral(" class=\"logo logo-admin\">\r\n                            ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2c0ad6bf5826560df380f7a714ddd0da56a2b189233", async() => {
+                }
+                );
+                __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+                __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_2);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_3);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_4);
+                await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+                if (!__tagHelperExecutionContext.Output.IsContentModified)
+                {
+                    await __tagHelperExecutionContext.SetOutputContentAsync();
+                }
+                Write(__tagHelperExecutionContext.Output);
+                __tagHelperExecutionContext = __tagHelperScopeManager.End();
+                WriteLiteral(@"
+                        </a>
+                    </h3>
+                    <div class=""p-3"">
+                        <h4 class=""text-muted font-18 m-b-5 text-center""><br />Recover your account</h4>
+                        <p class=""text-muted text-center"">We can help you reset your password. <br /> First, enter your email and follow the instructions below.</p><br />
+                        <form id=""form"" name=""loginForm"">
+                            <div class=""form-group"">
+                                <input type=""email"" class=""form-control"" name=""Email"" id=""Email"" placeholder=""Email"">
+                                <span id=""ValidationEmail"" style=""display:none; color:red"">Email doesn't exist</span>
+                            </div>
+                            <br />
+                            <div class=""form-group row m-t-20"">
+                                <div class=""col-sm-12 text-right"">
+                                    <a");
+                BeginWriteAttribute("href", " href=\"", 1970, "\"", 2011, 1);
+#nullable restore
+#line 38 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\RecoverPassword.cshtml"
+WriteAttributeValue("", 1977, Url.ActionLink("Index","Account"), 1977, 34, false);
+
+#line default
+#line hidden
+#nullable disable
+                EndWriteAttribute();
+                WriteLiteral(@" class=""btn btn-secondary"">Cancel</a>
+                                    <button class=""btn btn-primary"" type=""submit"">Send link</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!-- /.login-card-body -->
         </div>
     </div>
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src=""../../plugins/jquery/jquery.min.js""></script>
-    <!-- Bootstrap 4 -->
-    <script src=""../../plugins/bootstrap/js/boo");
-                WriteLiteral("tstrap.bundle.min.js\"></script>\r\n    <!-- AdminLTE App -->\r\n    <script src=\"../../dist/js/adminlte.min.js\"></script>\r\n");
+    <footer class=""footer mt-auto py-3 bg-transparent"">
+        <div style=""position: fixed; left: 0; bottom: 10px; width: 100%; color: transparent; text-align:center; color:black"">
+            &copy; 2021 PT Mitra Integrasi Informatika. All Rights Reserved.
+        </div>
+    </footer>
+");
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_BodyTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.BodyTagHelper>();
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_BodyTagHelper);
-            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_0);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral("\r\n</html>\r\n\r\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\r\n");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f2c0ad6bf5826560df380f7a714ddd0da56a2b1813363", async() => {
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_5);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral("\r\n");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f2c0ad6bf5826560df380f7a714ddd0da56a2b1814403", async() => {
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper);
+            __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_6);
             await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
             if (!__tagHelperExecutionContext.Output.IsContentModified)
             {
@@ -142,43 +204,50 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(@"
-</html>
-
+<link rel=""stylesheet"" href=""https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"" />
+<script src=""https://cdn.jsdelivr.net/npm/sweetalert2@10""></script>
 
 <script>
-
     var validator = $('#form').validate({
         rules: {
-            newPassword: ""required"",
-            confirmPassword: ""required""
+            Email: {
+                required: true,
+                email: true
+            }
         },
         messages: {
-            newPassword: ""<p style='color:red'>Please enter new password</p>"",
-            confirmPassword: ""<p style='color:red'>Please retype new password</p>""
+            Email: {
+                required: ""<p style='color:red'>Please enter your email</p>"",
+                email: ""<p style='color:red'>Please enter a valid email</p>""
+            }
         },
         submitHandler: function (form) {
             var form = $(form);
             $.ajax({
                 type: ""POST"",
-                url: ""Put"",
+                url: ""/Employee/Validation"",
                 data: form.serialize(),
                 success: function (data) {
-                    Swal.fire({
-                        title: 'Password has been changed',
-                        icon: 'success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = ");
-#nullable restore
-#line 95 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\RecoverPassword.cshtml"
-                                              Write(Url.Action("Index", "Account"));
+                    Swal.fire(
+                        'Email sent successfully',
+                        'Please check the email and follow the instructions for obtaining ");
+            WriteLiteral(@"a new password',
+                        'info'
+                    )
+                },
+                error: function (error) {
+                    $('#ValidationEmail').show();
+                    $('#Email').focus(
+                        function () {
+                            $('#ValidationEmail').hide();
+                        });
+                }
+            });
+        }
+    });
 
-#line default
-#line hidden
-#nullable disable
-            WriteLiteral(";\r\n                        }\r\n                    })\r\n                },\r\n                error: function (error) {\r\n\r\n                }\r\n            });\r\n        }\r\n    });\r\n</script>\r\n");
+</script>
+");
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

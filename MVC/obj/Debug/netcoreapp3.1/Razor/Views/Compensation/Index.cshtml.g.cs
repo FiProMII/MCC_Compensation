@@ -123,25 +123,25 @@ namespace AspNetCore
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"</h4>
+            WriteLiteral(@" Management</h4>
                 <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">×</button>
             </div>
             <div class=""modal-body"">
                 <form id=""form"" name=""form"">
                     <input type=""hidden"" class=""form-control"" name=""CompensationID"" id=""CompensationID"">
                     <div class=""form-group"">
-                        <label for=""compensationName"" class=""col-form-label"">Compensation Name</label>
+                        <label for=""compensationName"" class=""col-form-label"">Compensation Name <span class=""text-danger"">*</span></label>
                         <input type=""text"" class=""form-control"" name=""CompensationName"" id=""CompensationName"">
                     </div>
                     <div class=""form-group"">
-                        <label for=""cost"" class=""col-form-label"">Cost</label>
+                        <label for=""cost"" class=""col-form-label"">Cost <span class=""text-danger"">*</span></label>
                         <input type=""text"" class=""form-control"" name=""Cost"" id=""Cost"">
                     </div>
                 </form>
             </div>
-            <div class=""modal-footer"">
-                <button class=""btn btn-secondary waves-effect waves-l");
-            WriteLiteral(@"ight"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">Close</button>
+            <div class=""moda");
+            WriteLiteral(@"l-footer"">
+                <button class=""btn btn-secondary waves-effect waves-light"" data-dismiss=""modal"" aria-hidden=""true"" onclick=""reset()"">Close</button>
                 <button class=""btn btn-primary waves-effect waves-light"" type=""submit"" form=""form"" id=""Sumbit"">Submit</button>
             </div>
         </div>
@@ -178,13 +178,16 @@ namespace AspNetCore
                         }
                     }
                 ],
+                ""responsive"": true,
+                ""filter"": true,
+                ""orderMulti"": false,
                 ""ajax"": {
                     ""url"": ""/Compensation/Get"",
-                    ""type"": ""Get"",
+                    ""type"":");
+                WriteLiteral(@" ""Get"",
                     ""dataSrc"": ""result"",
                     ""beforeSend"": function (xhr) {
-     ");
-                WriteLiteral(@"                   xhr.setRequestHeader('Authorization', sessionStorage.token);
+                        xhr.setRequestHeader('Authorization', sessionStorage.token);
                     },
                 },
                 ""columnDefs"": [
@@ -207,37 +210,37 @@ namespace AspNetCore
                         }
                     },
                     { ""data"": 'compensationID' },
-                    { ""data"": 'compensationName' },
+                    { ""data"": 'compensationN");
+                WriteLiteral(@"ame' },
                     {
                         ""data"": 'cost',
-                        render: $.f");
-                WriteLiteral(@"n.dataTable.render.number(',', '.', 2, 'Rp. ')
+                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
                     },
                     {
                         ""data"": 'compensationID',
                         ""render"": function (data, type, row, meta) {
-                            return '<button class=""btn btn-sm btn-warning waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-table-edit""></i> Edit</button> ' +
+                            return '<button class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-table-edit""></i> Edit</button> ' +
                                 '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-delete""></i> Delete</button>'
                         }
                     }
                 ]
-            }).buttons().container().appendTo('#table_id_wrapper .col-md-6:eq(0)');
+            });
         });
 
         var validator = $(""#form"").validate({
             rules: {
-                compensationName: ""required"",
-        ");
-                WriteLiteral(@"        cost: {
+               ");
+                WriteLiteral(@" CompensationName: ""required"",
+                Cost: {
                     required: true,
                     digits: true
                 }
             },
             messages: {
-                compensationName: ""Please enter Compensation Name"",
-                cost: {
-                    required: ""Please type the Cost"",
-                    number: ""Please type only numbers""
+                CompensationName: ""<small class='text-danger'>Please enter <code>Compensation Name.</code></small>"",
+                Cost: {
+                    required: ""<small class='text-danger'>Please type the<code>Cost.</code></small>"",
+                    digits: ""<small class='text-danger'>Please enter <code>Only Numbers.</code></small>""
                 }
             },
             submitHandler: function (form) {
@@ -251,15 +254,15 @@ namespace AspNetCore
                     type: ""POST"",
                     url: urlString,
                     headers: {
-                        Authorization: sessionStorage.token
+                        Authorization: ");
+                WriteLiteral(@"sessionStorage.token
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('.bs-modal-sm').modal(");
-                WriteLiteral(@"'hide');
+                        $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'center',
                             icon: 'success',
                             title: 'Your data has been saved',
                             showConfirmButton: false,
@@ -278,15 +281,16 @@ namespace AspNetCore
             }
         });
 
-        function reset() {
+  ");
+                WriteLiteral(@"      function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
         }
 
         function Get(compensationID) {
+            debugger;
             $.ajax({
-                ");
-                WriteLiteral(@"url: ""/Compensation/GetById"",
+                url: ""/Compensation/GetById"",
                 type: ""GET"",
                 data: { 'key': compensationID },
                 headers: {
@@ -307,13 +311,13 @@ namespace AspNetCore
             debugger;
             swal.fire({
                 title: 'Are you sure?',
-                text: ""You won't be able to revert this!"",
+                text: ""You won't be able to r");
+                WriteLiteral(@"evert this!"",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButt");
-                WriteLiteral(@"onText: 'Yes, delete it!'
+                confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -331,12 +335,22 @@ namespace AspNetCore
                                 'success'
                             )
                         },
-                        error: function (error) {
+                        er");
+                WriteLiteral(@"ror: function (error) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
-                                text: 'Somet");
-                WriteLiteral("hing went wrong!\',\r\n                                footer: \'<a href>Your Work cannot be saved</a>\'\r\n                            })\r\n                        },\r\n                    });\r\n                }\r\n            });\r\n        }\r\n\r\n    </script>\r\n");
+                                text: 'Something went wrong!',
+                                footer: '<a href>Your Work cannot be saved</a>'
+                            })
+                        },
+                    });
+                }
+            });
+        }
+
+    </script>
+");
             }
             );
         }

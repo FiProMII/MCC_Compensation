@@ -19,10 +19,9 @@ namespace API.Controllers
 
     public class DocumentController : BaseController<Document, DocumentRepository, int>
     {
-
         private IWebHostEnvironment _hostingEnvironment;
         private readonly DocumentRepository _documentRepository;
-
+        
         public DocumentController(DocumentRepository documentRepository, IWebHostEnvironment environment) : base(documentRepository)
         {
             _hostingEnvironment = environment;

@@ -2,188 +2,141 @@
     ViewBag.Title = "New Request";
 }
 
-<!-- Row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card card-outline-info">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">@ViewData["Title"]</h4>
-            </div>
-            <div class="card-body">
-                <form action="#">
-                    <div class="form-body">
-                        <h3 class="card-title">Person Info</h3>
-                        <hr>
-                        <div class="row p-t-20">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label">Requester Name</label>
-                                    <input type="text" id="EmployeeName" class="form-control" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/row-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Department</label>
-                                    <input type="text" id="DepartmentName" class="form-control" disabled>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Relational Manager</label>
-                                    <input type="text" id="ManagerName" class="form-control" placeholder="dd/mm/yyyy">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <!--/row-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Position</label>
-                                    <input type="text" id="PositionName" class="form-control" disabled>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Join Date</label>
-                                    <input type="text" id="JoinDate" class="form-control" placeholder="dd/mm/yyyy">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <!--/row-->
-                        <h3 class="box-title m-t-40">New Request</h3>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Compensation Type</label>
-                                    <select class="form-control custom-select" id="CompensationID" name="CompensationID"></select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Event Date</label>
-                                    <input type="text" class="form-control" id="EventDate" name="EventDate">
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group" id="compensationDetail">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 bag">
-                                <div class='element' id='div_1'>
-                                    <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
-                                    <span class="add btn btn-sm btn-outline-success">Add Document</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                        <button type="button" class="btn btn-inverse">Cancel</button>
-                    </div>
-                </form>
-            </div>
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+        <div class="col-md-6 col-4 align-self-center">
+            <a href="/Request/Index" class="btn pull-right hidden-sm-down btn-outline-secondary"><i class="mdi mdi-keyboard-backspace"></i> Back</a>
         </div>
     </div>
-</div>
-<!-- Row -->
-
-@*<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
     <div class="row">
-        <div class="col-sm-12">
-            <div class="card-title">
-                <br /><h4 class="card-title"><i class="fas fa-clipboard-list"></i> Compensation Request</h4>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="flex-md-wrap">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card m-auto">
-                    <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
-                        <br />
-                        <h4>Requester Information</h4>
-                        <hr />
-                        <div class="form-group row">
-                            <label class="col-md-4">Requester</label>
-                            <span class="col-md-7" id="Requester"></span>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Department</label>
-                            <span class="col-md-7" id="DepartmentName"></span>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Position</label>
-                            <span class="col-md-7" id="PositionName"></span>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Relation Manager</label>
-                            <span class="col-md-7" id="ManagerName"></span>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Join Date</label>
-                            <span class="col-md-7" id="JoinDate"></span>
-                        </div>
-                    </div>
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">@ViewData["Title"]</h4>
                 </div>
-                <br />
-                <div class="card m-auto">
-                    <div class="card-header">Compensation Request</div>
-                    <form id="form">
-                        <div class="card-body" style="padding-left: 100px; padding-right: 100px;">
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Compensation Type</label>
-                                <div class="col-md-3">
-                                    <select class="form-control" id="CompensationID" name="CompensationID"></select>
+                <div class="card-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <h3 class="box-title">Person Info</h3>
+                            <hr class="m-t-0 m-b-40">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Requester Name: </label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static" id="Requester"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row" id="compensationDetail">
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">Event Date</label>
-                                <div class="col-md-3">
-                                    <input type="date" class="form-control" name="EventDate" id="EventDate">
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Department: </label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static" id="DepartmentName"></p>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Relational Manager: </label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static" id="ManagerName"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label">
-                                    Upload Requirement Files <br />
-                                    <span style="color:red; font-size:12px">Allowed extensions .jpg | .jpeg | .pdf</span>
-                                </label>
-                                <div class="col-md-7 col-form-label bag">
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Position: </label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static" id="PositionName"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Join Date: </label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static" id="JoinDate"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <h3 class="box-title m-t-40">New Request</h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Compensation Type</label>
+                                        <select class="form-control custom-select" id="CompensationID" name="CompensationID"></select>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Event Date</label>
+                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="validateDED()">
+                                        <small class="text-danger" id="errorMessage"></small>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" id="compensationDetail">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 bag">
                                     <div class='element' id='div_1'>
-                                        <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
-                                        <span class="add btn btn-sm btn-outline-success">Add Document</span>
+                                        <div class="input-group">
+                                            <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
+                                            <span class="add btn btn-sm btn-outline-success pull-right">Add File</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-12 text-right pr-5">
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                            </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Send Request</button>
+                            <button type="button" class="btn btn-inverse">Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>*@
+    <!-- Row -->
+</div>
 
 @section scripts
 {
@@ -211,9 +164,14 @@
                 }
             });
 
+            compensationRequirement.set("Wedding", "KK & KTP")
+            compensationRequirement.set("Baby Gift", "KK")
+            compensationRequirement.set("Grief", "KK")
+
+            var compensationDropdown = '<option value="-1">Please select a compensation type</option>';
             $.ajax({
                 type: "GET",
-                url: '/Compensation/Get',
+                url: '/compensation/get',
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -225,11 +183,6 @@
                 }
             });
 
-            compensationRequirement.set("Wedding", "KK & KTP")
-            compensationRequirement.set("Baby Gift", "KK")
-            compensationRequirement.set("Grief", "KK")
-
-            //Document Upload
             $(".add").click(function () {
                 var total_element = $(".element").length;
                 var lastid = $(".element:last").attr("id");
@@ -239,9 +192,9 @@
 
                 if (total_element < max) {
                     $(".element:last").after("<div class='element' id='div_" + nextindex + "'></div>");
-                    $("#div_" + nextindex).append("<br/><input type='file' name='file' class='custom-file' id='txt_"
+                    $("#div_" + nextindex).append("<br/><div class='input-group'><input type='file' name='file' class='custom-file' id='txt_"
                         + nextindex + "' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_"
-                        + nextindex + "' class='remove btn btn-sm btn-outline-danger'>Abort</span>");
+                        + nextindex + "' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</span></div>");
                 }
             });
 
@@ -254,6 +207,20 @@
             });
         });
 
+        function ValidateDED() {
+            var dateString = new Date($('#EventDate').val());
+            var dateNow = new Date();
+            if ($('#EventDate').val() == "") {
+                $('#EventDate').focus();
+                $('#messageError').html("The date is <code>Incorrect.</code>");
+            } else if (dateNow.getFullYear() - dateString.getFullYear() == 0) {
+                alert('Please set another Date');
+                $('#EventDate').val('');
+                $('#messageError').html("The date is <code>Incorrect.</code>");
+            }
+            $('#messageError').html("");
+        }
+
         $("select#CompensationID").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();
             compensationID = parseInt($('#CompensationID option:selected').val());
@@ -265,6 +232,7 @@
         })
 
         $('#form').submit(function (event) {
+            debugger;
             event.preventDefault()
 
             var formData = new FormData($(this)[0]);
@@ -273,16 +241,11 @@
             formData.append('eventDate', $('#EventDate').val())
 
             $.ajax({
-                url: '/Document/Post',
-                type: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                enctype: 'multipart/form-data',
-                processData: false,
-                success: function (response) {
-                }
+                type: "POST",
+                url: "/Request/Post",
+                data: JSON.stringify(CompensationRequest),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
             });
         })
 

@@ -254,11 +254,11 @@ namespace AspNetCore
                         for (var i = 0; i < data.documents.length; i++) {
                             if (data.documents[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
                                 var documentList = '<a target=""_blank"" href=""' + data.documents[i].link
-                                    + '""><img src=""/bootstrap/assets/images/pdf.png"" width=""30"">' + data.documen");
-                WriteLiteral(@"ts[i].documentName + '</><br/>'
+                                    + '""><img src=""/lib/src/images/pdf.png"" width=""30"">' + data.documents[i].doc");
+                WriteLiteral(@"umentName + '</><br/>'
                             } else if (data.documents[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
                                 var documentList = '<a target=""_blank"" href=""' + data.documents[i].link
-                                    + '""><img src=""/bootstrap/assets/images/images.png"" width=""30"">' + data.documents[i].documentName + '</>'
+                                    + '""><img src=""/lib/src/images/pdf.png"" width=""30"">' + data.documents[i].documentName + '</>'
                             }
                             $('#Document').append(documentList);
                         }

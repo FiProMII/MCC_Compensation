@@ -73,14 +73,14 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="mySmallModalLabel">@ViewData["Title"]</h4>
+                <h4 class="modal-title" id="mySmallModalLabel"><i class="icon-key"></i> @ViewData["Title"] Management</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form id="form" name="form">
                     <input type="hidden" class="form-control" name="RoleID" id="RoleID">
                     <div class="form-group">
-                        <label for="roleName" class="col-form-label"> Name</label>
+                        <label for="roleName" class="col-form-label"> Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="RoleName" id="RoleName">
                     </div>
                 </form>
@@ -93,14 +93,13 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
 @section scripts
 {
     <script>
         var isUpdate;
         $(document).ready(function () {
             $('#table_id').DataTable({
-                responsive: true,
+                "responsive": true,
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
@@ -135,7 +134,7 @@
                     {
                         "data": 'roleID',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-sm btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['roleID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
+                            return '<button class="btn btn-sm btn-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit"  onclick="Get(\'' + row['roleID'] + '\')"><i class ="mdi mdi-table-edit"></i> Edit</button> ' +
                                 '<button class="btn btn-sm btn-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Delete" onclick="Delete(\'' + row['roleID'] + '\')"><i class ="mdi mdi-delete"></i> Delete</button>'
                         }
                     }
@@ -148,7 +147,7 @@
                 roleName: "required",
             },
             messages: {
-                roleName: "Please enter Role Name",
+                roleName: "<small class='text-danger'>Please enter <code>Role Name.</code></small>",
             },
             submitHandler: function (form) {
                 var form = $(form);
@@ -231,7 +230,7 @@
                             Authorization: sessionStorage.token
                         },
                         success: function (data) {
-                            table.ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
                                 'Your data has been deleted.',
