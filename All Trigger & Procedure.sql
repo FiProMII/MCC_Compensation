@@ -67,7 +67,7 @@
 	GO
 
 	-- SP login
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveLogin]
+	CREATE PROCEDURE [dbo].[SP_RetrieveLogin]
 		@Email nvarchar(max),
 		@Password nvarchar(max)
 	AS
@@ -98,7 +98,7 @@
 		@Params varchar(max)
 	AS
 	BEGIN
-		SELECT * FROM TB_M_Employee WHERE Email = @Params OR NIK = @Params
+		SELECT * FROM TB_M_Employee WHERE Email = @Params
 	END
 	GO
 

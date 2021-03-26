@@ -130,8 +130,8 @@
                                                 <div class="input-group-addon"><i class="ti-email"></i></div>
                                             </div>
                                         </div>
+                                        <span id="ValidationEmail" style="display:none; color:red">Email already exist</span>
                                     </div>
-                                    <span id="ValidationEmail" style="display:none; color:red">Email already exist</span>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -434,49 +434,48 @@
         }
 
         $('#NIK').change(function () {
+            debugger;
             var nik = this.value;
             $.ajax({
-                url: "/Employee/Validation",
-                type: "POST",
-                data: { 'Params': nik },
+                url: "/Employee/GetById",
+                type: "GET",
+                data: { 'key': nik },
                 success: function (result) {
-                    if (result.status == 200) {
-                        $('#ValidationNIK').show();
-                        $('#NIK').focus(
-                            function () {
-                                $(this).val('');
-                                $('#ValidationNIK').hide();
-                            });
-                    } else {
+                    $('#ValidationEmail').show();
+                    $('#NIK').focus(function () {
+                        $(this).val('');
                         $('#ValidationNIK').hide();
-                    }
+                    });
+                },
+                error: function (error) {
+                    $('#ValidationEmail').hide();
                 }
-            });
-        })
+            })
+        });
 
         $('#Email').change(function () {
+            debugger;
             var email = this.value;
             $.ajax({
                 url: "/Employee/Validation",
                 type: "POST",
                 data: { 'Params': email },
                 success: function (result) {
-                    if (result.status == 200) {
-                        $('#ValidationEmail').show();
-                        $('#NIK').focus(
-                            function () {
-                                $(this).val('');
-                                $('#ValidationEmail').hide();
-                            });
-                    } else {
-                        $('#ValidationEmail').hide();
-                    }
+                    $('#ValidationEmail').show();
+                    $('#NIK').focus(function () {
+                        $(this).val('');
+                        $('#ValidationNIK').hide();
+                    });
+                },
+                error: function (error) {
+                    $('#ValidationEmail').hide();
                 }
-            });
-        })
+            })
+        });
 
  
         $('#form').submit(function (event) {
+            debugger;
             event.preventDefault();
             var form = $(form);
 
