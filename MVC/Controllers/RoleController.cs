@@ -10,6 +10,5 @@ namespace MVC.Controllers
 {
     public class RoleController : BaseController<Role, int>
     {
-
     }
 }

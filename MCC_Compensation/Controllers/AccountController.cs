@@ -40,10 +40,17 @@ namespace API.Controllers
                 var token = jwt.GenerateSecurityToken(result);
 
                 if (result.IsTemp)
+                {
                     responseContent.Status = ResponseVM<string>.StatusType.Warning;
-                responseContent.Status = ResponseVM<string>.StatusType.Success;
-                responseContent.Message = "Sign In successful";
-                responseContent.Result = token;
+                    responseContent.Message = "You need to change your password";
+                    responseContent.Result = token;
+                } 
+                else
+                {
+                    responseContent.Status = ResponseVM<string>.StatusType.Success;
+                    responseContent.Message = "Sign in successful";
+                    responseContent.Result = token;
+                }
                 return Ok(responseContent);
             }
             else

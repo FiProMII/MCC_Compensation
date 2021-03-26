@@ -21,6 +21,7 @@ namespace API.Controllers
     {
         private IWebHostEnvironment _hostingEnvironment;
         private readonly DocumentRepository _documentRepository;
+        
         public DocumentController(DocumentRepository documentRepository, IWebHostEnvironment environment) : base(documentRepository)
         {
             _hostingEnvironment = environment;
@@ -45,7 +46,7 @@ namespace API.Controllers
                     Document document = new Document();
 
                     document.DocumentName = file.FileName;
-                    document.Link = filePath;
+                    document.Link = "~/uploads/" + file.FileName;
 
                     documents.Add(document);
                 }

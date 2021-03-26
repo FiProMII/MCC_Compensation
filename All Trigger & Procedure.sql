@@ -114,3 +114,16 @@
 		FROM TB_T_CompensationRequest GROUP BY YEAR(RequestDate)
 	END
 	GO
+	
+	--get email manager
+	CREATE OR ALTER PROCEDURE SP_RetrieveManagerEmail
+		@departmentID int
+	AS
+	BEGIN
+		SELECT Email from TB_M_Employee 
+		JOIN TB_M_Position 
+		ON TB_M_Employee.PositionID = TB_M_Position.PositionID
+		JOIN TB_M_Department
+		ON TB_M_Position.DepartmentID = TB_M_Department.DepartmentID
+		WHERE PositionName = 'RM' AND TB_M_Department.DepartmentID = @departmentID
+	END

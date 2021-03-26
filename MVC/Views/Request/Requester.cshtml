@@ -35,7 +35,7 @@
                     <h4 class="m-b-0 text-white">@ViewData["Title"]</h4>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="form">
                         <div class="form-body">
                             <h3 class="box-title">Person Info</h3>
                             <hr class="m-t-0 m-b-40">
@@ -105,7 +105,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Event Date</label>
-                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="validateDED()">
+                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="">
                                         <small class="text-danger" id="errorMessage"></small>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                     <div class='element' id='div_1'>
                                         <div class="input-group">
                                             <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
-                                            <span class="add btn btn-sm btn-outline-success pull-right">Add File</span>
+                                            <div class="add btn btn-sm btn-outline-success pull-right">Add File</div>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
 {
     <script>
         //nanti diganti pake session
-        var currentNIK = "12345"
+        var currentNIK = "117100"
         var compensationID
 
         let compensationValue = new Map()
@@ -155,7 +155,8 @@
                 data: { 'key': currentNIK },
                 success: function (result) {
                     var data = result["result"];
-                    $('#Requester').html(data.employeeName)
+                    console.log(data)
+                    $('#EmployeeName').val(data.employeeName)
                     $('#DepartmentName').html(data.position.department.departmentName)
                     $('#PositionName').html(data.position.positionName)
                     $('#ManagerName').html(data.manager.employeeName)
@@ -174,6 +175,7 @@
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
+                        var compensationDropdown = '<option value="-1">Please select a compensation type</option>'
                         compensationDropdown += '<option value="' + data[i].compensationID + '">' + data[i].compensationName + '</option>';
                         $("#CompensationID").html(compensationDropdown);
                         compensationValue.set(data[i].compensationName, data[i].cost)
@@ -230,19 +232,23 @@
         })
 
         $('#form').submit(function (event) {
-            debugger;
             event.preventDefault()
-            var CompensationRequest = new Object();
-            CompensationRequest.nik = currentNIK;
-            CompensationRequest.compensationID = compensationID
-            CompensationRequest.eventDate = $('#EventDate').val();
-            console.log(CompensationRequest)
+
+            var formData = new FormData($(this)[0]);
+            formData.append('nik', currentNIK);
+            formData.append('compensationID', compensationID)
+            formData.append('eventDate', $('#EventDate').val())
             $.ajax({
-                type: "POST",
-                url: "/Request/Post",
-                data: JSON.stringify(CompensationRequest),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                url: '/Document/Post',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function (response) {
+                }
             });
         })
 

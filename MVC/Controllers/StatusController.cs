@@ -10,6 +10,5 @@ namespace MVC.Controllers
 {
     public class StatusController : BaseController<Status, int>
     {
-
     }
 }

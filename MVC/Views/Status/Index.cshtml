@@ -217,7 +217,7 @@
 
         function Get(id) {
             $.ajax({
-                url: "GetById",
+                url: "/Status/GetById",
                 type: "GET",
                 data: { 'key': id },
                 success: function (result) {

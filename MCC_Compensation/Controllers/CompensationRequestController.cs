@@ -19,7 +19,9 @@ namespace API.Controllers
 
     public class CompensationRequestController : BaseController<CompensationRequest, CompensationRequestRepository, int>
     {
+
         private readonly CompensationRequestRepository _compensationRequestRepository;
+
         public CompensationRequestController(CompensationRequestRepository compensationRequestRepository) : base(compensationRequestRepository)
         {
             _compensationRequestRepository = compensationRequestRepository;
@@ -42,8 +44,8 @@ namespace API.Controllers
             {
                 responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
-                EmailController emailController = new EmailController();
-                emailController.SendEmail("tes", EmailController.EmailType.CompensationRequest, "a");
+                //EmailController emailController = new EmailController();
+                //emailController.SendEmail("tes", EmailController.EmailType.CompensationRequest, "a");
                 return Ok(responseContent);
             }
             else

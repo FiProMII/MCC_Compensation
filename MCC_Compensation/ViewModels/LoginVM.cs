@@ -9,7 +9,6 @@ namespace API.ViewModels
     public class LoginVM
     {
         public string NIK { get; set; }
-
         [DataType(DataType.EmailAddress)]
         public string Email { set; get; }
 
