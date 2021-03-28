@@ -1,5 +1,6 @@
 ﻿using API.Repository.Interface;
 using API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace API.Base.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BaseController<Entity, Repository, Key> : ControllerBase
         where Entity : class
         where Repository : IRepository<Entity, Key>

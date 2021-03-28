@@ -128,7 +128,6 @@
 </html>
 
 <script>
-
     function tes() {
         var loginVM = new Object();
         loginVM.email = "mekar.bunga.a.r@gmail.com";
@@ -155,11 +154,12 @@
             success: function (data) {
                 var status = data['status'];
                 sessionStorage.token = (data['result']);
-                if (status == 1) {
+                console.log(sessionStorage.token)
+                @*if (status == 1) {
                     window.location.href = "@Url.Action("ChangePassword", "Account")";
                 } else {
                     window.location.href = "@Url.Action("Index", "Employee")";
-                }
+                }*@
             }
         });
 

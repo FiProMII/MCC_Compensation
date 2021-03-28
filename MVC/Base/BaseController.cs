@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MVC.Base
 {
@@ -26,7 +27,7 @@ namespace MVC.Base
             };
         }
 
-        public ViewResult Index() => View();
+        public virtual ViewResult Index() => View();
 
         public async Task<IActionResult> Get()
         {
@@ -34,6 +35,12 @@ namespace MVC.Base
             var response = await httpClient.GetAsync(typeof(Entity).Name);
             var apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<Entity>>>(apiResponse);
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(HttpContext.Session.GetString("Token"));
+
+            var tes = token.Claims.ToList();
+
             if (response.IsSuccessStatusCode)
                 return Ok(result);
             return BadRequest(result);

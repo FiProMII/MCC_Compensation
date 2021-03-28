@@ -230,7 +230,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary btn-rounded waves-effect waves-light" data-dismiss="modal" aria-hidden="true" onclick="Readonly()">Close</button>
-                        <button class="btn btn-success btn-rounded waves-effect waves-light" type="submit" form="form" id="Submit">Submit</button>
+                        <button class="btn btn-success btn-rounded waves-effect waves-light" type="submit" id="Submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -301,6 +301,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Role/Get',
+                headers: { "Authorization": sessionStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -324,6 +325,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Department/Get',
+                headers: { "Authorization": sessionStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -372,7 +374,8 @@
                 "ajax": {
                     "url": "/Employee/Get",
                     "type": "GET",
-                    "dataSrc": "result"
+                    "dataSrc": "result",
+                    "headers": "{ 'Authorization': 'Bearer '" + sessionStorage.token + "}", 
                 },
                 "columnDefs": [
                     {
@@ -483,7 +486,7 @@
  
         $('#form').submit(function (event) {
             event.preventDefault();
-            var form = $(form);
+            var form = $(this);
 
             var nikValue = $('#NIK').val()
             var myCheckboxes = new Array();
