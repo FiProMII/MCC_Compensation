@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/lib/assets/images/favicon.ico">
-    <title>@ViewData["Title"] - CA</title>
+    <title>Compensation | @ViewData["Title"]</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/lib/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Page plugins css -->
@@ -62,17 +62,17 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="/lib/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="/lib/assets/images/logo-icon.png" alt="homepage" width="30" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="/lib/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="/lib/assets/images/logo-light-icon.png" alt="homepage" width="30" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span>
                             <!-- dark Logo text -->
-                            <img src="/lib/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="/lib/assets/images/logo-text.png" alt="homepage" width="170" class="dark-logo" />
                             <!-- Light Logo text -->
-                            <img src="/lib/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <img src="/lib/assets/images/logo-light-text.png" alt="homepage" width="170" class="light-logo" />
                         </span>
                     </a>
                 </div>
@@ -112,12 +112,12 @@
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-agenda"></i> My Request</a></li>
+                                    <li><a href="/Account/Profil"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="/Request/Index"><i class="ti-agenda"></i> My Request</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="/Account/Index"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -134,28 +134,12 @@
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="/lib/assets/images/users/user.png" alt="user" /> </div>
-                    <!-- User profile text-->
-                    <div class="profile-text">
-                        <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span></a>
-                        <div class="dropdown-menu animated flipInY">
-                            <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                            <a href="/Request/Index" class="dropdown-item"><i class="ti-agenda"></i> My Request</a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                            <div class="dropdown-divider"></div> <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End User profile text-->
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">PERSONAL</li>
+                        <li class="nav-small-cap">COMPENSATION MANAGEMENT</li>
                         <li>
-                            <a class="" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
+                            <a class="" href="/Home/index" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
                             <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Management</span></a>
@@ -178,7 +162,7 @@
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Compensation Request</li>
                         <li>
-                            <a class="" href="/Request/Index" aria-expanded="false"><i class="mdi mdi-clipboard-flow"></i><span class="hide-menu">Detail Requests</span></a>
+                            <a class="" href="/Request/Index" aria-expanded="false"><i class="mdi mdi-clipboard-flow"></i><span class="hide-menu">Request List</span></a>
                         </li>
                     </ul>
                 </nav>

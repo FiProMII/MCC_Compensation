@@ -13,7 +13,7 @@
         <div class="col-md-6 col-8 align-self-center">
             <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
                 <li class="breadcrumb-item active">@ViewData["Title"]</li>
             </ol>
         </div>
@@ -105,7 +105,7 @@
                                                 <div class="input-group-addon"><i class="ti-id-badge"></i></div>
                                             </div>
                                         </div>
-                                        <span id="ValidationNIK" style="display: none; color: red">NIK already exist</span>
+                                        <small class="text-danger" id="ValidationNIK" style="display:none"><code>NIK</code> already exist</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -130,7 +130,7 @@
                                                 <div class="input-group-addon"><i class="ti-email"></i></div>
                                             </div>
                                         </div>
-                                        <span id="ValidationEmail" style="display:none; color:red">Email already exist</span>
+                                        <small class="text-danger" id="ValidationEmail" style="visibility: hidden"><code>Email</code> already exist.</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -163,8 +163,7 @@
                                         <label for="birthPlace" class="control-label">Birth Date <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="BirthDate" id="BirthDate" placeholder="dd/mm/yyyy" required data-validation-required-message="This field is required">
-                                                <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                                <input type="date" class="form-control" name="BirthDate" id="BirthDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -190,8 +189,7 @@
                                         <label for="birthPlace" class="control-label">Join Date <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="JoinDate" id="JoinDate" placeholder="dd/mm/yyyy" required data-validation-required-message="This field is required">
-                                                <span class="input-group-addon"><i class="icon-calender"></i></span>
+                                                <input type="date" class="form-control" name="JoinDate" id="JoinDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -459,23 +457,28 @@
         });
 
         $('#Email').change(function () {
-            debugger;
-            var email = this.value;
-            $.ajax({
-                url: "/Employee/Validation",
-                type: "POST",
-                data: { 'Params': email },
-                success: function (result) {
-                    $('#ValidationEmail').show();
-                    $('#NIK').focus(function () {
-                        $(this).val('');
-                        $('#ValidationNIK').hide();
-                    });
-                },
-                error: function (error) {
-                    $('#ValidationEmail').hide();
-                }
-            })
+            var email = $('#Email').val();
+            if (email == "") {
+                $('#ValidationEmail').css('visibility', 'hidden');
+            }
+            else {
+                $.ajax({
+                    url: "/Employee/Validation",
+                    type: "Post",
+                    data: { 'Email': email },
+                    success: function (result) {
+                        if (result.message == "FOUND") {
+                            try {
+                                $('#ValidationEmail').css('visibility', 'visible');
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            $('#ValidationEmail').css('visibility', 'hidden');
+                        }
+                    }
+                })
+            }
         });
 
  
@@ -628,16 +631,5 @@
             });
         }
 
-        // Date Picker
-        jQuery('#BirthDate').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        // Date Picker
-        jQuery('#JoinDate').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
     </script>
 }
