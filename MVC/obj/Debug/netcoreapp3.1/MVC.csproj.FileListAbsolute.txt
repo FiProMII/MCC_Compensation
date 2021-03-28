@@ -307,3 +307,4 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Profil.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Admin.cshtml.g.cs
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs

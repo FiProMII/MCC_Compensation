@@ -14,7 +14,7 @@ namespace API.Repository.Data
     {
         public CompensationRequestRepository(MyContext myContext) : base(myContext)
         {
-
+      
         }
     }
 }
