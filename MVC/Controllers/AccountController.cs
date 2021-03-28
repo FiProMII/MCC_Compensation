@@ -28,10 +28,10 @@ namespace MVC.Controllers
             return BadRequest(result);
         }
 
-        public ViewResult RecoverPassword() => View();
+        public ViewResult ForgotPassword() => View();
 
         [HttpPost]
-        public async Task<IActionResult> RecoverPassword([FromBody] LoginVM loginVM)
+        public async Task<IActionResult> ForgotPassword([FromBody] LoginVM loginVM)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(loginVM), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync("Account/ForgotPassword", content);
@@ -41,6 +41,8 @@ namespace MVC.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+
+        public ViewResult ChangePassword() => View();
 
         public ViewResult Profil() => View();
     }
