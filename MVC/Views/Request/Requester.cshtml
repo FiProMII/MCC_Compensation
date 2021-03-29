@@ -118,17 +118,20 @@
                                 </div>
                                 <div class="col-md-6 bag">
                                     <div class='element' id='div_1'>
-                                        <div class="input-group">
-                                            <input type="file" name="file" class="custom-file" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
+                                        <div class="form-group">
+                                            <label>File Upload</label> 
                                             <div class="add btn btn-sm btn-outline-success pull-right">Add File</div>
+                                            <div class="controls">
+                                                <input type="file" name="file" class="custom-file form-control" id="txt_1" accept="image/jpg, image/jpeg, .pdf" required />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Send Request</button>
-                            <button type="button" class="btn btn-inverse">Cancel</button>
+                            <a type="button" class="btn btn-outline-dark waves-effect waves-light" href="/Request/Index">Cancel</a>
+                            <button type="submit" class="btn btn-success waves-effect waves-light"><i class="fa fa-check"></i> Send Request</button>
                         </div>
                     </form>
                 </div>
@@ -192,9 +195,10 @@
 
                 if (total_element < max) {
                     $(".element:last").after("<div class='element' id='div_" + nextindex + "'></div>");
-                    $("#div_" + nextindex).append("<br/><div class='input-group'><input type='file' name='file' class='custom-file' id='txt_"
-                        + nextindex + "' accept='image/jpg, image/jpeg, .pdf' /><br /><span id='remove_"
-                        + nextindex + "' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</span></div>");
+                    $("#div_" + nextindex).append("<div class='form-group'><div id='remove_"
+                        + nextindex + "' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</div>"
+                        + "<div class='controls'><input type='file' name='file' class='custom-file form-control' id='txt_" 
+                        + nextindex + "' accept='image / jpg, image / jpeg, .pdf' required /></div>");
                 }
             });
 

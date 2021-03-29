@@ -19,12 +19,13 @@ namespace API.Controllers
 
     public class CompensationRequestController : BaseController<CompensationRequest, CompensationRequestRepository, int>
     {
-
+        private readonly IConfiguration _configuration;
         private readonly CompensationRequestRepository _compensationRequestRepository;
 
-        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository) : base(compensationRequestRepository)
+        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository, IConfiguration configuration) : base(compensationRequestRepository)
         {
             _compensationRequestRepository = compensationRequestRepository;
+            _configuration = configuration;
         }
 
         public override ActionResult Post(CompensationRequest compensationRequest)
@@ -60,6 +61,27 @@ namespace API.Controllers
         {
             IEnumerable<string> emails = Enumerable.Empty<string>();
             return emails;
+        }
+
+        [HttpGet("RequestList")]
+        public IActionResult RequestList(string Status, string Information)
+        {
+            ResponseVM<IEnumerable<RequestListVM>> responseContent = new ResponseVM<IEnumerable<RequestListVM>>();
+            var result = _compensationRequestRepository.RequestList(Status, Information);
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<IEnumerable<RequestListVM>>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<IEnumerable<RequestListVM>>.StatusType.Failed;
+                responseContent.Message = "Data not found";
+                return StatusCode(500, responseContent);
+            }
         }
     }
 }

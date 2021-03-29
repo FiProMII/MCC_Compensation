@@ -38,4 +38,16 @@
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 
-@section scripts{ } 
+@section scripts{
+    <script>
+        $.toast({
+            heading: 'Welcome to Compensation Applications',
+            text: 'Please fill out the request form, or view previous requests.',
+            position: 'top-right',
+            loaderBg:'#ff6849',
+            icon: 'info',
+            hideAfter: 10000,
+            stack: 6
+        });
+    </script>
+ } 

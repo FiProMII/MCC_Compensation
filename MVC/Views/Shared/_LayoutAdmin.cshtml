@@ -17,13 +17,12 @@
     <link href="~/lib/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet" />
     <!-- Color picker plugins css -->
     <link href="~/lib/assets/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet" />
-    <!-- Date picker plugins css -->
-    <link href="~/lib/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
-    <!-- Daterange picker plugins css -->
-    <link href="~/lib/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
-    <link href="~/lib/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <!-- Toast CSS -->   
+    <link href="~/lib/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="~/lib/css/style.css" rel="stylesheet" />
+    <!-- Page CSS -->
+    <link href="~/lib/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- You can change the theme colors from here -->
     <link href="~/lib/css/colors/purple-dark.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -241,24 +240,24 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="~/lib/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-    <!-- Moment JacaScript -->
-    @*<script src="../assets/plugins/moment/moment.js"></script>*@
     <!-- Clock Plugin JavaScript -->
     <script src="~/lib/assets/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <!-- Color Picker Plugin JavaScript -->
     <script src="~/lib/assets/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js"></script>
     <script src="~/lib/assets/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js"></script>
     <script src="~/lib/assets/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.js"></script>
-    <!-- Date Picker Plugin JavaScript -->
-    <script src="~/lib/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-    <!-- Date range Plugin JavaScript -->
-    <script src="~/lib/assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="~/lib/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- icheck -->
-    <script src="~/lib/assets/plugins/icheck/icheck.min.js"></script>
-    <script src="~/lib/assets/plugins/icheck/icheck.init.js"></script>
-    <!-- end - This is for export functionality only -->
+    <!-- Toast Javascript -->
+    <script src="~/lib/assets/plugins/toast-master/js/jquery.toast.js"></script>
+    <script src="~/lib/js/toastr.js"></script>
+    <!-- Page Javascript -->
+    <script src="~/lib/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
+    <script>
+        jQuery(document).ready(function () {
+            $('.selectpicker').selectpicker();
+        });
+    </script>
+    <!-- end - This is for export functionality only -->
     @RenderSection("scripts")
 </body>
 </html>
