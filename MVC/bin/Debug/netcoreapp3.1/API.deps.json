@@ -37,6 +37,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.13",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.13",
           "Microsoft.EntityFrameworkCore": "5.0.4",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.4",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.4",

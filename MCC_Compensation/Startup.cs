@@ -131,7 +131,7 @@ namespace MCC_Compensation
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger API Documentation");
-                app.UseDeveloperExceptionPage();
+                /*app.UseDeveloperExceptionPage();*/
             }
             );
             

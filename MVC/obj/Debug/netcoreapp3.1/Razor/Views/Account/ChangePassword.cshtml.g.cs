@@ -55,9 +55,9 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
   
-    ViewBag.Title = "CA 1 | Sign in";
+    ViewBag.Title = "Compensation | Recover Password";
     Layout = null;
 
 #line default
@@ -66,14 +66,14 @@ namespace AspNetCore
             WriteLiteral("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n");
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ffa1c9e28a07d3a815b5e53b48932e51387999628025", async() => {
                 WriteLiteral("\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <!-- Tell the browser to be responsive to screen width -->\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n    <meta name=\"description\"");
-                BeginWriteAttribute("content", " content=\"", 366, "\"", 376, 0);
+                BeginWriteAttribute("content", " content=\"", 383, "\"", 393, 0);
                 EndWriteAttribute();
                 WriteLiteral(">\r\n    <meta name=\"author\"");
-                BeginWriteAttribute("content", " content=\"", 403, "\"", 413, 0);
+                BeginWriteAttribute("content", " content=\"", 420, "\"", 430, 0);
                 EndWriteAttribute();
                 WriteLiteral(">\r\n    <!-- Favicon icon -->\r\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/lib/assets/images/favicon.ico\">\r\n    <title>");
 #nullable restore
-#line 18 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
+#line 18 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
       Write(ViewBag.Title);
 
 #line default
@@ -375,7 +375,7 @@ namespace AspNetCore
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("\";\r\n                    }\r\n                })\r\n            },\r\n            error: function (error) {\r\n\r\n            }\r\n        })\r\n    });\r\n</script>\r\n");
+            WriteLiteral("\";\r\n                    }\r\n                })\r\n            },\r\n            error: function (error) {\r\n            }\r\n        })\r\n    });\r\n</script>");
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

@@ -12,9 +12,22 @@ namespace API.Repository.Data
 {
     public class CompensationRequestRepository : GeneralRepository<MyContext, CompensationRequest, int>
     {
-        public CompensationRequestRepository(MyContext myContext) : base(myContext)
+        public IConfiguration _configuration;
+        readonly DynamicParameters _parameters = new DynamicParameters();
+        public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
+            _configuration = configuration;
+        }
 
+        public IEnumerable<RequestListVM> RequestList(string Status, string Information)
+        {
+            var _crRepository = new GeneralDapperRepository<RequestListVM>(_configuration);
+
+            var SPName = "SP_RetrieveDataStatus";
+            _parameters.Add("@Information", Information);
+            _parameters.Add("@Status", Status);
+            var result = _crRepository.MultipleGet(SPName, _parameters);
+            return result;
         }
     }
 }

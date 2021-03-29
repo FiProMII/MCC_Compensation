@@ -19,7 +19,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Compensation";
 
@@ -38,15 +38,15 @@ namespace AspNetCore
         <div class=""col-md-6 col-8 align-self-center"">
             <h3 class=""text-themecolor m-b-0 m-t-0"">");
 #nullable restore
-#line 14 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
                                                Write(ViewData["Title"]);
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"javascript:void(0)\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
+            WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"/Home/Index\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
 #nullable restore
-#line 17 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
                                               Write(ViewData["Title"]);
 
 #line default
@@ -56,7 +56,7 @@ namespace AspNetCore
             </ol>
         </div>
         <div class=""col-md-6 col-4 align-self-center"">
-            <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm""><i class=""mdi mdi-plus-circle""></i> Create</button>
+            <button class=""btn pull-right hidden-sm-down btn-success"" data-toggle=""modal"" data-target="".bs-modal-sm"" onclick=""reset()""><i class=""mdi mdi-plus-circle""></i> Create</button>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -71,9 +71,9 @@ namespace AspNetCore
                 <div class=""card-body"">
                     <h4 class=""card-title"">Data Export</h4>
                     <h6 class=""card-subtitle"">Export data CSV, Excel, PDF</h6>
-                    <div class=""table-responsive m-t-40"">
-      ");
-            WriteLiteral(@"                  <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
+                    <div class=""table-responsiv");
+            WriteLiteral(@"e m-t-40"">
+                        <table id=""table_id"" class=""display nowrap table table-hover table-striped table-bordered"" cellspacing=""0"" width=""100%"">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -93,8 +93,8 @@ namespace AspNetCore
                                     <th>Cost</th>
                                     <th>Actions</th>
                                 </tr>
-                            </tfoot");
-            WriteLiteral(@">
+                 ");
+            WriteLiteral(@"           </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -117,7 +117,7 @@ namespace AspNetCore
             <div class=""modal-header"">
                 <h4 class=""modal-title"" id=""mySmallModalLabel""><i class=""icon-heart""></i> ");
 #nullable restore
-#line 78 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
+#line 78 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Compensation\Index.cshtml"
                                                                                      Write(ViewData["Title"]);
 
 #line default

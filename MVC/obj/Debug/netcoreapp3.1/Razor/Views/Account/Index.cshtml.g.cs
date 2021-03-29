@@ -59,9 +59,9 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
    
-    ViewBag.Title = "CA 1 | Sign in";
+    ViewBag.Title = "Compensation | Sign in";
     Layout = null;    
 
 #line default
@@ -70,10 +70,10 @@ namespace AspNetCore
             WriteLiteral("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\r\n");
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "597ffab52fa666561670dfc426033af1c7bb2d8e9385", async() => {
                 WriteLiteral("\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <!-- Tell the browser to be responsive to screen width -->\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n    <meta name=\"description\"");
-                BeginWriteAttribute("content", " content=\"", 371, "\"", 381, 0);
+                BeginWriteAttribute("content", " content=\"", 379, "\"", 389, 0);
                 EndWriteAttribute();
                 WriteLiteral(">\r\n    <meta name=\"author\"");
-                BeginWriteAttribute("content", " content=\"", 408, "\"", 418, 0);
+                BeginWriteAttribute("content", " content=\"", 416, "\"", 426, 0);
                 EndWriteAttribute();
                 WriteLiteral(">\r\n    <!-- Favicon icon -->\r\n    ");
                 __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "597ffab52fa666561670dfc426033af1c7bb2d8e10296", async() => {
@@ -94,7 +94,7 @@ namespace AspNetCore
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n    <title>");
 #nullable restore
-#line 18 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
+#line 18 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
       Write(ViewBag.Title);
 
 #line default
@@ -178,17 +178,17 @@ namespace AspNetCore
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id=""wrapper"" class=""login-register login-sidebar"" style=""background-image:url(/lib/assets/images/background/login-register.jpg);"">
+    <section id=""wrapper"" class=""login-register login-sidebar"" style=""background-image:url(/lib/assets/images/background/login.jpg);"">
         <div class=""login-box card"">
             <div class=""card-body"">
                 <form class=""form-horizontal form-material"" id=""loginform"" action=""index.html"">
-                    <a href=""javascript:void(0)"" cl");
-                WriteLiteral(@"ass=""text-center db""><img src=""/lib/assets/images/logo-icon.png"" alt=""Home"" /><br /><img src=""/lib/assets/images/logo-text.png"" alt=""Home"" /></a>
+                    <a href=""javascript:void(0)"" class=""text");
+                WriteLiteral(@"-center db""><img src=""/lib/assets/images/logo-icon.png"" alt=""Home"" width=""70"" /><br /><img src=""/lib/assets/images/logo-text.png"" alt=""Home"" width=""210"" /></a>
 
                     <div class=""form-group m-t-40"">
                         <div class=""col-xs-12"">
                             <input class=""form-control"" type=""text""");
-                BeginWriteAttribute("required", " required=\"", 2662, "\"", 2673, 0);
+                BeginWriteAttribute("required", " required=\"", 2684, "\"", 2695, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" placeholder=""Email"" id=""Email"" name=""Email"">
                         </div>
@@ -196,7 +196,7 @@ namespace AspNetCore
                     <div class=""form-group"">
                         <div class=""col-xs-12"">
                             <input class=""form-control"" type=""password""");
-                BeginWriteAttribute("required", " required=\"", 2947, "\"", 2958, 0);
+                BeginWriteAttribute("required", " required=\"", 2969, "\"", 2980, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" placeholder=""Password"" id=""Password"" name=""Password"">
                         </div>
@@ -227,7 +227,7 @@ namespace AspNetCore
                     <div class=""form-group "">
                         <div class=""col-xs-12"">
                             <input class=""form-control"" type=""text""");
-                BeginWriteAttribute("required", " required=\"", 4588, "\"", 4599, 0);
+                BeginWriteAttribute("required", " required=\"", 4610, "\"", 4621, 0);
                 EndWriteAttribute();
                 WriteLiteral(@" placeholder=""Email"" id=""EmailForgotPassword"">
                         </div>
@@ -238,7 +238,7 @@ namespace AspNetCore
                         </div>
                     </div>
                     <div class=""form-group m-b-0"">
-                        <div class=""col-sm-12 text-left"">
+                        <div class=""col-sm-12"">
                             <a href=""javascript:void(0)"" id=""to-login"" class=""text-dark pull-right""><i class=""mdi mdi-keyboard-backspace""></i> Back</a>
                         </div>
                     </div>

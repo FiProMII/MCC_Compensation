@@ -67,7 +67,7 @@
 	GO
 
 	-- SP login
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveLogin]
+	CREATE PROCEDURE [dbo].[SP_RetrieveLogin]
 		@Email nvarchar(max),
 		@Password nvarchar(max)
 	AS
@@ -98,7 +98,7 @@
 		@Params varchar(max)
 	AS
 	BEGIN
-		SELECT * FROM TB_M_Employee WHERE Email = @Params OR NIK = @Params
+		SELECT * FROM TB_M_Employee WHERE Email = @Params
 	END
 	GO
 
@@ -127,3 +127,18 @@
 		ON TB_M_Position.DepartmentID = TB_M_Department.DepartmentID
 		WHERE PositionName = 'RM' AND TB_M_Department.DepartmentID = @departmentID
 	END
+	GO
+
+	CREATE OR ALTER PROCEDURE SP_RetrieveDataStatus
+		@Status nvarchar(max),
+		@Information nvarchar(max)
+	AS
+	BEGIN
+	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
+	JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
+	JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
+	JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
+	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE st.StatusName LIKE '%'+@Status+'%' AND app.Information=@Information
+	GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+	END
+	GO

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\assets\plugins\toast-master\js\jquery.toast.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>

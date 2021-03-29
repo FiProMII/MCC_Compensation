@@ -2550,6 +2550,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.13",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.13",
           "Microsoft.EntityFrameworkCore": "5.0.4",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.4",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
           "Swashbuckle.AspNetCore": "6.1.1"
@@ -8361,23 +8362,29 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "API >= 1.0.0",
-      "Microsoft.AspNetCore.Session >= 2.2.0"
+      "Microsoft.AspNetCore.Session >= 2.2.0",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\Acer\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\source\\repos\\MCC_Compensation\\MVC\\MVC.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\source\\repos\\MCC_Compensation\\MVC\\MVC.csproj",
       "projectName": "MVC",
-      "projectPath": "C:\\Users\\LENOVO\\source\\repos\\MCC_Compensation\\MVC\\MVC.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\source\\repos\\MCC_Compensation\\MVC\\obj\\",
+      "projectPath": "C:\\Users\\Acer\\source\\repos\\MCC_Compensation\\MVC\\MVC.csproj",
+      "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Acer\\source\\repos\\MCC_Compensation\\MVC\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8391,8 +8398,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\LENOVO\\source\\repos\\MCC_Compensation\\MCC_Compensation\\API.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\source\\repos\\MCC_Compensation\\MCC_Compensation\\API.csproj"
+            "C:\\Users\\Acer\\source\\repos\\MCC_Compensation\\MCC_Compensation\\API.csproj": {
+              "projectPath": "C:\\Users\\Acer\\source\\repos\\MCC_Compensation\\MCC_Compensation\\API.csproj"
             }
           }
         }
@@ -8410,6 +8417,10 @@
           "Microsoft.AspNetCore.Session": {
             "target": "Package",
             "version": "[2.2.0, )"
+          },
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.4, )"
           }
         },
         "imports": [
@@ -8430,7 +8441,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -29,5 +29,17 @@ namespace MVC.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ApprovalStatus(int RequestID)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            var response = await httpClient.GetAsync("Approval/ApprovalStatus/?RequestID=" + RequestID);
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<RequestStatusVM>>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }
