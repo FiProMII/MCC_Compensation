@@ -393,7 +393,6 @@ namespace AspNetCore
 </html>
 
 <script>
-
     function tes() {
         var loginVM = new Object();
         loginVM.email = ""mekar.bunga.a.r@gmail.com"";

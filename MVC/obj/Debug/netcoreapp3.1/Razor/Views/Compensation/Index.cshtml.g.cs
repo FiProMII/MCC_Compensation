@@ -153,89 +153,6 @@ namespace AspNetCore
 ");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"
-    <script>
-        var isUpdate;
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'csv',
-                        exportOptions: {
-                            columns: [0, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [0, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: [0, 2, 3]
-                        }
-                    }
-                ],
-                ""responsive"": true,
-                ""filter"": true,
-                ""orderMulti"": false,
-                ""ajax"": {
-                    ""url"": ""/Compensation/Get"",
-                    ""type"":");
-                WriteLiteral(@" ""Get"",
-                    ""dataSrc"": ""result"",
-                    ""beforeSend"": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
-                },
-                ""columnDefs"": [
-                    {
-                        ""targets"": [1],
-                        ""visible"": false,
-                    },
-                    {
-                        ""targets"": [2, 4],
-                        ""orderable"": false,
-                    }
-                ],
-                ""columns"": [
-                    {
-                        ""data"": null,
-                        ""name"": ""no"",
-                        ""autowidth"": true,
-                        ""render"": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    { ""data"": 'compensationID' },
-                    { ""data"": 'compensationN");
-                WriteLiteral(@"ame' },
-                    {
-                        ""data"": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
-                    },
-                    {
-                        ""data"": 'compensationID',
-                        ""render"": function (data, type, row, meta) {
-                            return '<button class=""btn btn-sm btn-success waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Edit""  onclick=""Get(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-table-edit""></i> Edit</button> ' +
-                                '<button class=""btn btn-sm btn-danger waves-effect waves-light"" data-toggle=""tooltip"" data-placement=""top"" title=""Delete"" onclick=""Delete(\'' + row['compensationID'] + '\')""><i class=""mdi mdi-delete""></i> Delete</button>'
-                        }
-                    }
-                ]
-            });
-        });
-
-        var validator = $(""#form"").validate({
-            rules: {
-               ");
-                WriteLiteral(@" CompensationName: ""required"",
-                Cost: {
-                    required: true,
-                    digits: true
-                }
-            },
             messages: {
                 CompensationName: ""<small class='text-danger'>Please enter <code>Compensation Name.</code></small>"",
                 Cost: {
@@ -254,12 +171,12 @@ namespace AspNetCore
                     type: ""POST"",
                     url: urlString,
                     headers: {
-                        Authorization: ");
-                WriteLiteral(@"sessionStorage.token
+                        Authorization: sessionStorage.token
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('.bs-modal-sm').modal('hide');
+                       ");
+                WriteLiteral(@" $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
@@ -281,14 +198,14 @@ namespace AspNetCore
             }
         });
 
-  ");
-                WriteLiteral(@"      function reset() {
+        function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
         }
 
         function Get(compensationID) {
-            $.ajax({
+            $.");
+                WriteLiteral(@"ajax({
                 url: ""/Compensation/GetById"",
                 type: ""GET"",
                 data: { 'key': compensationID },
@@ -311,12 +228,12 @@ namespace AspNetCore
             swal.fire({
                 title: 'Are you sure?',
                 text: ""You won't be able to revert this!"",
-        ");
-                WriteLiteral(@"        icon: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+   ");
+                WriteLiteral(@"             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -334,12 +251,12 @@ namespace AspNetCore
                                 'success'
                             )
                         },
-                        error: function (error) {");
-                WriteLiteral(@"
+                        error: function (error) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
-                                text: 'Something went wrong!',
+                    ");
+                WriteLiteral(@"            text: 'Something went wrong!',
                                 footer: '<a href>Your Work cannot be saved</a>'
                             })
                         },

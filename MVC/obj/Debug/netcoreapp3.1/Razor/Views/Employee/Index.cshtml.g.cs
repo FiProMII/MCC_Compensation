@@ -407,7 +407,8 @@ namespace AspNetCore
             })
 
             $('#table_id').DataTable({
-                dom: 'Bfrtip',");
+                dom: 'Bfrtip',
+");
                 WriteLiteral(@"
                 buttons: [
                     {
