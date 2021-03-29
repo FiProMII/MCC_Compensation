@@ -14,11 +14,6 @@ namespace MVC.Controllers
     [Authorize]
     public class DashboardController : BaseController<Account, string>
     {
-        public override ViewResult Index()
-        {
-            var name = User.Claims.Where(c => c.Type == "FullName");
-            var tes = User.IsInRole("Admin");
-            return View();
-        }
+
     }
 }
