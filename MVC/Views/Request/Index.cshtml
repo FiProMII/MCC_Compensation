@@ -20,7 +20,7 @@
         <div class="col-md-6 col-4 align-self-center">
             <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create</a>
             <div class="dropdown pull-right m-r-10 hidden-sm-down">
-                <select class="selectpicker m-b-20 m-r-10" data-style="btn-info" id="View">
+                <select class="selectpicker m-b-20 m-r-10" data-style="btn-secondary" id="View">
                     <option data-tokens="All" value="All">All Request</option>
                     <option data-tokens="Pending" value="0">Pending</option>
                     <option data-tokens="Approved" value="1">Approved</option>
@@ -210,12 +210,11 @@
                 <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <!-- /.modal-content --> 
+        <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 <!-- sample modal content -->
 <div id="statusModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -231,9 +230,9 @@
                             <table id="tablestatus" class="display nowrap table table-hover table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Status</th>
+                                        <th>Current Status</th>
                                         <th>Position</th>
-                                        <th>Approval Date</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody id="Status">

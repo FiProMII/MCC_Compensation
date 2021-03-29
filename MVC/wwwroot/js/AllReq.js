@@ -1,5 +1,27 @@
-﻿var isUpdate = 0;
+﻿var isUpdate = 0, value, urlString, dataStatus;
 $(document).ready(function () {
+    defaultTable();
+});
+
+$('#View').on('change', function () {
+    value = $(this).val();
+    $('#table_id').DataTable().destroy();
+    urlString = "/Request/RequestList";
+    if (value == '0') {
+        dataStatus = "Pending";
+        myTable();
+    } else if (value == '1') {
+        dataStatus = "Approve";
+        myTable();
+    } else if (value == '-1') {
+        dataStatus = "Rejected";
+        myTable();
+    } else {
+        defaultTable();
+    }
+});
+
+function defaultTable() {
     $('#table_id').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -88,7 +110,99 @@ $(document).ready(function () {
             }
         ]
     })
-});
+}
+
+function myTable() {
+    $('#table_id').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            }
+        ],
+        "order": [],
+        "responsive": true,
+        "filter": true,
+        "orderMulti": false,
+        "ajax": {
+            "url": urlString,
+            "type": "Get",
+            "data": { 'status': dataStatus, 'information': value },
+            "dataSrc": "result"
+        },
+        "columnDefs": [
+            {
+                "targets": [1, 3, 4],
+                "visible": false,
+            },
+            {
+                "targets": [0, 8],
+                "orderable": false,
+            },
+            {
+                "targets": [0, 1, 3, 5, 6, 7, 8],
+                "className": "texUrl-center",
+            },
+            {
+                "order": [[2, 'asc']]
+            }
+        ],
+        "columns": [
+            {
+                "data": null,
+                "name": "no",
+                "autowidth": true,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            { "data": 'requestID' },
+            { "data": 'employeeName' },
+            {
+                "data": 'joinDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            { "data": 'manager' },
+            { "data": 'compensationName' },
+            {
+                "data": 'eventDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                "data": 'requestDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                "data": 'requestID',
+                "render": function (data, type, row, meta) {
+                    return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button> ' +
+                        '<button class="btn btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Status" onclick="GetApprovalStatus(\'' + row['requestID'] + '\')"><i class="fa fa-check-round-o"></i> Status</button>'
+                }
+            }
+        ]
+    })
+}
 
 function GetDetail(id) {
     $.ajax({
@@ -128,7 +242,6 @@ $('#modal').on('hide.bs.modal', function () {
 });
 
 function GetApprovalStatus(id) {
-    debugger;
     $.ajax({
         url: "/Approval/ApprovalStatus",
         type: "GET",
