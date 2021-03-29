@@ -28,7 +28,7 @@ namespace API.Services
             var key = Encoding.ASCII.GetBytes(_secret);
 
             List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, loginVM.NIK));
+            claims.Add(new Claim("NIK", loginVM.NIK));
             claims.Add(new Claim("FullName", loginVM.EmployeeName));
             claims.Add(new Claim(ClaimTypes.Email, loginVM.Email));
             foreach (var role in loginVM.Roles)

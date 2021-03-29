@@ -100,5 +100,4 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dl
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\AdminIndex.cshtml.g.cs
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\UserIndex.cshtml.g.cs
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
