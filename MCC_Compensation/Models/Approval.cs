@@ -16,10 +16,9 @@ namespace API.Models
         public int StatusID { get; set; }
         public string NIK { get; set; }
         public int RequestID { get; set; }
-
         [DataType(DataType.Date)]
         public DateTime ApprovalDate { get; set; }
-
+        public string Information { get; set; }
         [JsonIgnore]
         public virtual Status Status { get; set; }
         [JsonIgnore]

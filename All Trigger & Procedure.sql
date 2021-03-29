@@ -66,33 +66,6 @@
 	END
 	GO
 
-	-- SP login
-	CREATE PROCEDURE [dbo].[SP_RetrieveLogin]
-		@Email nvarchar(max),
-		@Password nvarchar(max)
-	AS
-	BEGIN
-		DECLARE @Id nvarchar(max)
-	
-		SET @Id = (SELECT A.NIK FROM TB_M_Account A 
-				JOIN TB_M_Employee E 
-				ON A.NIK = E.NIK 
-				WHERE E.Email=@Email)
-		SELECT 
-			EmployeeName,
-			RoleName, 
-			Email
-		FROM TB_M_Employee E
-			JOIN TB_M_Account A 
-			ON E.NIK = A.NIK
-				JOIN TB_T_AccountRole AR 
-				ON A.NIK = AR.NIK
-					JOIN TB_M_Role R 
-					ON AR.RoleID = R.RoleID
-		WHERE E.NIK = @Id and A.Password = @Password
-	END
-	GO
-
 	-- Get nik & email for validation
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
 		@Params varchar(max)
