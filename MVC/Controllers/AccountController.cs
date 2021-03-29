@@ -66,5 +66,7 @@ namespace MVC.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+
+        public ViewResult Profil() => View();
     }
 }
