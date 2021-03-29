@@ -393,7 +393,6 @@ namespace AspNetCore
 </html>
 
 <script>
-
     function tes() {
         var loginVM = new Object();
         loginVM.email = ""mekar.bunga.a.r@gmail.com"";
@@ -406,7 +405,7 @@ namespace AspNetCore
             success: function (data) {
             }
         });
-    }
+    }    
 
     $(""#loginform"").submit(function (e) {
 
@@ -419,11 +418,12 @@ namespace AspNetCore
             data: form.serialize(),
             success: function (data) {
                 var status = data['status'];
-                sessionStorage.token = (data['result']);
+                localStorage.token = (data['result']);
+                console.log(localStorage.token)
                 if (status == 1) {
                     window.location.href = """);
 #nullable restore
-#line 159 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
+#line 159 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
                                        Write(Url.Action("ChangePassword", "Account"));
 
 #line default

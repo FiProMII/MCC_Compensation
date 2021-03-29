@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MVC.Base
 {
@@ -26,7 +27,7 @@ namespace MVC.Base
             };
         }
 
-        public ViewResult Index() => View();
+        public virtual ViewResult Index() => View();
 
         public async Task<IActionResult> Get()
         {
@@ -64,7 +65,7 @@ namespace MVC.Base
         }
 
         [HttpPost]
-        public async Task<IActionResult> Put(Entity entity)
+        public virtual async Task<IActionResult> Put(Entity entity)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

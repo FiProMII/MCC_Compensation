@@ -186,9 +186,7 @@ namespace AspNetCore
                     ""type"":");
                 WriteLiteral(@" ""Get"",
                     ""dataSrc"": ""result"",
-                    ""beforeSend"": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
+                    ""headers"": { 'Authorization': 'Bearer ' + sessionStorage.token }
                 },
                 ""columnDefs"": [
                     {
@@ -210,11 +208,11 @@ namespace AspNetCore
                         }
                     },
                     { ""data"": 'compensationID' },
-                    { ""data"": 'compensationN");
-                WriteLiteral(@"ame' },
+                    { ""data"": 'compensationName' },
                     {
                         ""data"": 'cost',
-                        render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
+   ");
+                WriteLiteral(@"                     render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
                     },
                     {
                         ""data"": 'compensationID',
@@ -229,10 +227,10 @@ namespace AspNetCore
 
         var validator = $(""#form"").validate({
             rules: {
-               ");
-                WriteLiteral(@" CompensationName: ""required"",
+                CompensationName: ""required"",
                 Cost: {
-                    required: true,
+                   ");
+                WriteLiteral(@" required: true,
                     digits: true
                 }
             },
@@ -254,12 +252,12 @@ namespace AspNetCore
                     type: ""POST"",
                     url: urlString,
                     headers: {
-                        Authorization: ");
-                WriteLiteral(@"sessionStorage.token
+                        Authorization: sessionStorage.token
                     },
                     data: form.serialize(),
                     success: function (data) {
-                        $('.bs-modal-sm').modal('hide');
+                       ");
+                WriteLiteral(@" $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',
@@ -281,14 +279,14 @@ namespace AspNetCore
             }
         });
 
-  ");
-                WriteLiteral(@"      function reset() {
+        function reset() {
             isUpdate = 0;
             $('#form').trigger('reset');
         }
 
         function Get(compensationID) {
-            $.ajax({
+            $.");
+                WriteLiteral(@"ajax({
                 url: ""/Compensation/GetById"",
                 type: ""GET"",
                 data: { 'key': compensationID },
@@ -311,12 +309,12 @@ namespace AspNetCore
             swal.fire({
                 title: 'Are you sure?',
                 text: ""You won't be able to revert this!"",
-        ");
-                WriteLiteral(@"        icon: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+   ");
+                WriteLiteral(@"             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -334,12 +332,12 @@ namespace AspNetCore
                                 'success'
                             )
                         },
-                        error: function (error) {");
-                WriteLiteral(@"
+                        error: function (error) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
-                                text: 'Something went wrong!',
+                    ");
+                WriteLiteral(@"            text: 'Something went wrong!',
                                 footer: '<a href>Your Work cannot be saved</a>'
                             })
                         },

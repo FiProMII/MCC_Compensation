@@ -155,7 +155,8 @@
             data: form.serialize(),
             success: function (data) {
                 var status = data['status'];
-                sessionStorage.token = (data['result']);
+                localStorage.token = (data['result']);
+                console.log(localStorage.token)
                 if (status == 1) {
                     window.location.href = "@Url.Action("ChangePassword", "Account")";
                 } else {

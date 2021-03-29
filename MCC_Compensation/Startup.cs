@@ -114,11 +114,12 @@ namespace MCC_Compensation
 
             app.UseRouting();
 
-            app.UseCors(options => options.WithOrigins("https://localhost:44309"));
 
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {
@@ -133,6 +134,8 @@ namespace MCC_Compensation
                 /*app.UseDeveloperExceptionPage();*/
             }
             );
+            
+            app.UseCors(options => options.WithOrigins("https://localhost:44309"));
         }
     }
 }

@@ -30,6 +30,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
         public IActionResult Login(LoginVM login)
         {
             var result = _accountRepository.Login(login);
@@ -91,6 +92,7 @@ namespace API.Controllers
         }
 
         [HttpPost("ForgotPassword")]
+        [AllowAnonymous]
         public IActionResult ForgotPassword(LoginVM loginVM)
         {
             var result = _accountRepository.ForgotPassword(loginVM.Email);
