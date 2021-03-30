@@ -188,6 +188,7 @@
                     url: "/Request/GetById",
                     type: "GET",
                     data: { 'key': id },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (result) {
                         var data = result["result"];
                         managerNIK = data.employee.manager.nik
@@ -233,6 +234,7 @@
                 type: "POST",
                 url: "/Approval/Post",
                 data: JSON.stringify(Approval),
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             });

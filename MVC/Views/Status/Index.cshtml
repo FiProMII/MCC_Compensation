@@ -130,7 +130,8 @@
                 "ajax": {
                     "url": "/Status/Get",
                     "type": "GET",
-                    "dataSrc": "result"
+                    "dataSrc": "result",
+                    "headers": { 'Authorization': 'Bearer ' + localStorage.token },
                 },
                 "columnDefs": [
                     {
@@ -187,6 +188,7 @@
                     type: "POST",
                     url: urlString,
                     data: form.serialize(),
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (data) {
                         $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
@@ -220,6 +222,7 @@
                 url: "/Status/GetById",
                 type: "GET",
                 data: { 'key': id },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('.bs-modal-sm').modal('show');
                     var data = result["result"];
@@ -245,6 +248,7 @@
                         type: "POST",
                         url: "/Status/Delete",
                         data: { 'key': id },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (data) {
                             $('#table_id').DataTable().ajax.reload();
                             Swal.fire(

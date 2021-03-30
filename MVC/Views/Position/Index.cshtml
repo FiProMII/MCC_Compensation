@@ -115,6 +115,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Department/Get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     var s = '<option value="-1">Please Select a Department</option>';
@@ -153,7 +154,8 @@
                 "ajax": {
                     "url": "get",
                     "type": "get",
-                    "dataSrc": "result"
+                    "dataSrc": "result",
+                    "headers": { 'Authorization': 'Bearer ' + localStorage.token },
                 },
                 "columnDefs": [
                     {
@@ -211,6 +213,7 @@
                     type: "POST",
                     url: urlString,
                     data: form.serialize(),
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (data) {
                         $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
@@ -244,6 +247,7 @@
                 url: "/Position/GetById",
                 type: "GET",
                 data: { 'key': id },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('.bs-modal-sm').modal('show');
                     var data = result["result"];
@@ -270,6 +274,7 @@
                         type: "POST",
                         url: "/Position/Delete",
                         data: { 'key': id },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (data) {
                             $('#table_id').DataTable().ajax.reload();
                             Swal.fire(

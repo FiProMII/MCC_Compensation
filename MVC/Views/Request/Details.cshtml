@@ -178,6 +178,7 @@
                     url: "/Request/GetById",
                     type: "GET",
                     data: { 'key': id },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (result) {
                         $('#modal').modal('show');
                         var data = result["result"];

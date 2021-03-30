@@ -257,6 +257,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Position/Get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -273,8 +274,8 @@
             $.ajax({
                 type: "GET",
                 url: '/Employee/Get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    
                     var data = result['result']
                     if (selectedPosition != "RM") {
                         $('#ManagerNIK').removeAttr("disabled");
@@ -299,7 +300,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Role/Get',
-                headers: { "Authorization": sessionStorage.token },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -323,7 +324,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Department/Get',
-                headers: { "Authorization": sessionStorage.token },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -373,7 +374,7 @@
                     "url": "/Employee/Get",
                     "type": "GET",
                     "dataSrc": "result",
-                    "headers": "{ 'Authorization': 'Bearer '" + sessionStorage.token + "}", 
+                    "headers": { 'Authorization': 'Bearer ' + localStorage.token}, 
                 },
                 "columnDefs": [
                     {
@@ -446,6 +447,7 @@
                 url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': nik },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('#ValidationEmail').show();
                     $('#NIK').focus(function () {
@@ -469,6 +471,7 @@
                     url: "/Employee/Validation",
                     type: "Post",
                     data: { 'Email': email },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (result) {
                         if (result.message == "FOUND") {
                             try {
@@ -506,6 +509,7 @@
                 type: "POST",
                 url: urlString,
                 data: form.serialize(),
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (data) {
                     $('.bs-modal-lg').modal('hide');
                     $('#table_id').DataTable().ajax.reload();
@@ -521,7 +525,8 @@
                         $.ajax({
                             type: "POST",
                             url: "/AccountRole/Delete",
-                            data: { 'key': nikValue }
+                            data: { 'key': nikValue },
+                            headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         });
                     }
 
@@ -534,6 +539,7 @@
                             type: "POST",
                             url: "/AccountRole/Post",
                             data: JSON.stringify(role),
+                            headers: { 'Authorization': 'Bearer ' + localStorage.token },
                             contentType: "application/json; charset=utf-8",
                             dataType: "json"
                         });
@@ -563,6 +569,7 @@
                 url: "/AccountRole/GetById",
                 type: "GET",
                 data: { 'key': id },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result["result"];
                     $('input:checkbox').removeAttr('checked');
@@ -576,6 +583,7 @@
                 url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': id },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('.bs-modal-lg').modal('show');
                     var data = result["result"];
@@ -613,6 +621,7 @@
                         type: "POST",
                         url: "/Account/Delete",
                         data: { 'key': id },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (data) {
                             $('#table_id').DataTable().ajax.reload();
                             Swal.fire(

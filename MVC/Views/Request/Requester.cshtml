@@ -156,6 +156,7 @@
                 url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': currentNIK },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result["result"];
                     console.log(data)
@@ -175,6 +176,7 @@
             $.ajax({
                 type: "GET",
                 url: '/compensation/get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -246,6 +248,7 @@
                 url: '/Document/Post',
                 type: 'POST',
                 data: formData,
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 async: false,
                 cache: false,
                 contentType: false,

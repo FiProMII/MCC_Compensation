@@ -106,9 +106,7 @@
                     "url": "/Role/Get",
                     "type": "Get",
                     "dataSrc": "result",
-                    "beforeSend": function (xhr) {
-                        xhr.setRequestHeader('Authorization', sessionStorage.token);
-                    },
+                    "headers": { 'Authorization': 'Bearer ' +localStorage.token },
                 },
                 "columnDefs": [
                     {
@@ -159,9 +157,7 @@
                 $.ajax({
                     type: "POST",
                     url: urlString,
-                    headers: {
-                        Authorization: sessionStorage.token
-                    },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     data: form.serialize(),
                     success: function (data) {
                         $('.bs-modal-sm').modal('hide');
@@ -197,9 +193,7 @@
                 url: "/Role/GetById",
                 type: "GET",
                 data: { 'key': roleID },
-                headers: {
-                    Authorization: sessionStorage.token
-                },
+                headers: { "Authorization": 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('.bs-modal-sm').modal('show');
                     var data = result['result'];
@@ -226,9 +220,7 @@
                         type: "POST",
                         url: "/Role/Delete",
                         data: { 'key': roleID },
-                        headers: {
-                            Authorization: sessionStorage.token
-                        },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (data) {
                             $('#table_id').DataTable().ajax.reload();
                             Swal.fire(

@@ -135,7 +135,7 @@
                     "url": "/Compensation/Get",
                     "type": "Get",
                     "dataSrc": "result",
-                    "headers": { 'Authorization': 'Bearer ' + sessionStorage.token }
+                    "headers": { 'Authorization': 'Bearer ' + localStorage.token }
                 },
                 "columnDefs": [
                     {
@@ -198,10 +198,8 @@
                 $.ajax({
                     type: "POST",
                     url: urlString,
-                    headers: {
-                        Authorization: sessionStorage.token
-                    },
                     data: form.serialize(),
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (data) {
                         $('.bs-modal-sm').modal('hide');
                         $('#table_id').DataTable().ajax.reload();
@@ -235,9 +233,7 @@
                 url: "/Compensation/GetById",
                 type: "GET",
                 data: { 'key': compensationID },
-                headers: {
-                    Authorization: sessionStorage.token
-                },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     $('.bs-modal-sm').modal('show');
                     var data = result['result'];
@@ -265,9 +261,7 @@
                         type: "POST",
                         url: "/Compensation/Delete",
                         data: { 'key': compensationID },
-                        headers: {
-                            Authorization: sessionStorage.token
-                        },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (data) {
                             $('#table_id').DataTable().ajax.reload();
                             Swal.fire(
