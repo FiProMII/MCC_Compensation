@@ -9,7 +9,7 @@ $('#View').on('change', function () {
     urlString = "/Request/RequestList";
     if (value == '0') {
         dataStatus = "Pending";
-        myTable();
+        pendingTable();
     } else if (value == '1') {
         dataStatus = "Approve";
         myTable();
@@ -105,6 +105,98 @@ function defaultTable() {
                 "data": 'requestID',
                 "render": function (data, type, row, meta) {
                     return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button> ' +
+                        '<button class="btn btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Status" onclick="GetApprovalStatus(\'' + row['requestID'] + '\')"><i class="fa fa-check-round-o"></i> Status</button>'
+                }
+            }
+        ]
+    })
+}
+
+function pendingTable() {
+    $('#table_id').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: [0, 2, 3, 4, 5, 6]
+                }
+            }
+        ],
+        "order": [],
+        "responsive": true,
+        "filter": true,
+        "orderMulti": false,
+        "ajax": {
+            "url": urlString,
+            "type": "Get",
+            "data": { 'status': dataStatus },
+            "dataSrc": "result"
+        },
+        "columnDefs": [
+            {
+                "targets": [1, 3, 4],
+                "visible": false,
+            },
+            {
+                "targets": [0, 8],
+                "orderable": false,
+            },
+            {
+                "targets": [0, 1, 3, 5, 6, 7, 8],
+                "className": "texUrl-center",
+            },
+            {
+                "order": [[2, 'asc']]
+            }
+        ],
+        "columns": [
+            {
+                "data": null,
+                "name": "no",
+                "autowidth": true,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            { "data": 'requestID' },
+            { "data": 'employeeName' },
+            {
+                "data": 'joinDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            { "data": 'manager' },
+            { "data": 'compensationName' },
+            {
+                "data": 'eventDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                "data": 'requestDate',
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                "data": 'requestID',
+                "render": function (data, type, row, meta) {
+                    return '<a class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" href="/Request/Approval/?requestID=' +row ['requestID'] +'"><i class="fa fa-info-circle"></i> Approval</a> ' +
                         '<button class="btn btn-outline-success waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Status" onclick="GetApprovalStatus(\'' + row['requestID'] + '\')"><i class="fa fa-check-round-o"></i> Status</button>'
                 }
             }
