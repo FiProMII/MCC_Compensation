@@ -60,7 +60,7 @@
 	GO
 	
 	--get email manager --
-	CREATE OR ALTER PROCEDURE SP_RetrieveManagerEmail
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveManagerEmail]
 		@departmentID int
 	AS
 	BEGIN
@@ -84,5 +84,21 @@
 	JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
 	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE st.StatusName LIKE '%'+@Status+'%'
 	GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+	END
+	GO
+
+	-- Get Approval Status
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveApprovalStatus]
+	@RequestID int
+	AS
+	BEGIN
+		SELECT st.StatusName,CONCAT(pos.PositionName, '-',dep.DepartmentName) AS Approval, app.ApprovalDate 
+		FROM TB_M_Status st 
+		JOIN TB_T_Approval app ON st.StatusID = app.StatusID 
+		JOIN TB_M_Employee emp ON app.NIK = emp.NIK
+		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID 
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+		WHERE app.RequestID = @RequestID
+		GROUP BY PositionName, StatusName, DepartmentName, ApprovalDate
 	END
 	GO

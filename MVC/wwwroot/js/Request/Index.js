@@ -242,6 +242,7 @@ $('#modal').on('hide.bs.modal', function () {
 });
 
 function GetApprovalStatus(id) {
+    debugger;
     $.ajax({
         url: "/Approval/ApprovalStatus",
         type: "GET",
