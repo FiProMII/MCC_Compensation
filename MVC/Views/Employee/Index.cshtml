@@ -13,7 +13,7 @@
         <div class="col-md-6 col-8 align-self-center">
             <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Dashboard/Index">Home</a></li>
                 <li class="breadcrumb-item active">@ViewData["Title"]</li>
             </ol>
         </div>
@@ -143,6 +143,7 @@
                                                 <div class="input-group-addon"><i class="ti-mobile"></i></div>
                                             </div>
                                         </div>
+                                        <small class="text-danger" id="ValidationPhone" style="visibility: hidden"><code>Phone number</code> already exist.</small>
                                     </div>
                                 </div>
                             </div>
@@ -440,7 +441,6 @@
         }
 
         $('#NIK').change(function () {
-            debugger;
             var nik = this.value;
             $.ajax({
                 url: "/Employee/GetById",
@@ -460,7 +460,7 @@
         });
 
         $('#Email').change(function () {
-            var email = $('#Email').val();
+            var email = $(this).val();
             if (email == "") {
                 $('#ValidationEmail').css('visibility', 'hidden');
             }
@@ -468,7 +468,7 @@
                 $.ajax({
                     url: "/Employee/Validation",
                     type: "Post",
-                    data: { 'Email': email },
+                    data: { 'Params': email },
                     success: function (result) {
                         if (result.message == "FOUND") {
                             try {
@@ -478,6 +478,31 @@
                             }
                         } else {
                             $('#ValidationEmail').css('visibility', 'hidden');
+                        }
+                    }
+                })
+            }
+        });
+
+        $('#Phone').change(function () {
+            var phone = $(this).val();
+            if (phone == "") {
+                $('#ValidationPhone').css('visibility', 'hidden');
+            }
+            else {
+                $.ajax({
+                    url: "/Employee/Validation",
+                    type: "Post",
+                    data: { 'Params': phone },
+                    success: function (result) {
+                        if (result.message == "FOUND") {
+                            try {
+                                $('#ValidationPhone').css('visibility', 'visible');
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            $('#ValidationPhone').css('visibility', 'hidden');
                         }
                     }
                 })

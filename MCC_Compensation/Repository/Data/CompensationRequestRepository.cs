@@ -19,12 +19,11 @@ namespace API.Repository.Data
             _configuration = configuration;
         }
 
-        public IEnumerable<RequestListVM> RequestList(string Status, string Information)
+        public IEnumerable<RequestListVM> RequestList(string Status)
         {
             var _crRepository = new GeneralDapperRepository<RequestListVM>(_configuration);
 
             var SPName = "SP_RetrieveDataStatus";
-            _parameters.Add("@Information", Information);
             _parameters.Add("@Status", Status);
             var result = _crRepository.MultipleGet(SPName, _parameters);
             return result;

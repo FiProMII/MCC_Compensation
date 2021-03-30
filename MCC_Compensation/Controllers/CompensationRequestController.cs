@@ -64,10 +64,10 @@ namespace API.Controllers
         }
 
         [HttpGet("RequestList")]
-        public IActionResult RequestList(string Status, string Information)
+        public IActionResult RequestList(string Status)
         {
             ResponseVM<IEnumerable<RequestListVM>> responseContent = new ResponseVM<IEnumerable<RequestListVM>>();
-            var result = _compensationRequestRepository.RequestList(Status, Information);
+            var result = _compensationRequestRepository.RequestList(Status);
 
             if (result != null)
             {

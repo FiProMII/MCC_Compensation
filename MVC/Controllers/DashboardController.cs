@@ -10,10 +10,12 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace MVC.Controllers
-{
-    [Authorize]
-    public class DashboardController : BaseController<Account, string>
+{   
+    public class DashboardController : Controller
     {
-
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace API.Repository.Data
             var _employeeRepository = new GeneralDapperRepository<Employee>(_configuration);
 
             _parameters.Add("@Params", Params);
-            var result = _employeeRepository.SingleGet("SP_RetrieveNIKEmail", _parameters);
+            var result = _employeeRepository.SingleGet("SP_RetrieveValidation", _parameters);
             return result;
         }
     }

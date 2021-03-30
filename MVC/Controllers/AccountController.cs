@@ -68,5 +68,7 @@ namespace MVC.Controllers
         }
 
         public ViewResult Profil() => View();
+
+        public ViewResult AccountSetting() => View();
     }
 }

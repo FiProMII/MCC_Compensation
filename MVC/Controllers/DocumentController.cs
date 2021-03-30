@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using API.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Base;
 using Newtonsoft.Json;
@@ -43,6 +44,7 @@ namespace MVC.Controllers
                 }, "Files", fileName);
             }
 
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var documentResponse = await httpClient.PostAsync("Document/Upload", content);
             string documentApiResponse = await documentResponse.Content.ReadAsStringAsync();
             var Documents = JsonConvert.DeserializeObject<List<Document>>(documentApiResponse);

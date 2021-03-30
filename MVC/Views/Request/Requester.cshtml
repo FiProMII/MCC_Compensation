@@ -13,7 +13,7 @@
         <div class="col-md-6 col-8 align-self-center">
             <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Dashboard/Index">Home</a></li>
                 <li class="breadcrumb-item active">@ViewData["Title"]</li>
             </ol>
         </div>
@@ -105,7 +105,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Event Date</label>
-                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="">
+                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="ValidateDED()">
                                         <small class="text-danger" id="errorMessage"></small>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                 success: function (result) {
                     var data = result["result"];
                     console.log(data)
-                    $('#EmployeeName').val(data.employeeName)
+                    $('#Requester').val(data.employeeName)
                     $('#DepartmentName').html(data.position.department.departmentName)
                     $('#PositionName').html(data.position.positionName)
                     $('#ManagerName').html(data.manager.employeeName)
