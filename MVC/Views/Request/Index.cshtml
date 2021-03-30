@@ -222,9 +222,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal">Reject</button>
-                <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal">Approve</button>
+                <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal" id="close" style="visibility: visible">Close</button>
+                <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal" id="reject" style="visibility: visible">Reject</button>
+                <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal" id="approve" style="visibility: visible">Approve</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -478,7 +478,6 @@
                 type: "GET",
                 data: { 'RequestID': id },
                 success: function (result) {
-                    $('#statusModal').modal('show');
                     var data = result["result"];
                     for (var i = 0; i < data.length; i++) {
                         var statusList = '<tr><th id="Status">' + data[i].statusName + '</th>'
