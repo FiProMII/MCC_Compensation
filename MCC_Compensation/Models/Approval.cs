@@ -16,13 +16,12 @@ namespace API.Models
         public int StatusID { get; set; }
         public string NIK { get; set; }
         public int RequestID { get; set; }
+        public int DepartmentID { get; set; }
         [DataType(DataType.Date)]
         public DateTime ApprovalDate { get; set; }
-        [JsonIgnore]
         public virtual Status Status { get; set; }
-        [JsonIgnore]
         public virtual Employee Employee { get; set; }
-        [JsonIgnore]
+        public virtual Department Department { get; set; }
         public virtual CompensationRequest CompensationRequest { get; set; }
     }
 }

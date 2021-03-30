@@ -45,13 +45,10 @@ namespace API.Models
 
         public virtual Employee Manager { get; set; }
 
-        [JsonIgnore]
         public virtual Account Account { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<CompensationRequest> CompensationRequests { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

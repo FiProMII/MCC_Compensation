@@ -212,12 +212,17 @@ namespace API.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RequestID = table.Column<int>(type: "int", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Information = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DepartmentID = table.Column<int>(type: "int", nullable: false),
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_T_Approval", x => x.ApprovalID);
+                    table.ForeignKey(
+                        name: "FK_TB_T_Approval_TB_M_Department_DepartmentID",
+                        column: x => x.DepartmentID,
+                        principalTable: "TB_M_Department",
+                        principalColumn: "DepartmentID");
                     table.ForeignKey(
                         name: "FK_TB_T_Approval_TB_M_Employee_NIK",
                         column: x => x.NIK,
@@ -261,6 +266,11 @@ namespace API.Migrations
                 name: "IX_TB_T_AccountRole_RoleID",
                 table: "TB_T_AccountRole",
                 column: "RoleID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_Approval_DepartmentID",
+                table: "TB_T_Approval",
+                column: "DepartmentID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_T_Approval_NIK",

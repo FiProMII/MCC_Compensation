@@ -90,6 +90,12 @@ namespace API.Context
                 .WithMany(a => a.Approvals)
                 .HasForeignKey(a => a.NIK)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Approval>()
+                .HasOne(d => d.Department)
+                .WithMany(a => a.Approvals)
+                .HasForeignKey(d => d.DepartmentID)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

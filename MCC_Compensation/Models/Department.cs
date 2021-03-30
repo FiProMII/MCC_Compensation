@@ -15,7 +15,7 @@ namespace API.Models
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<Position> Positions { get; set; }
+        public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

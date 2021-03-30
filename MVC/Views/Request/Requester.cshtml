@@ -37,61 +37,6 @@
                 <div class="card-body">
                     <form class="form-horizontal" role="form" id="form">
                         <div class="form-body">
-                            <h3 class="box-title">Person Info</h3>
-                            <hr class="m-t-0 m-b-40">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Requester Name: </label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static" id="Requester"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/row-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Department: </label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static" id="DepartmentName"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Relational Manager: </label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static" id="ManagerName"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Position: </label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static" id="PositionName"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Join Date: </label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static" id="JoinDate"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
                             <h3 class="box-title m-t-40">New Request</h3>
                             <hr>
                             <div class="row">
@@ -144,28 +89,12 @@
 @section scripts
 {
     <script>
-        //nanti diganti pake session
-        var currentNIK = "117100"
         var compensationID
 
         let compensationValue = new Map()
         let compensationRequirement = new Map()
 
         $(document).ready(function () {
-            $.ajax({
-                url: "/Employee/GetById",
-                type: "GET",
-                data: { 'key': currentNIK },
-                success: function (result) {
-                    var data = result["result"];
-                    console.log(data)
-                    $('#Requester').val(data.employeeName)
-                    $('#DepartmentName').html(data.position.department.departmentName)
-                    $('#PositionName').html(data.position.positionName)
-                    $('#ManagerName').html(data.manager.employeeName)
-                    $('#JoinDate').html(moment(data.joinDate).format('DD-MM-YYYY'))
-                }
-            });
 
             compensationRequirement.set("Wedding", "KK & KTP")
             compensationRequirement.set("Baby Gift", "KK")
@@ -211,7 +140,7 @@
             });
         });
 
-        function ValidateDED() {
+        @*function ValidateDED() {
             var dateString = new Date($('#EventDate').val());
             var dateNow = new Date();
             if ($('#EventDate').val() == "") {
@@ -223,7 +152,7 @@
                 $('#messageError').html("The date is <code>Incorrect.</code>");
             }
             $('#messageError').html("");
-        }
+        }*@
 
         $("select#CompensationID").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();
@@ -252,6 +181,7 @@
                 enctype: 'multipart/form-data',
                 processData: false,
                 success: function (response) {
+
                 }
             });
         })

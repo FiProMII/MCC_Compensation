@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210330031820_Refactor")]
-    partial class Refactor
+    [Migration("20210330082756_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,9 @@ namespace API.Migrations
                     b.Property<DateTime>("ApprovalDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DepartmentID")
+                        .HasColumnType("int");
+
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
 
@@ -69,6 +72,8 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ApprovalID");
+
+                    b.HasIndex("DepartmentID");
 
                     b.HasIndex("NIK");
 
@@ -277,6 +282,12 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Approval", b =>
                 {
+                    b.HasOne("API.Models.Department", "Department")
+                        .WithMany("Approvals")
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("API.Models.Employee", "Employee")
                         .WithMany("Approvals")
                         .HasForeignKey("NIK")
@@ -295,6 +306,8 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("CompensationRequest");
+
+                    b.Navigation("Department");
 
                     b.Navigation("Employee");
 
@@ -386,6 +399,8 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Department", b =>
                 {
+                    b.Navigation("Approvals");
+
                     b.Navigation("Positions");
                 });
 
