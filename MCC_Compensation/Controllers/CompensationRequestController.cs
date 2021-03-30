@@ -45,8 +45,19 @@ namespace API.Controllers
             {
                 responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
-                //EmailController emailController = new EmailController();
-                //emailController.SendEmail("tes", EmailController.EmailType.CompensationRequest, "a");
+                
+                EmailController emailController = new EmailController();
+                try
+                {
+                    var nik = User.FindFirst("NIK").ToString();
+                    var email = _compensationRequestRepository.GetManagerEmail(nik);
+                    emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
+                } catch
+                {
+                    responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Failed;
+                    responseContent.Message = "Email is not sent";
+                    return StatusCode(500, responseContent);
+                }
                 return Ok(responseContent);
             }
             else
@@ -57,11 +68,19 @@ namespace API.Controllers
             }
         }
 
-        public IEnumerable<string> GetRecipientEmails()
-        {
-            IEnumerable<string> emails = Enumerable.Empty<string>();
-            return emails;
-        }
+        //public IEnumerable<string> GetRecipientEmails()
+        //{
+        //    var nik = User.FindFirst("NIK").ToString();
+        //    IEnumerable<string> emails = Enumerable.Empty<string>();
+        //    if (User.IsInRole("Manager"))
+        //    {
+        //        emails = _compensationRequestRepository.GetRecipientEmails(1, nik);
+        //    } else if (User.IsInRole("HR"))
+        //    {
+        //        emails = _compensationRequestRepository.GetRecipientEmails(2, nik);
+        //    } 
+        //    return emails;
+        //}
 
         [HttpGet("RequestList")]
         public IActionResult RequestList(string Status)

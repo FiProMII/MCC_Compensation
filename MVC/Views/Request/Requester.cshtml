@@ -100,10 +100,10 @@
             compensationRequirement.set("Baby Gift", "KK")
             compensationRequirement.set("Grief", "KK")
 
-            var compensationDropdown = '<option value="-1">Please select a compensation type</option>';
             $.ajax({
                 type: "GET",
                 url: '/compensation/get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -168,13 +168,13 @@
             event.preventDefault()
 
             var formData = new FormData($(this)[0]);
-            formData.append('nik', currentNIK);
             formData.append('compensationID', compensationID)
             formData.append('eventDate', $('#EventDate').val())
             $.ajax({
                 url: '/Document/Post',
                 type: 'POST',
                 data: formData,
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 async: false,
                 cache: false,
                 contentType: false,
