@@ -109,7 +109,8 @@
                 "ajax": {
                     "url": "Get",
                     "type": "Get",
-                    "dataSrc": "result"
+                    "dataSrc": "result",
+                    "headers": { 'Authorization': 'Bearer ' + localStorage.token },
                 },
                 "columnDefs": [
                     {

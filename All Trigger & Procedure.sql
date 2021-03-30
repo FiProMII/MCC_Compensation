@@ -16,6 +16,21 @@
 			DELETE FROM TB_M_Account WHERE NIK = @nik
 	END
 	GO
+	
+	--set status manager to pending when compensationrequest is inserted
+	CREATE OR ALTER   TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
+	AFTER INSERT AS
+	BEGIN
+		DECLARE @StatusID INT
+		DECLARE @NIK nvarchar(450)
+		SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
+		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
+
+		INSERT TB_T_Approval 
+		SELECT @StatusID,@NIK,RequestID,GETDATE()
+		FROM inserted
+	END
+	GO
 
 ---------------------------------------- P R O C E D U R E -----------------------------------------------
 	-- Delete all accountrole by id --

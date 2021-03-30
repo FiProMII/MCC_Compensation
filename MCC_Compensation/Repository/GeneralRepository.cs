@@ -12,8 +12,8 @@ namespace API.Repository
         where Entity : class
         where Context : MyContext
     {
-        private readonly MyContext myContext;
-        private readonly DbSet<Entity> entities;
+        protected readonly MyContext myContext;
+        protected readonly DbSet<Entity> entities;
 
         public GeneralRepository(MyContext myContext)
         {
@@ -41,7 +41,7 @@ namespace API.Repository
             return entities.Find(key);
         }
 
-        public int Insert(Entity entity)
+        public virtual int Insert(Entity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");

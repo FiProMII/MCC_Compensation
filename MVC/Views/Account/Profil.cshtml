@@ -135,6 +135,7 @@
                 url: "/Employee/GetById/",
                 type: "GET",
                 data: { 'key': currentNIK },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result["result"];
                     $('#NIK').html(data.nik);

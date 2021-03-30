@@ -248,6 +248,7 @@
                 url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': nik },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     if (result != null) {
                         $('#ValidationNIK').css('visibility', 'visible');

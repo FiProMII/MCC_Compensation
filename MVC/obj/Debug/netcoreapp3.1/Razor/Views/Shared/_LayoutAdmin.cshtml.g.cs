@@ -77,7 +77,7 @@ namespace AspNetCore
                 EndWriteAttribute();
                 WriteLiteral(">\r\n    <!-- Favicon icon -->\r\n    <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/lib/assets/images/favicon.ico\">\r\n    <title>Compensation | ");
 #nullable restore
-#line 13 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Shared\_LayoutAdmin.cshtml"
+#line 13 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Shared\_LayoutAdmin.cshtml"
                      Write(ViewData["Title"]);
 
 #line default
@@ -371,7 +371,7 @@ namespace AspNetCore
         <div class=""page-wrapper"">
             ");
 #nullable restore
-#line 179 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Shared\_LayoutAdmin.cshtml"
+#line 179 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Shared\_LayoutAdmin.cshtml"
        Write(RenderBody());
 
 #line default
