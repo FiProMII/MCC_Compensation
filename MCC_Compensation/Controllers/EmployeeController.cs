@@ -68,13 +68,13 @@ namespace API.Controllers
             if (result != null)
             {
                 responseContent.Status = ResponseVM<string>.StatusType.Success;
-                responseContent.Message = "Sign In successful";
+                responseContent.Message = "Data Found";
                 return Ok(responseContent);
             }
             else
             {
                 responseContent.Status = ResponseVM<string>.StatusType.Failed;
-                responseContent.Message = "Sign in failed";
+                responseContent.Message = "Not Found";
                 return BadRequest(responseContent);
             }
         }

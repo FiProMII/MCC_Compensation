@@ -17,31 +17,19 @@
 	END
 	GO
 
-	-- insert account with default pass before inserting to employee
-	CREATE OR ALTER TRIGGER [dbo].[T_Employee] ON [dbo].[TB_M_Employee]
-	INSTEAD OF INSERT AS
-	BEGIN
-		INSERT TB_M_Account
-		SELECT NIK, NEWID()
-		FROM inserted
-
-		INSERT TB_M_Employee
-		SELECT *
-		FROM inserted
-	END
-	GO
-
 	-- Insert to TB_T_Approval first as status pending
 	CREATE OR ALTER TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
 	AFTER INSERT AS
 	BEGIN
 		DECLARE @StatusID INT
 		DECLARE @NIK nvarchar(450)
+		DECLARE @Info nvarchar(450)
 		SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
 		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
+		SET @Info = '0'
 
 		INSERT TB_T_Approval 
-		SELECT @StatusID,@NIK,RequestID,GETDATE()
+		SELECT @StatusID,@NIK,RequestID,GETDATE(),@Info
 		FROM inserted
 	END
 	GO

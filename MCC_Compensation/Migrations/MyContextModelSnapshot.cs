@@ -57,6 +57,9 @@ namespace API.Migrations
                     b.Property<DateTime>("ApprovalDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Information")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");
 

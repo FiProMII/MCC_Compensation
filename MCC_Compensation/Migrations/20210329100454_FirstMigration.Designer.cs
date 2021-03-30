@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20210326042731_FirstMigration")]
+    [Migration("20210329100454_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace API.Migrations
 
                     b.Property<DateTime>("ApprovalDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Information")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NIK")
                         .HasColumnType("nvarchar(450)");

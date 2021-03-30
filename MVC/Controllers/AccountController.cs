@@ -26,7 +26,7 @@ namespace MVC.Controllers
             var response = await httpClient.PostAsync("Account/Login", content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<string>>(apiResponse);
-            
+
             if (response.IsSuccessStatusCode)
             {
                 HttpContext.Session.SetString("Token", result.Result);
