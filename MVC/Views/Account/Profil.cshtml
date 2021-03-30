@@ -14,7 +14,7 @@
         <div class="col-md-6 col-8 align-self-center">
             <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Dashboard/Index">Home</a></li>
                 <li class="breadcrumb-item active">@ViewData["Title"]</li>
             </ol>
         </div>
@@ -29,17 +29,15 @@
         <div class="col-lg-12">
             <div class="card card-outline-info">
                 <div class="card-header">
-                    <h4 class="m-b-0 text-white">@ViewData["Title"]</h4>
+                    <h4 class="m-b-0 text-white">My @ViewData["Title"]</h4>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-body">
-                            <h3 class="box-title">@ViewData["Title"]</h3>
-                            <hr class="m-t-0 m-b-40">
                             <div class="row">
                                 <div class="col-md-12">
                                     <center class="m-t-30">
-                                        <img src="/lib/assets/images/users/user.png" class="img-circle" width="150" />
+                                        <img src="/lib/assets/images/users/user.png" class="img-circle" width="100" />
                                         <h4 class="card-title m-t-10" id="NIK"></h4>
                                         <h6 class="card-subtitle" id="EmployeeName"></h6>
                                     </center>
@@ -104,7 +102,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Relation Manager:</label>
+                                        <label class="control-label text-right col-md-4">Manager:</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static" id="ManagerName"></p>
                                         </div>
@@ -131,7 +129,7 @@
     <script>
         $(document).ready(function () {
             debugger;
-            var currentNIK = "12345";
+            var currentNIK = "117100";
 
             $.ajax({
                 url: "/Employee/GetById/",
@@ -144,7 +142,7 @@
                     $('#EmployeeName').html(data.employeeName);
                     $('#Email').html(data.email);
                     $('#Phone').html(data.phone);
-                    $('#Birth').html(data.birthPlace + ', ' + data.birthDate);
+                    $('#Birth').html(data.birthPlace + ', <br/ > ' + moment(data.birthDate).format('DD-MM-YYYY'));
                     $('#Address').html(data.address);
                     $('#DepartmentName').html(data.position.department.departmentName);
                     $('#PositionName').html(data.position.positionName);

@@ -17,37 +17,8 @@
 	END
 	GO
 
-	-- insert account with default pass before inserting to employee
-	CREATE OR ALTER TRIGGER [dbo].[T_Employee] ON [dbo].[TB_M_Employee]
-	INSTEAD OF INSERT AS
-	BEGIN
-		INSERT TB_M_Account
-		SELECT NIK, NEWID()
-		FROM inserted
-
-		INSERT TB_M_Employee
-		SELECT *
-		FROM inserted
-	END
-	GO
-
-	-- Insert to TB_T_Approval first as status pending
-	CREATE OR ALTER TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
-	AFTER INSERT AS
-	BEGIN
-		DECLARE @StatusID INT
-		DECLARE @NIK nvarchar(450)
-		SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
-		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
-
-		INSERT TB_T_Approval 
-		SELECT @StatusID,@NIK,RequestID,GETDATE()
-		FROM inserted
-	END
-	GO
-
 ---------------------------------------- P R O C E D U R E -----------------------------------------------
-	-- Delete all accountrole by id
+	-- Delete all accountrole by id --
 	CREATE OR ALTER PROCEDURE [dbo].[SP_DeleteAccountRoleByID]
 	@nik nvarchar(450)
 	AS
@@ -56,7 +27,7 @@
 	END
 	GO
 
-	-- get all accountrole by id
+	-- get all accountrole by id --
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveAccountRoleByID]
 	@nik nvarchar(450)
 	AS
@@ -66,43 +37,16 @@
 	END
 	GO
 
-	-- SP login
-	CREATE PROCEDURE [dbo].[SP_RetrieveLogin]
-		@Email nvarchar(max),
-		@Password nvarchar(max)
-	AS
-	BEGIN
-		DECLARE @Id nvarchar(max)
-	
-		SET @Id = (SELECT A.NIK FROM TB_M_Account A 
-				JOIN TB_M_Employee E 
-				ON A.NIK = E.NIK 
-				WHERE E.Email=@Email)
-		SELECT 
-			EmployeeName,
-			RoleName, 
-			Email
-		FROM TB_M_Employee E
-			JOIN TB_M_Account A 
-			ON E.NIK = A.NIK
-				JOIN TB_T_AccountRole AR 
-				ON A.NIK = AR.NIK
-					JOIN TB_M_Role R 
-					ON AR.RoleID = R.RoleID
-		WHERE E.NIK = @Id and A.Password = @Password
-	END
-	GO
-
-	-- Get nik & email for validation
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveNIKEmail]
+	-- Get phone & email for validation --
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveValidation]
 		@Params varchar(max)
 	AS
 	BEGIN
-		SELECT * FROM TB_M_Employee WHERE Email = @Params
+		SELECT * FROM TB_M_Employee WHERE Email = @Params OR Phone = @Params
 	END
 	GO
 
-	-- Get Compensation for Chart
+	-- Get Compensation for Chart -- 
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveCompensation]
 	AS
 	BEGIN
@@ -115,7 +59,7 @@
 	END
 	GO
 	
-	--get email manager
+	--get email manager --
 	CREATE OR ALTER PROCEDURE SP_RetrieveManagerEmail
 		@departmentID int
 	AS
@@ -129,16 +73,16 @@
 	END
 	GO
 
+	-- Get Request List --
 	CREATE OR ALTER PROCEDURE SP_RetrieveDataStatus
-		@Status nvarchar(max),
-		@Information nvarchar(max)
+		@Status nvarchar(max)
 	AS
 	BEGIN
 	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
 	JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
 	JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
 	JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
-	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE st.StatusName LIKE '%'+@Status+'%' AND app.Information=@Information
+	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE st.StatusName LIKE '%'+@Status+'%'
 	GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
 	END
 	GO

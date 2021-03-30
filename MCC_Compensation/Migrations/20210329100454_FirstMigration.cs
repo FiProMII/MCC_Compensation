@@ -212,7 +212,8 @@ namespace API.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RequestID = table.Column<int>(type: "int", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Information = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

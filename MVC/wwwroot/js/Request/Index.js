@@ -142,7 +142,7 @@ function myTable() {
         "ajax": {
             "url": urlString,
             "type": "Get",
-            "data": { 'status': dataStatus, 'information': value },
+            "data": { 'status': dataStatus },
             "dataSrc": "result"
         },
         "columnDefs": [

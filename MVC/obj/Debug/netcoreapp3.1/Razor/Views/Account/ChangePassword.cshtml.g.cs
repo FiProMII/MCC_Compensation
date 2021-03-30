@@ -157,13 +157,12 @@ namespace AspNetCore
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id=""wrapper"" class=""login-register login-sidebar"" style=""background-image:url(/lib/assets/images/background/login-register.jpg);"">
+    <section id=""wrapper"" class=""login-register login-sidebar"" style=""background-image:url(/lib/assets/images/background/login.jpg);"">
         <div class=""login-box card"">
             <div class=""card-body"">
                 <form class=""form-horizontal form-material"" id=""loginform"" action=""index.html"">
-                    <a href=""javascript:void(0)"" cl");
-                WriteLiteral(@"ass=""text-center db""><img src=""/lib/assets/images/logo-icon.png"" alt=""Home"" /><br /><img src=""/lib/assets/images/logo-text.png"" alt=""Home"" /></a>
-
+                    <a href=""javascript:void(0)"" class=""text");
+                WriteLiteral(@"-center db""><img src=""/lib/assets/images/logo-icon.png"" alt=""Home"" wiidth=""70"" /><br /><img src=""/lib/assets/images/logo-text.png"" alt=""Home"" width=""210"" /></a>
                     <div class=""form-group m-t-40"">
                         <div class=""col-xs-12"">
                             <input class=""form-control"" type=""password"" name=""Password"" id=""newPassword""");
@@ -322,7 +321,7 @@ namespace AspNetCore
                 }
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
-                WriteLiteral("\r\n");
+                WriteLiteral("\r\n    <!-- Sweet-Alert  -->\r\n    <script src=\"//cdn.jsdelivr.net/npm/sweetalert2@10\"></script>\r\n");
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_BodyTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.BodyTagHelper>();
@@ -335,8 +334,8 @@ namespace AspNetCore
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(@"
-
 </html>
+
 <script>
     $('#confirmPassword').keyup(function () {
         var pass = $('#newPassword').val();
@@ -364,13 +363,13 @@ namespace AspNetCore
             headers: { 'Authorization': 'Bearer ' + localStorage.token },
             success: function (data) {
                 Swal.fire({
-                    title: 'Password has been changed',
+                    title: 'You have successfully changed your password',
                     icon: 'success',
-                    confirmB");
-            WriteLiteral("uttonColor: \'#3085d6\',\r\n                    confirmButtonText: \'OK\'\r\n                }).then((result) => {\r\n                    if (result.isConfirmed) {\r\n                        window.location.href = \"");
+          ");
+            WriteLiteral("          confirmButtonColor: \'#3085d6\',\r\n                    confirmButtonText: \'OK\'\r\n                }).then((result) => {\r\n                    if (result.isConfirmed) {\r\n                        window.location.href = \"");
 #nullable restore
-#line 131 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
-                                           Write(Url.Action("Index", "Employee"));
+#line 132 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\ChangePassword.cshtml"
+                                           Write(Url.Action("Index", "Home"));
 
 #line default
 #line hidden

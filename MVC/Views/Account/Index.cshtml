@@ -1,6 +1,6 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Compensation | Sign in";
-    Layout = null;    
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -140,6 +140,29 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
+                Swal.fire({
+                    title: '<strong>Congrats</strong>',
+                    icon: 'info',
+                    html:
+                        'a temporary password has been sent to you by <b>email</b>., ' +
+                        '<br />Please check your email ' +
+                        '<br />Thank you',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Great!',
+                    confirmButtonAriaLabel: 'Thumbs up, great!',
+                    cancelButtonText:
+                        '<i class="fa fa-thumbs-down"></i>',
+                    cancelButtonAriaLabel: 'Thumbs down'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#recoverform').trigger('reset');
+                        $("#recoverform").hide();
+                        $("#loginform").fadeIn();
+                    }
+                })
             }
         });
     });    
@@ -160,7 +183,7 @@
                 if (status == 1) {
                     window.location.href = "@Url.Action("ChangePassword", "Account")";
                 } else {
-                    window.location.href = "@Url.Action("Index", "Employee")";
+                    window.location.href = "@Url.Action("Index", "Dashboard")";
                 }
             }
         });
