@@ -11,11 +11,12 @@ namespace API.Models
     [Table("TB_T_CompensationRequest")]
     public class CompensationRequest
     {
-        [Key][Required]
+        [Key]
+        [Required]
         public int RequestID { get; set; }
 
         public string NIK { get; set; }
-       
+
         public int CompensationID { get; set; }
 
         [DataType(DataType.Date)]

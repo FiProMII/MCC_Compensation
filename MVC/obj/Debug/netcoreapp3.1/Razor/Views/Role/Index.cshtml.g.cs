@@ -41,7 +41,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
    Layout = "_LayoutAdmin";
     ViewData["Title"] = "Role";
 
@@ -60,7 +60,7 @@ namespace AspNetCore
         <div class=""col-md-6 col-8 align-self-center"">
             <h3 class=""text-themecolor m-b-0 m-t-0"">");
 #nullable restore
-#line 14 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+#line 14 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
                                                Write(ViewData["Title"]);
 
 #line default
@@ -68,7 +68,7 @@ namespace AspNetCore
 #nullable disable
             WriteLiteral("</h3>\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"/Dashboard/Index\">Home</a></li>\r\n                <li class=\"breadcrumb-item active\">");
 #nullable restore
-#line 17 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+#line 17 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
                                               Write(ViewData["Title"]);
 
 #line default
@@ -137,7 +137,7 @@ namespace AspNetCore
             <div class=""modal-header"">
                 <h4 class=""modal-title"" id=""mySmallModalLabel""><i class=""icon-key""></i> ");
 #nullable restore
-#line 76 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
+#line 76 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Role\Index.cshtml"
                                                                                    Write(ViewData["Title"]);
 
 #line default

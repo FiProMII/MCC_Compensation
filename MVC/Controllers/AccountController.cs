@@ -67,7 +67,7 @@ namespace MVC.Controllers
             return BadRequest(result);
         }
 
-        public ViewResult Profil() => View();
+        public ViewResult Profil() => View(); 
 
         public ViewResult AccountSetting() => View();
     }

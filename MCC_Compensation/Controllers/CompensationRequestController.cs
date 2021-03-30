@@ -49,7 +49,7 @@ namespace API.Controllers
                 EmailController emailController = new EmailController();
                 try
                 {
-                    var nik = User.FindFirst("NIK").ToString();
+                    var nik = User.FindFirst("NIK").Value;
                     var email = _compensationRequestRepository.GetManagerEmail(nik);
                     emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
                 } catch

@@ -42,13 +42,9 @@ namespace API.Models
         public string ManagerNIK { get; set; }
 
         public virtual Position Position { get; set; }
-
         public virtual Employee Manager { get; set; }
-
         public virtual Account Account { get; set; }
-
         public virtual ICollection<CompensationRequest> CompensationRequests { get; set; }
-
         public virtual ICollection<Approval> Approvals { get; set; }
     }
 }

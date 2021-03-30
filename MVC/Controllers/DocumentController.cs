@@ -1,7 +1,6 @@
 ﻿using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,9 +24,9 @@ namespace MVC.Controllers
         {
             var files = documentVM.File;
             var content = new MultipartFormDataContent();
-            
+
             var date = DateTime.Now.ToString("dd-MM-yy");
-            var nik = User.FindFirst("NIK").ToString();
+            var nik = User.FindFirst("NIK").Value;
 
             foreach (var file in files)
             {

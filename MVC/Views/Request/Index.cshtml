@@ -92,7 +92,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myLargeModalLabel">Detail Request</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
@@ -222,9 +222,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal" id="close" style="visibility: visible">Close</button>
-                <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal" id="reject" style="visibility: visible">Reject</button>
-                <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal" id="approve" style="visibility: visible">Approve</button>
+                <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal" id="close" onclick="reset()">Close</button>
+                <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal" id="reject">Reject</button>
+                <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal" id="approve">Approve</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -489,10 +489,10 @@
             })
         };
 
-        $('#modal').on('hide.bs.modal', function () {
+        function reset() {
             $('#Document').empty();
             $("#tablestatus tbody").empty();
-        });
+        }
     </script>
 }
 

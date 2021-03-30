@@ -101,8 +101,6 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.deps.json
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.runtimeconfig.json
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.runtimeconfig.dev.json

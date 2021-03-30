@@ -18,16 +18,18 @@
 	GO
 	
 	--set status manager to pending when compensationrequest is inserted
-	CREATE OR ALTER   TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
+	CREATE OR ALTER TRIGGER [dbo].[T_CompensationRequest] ON [dbo].[TB_T_CompensationRequest]
 	AFTER INSERT AS
 	BEGIN
 		DECLARE @StatusID INT
 		DECLARE @NIK nvarchar(450)
+		DECLARE @DepartmentID INT 
 		SET @StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%') 
 		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
+		SET @DepartmentID = (SELECT dep.DepartmentID FROM TB_M_Department dep JOIN TB_M_Position pos ON dep.DepartmentID = pos.DepartmentID JOIN TB_M_Employee emp ON pos.PositionID = emp.PositionID WHERE emp.NIK = @NIK)
 
 		INSERT TB_T_Approval 
-		SELECT @StatusID,@NIK,RequestID,GETDATE()
+		SELECT @StatusID,@NIK,RequestID,@DepartmentID,GETDATE()
 		FROM inserted
 	END
 	GO

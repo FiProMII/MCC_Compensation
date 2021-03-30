@@ -50,7 +50,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Event Date</label>
-                                        <input type="date" class="form-control" id="EventDate" name="EventDate" onchange="ValidateDED()">
+                                        <input type="date" class="form-control" id="EventDate" name="EventDate">
                                         <small class="text-danger" id="errorMessage"></small>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                             <label>File Upload</label> 
                                             <div class="add btn btn-sm btn-outline-success pull-right">Add File</div>
                                             <div class="controls">
-                                                <input type="file" name="file" class="custom-file form-control" id="txt_1" accept="image/jpg, image/jpeg, .pdf" required />
+                                                <input type="file" name="file" class="custom-file form-control" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
 
             $.ajax({
                 type: "GET",
-                url: '/compensation/get',
+                url: '/Compensation/Get',
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
@@ -126,7 +126,7 @@
                     $(".element:last").after("<div class='element' id='div_" + nextindex + "'></div>");
                     $("#div_" + nextindex).append("<div class='form-group'><div id='remove_"
                         + nextindex + "' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</div>"
-                        + "<div class='controls'><input type='file' name='file' class='custom-file form-control' id='txt_" 
+                        + "<div class='controls'><input type='file' name='file' class='custom-file form-control' id='txt_"
                         + nextindex + "' accept='image / jpg, image / jpeg, .pdf' required /></div>");
                 }
             });
@@ -140,7 +140,7 @@
             });
         });
 
-        @*function ValidateDED() {
+        function ValidateDED() {
             var dateString = new Date($('#EventDate').val());
             var dateNow = new Date();
             if ($('#EventDate').val() == "") {
@@ -152,7 +152,7 @@
                 $('#messageError').html("The date is <code>Incorrect.</code>");
             }
             $('#messageError').html("");
-        }*@
+        }
 
         $("select#CompensationID").on('change', function () {
             var selectedCompensationText = $('#CompensationID option:selected').text();
@@ -166,7 +166,6 @@
 
         $('#form').submit(function (event) {
             event.preventDefault()
-
             var formData = new FormData($(this)[0]);
             formData.append('compensationID', compensationID)
             formData.append('eventDate', $('#EventDate').val())
@@ -181,7 +180,27 @@
                 enctype: 'multipart/form-data',
                 processData: false,
                 success: function (response) {
-
+                    Swal.fire({
+                        title: '<strong>Congrats</strong>',
+                        icon: 'info',
+                        html:
+                            'You have succesfully <b>send new request</b>, ' +
+                            'please wait for managers ' +
+                            'Approval',
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Great!',
+                        confirmButtonAriaLabel: 'Thumbs up, great!',
+                        cancelButtonText:
+                            '<i class="fa fa-thumbs-down"></i>',
+                        cancelButtonAriaLabel: 'Thumbs down'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "@Url.Action("Index", "Request")";
+                        }
+                    })
                 }
             });
         })
