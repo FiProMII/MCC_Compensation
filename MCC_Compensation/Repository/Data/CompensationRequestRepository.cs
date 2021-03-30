@@ -2,6 +2,7 @@
 using API.Models;
 using API.ViewModels;
 using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,13 @@ namespace API.Repository.Data
     {
         public IConfiguration _configuration;
         readonly DynamicParameters _parameters = new DynamicParameters();
+        private readonly DbSet<Employee> employees;
+        private readonly MyContext _myContext;
         public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
+            _myContext = myContext;
             _configuration = configuration;
+            employees = _myContext.Set<Employee>();
         }
 
         public IEnumerable<RequestListVM> RequestList(string Status, string Information)
@@ -28,6 +33,45 @@ namespace API.Repository.Data
             _parameters.Add("@Status", Status);
             var result = _crRepository.MultipleGet(SPName, _parameters);
             return result;
+        }
+
+        public string GetRecipientEmails(string nik)
+        {
+            string email = null;
+            var employee = employees.Where(e => e.NIK == nik).SingleOrDefault();
+            email = employees.Where(e => e.NIK == employee.ManagerNIK).SingleOrDefault().Email;
+            return email;
+        }
+
+        public IEnumerable<string> GetRecipientEmails(int type, string nik)
+        {
+            IEnumerable<string> emails = Enumerable.Empty<string>();
+            var departmentID = 0;
+            switch (type)
+            {
+                case 1:
+                    departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
+                    emails = employees.Include("Position")
+                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "HR")
+                        .Select(e => e.Email);
+                    break;
+                case 2:
+                    departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
+                    emails = employees.Include("Position")
+                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "Finance")
+                        .Select(e => e.Email);
+                    break;
+            }
+            return emails;
+        }
+
+        public override int Insert(CompensationRequest compensationRequest)
+        {
+            if (compensationRequest == null)
+                throw new ArgumentNullException("entity");
+            entities.Add(compensationRequest);
+            myContext.SaveChanges();
+            return compensationRequest.CompensationID;
         }
     }
 }

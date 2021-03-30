@@ -1,7 +1,6 @@
-﻿using API.Models;
-using API.ViewModels;
+﻿using API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using MVC.Base;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using MVC.Base;
+using API.Models;
 
 namespace MVC.Controllers
 {
@@ -23,7 +26,7 @@ namespace MVC.Controllers
             var content = new MultipartFormDataContent();
             
             var date = DateTime.Now.ToString("dd-MM-yy");
-            var nik = documentVM.NIK;
+            var nik = User.FindFirst("NIK").ToString();
 
             foreach (var file in files)
             {
@@ -43,6 +46,7 @@ namespace MVC.Controllers
                 }, "Files", fileName);
             }
 
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var documentResponse = await httpClient.PostAsync("Document/Upload", content);
             string documentApiResponse = await documentResponse.Content.ReadAsStringAsync();
             var Documents = JsonConvert.DeserializeObject<List<Document>>(documentApiResponse);
@@ -54,6 +58,7 @@ namespace MVC.Controllers
             compensationRequest.RequestDate = DateTime.Now;
             compensationRequest.Documents = Documents;
 
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(compensationRequest), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync("CompensationRequest", stringContent);
             string apiResponse = await response.Content.ReadAsStringAsync();
