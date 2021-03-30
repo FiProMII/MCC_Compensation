@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using API.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Base;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +19,8 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<JsonResult> Validation(string Params)
         {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             StringContent content = new StringContent(JsonConvert.SerializeObject(Params), Encoding.UTF8, "application/json");
-
             using var response = await httpClient.PostAsync("Employee/Validation/?Params=" + Params, content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Employee>>(apiResponse);

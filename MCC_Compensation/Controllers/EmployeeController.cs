@@ -68,13 +68,13 @@ namespace API.Controllers
             if (result != null)
             {
                 responseContent.Status = ResponseVM<string>.StatusType.Success;
-                responseContent.Message = "Data Found";
+                responseContent.Message = "Found";
                 return Ok(responseContent);
             }
             else
             {
                 responseContent.Status = ResponseVM<string>.StatusType.Failed;
-                responseContent.Message = "Not Found";
+                responseContent.Message = "";
                 return BadRequest(responseContent);
             }
         }

@@ -249,9 +249,11 @@
             $('.selectpicker').selectpicker();
         });
     </script>
-
     <script>
-
+        ! function (window, document, $) {
+            "use strict";
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation()
+        }(window, document, jQuery);
     </script>
     <!-- end - This is for export functionality only -->
     @RenderSection("scripts")

@@ -82,7 +82,6 @@
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
-
 <!-- sample modal content -->
 <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
@@ -105,7 +104,7 @@
                                                 <div class="input-group-addon"><i class="ti-id-badge"></i></div>
                                             </div>
                                         </div>
-                                        <small class="text-danger" id="ValidationNIK" style="display:none"><code>NIK</code> already exist</small>
+                                        <small class="text-danger" id="ValidationNIK" style="visibility: hidden"><code>NIK</code> already exist</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -242,4 +241,81 @@
 @section scripts
 {
     <script src="~/js/Employee/Index.js"></script>
+    <script>
+        $('#NIK').change(function () {
+            var nik = $(this).val();
+            $.ajax({
+                url: "/Employee/GetById",
+                type: "GET",
+                data: { 'key': nik },
+                success: function (result) {
+                    if (result != null) {
+                        $('#ValidationNIK').css('visibility', 'visible');
+                        $('#NIK').focus(function () {
+                            $('#ValidationNIK').css('visibility', 'hidden');
+                        });
+                    }
+                    else {
+                        $('#ValidationNIK').css('visibility', 'hidden');
+                    }
+                }
+            })
+        });
+
+        $('#Email').change(function () {
+            var email = $(this).val();
+            if (email == "") {
+                $('#ValidationEmail').css('visibility', 'hidden');
+            }
+            else {
+                $.ajax({
+                    url: "/Employee/Validation",
+                    type: "Post",
+                    data: { 'params': email },
+                    success: function (result) {
+                        var data = result["message"];
+                        if (data != "") {
+                            try {
+                                $('#ValidationEmail').css('visibility', 'visible');
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            $('#Email').focus(function () {
+                                $('#ValidationEmail').css('visibility', 'hidden');
+                            });
+                        }
+                    }
+                })
+            }
+        });
+
+        $('#Phone').change(function () {
+            var phone = $(this).val();
+            if (phone == "") {
+                $('#ValidationPhone').css('visibility', 'hidden');
+            }
+            else {
+                $.ajax({
+                    url: "/Employee/Validation",
+                    type: "Post",
+                    data: { 'params': phone },
+                    success: function (result) {
+                        var data = result["message"];
+                        if (data != "") {
+                            try {
+                                $('#ValidationPhone').css('visibility', 'visible');
+                            } catch (e) {
+                                return false;
+                            }
+                        } else {
+                            $('#Phone').focus(function () {
+                                $('#ValidationPhone').css('visibility', 'hidden');
+                            });
+                        }
+                    }
+                })
+            }
+        });
+    </script>
 }

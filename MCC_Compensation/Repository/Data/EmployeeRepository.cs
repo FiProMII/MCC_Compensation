@@ -22,9 +22,9 @@ namespace API.Repository.Data
         public Employee Validation(string Params)
         {
             var _employeeRepository = new GeneralDapperRepository<Employee>(_configuration);
-
+            var SPName = "SP_RetrieveValidation";
             _parameters.Add("@Params", Params);
-            var result = _employeeRepository.SingleGet("SP_RetrieveValidation", _parameters);
+            var result = _employeeRepository.SingleGet(SPName, _parameters);
             return result;
         }
     }
