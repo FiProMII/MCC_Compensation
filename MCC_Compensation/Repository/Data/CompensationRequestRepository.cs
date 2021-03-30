@@ -16,12 +16,14 @@ namespace API.Repository.Data
         public IConfiguration _configuration;
         readonly DynamicParameters _parameters = new DynamicParameters();
         private readonly DbSet<Employee> employees;
+        private readonly DbSet<AccountRole> accountRoles;
         private readonly MyContext _myContext;
         public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
             _myContext = myContext;
             _configuration = configuration;
             employees = _myContext.Set<Employee>();
+            accountRoles = _myContext.Set<AccountRole>();
         }
 
         public IEnumerable<RequestListVM> RequestList(string Status)
@@ -34,7 +36,7 @@ namespace API.Repository.Data
             return result;
         }
 
-        public string GetRecipientEmails(string nik)
+        public string GetManagerEmail(string nik)
         {
             string email = null;
             var employee = employees.Where(e => e.NIK == nik).SingleOrDefault();
@@ -45,17 +47,15 @@ namespace API.Repository.Data
         public IEnumerable<string> GetRecipientEmails(int type, string nik)
         {
             IEnumerable<string> emails = Enumerable.Empty<string>();
-            var departmentID = 0;
+            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
             switch (type)
             {
                 case 1:
-                    departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
                     emails = employees.Include("Position")
                         .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "HR")
                         .Select(e => e.Email);
                     break;
                 case 2:
-                    departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
                     emails = employees.Include("Position")
                         .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "Finance")
                         .Select(e => e.Email);

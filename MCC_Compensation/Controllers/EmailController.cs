@@ -15,7 +15,7 @@ namespace API.Controllers
     {
         public const string RequestSubject = "Compensation Request";
         public const string TemporaryPasswordSubject = "New Temporary Password";
-        public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Approval/";
+        public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
         public const string TemporaryPasswordBody = "Login with your new temporary password: ";
 
         public enum EmailType
@@ -46,7 +46,7 @@ namespace API.Controllers
             message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("dikarandika.rn@gmail.com", "@Qwerty210995");
+            System.Net.NetworkCredential("mekarbunga2021@gmail.com", "mekarbunga123456");
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
             client.Credentials = basicCredential1;
