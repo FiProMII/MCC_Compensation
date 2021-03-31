@@ -14,7 +14,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class DashboardController : ControllerBase
     {
         private readonly DashboardRepository _dashboardRepository;
@@ -26,8 +26,8 @@ namespace API.Controllers
         }
 
         [EnableCors("AllowOrigin")]
-        [HttpGet("CompensationChart")]
-        [Authorize]
+        [HttpGet("Chart")]
+        [AllowAnonymous]
         public IActionResult Chart()
         {
             var result = _dashboardRepository.Chart();

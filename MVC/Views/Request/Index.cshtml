@@ -95,7 +95,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reset()">×</button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="formApproval">
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -219,12 +219,12 @@
                             </table>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal" id="close" onclick="reset()">Close</button>
+                        <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal" id="Approval" value="2">Reject</button>
+                        <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal" id="Approval" value="3">Approve</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary btn-rounded waves-effect text-left" data-dismiss="modal" id="close" onclick="reset()">Close</button>
-                <button type="submit" class="btn btn-danger btn-rounded waves-effect text-left" data-dismiss="modal" id="reject">Reject</button>
-                <button type="submit" class="btn btn-success btn-rounded waves-effect text-left" data-dismiss="modal" id="approve">Approve</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -601,14 +601,28 @@
             $('#Document').empty();
             $("#tablestatus tbody").empty();
         }
+
+        var statusID;
+        $('#Approval').click(function () {
+            statusID = parseInt($(this).val())
+        })
+
+        $('#formApproval').submit(function (event) {
+            event.preventDefault()
+            var UpdateStatusVM = new Object();
+            UpdateStatusVM.newStatusID = statusID;
+            UpdateStatusVM.requestID = parseInt($('#RequestID').val());
+            $.ajax({
+                type: "POST",
+                url: "/Approval/UpdateStatus",
+                data: JSON.stringify(UpdateStatusVM),
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#pendingTable').DataTable().ajax.reload();
+                }
+            })
+        })
     </script>
 }
-
-<!--
---------------------- Notes -----------------------
-ini yang perlu ditampilin lewat role
-1. Employee >> bisa semua yg ada di index.cshtml, jadi gak ada yg disembunyiin 
-2. Manager, HR, Finance >> tombol detail yg di table diganti sama approval.cshtml, 
-    tombol create di ilangin, status masih tetep ada
-3. Superadmin >> tombol create aja di ilangin
--->

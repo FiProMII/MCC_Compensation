@@ -123,6 +123,8 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="~/lib/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>
@@ -165,10 +167,11 @@
                 })
             }
         });
-    });    
+    });
 
     var obj;
     $("#loginform").submit(function (e) {
+        debugger;
         e.preventDefault();
 
         var form = $(this)
@@ -192,6 +195,14 @@
                 } else {
                     window.location.href = "@Url.Action("Index", "Dashboard")";
                 }
+            },
+            error: function (error) {
+                debugger;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sign in was not successful, please check your email or password again!',
+                })
             }
         });
 

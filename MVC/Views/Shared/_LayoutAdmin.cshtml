@@ -117,7 +117,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li><a href="/Account/AccountSetting"><i class="ti-settings"></i> Account Setting</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="/Account/Index"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="/Account/Index" id="LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -277,6 +277,13 @@
             $('#compensationRequest').show();
             $('#requestList').show();
         }
+
+        $('#LogOut').on('click', function () {
+            localStorage.clear();
+            sessionStorage.clear();
+            localStorage.removeItem();
+            sessionStorage.removeItem();
+        })
     </script>
     <!-- end - This is for export functionality only -->
     @RenderSection("scripts")
