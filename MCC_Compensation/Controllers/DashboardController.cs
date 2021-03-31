@@ -1,14 +1,12 @@
-﻿using API.Repository.Data;
+﻿using API.Base.Controller;
+using API.Repository.Data;
+using API.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -28,9 +26,9 @@ namespace API.Controllers
         [EnableCors("AllowOrigin")]
         [HttpGet("Chart")]
         [AllowAnonymous]
-        public IActionResult Chart()
+        public IActionResult Chart(string Params)
         {
-            var result = _dashboardRepository.Chart();
+            var result = _dashboardRepository.RequestChart(Params);
 
             if (result != null)
             {

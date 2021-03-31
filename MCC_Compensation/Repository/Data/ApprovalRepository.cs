@@ -25,7 +25,6 @@ namespace API.Repository.Data
             _myContext = myContext;
             employees = _myContext.Set<Employee>();
             departments = _myContext.Set<Department>();
-
         }
 
         public IEnumerable<RequestStatusVM> ApprovalStatus(int RequestID)

@@ -65,9 +65,10 @@
 
 	-- Get Compensation for Chart -- 
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveChart]
+	@Params nvarchar(max)
 	AS
 	BEGIN
-		SELECT COUNT(RequestID) AS Request, YEAR(RequestDate) AS [Year]
+		SELECT COUNT(@Params) AS Request, YEAR(RequestDate) AS [Year]
 		FROM TB_T_CompensationRequest GROUP BY YEAR(RequestDate)
 		ORDER BY YEAR(RequestDate)
 	END
