@@ -71,5 +71,11 @@ namespace MVC.Controllers
         public ViewResult Profil() => View(); 
 
         public ViewResult AccountSetting() => View();
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Ok();
+        }
     }
 }

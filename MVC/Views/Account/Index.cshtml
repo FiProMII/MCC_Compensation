@@ -207,6 +207,12 @@
     $('#to-login').on("click", function () {
         $("#recoverform").hide();
         $("#loginform").fadeIn();
+        $.ajax({
+            type: "GET",
+            url: "/Account/Logout",
+            success: function (data) {
+            }
+        });
     });
 
     function parseJwt(token) {
