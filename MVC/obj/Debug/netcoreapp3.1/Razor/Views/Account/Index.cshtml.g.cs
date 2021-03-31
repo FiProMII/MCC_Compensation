@@ -59,7 +59,7 @@ namespace AspNetCore
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 1 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
+#line 1 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
   
     ViewBag.Title = "Compensation | Sign in";
     Layout = null;
@@ -94,7 +94,7 @@ namespace AspNetCore
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n    <title>");
 #nullable restore
-#line 18 "C:\Users\Acer\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
+#line 18 "C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\Views\Account\Index.cshtml"
       Write(ViewBag.Title);
 
 #line default
@@ -435,7 +435,6 @@ namespace AspNetCore
 
     var obj;
     $(""#loginform"").submit(function (e) {
-        debugger;
         e.preventDefault();
 
         var form = $(this)

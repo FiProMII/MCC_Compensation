@@ -119,3 +119,51 @@
 		GROUP BY PositionName, StatusName, DepartmentName, ApprovalDate
 	END
 	GO
+	
+	--update status, set pending to next department if not rejected
+	CREATE OR ALTER PROCEDURE SP_UpdateStatus 
+	@RequestID int,
+	@DepartmentID int,
+	@NewStatusID int,
+	@NIK nvarchar(450)
+	AS
+	BEGIN
+		DECLARE @PendingID int
+		SET @PendingID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%')
+
+		DECLARE @RejectedID int
+		SET @RejectedID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Rejected%')
+
+		DECLARE @FinanceID int
+		DECLARE @HRID int
+		SET @FinanceID = (SELECT DepartmentID FROM TB_M_Department WHERE DepartmentName LIKE '%Finance%')
+		SET @HRID = (SELECT DepartmentID FROM TB_M_Department WHERE DepartmentName LIKE '%HR%')
+
+		IF (@DepartmentID != @FinanceID) AND (@NewStatusID != @RejectedID)
+		BEGIN
+			IF (@DepartmentID = @HRID)
+			BEGIN
+				INSERT INTO TB_T_Approval (StatusID, RequestID, DepartmentID, ApprovalDate)
+				VALUES (@PendingID, @RequestID, @FinanceID, GETDATE())
+
+				UPDATE TB_T_Approval
+				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
+				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+			END
+			ELSE
+			BEGIN
+				INSERT INTO TB_T_Approval (StatusID, RequestID, DepartmentID, ApprovalDate)
+				VALUES (@PendingID, @RequestID, @HRID, GETDATE())
+
+				UPDATE TB_T_Approval
+				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
+				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+			END
+		END
+		ELSE
+		BEGIN
+			UPDATE TB_T_Approval
+			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
+			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+		END
+	END
