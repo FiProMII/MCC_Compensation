@@ -46,5 +46,25 @@ namespace API.Controllers
                 return StatusCode(500, responseContent);
             }
         }
+
+        [HttpPost("UpdateApprovalStatus")]
+        public IActionResult UpdateApprovalStatus(UpdateStatusVM updateStatusVM)
+        {
+            ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
+            var result = _approvalRepository.UpdateApprovalStatus(updateStatusVM);
+
+            if (result > 0)
+            {
+                responseContent.Status = ResponseVM<Approval>.StatusType.Success;
+                responseContent.Message = "Data was updated";
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<Approval>.StatusType.Failed;
+                responseContent.Message = "Data was not updated";
+                return StatusCode(500, responseContent);
+            }
+        }
     }
 }

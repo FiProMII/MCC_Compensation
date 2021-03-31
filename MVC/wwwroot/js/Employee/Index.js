@@ -6,49 +6,6 @@
     });
 }
 
-var positionDropdown = '<option value="-1">Please select a position</option>';
-var managerDropdown = '<option value="-1">Please select a manager</option>';
-function GetPositionDropdown(selectedDepartment) {
-    $.ajax({
-        type: "GET",
-        url: '/Position/Get',
-        success: function (result) {
-            var data = result['result']
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].departmentID == selectedDepartment) {
-                    positionDropdown += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
-                    $("#PositionID").html(positionDropdown);
-                }
-            }
-        }
-    });
-}
-
-function GetManagerDropdown(selectedPosition, selectedDepartment) {
-    $.ajax({
-        type: "GET",
-        url: '/Employee/Get',
-        success: function (result) {
-
-            var data = result['result']
-            if (selectedPosition != "RM") {
-                $('#ManagerNIK').removeAttr("disabled");
-                managerDropdown = '<option value="-1">Please select a manager</option>';
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].position.departmentID == selectedDepartment) {
-                        managerDropdown += '<option value="' + data[i].nik + '">' + data[i].employeeName + '</option>';
-                        $("#ManagerNIK").html(managerDropdown);
-                    }
-                }
-            } else {
-                managerDropdown = '< option value = "-1" > Please select a manager</option >';
-                $("#ManagerNIK").html(managerDropdown);
-                $('#ManagerNIK').prop("disabled", true);
-            }
-        }
-    });
-}
-
 var isUpdate = 0;
 $(document).ready(function () {
     $.ajax({
@@ -77,8 +34,7 @@ $(document).ready(function () {
     var departmentDropdown = '<option value="-1">Please select a department</option>';
     $.ajax({
         type: "GET",
-        url: '/Department/Get',
-        headers: { "Authorization": sessionStorage.token },
+        url: '/department/get',
         success: function (result) {
             var data = result['result']
             for (var i = 0; i < data.length; i++) {
@@ -90,14 +46,49 @@ $(document).ready(function () {
 
     $("select#DepartmentDropdown").on('change', function () {
         var selectedDepartment = $('#DepartmentDropdown option:selected').val();
-        GetPositionDropdown(selectedDepartment);
-    })
+        $.ajax({
+            type: "GET",
+            url: '/position/get',
+            success: function (result) {
+                var positionDropdown = '<option value="-1">Please select a position</option>';
+                var data = result['result']
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].departmentID == selectedDepartment) {
+                        positionDropdown += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
+                        $("#PositionID").html(positionDropdown);
+                    }
+                }
+            }
+        });
 
-    $("select#PositionID").on('change', function () {
-        var selectedPosition = $('#PositionID option:selected').text();
-        var selectedDepartment = $('#DepartmentDropdown option:selected').val();
-        GetManagerDropdown(selectedPosition, selectedDepartment)
-    })
+        $("select#PositionID").on('change', function () {
+            var selectedPosition = $('#PositionID option:selected').text();
+            var selectedDepartment = $('#DepartmentDropdown option:selected').val();
+            $.ajax({
+                type: "GET",
+                url: '/Employee/Get',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                success: function (result) {
+                    var data = result['result']
+                    if (selectedPosition != "RM") {
+                        $('#ManagerNIK').removeAttr("disabled");
+                        managerDropdown = '<option value="-1">Please select a manager</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].position.departmentID == selectedDepartment) {
+                                managerDropdown += '<option value="' + data[i].nik + '">' + data[i].employeeName + '</option>';
+                                $("#ManagerNIK").html(managerDropdown);
+                            }
+                        }
+                    } else {
+                        managerDropdown = '< option value = "-1" > Please select a manager</option >';
+                        $("#ManagerNIK").html(managerDropdown);
+                        $('#ManagerNIK').prop("disabled", true);
+                    }
+                }
+            });
+        })
+    });
+
 
     $('#table_id').DataTable({
         dom: 'Bfrtip',
@@ -191,18 +182,18 @@ function Readonly() {
     $('#Email').attr('readonly', false);
     $('#ValidationNIK').hide();
     $('#ValidationEmail').hide();
-    validator.resetForm();
 }
 
 $('#form').submit(function (event) {
-    debugger;
     event.preventDefault();
     var form = $(this);
     var nikValue = $('#NIK').val()
+
     var myCheckboxes = new Array();
     $("input:checked").each(function () {
         myCheckboxes.push(parseInt($(this).val()));
     });
+
     var urlString;
     if (isUpdate == 1)
         urlString = "/Employee/Put"
@@ -222,7 +213,6 @@ $('#form').submit(function (event) {
                 timer: 1500
             })
             if (isUpdate == 1) {
-                var nik = "117104"
                 $.ajax({
                     type: "POST",
                     url: "/AccountRole/Delete",
@@ -289,12 +279,10 @@ function Get(id) {
             $('#BirthPlace').val(data.birthPlace);
             $('#BirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
             $('#JoinDate').val(moment(data.joinDate).format('YYYY-MM-DD'));
-            $('#DepartmentDropdown').val(data.position.departmentID);
-            GetManagerDropdown(data.positionID, data.position.departmentID);
+            $('#DepartmentDropdown').val(data.position.departmentID).change();
+            $('#PositionID').val(data.positionID).change();
             if (data.manager != null)
                 $('#ManagerNIK').val(data.manager.nik).change();
-            GetPositionDropdown(data.position.departmentID);
-            $('#PositionID').val(data.positionID);
             isUpdate = 1;
         }
     });

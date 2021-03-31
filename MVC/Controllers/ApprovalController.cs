@@ -30,6 +30,22 @@ namespace MVC.Controllers
             return BadRequest(result);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateStatus([FromBody] UpdateStatusVM updateStatusVM)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            updateStatusVM.ApprovalDate = DateTime.Now;
+            updateStatusVM.NIK = User.FindFirst("NIK").Value;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(updateStatusVM), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("Approval", content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<Approval>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
         [HttpGet]
         public async Task<IActionResult> ApprovalStatus(int RequestID)
         {

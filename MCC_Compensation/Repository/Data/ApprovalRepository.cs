@@ -29,5 +29,17 @@ namespace API.Repository.Data
             var result = _crRepository.MultipleGet(SPName, _parameters);
             return result;
         }
+
+        public int UpdateApprovalStatus(UpdateStatusVM updateStatusVM)
+        {
+            var _crRepository = new GeneralDapperRepository<RequestStatusVM>(_configuration);
+
+            var SPName = "SP_UpdateStatus";
+            _parameters.Add("@RequestID", updateStatusVM.RequestID);
+            _parameters.Add("@DepartmentID", updateStatusVM.RequestID);
+            _parameters.Add("@NewStatusID", updateStatusVM.RequestID);
+            var result = _crRepository.Execute(SPName, _parameters);
+            return result;
+        }
     }
 }

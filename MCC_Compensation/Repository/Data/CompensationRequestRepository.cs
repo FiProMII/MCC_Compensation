@@ -70,7 +70,8 @@ namespace API.Repository.Data
                 throw new ArgumentNullException("entity");
             entities.Add(compensationRequest);
             myContext.SaveChanges();
-            return compensationRequest.CompensationID;
+            var requestID = compensationRequest.RequestID;
+            return requestID;
         }
     }
 }
