@@ -44,26 +44,6 @@ namespace API.Repository.Data
             return email;
         }
 
-        public IEnumerable<string> GetRecipientEmails(int type, string nik)
-        {
-            IEnumerable<string> emails = Enumerable.Empty<string>();
-            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
-            switch (type)
-            {
-                case 1:
-                    emails = employees.Include("Position")
-                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "HR")
-                        .Select(e => e.Email);
-                    break;
-                case 2:
-                    emails = employees.Include("Position")
-                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "Finance")
-                        .Select(e => e.Email);
-                    break;
-            }
-            return emails;
-        }
-
         public override int Insert(CompensationRequest compensationRequest)
         {
             if (compensationRequest == null)

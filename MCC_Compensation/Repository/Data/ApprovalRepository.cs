@@ -50,5 +50,25 @@ namespace API.Repository.Data
             var result = _crRepository.Execute(SPName, _parameters);
             return result;
         }
+
+        public IEnumerable<string> GetRecipientEmails(int type, string nik)
+        {
+            IEnumerable<string> emails = Enumerable.Empty<string>();
+            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
+            switch (type)
+            {
+                case 1:
+                    emails = employees.Include("Position")
+                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "HR")
+                        .Select(e => e.Email);
+                    break;
+                case 2:
+                    emails = employees.Include("Position")
+                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "Finance")
+                        .Select(e => e.Email);
+                    break;
+            }
+            return emails;
+        }
     }
 }

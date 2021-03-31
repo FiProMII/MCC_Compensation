@@ -57,6 +57,9 @@ namespace API.Repository.Data
                     {
                         return null;
                     }
+                } else
+                {
+                    return null;
                 }
             }
             return loginResult;

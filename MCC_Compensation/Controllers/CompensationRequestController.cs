@@ -68,20 +68,6 @@ namespace API.Controllers
             }
         }
 
-        //public IEnumerable<string> GetRecipientEmails()
-        //{
-        //    var nik = User.FindFirst("NIK").ToString();
-        //    IEnumerable<string> emails = Enumerable.Empty<string>();
-        //    if (User.IsInRole("Manager"))
-        //    {
-        //        emails = _compensationRequestRepository.GetRecipientEmails(1, nik);
-        //    } else if (User.IsInRole("HR"))
-        //    {
-        //        emails = _compensationRequestRepository.GetRecipientEmails(2, nik);
-        //    } 
-        //    return emails;
-        //}
-
         [HttpGet("RequestList")]
         public IActionResult RequestList(string Status)
         {
