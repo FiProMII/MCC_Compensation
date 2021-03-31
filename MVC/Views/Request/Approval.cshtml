@@ -226,13 +226,12 @@
 
         $('#form').submit(function (event) {
             event.preventDefault()
-            var Approval = new Object();
-            Approval.statusID = statusID;
-            Approval.nik = managerNIK;
-            Approval.requestID = requestID;
+            var UpdateStatusVM = new Object();
+            UpdateStatusVM.newStatusID = statusID;
+            UpdateStatusVM.requestID = requestID;
             $.ajax({
                 type: "POST",
-                url: "/Approval/Post",
+                url: "/Approval/UpdateStatus",
                 data: JSON.stringify(Approval),
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 contentType: "application/json; charset=utf-8",
