@@ -38,7 +38,7 @@
                                 <div class="col-md-12">
                                     <center class="m-t-30">
                                         <img src="/lib/assets/images/users/user.png" class="img-circle" width="100" />
-                                        <h4 class="card-title m-t-10" id="NIK">@ViewBag.NIK</h4>
+                                        <h4 class="card-title m-t-10" id="NIK"></h4>
                                         <h6 class="card-subtitle" id="EmployeeName"></h6>
                                     </center>
                                 </div>
@@ -128,11 +128,11 @@
 {
     <script>
         $(document).ready(function () {
-            var id = $('#NIK').val();
+            var nik = sessionStorage.getItem("NIK");
             $.ajax({
                 url: "/Employee/GetById/",
                 type: "GET",
-                data: {"key": id},
+                data: {"key": nik},
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result["result"];

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\MCC_Compensation\API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Employee\" />
+  </ItemGroup>
+
 </Project>

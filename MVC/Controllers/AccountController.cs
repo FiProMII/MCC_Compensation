@@ -29,6 +29,7 @@ namespace MVC.Controllers
 
             if (response.IsSuccessStatusCode)
             {
+                var Role = User.IsInRole("RM");
                 HttpContext.Session.SetString("Token", result.Result);
                 return Ok(result);
             }
