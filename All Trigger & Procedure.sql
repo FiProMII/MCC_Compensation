@@ -104,6 +104,8 @@
 	END
 	GO
 
+	EXEC SP_RetrieveDataStatus 'APproved'
+
 	-- Get Approval Status
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveApprovalStatus]
 	@RequestID int
@@ -143,8 +145,8 @@
 		BEGIN
 			IF (@DepartmentID = @HRID)
 			BEGIN
-				INSERT INTO TB_T_Approval (StatusID, RequestID, DepartmentID, ApprovalDate)
-				VALUES (@PendingID, @RequestID, @FinanceID, GETDATE())
+				INSERT INTO TB_T_Approval (StatusID, NIK, RequestID, DepartmentID, ApprovalDate)
+				VALUES (@PendingID, @NIK, @RequestID, @FinanceID, GETDATE())
 
 				UPDATE TB_T_Approval
 				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
