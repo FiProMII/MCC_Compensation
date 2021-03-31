@@ -18,7 +18,7 @@
             </ol>
         </div>
         <div class="col-md-6 col-4 align-self-center">
-            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create</a>
+            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success" id="CreateRequest"><i class="mdi mdi-plus-circle"></i> Create</a>
             <div class="dropdown pull-right m-r-10 hidden-sm-down">
                 <select class="selectpicker m-b-20 m-r-10" data-style="btn-secondary" id="View">
                     <option data-tokens="All" value="All">All Request</option>
@@ -240,6 +240,14 @@
         var isUpdate = 0, value, urlString, dataStatus;
         $(document).ready(function () {
             defaultTable();
+            debugger;
+            var data = JSON.parse(localStorage.getItem("Role"));
+            if (data.includes("Super Admin") || data.includes("RM") || data.includes("HR") || data.includes("Finance")) {
+                $('#CreateRequest').hide()
+            } else {
+                $('#CreateRequest').show()
+            }
+            debugger;
         });
 
         $('#View').on('change', function () {
@@ -248,17 +256,117 @@
             urlString = "/Request/RequestList";
             if (value == '0') {
                 dataStatus = "Pending";
-                myTable();
+                pendingTable();
+                $('#close').hide();
             } else if (value == '1') {
                 dataStatus = "Approve";
                 myTable();
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
             } else if (value == '-1') {
                 dataStatus = "Rejected";
                 myTable();
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
             } else {
                 defaultTable();
+                $('#close').show();
+                $('#reject').hide();
+                $('#approve').hide();
             }
         });
+
+        function pendingTable() {
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5, 6]
+                        }
+                    }
+                ],
+                "order": [],
+                "responsive": true,
+                "filter": true,
+                "orderMulti": false,
+                "ajax": {
+                    "url": "/Request/Get",
+                    "type": "Get",
+                    "dataSrc": "result"
+                },
+                "columnDefs": [
+                    {
+                        "targets": [1, 3, 4],
+                        "visible": false,
+                    },
+                    {
+                        "targets": [0, 8],
+                        "orderable": false,
+                    },
+                    {
+                        "targets": [0, 1, 3, 5, 6, 7, 8],
+                        "className": "texUrl-center",
+                    },
+                    {
+                        "order": [[2, 'asc']]
+                    }
+                ],
+                "columns": [
+                    {
+                        "data": null,
+                        "name": "no",
+                        "autowidth": true,
+                        "render": function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    { "data": 'requestID' },
+                    { "data": 'employee.employeeName' },
+                    {
+                        "data": 'employee.joinDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    { "data": 'employee.manager.employeeName' },
+                    { "data": 'compensation.compensationName' },
+                    {
+                        "data": 'eventDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    {
+                        "data": 'requestDate',
+                        "render": function (data, type, row) {
+                            return moment(data).format('DD/MM/YYYY');
+                        }
+                    },
+                    {
+                        "data": 'requestID',
+                        "render": function (data, type, row, meta) {
+                            return '<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Needed" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Approval</button>'
+                        }
+                    }
+                ]
+            })
+        }
 
         function defaultTable() {
             $('#table_id').DataTable({

@@ -17,7 +17,7 @@
     <link href="~/lib/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet" />
     <!-- Color picker plugins css -->
     <link href="~/lib/assets/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet" />
-    <!-- Toast CSS -->   
+    <!-- Toast CSS -->
     <link href="~/lib/assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="~/lib/css/style.css" rel="stylesheet" />
@@ -102,13 +102,14 @@
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <ul class="dropdown-user">
                                     <li>
-                                        <div class="dw-user-box">
+                                        <center class="dw-user-box">
                                             <div class="u-img"><img src="/lib/assets/images/users/user.png" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p>
+                                                <br />
+                                                <h4 id="userName"></h4>
+                                                <p class="text-muted" id="userEmail"></p>
                                             </div>
-                                        </div>
+                                        </center>
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="/Account/Profil"><i class="ti-user"></i> My Profile</a></li>
@@ -141,22 +142,22 @@
                             <a class="" href="/Dashboard/index" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Management</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false" id="management"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Management</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/Department/Index">Department List</a></li>
-                                <li><a href="/Position/Index">Position List</a></li>
-                                <li><a href="/Employee/Index">Employees List</a></li>
-                                <li><a href="/Compensation/Index">Compensation List</a></li>
-                                <li><a href="/Status/Index">Status List</a></li>
+                                <li><a href="/Department/Index" id="department">Department List</a></li>
+                                <li><a href="/Position/Index" id="position">Position List</a></li>
+                                <li><a href="/Employee/Index" id="employee">Employees List</a></li>
+                                <li><a href="/Compensation/Index" id="compensation">Compensation List</a></li>
+                                <li><a href="/Status/Index" id="status">Status List</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a class="" href="/Role/index" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">User Role</span></a>
+                            <a class="" href="/Role/index" aria-expanded="false" id="userRole"><i class="mdi mdi-account-key"></i><span class="hide-menu">User Role</span></a>
                         </li>
                         <li class="nav-devider"></li>
-                        <li class="nav-small-cap">Compensation Request</li>
+                        <li class="nav-small-cap" id="compensationRequest">Compensation Request</li>
                         <li>
-                            <a class="" href="/Request/Index" aria-expanded="false"><i class="mdi mdi-clipboard-flow"></i><span class="hide-menu">Request List</span></a>
+                            <a class="" href="/Request/Index" aria-expanded="false" id="RequestList"><i class="mdi mdi-clipboard-flow"></i><span class="hide-menu">Request List</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -236,20 +237,46 @@
     <!-- Toast Javascript -->
     <script src="~/lib/assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script src="~/lib/js/toastr.js"></script>
-    <script src="~/lib/js/validation.js"></script>
     <!-- Page Javascript -->
     <script src="~/lib/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-
     <script>
         jQuery(document).ready(function () {
             $('.selectpicker').selectpicker();
         });
-    </script>
-    <script>
-        ! function (window, document, $) {
-            "use strict";
-            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation()
-        }(window, document, jQuery);
+
+        debugger;
+        $('#userEmail').text(sessionStorage.getItem("Email"));
+        $('#userName').text(sessionStorage.getItem("FullName"));
+        var data = JSON.parse(localStorage.getItem("Role"));
+        if (data.includes("Super Admin")) {
+            $('#management').show();
+            $('#department').show();
+            $('#position').show();
+            $('#employee').show();
+            $('#status').show();
+            $('#userRole').show();
+            $('#compensationRequest').show();
+            $('#requestList').show();
+        }
+        else if (data.includes("RM") || data.includes("Employee") || data.includes("Finance")) {
+            $('#management').hide();
+            $('#department').hide();
+            $('#position').hide();
+            $('#employee').hide();
+            $('#status').hide();
+            $('#userRole').hide();
+            $('#compensationRequest').show();
+            $('#requestList').show();
+        } else if (data.includes("HR")) {
+            $('#management').show();
+            $('#department').show();
+            $('#position').show();
+            $('#employee').show();
+            $('#status').hide();
+            $('#userRole').hide();
+            $('#compensationRequest').show();
+            $('#requestList').show();
+        }
     </script>
     <!-- end - This is for export functionality only -->
     @RenderSection("scripts")
