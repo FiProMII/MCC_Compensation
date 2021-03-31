@@ -18,10 +18,11 @@ namespace API.Repository.Data
             _configuration = configuration;
         }
 
-        public IEnumerable<ChartVM> Chart()
+        public IEnumerable<ChartVM> Chart(string Params)
         {
             var _dashboardRepository = new GeneralDapperRepository<ChartVM>(_configuration);
-            var result = _dashboardRepository.MultipleGet("SP_RetrieveChart", null);
+            _parameters.Add("@Params", Params);
+            var result = _dashboardRepository.MultipleGet("SP_RetrieveChart", _parameters);
             return result;
         }
     }

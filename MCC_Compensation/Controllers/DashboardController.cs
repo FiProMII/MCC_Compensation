@@ -26,9 +26,9 @@ namespace API.Controllers
         [EnableCors("AllowOrigin")]
         [HttpGet("Chart")]
         [AllowAnonymous]
-        public IActionResult Chart(string Params)
+        public IActionResult Chart()
         {
-            var result = _dashboardRepository.RequestChart(Params);
+            var result = _dashboardRepository.Chart("CompensationID");
 
             if (result != null)
             {

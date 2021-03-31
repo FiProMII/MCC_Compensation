@@ -56,6 +56,7 @@ namespace MCC_Compensation
             services.AddScoped<PositionRepository>();
             services.AddScoped<RoleRepository>();
             services.AddScoped<StatusRepository>();
+            services.AddScoped<DashboardRepository>();
 
             services.AddDbContext<MyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyContext")).UseLazyLoadingProxies());
@@ -98,7 +99,7 @@ namespace MCC_Compensation
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:443309").AllowAnyHeader());
             });
         }
 
@@ -114,7 +115,7 @@ namespace MCC_Compensation
 
             app.UseRouting();
 
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(options => options.WithOrigins("https://localhost:443309").AllowAnyHeader());
 
             app.UseAuthentication();
 

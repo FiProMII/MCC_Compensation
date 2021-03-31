@@ -74,7 +74,7 @@
             success: function (result) {
                 var data = [];
                 var categories = [];
-                result.result.map(x => { data.push(x.employee); });
+                result.result.map(x => { data.push(x.request); });
                 result.result.map(x => { categories.push(x.year); });
                 chart.updateSeries([
                     {
