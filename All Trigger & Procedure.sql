@@ -91,7 +91,7 @@
 	GO
 
 	-- Get Request List --
-	CREATE OR ALTER PROCEDURE SP_RetrieveDataStatus
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDataStatus]
 		@Status nvarchar(max)
 	AS
 	BEGIN
@@ -121,7 +121,7 @@
 	GO
 	
 	--update status, set pending to next department if not rejected
-	CREATE OR ALTER PROCEDURE SP_UpdateStatus 
+	CREATE OR ALTER PROCEDURE [dbo].[SP_UpdateStatus] 
 	@RequestID int,
 	@DepartmentID int,
 	@NewStatusID int,
