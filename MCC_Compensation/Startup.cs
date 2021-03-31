@@ -98,7 +98,7 @@ namespace MCC_Compensation
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44309"));
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
         }
 
@@ -114,12 +114,11 @@ namespace MCC_Compensation
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            
 
             app.UseEndpoints(endpoints =>
             {
@@ -134,8 +133,6 @@ namespace MCC_Compensation
                 /*app.UseDeveloperExceptionPage();*/
             }
             );
-            
-            app.UseCors(options => options.WithOrigins("https://localhost:44309"));
         }
     }
 }

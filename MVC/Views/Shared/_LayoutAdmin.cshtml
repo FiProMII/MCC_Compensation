@@ -239,12 +239,14 @@
     <script src="~/lib/js/toastr.js"></script>
     <!-- Page Javascript -->
     <script src="~/lib/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <!-- Apex Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Set Role -->
     <script>
         jQuery(document).ready(function () {
             $('.selectpicker').selectpicker();
         });
 
-        debugger;
         $('#userEmail').text(sessionStorage.getItem("Email"));
         $('#userName').text(sessionStorage.getItem("FullName"));
         var data = JSON.parse(localStorage.getItem("Role"));

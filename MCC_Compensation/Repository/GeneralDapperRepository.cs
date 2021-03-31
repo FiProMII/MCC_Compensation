@@ -30,7 +30,7 @@ namespace API.Repository
 
         public IEnumerable<Entity> MultipleGet(string query, DynamicParameters parameters)
         {
-            var result = _connection.Query<Entity>(query, parameters, commandType: CommandType.StoredProcedure);
+            var result = _connection.Query<Entity>(query, parameters, commandType: CommandType.StoredProcedure).ToList();
             return result;
         }
 
