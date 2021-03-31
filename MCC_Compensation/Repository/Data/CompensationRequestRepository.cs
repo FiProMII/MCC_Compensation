@@ -17,6 +17,7 @@ namespace API.Repository.Data
         readonly DynamicParameters _parameters = new DynamicParameters();
         private readonly DbSet<Employee> employees;
         private readonly DbSet<AccountRole> accountRoles;
+        private readonly DbSet<Approval> approvals;
         private readonly MyContext _myContext;
         public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
@@ -24,6 +25,7 @@ namespace API.Repository.Data
             _configuration = configuration;
             employees = _myContext.Set<Employee>();
             accountRoles = _myContext.Set<AccountRole>();
+            approvals = _myContext.Set<Approval>();
         }
 
         public IEnumerable<RequestListVM> RequestList(string Status)
@@ -44,24 +46,11 @@ namespace API.Repository.Data
             return email;
         }
 
-        public IEnumerable<string> GetRecipientEmails(int type, string nik)
+        public IEnumerable<CompensationRequest> GetRequestsByDepartment(string nik)
         {
-            IEnumerable<string> emails = Enumerable.Empty<string>();
-            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).SingleOrDefault().Position.DepartmentID;
-            switch (type)
-            {
-                case 1:
-                    emails = employees.Include("Position")
-                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "HR")
-                        .Select(e => e.Email);
-                    break;
-                case 2:
-                    emails = employees.Include("Position")
-                        .Where(e => e.Position.DepartmentID == departmentID && e.Position.PositionName == "Finance")
-                        .Select(e => e.Email);
-                    break;
-            }
-            return emails;
+            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).FirstOrDefault().Position.DepartmentID;
+            var requestList = approvals.Include("CompensationRequest").Where(a => a.DepartmentID == departmentID).Select(a => a.CompensationRequest);
+            return requestList.ToList();
         }
 
         public override int Insert(CompensationRequest compensationRequest)

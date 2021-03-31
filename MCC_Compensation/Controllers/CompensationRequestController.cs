@@ -68,20 +68,6 @@ namespace API.Controllers
             }
         }
 
-        //public IEnumerable<string> GetRecipientEmails()
-        //{
-        //    var nik = User.FindFirst("NIK").ToString();
-        //    IEnumerable<string> emails = Enumerable.Empty<string>();
-        //    if (User.IsInRole("Manager"))
-        //    {
-        //        emails = _compensationRequestRepository.GetRecipientEmails(1, nik);
-        //    } else if (User.IsInRole("HR"))
-        //    {
-        //        emails = _compensationRequestRepository.GetRecipientEmails(2, nik);
-        //    } 
-        //    return emails;
-        //}
-
         [HttpGet("RequestList")]
         public IActionResult RequestList(string Status)
         {
@@ -98,6 +84,28 @@ namespace API.Controllers
             else
             {
                 responseContent.Status = ResponseVM<IEnumerable<RequestListVM>>.StatusType.Failed;
+                responseContent.Message = "Data not found";
+                return StatusCode(500, responseContent);
+            }
+        }
+
+        [HttpGet("RequestByDepartmentList")]
+        public IActionResult GetRequestsByDepartment()
+        {
+            ResponseVM<IEnumerable<CompensationRequest>> responseContent = new ResponseVM<IEnumerable<CompensationRequest>>();
+            var nik = User.FindFirst("NIK").Value;
+            var result = _compensationRequestRepository.GetRequestsByDepartment(nik);
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<IEnumerable<CompensationRequest>>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<IEnumerable<CompensationRequest>>.StatusType.Failed;
                 responseContent.Message = "Data not found";
                 return StatusCode(500, responseContent);
             }

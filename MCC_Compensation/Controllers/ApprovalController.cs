@@ -53,10 +53,27 @@ namespace API.Controllers
             ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
             var result = _approvalRepository.UpdateApprovalStatus(updateStatusVM);
 
-            if (result > 0)
+            if (result > 1)
             {
                 responseContent.Status = ResponseVM<Approval>.StatusType.Success;
                 responseContent.Message = "Data was updated";
+
+                EmailController emailController = new EmailController();
+                try
+                {
+                    var emails = GetRecipientEmails();
+                    foreach (var email in emails)
+                    {
+                        emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
+                    }
+                }
+                catch
+                {
+                    responseContent.Status = ResponseVM<Approval>.StatusType.Failed;
+                    responseContent.Message = "Email is not sent";
+                    return StatusCode(500, responseContent);
+                }
+
                 return Ok(responseContent);
             }
             else
@@ -65,6 +82,21 @@ namespace API.Controllers
                 responseContent.Message = "Data was not updated";
                 return StatusCode(500, responseContent);
             }
+        }
+
+        public IEnumerable<string> GetRecipientEmails()
+        {
+            var nik = User.FindFirst("NIK").Value;
+            IEnumerable<string> emails = Enumerable.Empty<string>();
+            if (User.IsInRole("Manager"))
+            {
+                emails = _approvalRepository.GetRecipientEmails(1, nik);
+            }
+            else if (User.IsInRole("HR"))
+            {
+                emails = _approvalRepository.GetRecipientEmails(2, nik);
+            }
+            return emails;
         }
     }
 }
