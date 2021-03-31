@@ -49,5 +49,17 @@ namespace MVC.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> RequestByDepartmentList()
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            var response = await httpClient.GetAsync("CompensationRequest/RequestByDepartmentList");
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<CompensationRequest>>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

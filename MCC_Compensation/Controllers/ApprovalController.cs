@@ -53,7 +53,7 @@ namespace API.Controllers
             ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
             var result = _approvalRepository.UpdateApprovalStatus(updateStatusVM);
 
-            if (result > 0)
+            if (result > 1)
             {
                 responseContent.Status = ResponseVM<Approval>.StatusType.Success;
                 responseContent.Message = "Data was updated";
@@ -61,7 +61,6 @@ namespace API.Controllers
                 EmailController emailController = new EmailController();
                 try
                 {
-                    var nik = User.FindFirst("NIK").Value;
                     var emails = GetRecipientEmails();
                     foreach (var email in emails)
                     {

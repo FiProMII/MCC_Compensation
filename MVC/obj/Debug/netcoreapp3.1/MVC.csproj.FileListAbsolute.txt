@@ -2,6 +2,7 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.ex
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.StaticWebAssets.xml
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.exe
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.deps.json
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.runtimeconfig.json
@@ -100,4 +101,3 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.cs
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dll
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
-C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.StaticWebAssets.xml

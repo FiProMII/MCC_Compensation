@@ -17,6 +17,7 @@ namespace API.Repository.Data
         readonly DynamicParameters _parameters = new DynamicParameters();
         private readonly DbSet<Employee> employees;
         private readonly DbSet<AccountRole> accountRoles;
+        private readonly DbSet<Approval> approvals;
         private readonly MyContext _myContext;
         public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
@@ -24,6 +25,7 @@ namespace API.Repository.Data
             _configuration = configuration;
             employees = _myContext.Set<Employee>();
             accountRoles = _myContext.Set<AccountRole>();
+            approvals = _myContext.Set<Approval>();
         }
 
         public IEnumerable<RequestListVM> RequestList(string Status)
@@ -42,6 +44,13 @@ namespace API.Repository.Data
             var employee = employees.Where(e => e.NIK == nik).SingleOrDefault();
             email = employees.Where(e => e.NIK == employee.ManagerNIK).SingleOrDefault().Email;
             return email;
+        }
+
+        public IEnumerable<CompensationRequest> GetRequestsByDepartment(string nik)
+        {
+            var departmentID = employees.Include("Position").Where(e => e.NIK == nik).FirstOrDefault().Position.DepartmentID;
+            var requestList = approvals.Include("CompensationRequest").Where(a => a.DepartmentID == departmentID).Select(a => a.CompensationRequest);
+            return requestList.ToList();
         }
 
         public override int Insert(CompensationRequest compensationRequest)
