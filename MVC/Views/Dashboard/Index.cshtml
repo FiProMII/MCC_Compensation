@@ -26,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="m-t-40" style="height:350px;"></div>
+                    <div class="m-t-40" style="height:200px;" id="chartBar"></div>
                 </div>
             </div>
         </div>
@@ -49,5 +49,41 @@
             hideAfter: 10000,
             stack: 6
         });
+
+        var options = {
+            chart: {
+                type: 'line'
+            },
+            series: [{
+                name: 'Requester',
+                data: []
+            }],
+            xaxis: {
+                categories: []
+            }
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chartBar"), options);
+
+        chart.render();
+
+        $.ajax({
+            type: "Get",
+            url: "https://localhost:44317/API/Dashboard/Chart",
+            headers: { 'Authorization': 'Bearer ' + localStorage.token },
+            success: function (result) {
+                var data = [];
+                var categories = [];
+                result.result.map(x => { data.push(x.employee); });
+                result.result.map(x => { categories.push(x.year); });
+                chart.updateSeries([
+                    {
+                        name: 'Year',
+                        data: data,
+                        categories: categories
+                    }
+                ])
+            }
+        })
     </script>
 } 

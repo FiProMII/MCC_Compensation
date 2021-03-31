@@ -18,7 +18,7 @@ namespace API.Repository.Data
         public IEnumerable<ChartVM> Chart()
         {
             var _dashboardRepository = new GeneralDapperRepository<ChartVM>(_configuration);
-            var result = _dashboardRepository.MultipleGet("SP_RetrieveCompensation", null);
+            var result = _dashboardRepository.MultipleGet("SP_RetrieveChart", null);
             return result;
         }
     }

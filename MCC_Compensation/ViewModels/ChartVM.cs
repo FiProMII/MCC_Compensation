@@ -7,9 +7,7 @@ namespace API.ViewModels
 {
     public class ChartVM
     {
-        public int Wedding { get; set; }
-        public int Baby { get; set; }
-        public int Duka { get; set; }
-        public int Year { get; set; }
+        public string Request {get;set;}
+        public string Year { get; set; }
     }
 }

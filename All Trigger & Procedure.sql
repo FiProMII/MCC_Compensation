@@ -64,15 +64,12 @@
 	GO
 
 	-- Get Compensation for Chart -- 
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveCompensation]
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveChart]
 	AS
 	BEGIN
-		SELECT 
-		SUM(CASE WHEN CompensationID = 1 THEN CompensationID ELSE 0 END) AS [Wedding],
-		SUM(CASE WHEN CompensationID = 2 THEN CompensationID ELSE 0 END) AS [Baby Gift],
-		SUM(CASE WHEN CompensationID = 3 THEN CompensationID ELSE 0 END) AS [Duka],
-		YEAR(RequestDate) AS [Year]
+		SELECT COUNT(RequestID) AS Request, YEAR(RequestDate) AS [Year]
 		FROM TB_T_CompensationRequest GROUP BY YEAR(RequestDate)
+		ORDER BY YEAR(RequestDate)
 	END
 	GO
 	
