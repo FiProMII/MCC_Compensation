@@ -47,7 +47,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("UpdateApprovalStatus")]
+        [HttpPut("UpdateApprovalStatus")]
         public IActionResult UpdateApprovalStatus(UpdateStatusVM updateStatusVM)
         {
             ResponseVM<Approval> responseContent = new ResponseVM<Approval>();

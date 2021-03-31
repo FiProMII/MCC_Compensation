@@ -38,7 +38,7 @@ namespace MVC.Controllers
             updateStatusVM.ApprovalDate = DateTime.Now;
             updateStatusVM.NIK = User.FindFirst("NIK").Value;
             StringContent content = new StringContent(JsonConvert.SerializeObject(updateStatusVM), Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("Approval", content);
+            var response = await httpClient.PutAsync("Approval/UpdateApprovalStatus", content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<Approval>>(apiResponse);
             if (response.IsSuccessStatusCode)
