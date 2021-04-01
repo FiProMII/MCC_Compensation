@@ -96,9 +96,11 @@
 
         $(document).ready(function () {
 
-            compensationRequirement.set("Wedding", "KK & KTP")
+            compensationRequirement.set("Wedding Gift", "KK & KTP")
             compensationRequirement.set("Baby Gift", "KK")
             compensationRequirement.set("Grief", "KK")
+
+            var compensationDropdown = '<option value="-1">Please select a compensation type</option>';
 
             $.ajax({
                 type: "GET",
@@ -106,12 +108,12 @@
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     var data = result['result']
+                    console.log(data.length)
                     for (var i = 0; i < data.length; i++) {
-                        var compensationDropdown = '<option value="-1">Please select a compensation type</option>'
                         compensationDropdown += '<option value="' + data[i].compensationID + '">' + data[i].compensationName + '</option>';
-                        $("#CompensationID").html(compensationDropdown);
                         compensationValue.set(data[i].compensationName, data[i].cost)
                     }
+                    $("#CompensationID").html(compensationDropdown);
                 }
             });
 

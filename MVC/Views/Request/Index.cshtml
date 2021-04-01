@@ -237,7 +237,7 @@
 {
     @*<script src="~/js/Request/Index.js"></script>*@
 <script>
-        var isUpdate = 0, value, urlString, dataStatus;
+        var isUpdate = 0, value, urlString, dataStatus, NIK;
         $(document).ready(function () {
             dataStatus = "Pending";
             pendingTable();
@@ -255,23 +255,25 @@
 
         $('#View').on('change', function () {
             value = $(this).val();
-            console.log(value);
             $('#table_id').DataTable().destroy();
             urlString = "/Request/RequestList";
             if (value == '0') {
                 dataStatus = "Pending";
+                NIK = sessionStorage.getItem("NIK");
                 pendingTable();
                 $('#reject').show();
                 $('#approve').show();
                 $('#close').hide();
             } else if (value == '1') {
                 dataStatus = "Approve";
+                NIK = sessionStorage.getItem("NIK");
                 myTable();
                 $('#reject').hide();
                 $('#approve').hide();
                 $('#close').show();
             } else if (value == '-1') {
                 dataStatus = "Rejected";
+                NIK = sessionStorage.getItem("NIK");
                 myTable();
                 $('#reject').hide();
                 $('#approve').hide();
@@ -312,8 +314,9 @@
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "/Request/RequestByDepartmentList",
+                    "url": urlString,
                     "type": "Get",
+                    "data": { 'status': dataStatus, 'nik': NIK },
                     "dataSrc": "result"
                 },
                 "columnDefs": [
@@ -494,7 +497,7 @@
                 "ajax": {
                     "url": urlString,
                     "type": "Get",
-                    "data": { 'status': dataStatus },
+                    "data": { 'status': dataStatus, 'nik': NIK },
                     "dataSrc": "result"
                 },
                 "columnDefs": [

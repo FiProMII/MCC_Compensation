@@ -28,12 +28,13 @@ namespace API.Repository.Data
             approvals = _myContext.Set<Approval>();
         }
 
-        public IEnumerable<RequestListVM> RequestList(string Status)
+        public IEnumerable<RequestListVM> RequestList(string Status, string NIK)
         {
             var _crRepository = new GeneralDapperRepository<RequestListVM>(_configuration);
 
             var SPName = "SP_RetrieveDataStatus";
             _parameters.Add("@Status", Status);
+            _parameters.Add("@NIK", NIK);
             var result = _crRepository.MultipleGet(SPName, _parameters);
             return result;
         }

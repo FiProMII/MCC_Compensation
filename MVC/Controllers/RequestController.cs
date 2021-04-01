@@ -39,10 +39,10 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RequestList(string Status)
+        public async Task<IActionResult> RequestList(string Status, string NIK)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
-            var response = await httpClient.GetAsync("CompensationRequest/RequestList/?Status=" + Status);
+            var response = await httpClient.GetAsync("CompensationRequest/RequestList/?Status=" + Status + "&NIK=" + NIK);
             var apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<IEnumerable<RequestListVM>>>(apiResponse);
             if (response.IsSuccessStatusCode)
