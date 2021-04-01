@@ -239,7 +239,6 @@
 <script>
         var isUpdate = 0, value, urlString, dataStatus, NIK;
     $(document).ready(function () {
-        debugger;
             urlString = "/Request/RequestList";
             dataStatus = "Pending";
             NIK = sessionStorage.getItem("NIK");
@@ -253,6 +252,9 @@
                 $('#CreateRequest').hide()
             } else {
                 $('#CreateRequest').show()
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
             }
         });
 
@@ -290,7 +292,6 @@
         });
 
     function pendingTable() {
-        debugger;
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -379,7 +380,6 @@
                     }
                 ]
             })
-        debugger;
         }
 
         function defaultTable() {
