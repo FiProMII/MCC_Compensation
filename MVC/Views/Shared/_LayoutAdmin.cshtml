@@ -283,6 +283,12 @@
         $('#LogOut').on('click', function () {
             localStorage.clear();
             sessionStorage.clear();
+            $.ajax({
+                type: "GET",
+                url: '/Account/Logout',
+                success: function (result) {
+                }
+            });
         })
     </script>
     <!-- end - This is for export functionality only -->

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\Employee\**" />
+    <Content Remove="wwwroot\js\Employee\**" />
+    <EmbeddedResource Remove="wwwroot\js\Employee\**" />
+    <None Remove="wwwroot\js\Employee\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\assets\plugins\toast-master\js\jquery.toast.js" />
   </ItemGroup>
 
@@ -15,10 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MCC_Compensation\API.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\Employee\" />
   </ItemGroup>
 
 </Project>
