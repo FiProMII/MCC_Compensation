@@ -30,11 +30,12 @@ namespace API.Repository.Data
 
         public IEnumerable<RequestListVM> RequestList(string Status, string NIK)
         {
+            var departmentName = employees.Include("Position").Where(e => e.NIK == NIK).FirstOrDefault().Position.Department.DepartmentName;
             var _crRepository = new GeneralDapperRepository<RequestListVM>(_configuration);
 
             var SPName = "SP_RetrieveDataStatus";
             _parameters.Add("@Status", Status);
-            _parameters.Add("@NIK", NIK);
+            _parameters.Add("@DepartmentName", departmentName);
             var result = _crRepository.MultipleGet(SPName, _parameters);
             return result;
         }

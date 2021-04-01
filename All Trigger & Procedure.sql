@@ -91,17 +91,19 @@
 	-- Get Request List --
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDataStatus]
 		@Status nvarchar(max),
-		@NIK nvarchar(max)
+		@DepartmentName nvarchar(max)
 	AS
 	BEGIN
 	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
-	JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
-	JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
-	JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
-	JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
-	JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
-	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE app.StatusID = (SELECT s.StatusID FROM TB_M_Status s WHERE s.StatusName  LIKE '%'+@Status+'%') AND
-	app.DepartmentID = (SELECT d.DepartmentID FROM TB_M_Employee e JOIN TB_M_Position p ON e.PositionID = p.PositionID JOIN TB_M_Department d ON p.DepartmentID = d.DepartmentID WHERE e.ManagerNIK = @NIK) GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+		JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
+		JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
+		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
+	WHERE app.StatusID = (SELECT s.StatusID FROM TB_M_Status s WHERE s.StatusName  LIKE '%'+@Status+'%') AND
+	app.DepartmentID = 
+	(SELECT d.DepartmentID FROM TB_M_Department d WHERE d.DepartmentName LIKE '%'+@DepartmentName+'%' GROUP BY d.DepartmentID) GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
 	END
 	GO
 
@@ -153,8 +155,8 @@
 			END
 			ELSE
 			BEGIN
-				INSERT INTO TB_T_Approval (StatusID, RequestID, DepartmentID, ApprovalDate)
-				VALUES (@PendingID, @RequestID, @HRID, GETDATE())
+				INSERT INTO TB_T_Approval (StatusID, NIK, RequestID, DepartmentID, ApprovalDate)
+				VALUES (@PendingID, @NIK, @RequestID, @HRID, GETDATE())
 
 				UPDATE TB_T_Approval
 				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
@@ -168,3 +170,4 @@
 			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
 		END
 	END
+	GO
