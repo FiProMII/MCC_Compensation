@@ -238,8 +238,11 @@
     @*<script src="~/js/Request/Index.js"></script>*@
 <script>
         var isUpdate = 0, value, urlString, dataStatus, NIK;
-        $(document).ready(function () {
+    $(document).ready(function () {
+        debugger;
+            urlString = "/Request/RequestList";
             dataStatus = "Pending";
+            NIK = sessionStorage.getItem("NIK");
             pendingTable();
             $('#reject').show();
             $('#approve').show();
@@ -286,7 +289,8 @@
             }
         });
 
-        function pendingTable() {
+    function pendingTable() {
+        debugger;
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -375,6 +379,7 @@
                     }
                 ]
             })
+        debugger;
         }
 
         function defaultTable() {
