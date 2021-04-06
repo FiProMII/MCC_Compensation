@@ -28,7 +28,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public IActionResult Chart()
         {
-            var result = _dashboardRepository.Chart("CompensationID");
+            var result = _dashboardRepository.Chart("RequestID");
 
             if (result != null)
             {

@@ -89,27 +89,50 @@
 	GO
 
 	-- Get Request List --
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDataStatus]
-		@Status nvarchar(max)
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveRequestList]
+		@Status nvarchar(max),
+		@DepartmentName nvarchar(max)
 	AS
 	BEGIN
 	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
-	JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
-	JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
-	JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
-	JOIN TB_M_Status st ON app.StatusID = st.StatusID WHERE st.StatusName LIKE '%'+@Status+'%'
-	GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+		JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
+		JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
+		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
+	WHERE app.StatusID = (SELECT s.StatusID FROM TB_M_Status s WHERE s.StatusName  LIKE '%'+@Status+'%') AND
+	app.DepartmentID = 
+	(SELECT d.DepartmentID FROM TB_M_Department d WHERE d.DepartmentName LIKE '%'+@DepartmentName+'%' GROUP BY d.DepartmentID) GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
 	END
 	GO
 
-	EXEC SP_RetrieveDataStatus 'APproved'
+	-- Get Request List By NIK--
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveRequestListByNIK]
+		@Status nvarchar(max),
+		@DepartmentName nvarchar(max),
+		@NIK nvarchar(max)
+	AS
+	BEGIN
+	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
+		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+		JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
+		JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
+		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
+	WHERE app.StatusID = (SELECT s.StatusID FROM TB_M_Status s WHERE s.StatusName  LIKE '%'+@Status+'%') AND
+	app.DepartmentID = 
+	(SELECT d.DepartmentID FROM TB_M_Department d WHERE d.DepartmentName LIKE '%'+@DepartmentName+'%' GROUP BY d.DepartmentID) AND creq.NIK = @NIK GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+	END
+	GO
 
 	-- Get Approval Status
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveApprovalStatus]
 	@RequestID int
 	AS
 	BEGIN
-		SELECT st.StatusName,CONCAT(pos.PositionName, '-',dep.DepartmentName) AS Approval, app.ApprovalDate 
+		SELECT st.StatusName,dep.DepartmentName AS Approval, app.ApprovalDate 
 		FROM TB_M_Status st 
 		JOIN TB_T_Approval app ON st.StatusID = app.StatusID 
 		JOIN TB_M_Employee emp ON app.NIK = emp.NIK
@@ -152,8 +175,8 @@
 			END
 			ELSE
 			BEGIN
-				INSERT INTO TB_T_Approval (StatusID, RequestID, DepartmentID, ApprovalDate)
-				VALUES (@PendingID, @RequestID, @HRID, GETDATE())
+				INSERT INTO TB_T_Approval (StatusID, NIK, RequestID, DepartmentID, ApprovalDate)
+				VALUES (@PendingID, @NIK, @RequestID, @HRID, GETDATE())
 
 				UPDATE TB_T_Approval
 				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
@@ -167,3 +190,4 @@
 			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
 		END
 	END
+	GO

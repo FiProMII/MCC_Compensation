@@ -27,7 +27,10 @@ namespace MVC.Base
             };
         }
 
-        public virtual ViewResult Index() => View();
+        public virtual ViewResult Index()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Get()
         {

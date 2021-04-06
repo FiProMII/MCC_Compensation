@@ -220,9 +220,9 @@
                         </div>
                     </div>
                     <div class="modal-footer form-actions">
-                        <button type="button" class="btn btn-outline-secondary btn-rounded" data-dismiss="modal" id="close" onclick="reset()">Close</button>
-                        <button type="submit" class="btn btn-danger btn-rounded" id="reject" value="3">Reject</button>
-                        <button type="submit" class="btn btn-success btn-rounded" id="approve" value="2">Approve</button>
+                        <button type="button" class="btn-secondary btn-rounded waves-effect waves-light" data-dismiss="modal" id="close" onclick="reset()">Close</button>
+                        <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" id="reject" value="3">Reject</button>
+                        <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light" id="approve" value="2">Approve</button>
                     </div>
                 </form>
             </div>
@@ -236,10 +236,12 @@
 @section scripts
 {
     @*<script src="~/js/Request/Index.js"></script>*@
-<script>
-        var isUpdate = 0, value, urlString, dataStatus;
+    <script>
+        var isUpdate = 0, value, urlString, dataStatus, NIK;
         $(document).ready(function () {
+            urlString = "/Request/RequestList";
             dataStatus = "Pending";
+            NIK = sessionStorage.getItem("NIK");
             pendingTable();
             $('#reject').show();
             $('#approve').show();
@@ -251,37 +253,37 @@
             } else {
                 $('#CreateRequest').show()
             }
-        });
 
-        $('#View').on('change', function () {
-            value = $(this).val();
-            console.log(value);
-            $('#table_id').DataTable().destroy();
-            urlString = "/Request/RequestList";
-            if (value == '0') {
-                dataStatus = "Pending";
-                pendingTable();
-                $('#reject').show();
-                $('#approve').show();
-                $('#close').hide();
-            } else if (value == '1') {
-                dataStatus = "Approve";
-                myTable();
-                $('#reject').hide();
-                $('#approve').hide();
-                $('#close').show();
-            } else if (value == '-1') {
-                dataStatus = "Rejected";
-                myTable();
-                $('#reject').hide();
-                $('#approve').hide();
-                $('#close').show();
-            } else {
-                defaultTable();
-                $('#close').show();
-                $('#reject').hide();
-                $('#approve').hide();
-            }
+            $('#View').on('change', function () {
+                value = $(this).val();
+                console.log(value);
+                $('#table_id').DataTable().destroy();
+                urlString = "/Request/RequestList";
+                if (value == '0') {
+                    dataStatus = "Pending";
+                    pendingTable();
+                    $('#reject').show();
+                    $('#approve').show();
+                    $('#close').hide();
+                } else if (value == '1') {
+                    dataStatus = "Approve";
+                    myTable();
+                    $('#reject').hide();
+                    $('#approve').hide();
+                    $('#close').show();
+                } else if (value == '-1') {
+                    dataStatus = "Rejected";
+                    myTable();
+                    $('#reject').hide();
+                    $('#approve').hide();
+                    $('#close').show();
+                } else {
+                    defaultTable();
+                    $('#close').show();
+                    $('#reject').hide();
+                    $('#approve').hide();
+                }
+            });
         });
 
         function pendingTable() {
@@ -312,13 +314,14 @@
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "/Request/RequestByDepartmentList",
+                    "url": urlString,
                     "type": "Get",
+                    "data": { 'status': dataStatus, 'nik': NIK },
                     "dataSrc": "result"
                 },
                 "columnDefs": [
                     {
-                        "targets": [1, 3, 4],
+                        "targets": [1],
                         "visible": false,
                     },
                     {
@@ -343,15 +346,15 @@
                         }
                     },
                     { "data": 'requestID' },
-                    { "data": 'employee.employeeName' },
+                    { "data": 'employeeName' },
                     {
-                        "data": 'employee.joinDate',
+                        "data": 'joinDate',
                         "render": function (data, type, row) {
                             return moment(data).format('DD/MM/YYYY');
                         }
                     },
-                    { "data": 'employee.manager.employeeName' },
-                    { "data": 'compensation.compensationName' },
+                    { "data": 'manager' },
+                    { "data": 'compensationName' },
                     {
                         "data": 'eventDate',
                         "render": function (data, type, row) {
@@ -494,12 +497,12 @@
                 "ajax": {
                     "url": urlString,
                     "type": "Get",
-                    "data": { 'status': dataStatus },
+                    "data": { 'status': dataStatus, 'nik': NIK },
                     "dataSrc": "result"
                 },
                 "columnDefs": [
                     {
-                        "targets": [1, 3, 4],
+                        "targets": [1],
                         "visible": false,
                     },
                     {
@@ -585,23 +588,23 @@
                         }
                         $('#Document').append(documentList);
                     }
+
+                    $.ajax({
+                        url: "/Approval/ApprovalStatus",
+                        type: "GET",
+                        data: { 'RequestID': id },
+                        success: function (result) {
+                            var data = result["result"];
+                            for (var i = 0; i < data.length; i++) {
+                                var statusList = '<tr><th id="Status">' + data[i].statusName + '</th>'
+                                    + '<th id="Approval">' + data[i].approval + '</th>'
+                                    + '<th id="ApprovalDate">' + moment(data[i].approvalDate).format('DD MM YYYY') + '</th></tr>'
+                                $('#Status').append(statusList);
+                            }
+                        }
+                    })
                 }
             });
-
-            $.ajax({
-                url: "/Approval/ApprovalStatus",
-                type: "GET",
-                data: { 'RequestID': id },
-                success: function (result) {
-                    var data = result["result"];
-                    for (var i = 0; i < data.length; i++) {
-                        var statusList = '<tr><th id="Status">' + data[i].statusName + '</th>'
-                            + '<th id="Approval">' + data[i].approval + '</th>'
-                            + '<th id="ApprovalDate">' + moment(data[i].approvalDate).format('DD MM YYYY') + '</th></tr>'
-                        $('#Status').append(statusList);
-                    }
-                }
-            })
         };
 
         function reset() {
@@ -636,23 +639,18 @@
                         icon: 'info',
                         html:
                             'you succeeded in <b>giving approval</b> ',
-                        showCloseButton: true,
-                        showCancelButton: true,
                         focusConfirm: false,
                         confirmButtonText:
                             '<i class="fa fa-thumbs-up"></i> Great!',
                         confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText:
-                            '<i class="fa fa-thumbs-down"></i>',
-                        cancelButtonAriaLabel: 'Thumbs down'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            $('#pendingTable').DataTable().ajax.reload();
+                            $('#table_id').DataTable().ajax.reload();
+                            $('#modal').modal('hide');
                         }
                     })
                 }
             })
         })
-
-</script>
+    </script>
 }

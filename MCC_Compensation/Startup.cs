@@ -103,7 +103,7 @@ namespace MCC_Compensation
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:443309").AllowAnyHeader());
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44309").AllowAnyHeader());
             });
         }
 
@@ -119,7 +119,7 @@ namespace MCC_Compensation
 
             app.UseRouting();
 
-            app.UseCors(options => options.WithOrigins("https://localhost:443309").AllowAnyHeader());
+            app.UseCors(options => options.WithOrigins("https://localhost:44309").AllowAnyHeader());
 
             app.UseAuthentication();
 

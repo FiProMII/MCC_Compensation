@@ -24,7 +24,7 @@
     <!-- Page CSS -->
     <link href="~/lib/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- You can change the theme colors from here -->
-    <link href="~/lib/css/colors/purple-dark.css" rel="stylesheet" />
+    <link href="~/lib/css/colors/purple.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -56,7 +56,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="#">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -283,6 +283,12 @@
         $('#LogOut').on('click', function () {
             localStorage.clear();
             sessionStorage.clear();
+            $.ajax({
+                type: "GET",
+                url: '/Account/Logout',
+                success: function (result) {
+                }
+            });
         })
     </script>
     <!-- end - This is for export functionality only -->
