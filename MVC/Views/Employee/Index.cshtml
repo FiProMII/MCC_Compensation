@@ -438,14 +438,6 @@
                 url: urlString,
                 data: form.serialize(),
                 success: function (data) {
-                    $('.bs-modal-lg').modal('hide');
-                    $('#table_id').DataTable().ajax.reload();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Your data has been saved',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
                     if (isUpdate == 1) {
                         $.ajax({
                             type: "POST",
@@ -453,7 +445,7 @@
                             data: { 'key': nikValue }
                         });
                     }
-                    debugger;
+
                     for (var i = 0; i < myCheckboxes.length; i++) {
                         var role = new Object();
                         role.nik = nikValue;
@@ -467,7 +459,15 @@
                             dataType: "json"
                         });
                     }
-                    debugger;
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your data has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('.bs-modal-lg').modal('hide');
+                    $('#table_id').DataTable().ajax.reload();
                 },
                 error: function (error) {
                     Swal.fire({

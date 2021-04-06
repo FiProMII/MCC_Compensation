@@ -68,6 +68,7 @@
                                             <div class="add btn btn-sm btn-outline-success pull-right">Add File</div>
                                             <div class="controls">
                                                 <input type="file" name="file" class="custom-file form-control" id="txt_1" accept="image/jpg, image/jpeg, .pdf" />
+                                                <span class="text-danger">upload KK</span>
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +130,8 @@
                     $("#div_" + nextindex).append("<div class='form-group'><div id='remove_"
                         + nextindex + "' class='remove btn btn-sm btn-outline-danger pull-right'>Abort</div>"
                         + "<div class='controls'><input type='file' name='file' class='custom-file form-control' id='txt_"
-                        + nextindex + "' accept='image / jpg, image / jpeg, .pdf' required /></div>");
+                        + nextindex + "' accept='image/jpg, image/jpeg, .pdf' required /></div>"
+                        + "<span class='text-danger'>upload KTP</span >");
                 }
             });
 
@@ -181,6 +183,17 @@
                 contentType: false,
                 enctype: 'multipart/form-data',
                 processData: false,
+                beforeSend: function () {
+                    Swal.fire({
+                        title: 'Please Wait !',
+                        html: 'Your request is being processed',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        }
+                    })
+                },
                 success: function (response) {
                     Swal.fire({
                         title: '<strong>Congrats</strong>',
@@ -190,14 +203,11 @@
                             'please wait for managers ' +
                             'Approval',
                         showCloseButton: true,
-                        showCancelButton: true,
                         focusConfirm: false,
                         confirmButtonText:
                             '<i class="fa fa-thumbs-up"></i> Great!',
                         confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText:
-                            '<i class="fa fa-thumbs-down"></i>',
-                        cancelButtonAriaLabel: 'Thumbs down'
+                        allowOutsideClick: false,
                     }).then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "@Url.Action("Index", "Request")";

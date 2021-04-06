@@ -577,6 +577,7 @@
                     $('#CompensationName').html(data.compensation.compensationName)
                     $('#EventDate').html(moment(data.eventDate).format('DD MMMM YYYY'))
                     $('#RequestDate').html(moment(data.requestDate).format('DD MMMM YYYY'))
+
                     for (var i = 0; i < data.documents.length; i++) {
                         if (data.documents[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
                             var documentList = '<a target="_blank" href="' + data.documents[i].link
