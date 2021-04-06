@@ -132,7 +132,7 @@
 	@RequestID int
 	AS
 	BEGIN
-		SELECT st.StatusName,CONCAT(pos.PositionName, '-',dep.DepartmentName) AS Approval, app.ApprovalDate 
+		SELECT st.StatusName,dep.DepartmentName AS Approval, app.ApprovalDate 
 		FROM TB_M_Status st 
 		JOIN TB_T_Approval app ON st.StatusID = app.StatusID 
 		JOIN TB_M_Employee emp ON app.NIK = emp.NIK
