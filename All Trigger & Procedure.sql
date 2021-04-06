@@ -89,7 +89,7 @@
 	GO
 
 	-- Get Request List --
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDataStatus]
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveRequestList]
 		@Status nvarchar(max),
 		@DepartmentName nvarchar(max)
 	AS
@@ -107,10 +107,11 @@
 	END
 	GO
 
-	-- Get Request List --
-	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDataStatus]
+	-- Get Request List By NIK--
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveRequestListByNIK]
 		@Status nvarchar(max),
-		@DepartmentName nvarchar(max)
+		@DepartmentName nvarchar(max),
+		@NIK nvarchar(max)
 	AS
 	BEGIN
 	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
@@ -122,7 +123,7 @@
 		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
 	WHERE app.StatusID = (SELECT s.StatusID FROM TB_M_Status s WHERE s.StatusName  LIKE '%'+@Status+'%') AND
 	app.DepartmentID = 
-	(SELECT d.DepartmentID FROM TB_M_Department d WHERE d.DepartmentName LIKE '%'+@DepartmentName+'%' GROUP BY d.DepartmentID) GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
+	(SELECT d.DepartmentID FROM TB_M_Department d WHERE d.DepartmentName LIKE '%'+@DepartmentName+'%' GROUP BY d.DepartmentID) AND creq.NIK = @NIK GROUP BY creq.RequestID,emp.EmployeeName,emp.joinDate,comp.CompensationName,creq.EventDate,creq.RequestDate
 	END
 	GO
 
