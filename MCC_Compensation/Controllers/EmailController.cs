@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
 
 namespace API.Controllers
 {
@@ -18,6 +23,13 @@ namespace API.Controllers
         public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
         public const string TemporaryPasswordBody = "Login with your new temporary password: ";
 
+        private IWebHostEnvironment _hostingEnvironment;
+
+        public EmailController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         public enum EmailType
         {
             CompensationRequest,
@@ -26,33 +38,42 @@ namespace API.Controllers
 
         public void SendEmail(string recipient, EmailType emailType, string bodyParam)
         {
-            string to = recipient;
-            string from = "compensationmcc@gmail.com";
-            MailMessage message = new MailMessage(from, to);
+            var webRoot = _hostingEnvironment.WebRootPath;
+            var pathToFile = webRoot
+                            + Path.DirectorySeparatorChar.ToString()
+                            + "tes.html";
 
-            switch (emailType)
+            var builder = new BodyBuilder();
+
+            using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
             {
-                case EmailType.CompensationRequest:
-                    message.Body = RequestBody + bodyParam;
-                    message.Subject = RequestSubject;
-                    break;
-                case EmailType.TemporaryPassword:
-                    message.Body = TemporaryPasswordBody + bodyParam;
-                    message.Subject = TemporaryPasswordSubject;
-                    break;
-            }
 
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("compensationmcc@gmail.com", "compensationmcc2021");
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.Credentials = basicCredential1;
+                builder.HtmlBody = SourceReader.ReadToEnd();
+
+            }            
+            
+            //string to = recipient;
+            //string from = "compensationmcc@gmail.com";
+            MimeMessage message = new MimeMessage();
+
+            MailboxAddress from = new MailboxAddress("Admin", "compensationmcc@gmail.com");
+            MailboxAddress to = new MailboxAddress("User", recipient);
+            message.To.Add(to);
+            message.From.Add(from);
+            message.Body = builder.ToMessageBody();
+
+            message.Subject = "This is email subject";
+
+
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            client.Authenticate("compensationmcc@gmail.com", "compensationmcc2021");
+            
             try
             {
                 client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
             }
 
             catch (Exception ex)

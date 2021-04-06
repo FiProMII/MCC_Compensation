@@ -2,6 +2,7 @@
 using API.Models;
 using API.Repository.Data;
 using API.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,11 +20,13 @@ namespace API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly ApprovalRepository _approvalRepository;
+        private IWebHostEnvironment _hostingEnvironment;
 
-        public ApprovalController(ApprovalRepository approvalRepository, IConfiguration configuration) : base(approvalRepository)
+        public ApprovalController(ApprovalRepository approvalRepository, IConfiguration configuration, IWebHostEnvironment hostingEnvironment) : base(approvalRepository)
         {
             _approvalRepository = approvalRepository;
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet("ApprovalStatus")]
@@ -58,7 +61,7 @@ namespace API.Controllers
                 responseContent.Status = ResponseVM<Approval>.StatusType.Success;
                 responseContent.Message = "Data was updated";
 
-                EmailController emailController = new EmailController();
+                EmailController emailController = new EmailController(_hostingEnvironment);
                 try
                 {
                     var emails = GetRecipientEmails();

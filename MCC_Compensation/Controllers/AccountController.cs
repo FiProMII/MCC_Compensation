@@ -4,6 +4,7 @@ using API.Repository.Data;
 using API.Services;
 using API.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,10 +24,13 @@ namespace API.Controllers
     {
         private readonly AccountRepository _accountRepository;
         private readonly IConfiguration _configuration;
-        public AccountController(AccountRepository accountRepository, IConfiguration configuration) : base(accountRepository)
+        private IWebHostEnvironment _hostingEnvironment;
+
+        public AccountController(AccountRepository accountRepository, IConfiguration configuration, IWebHostEnvironment hostingEnvironment) : base(accountRepository)
         {
             _accountRepository = accountRepository;
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpPost("Login")]
@@ -99,7 +103,7 @@ namespace API.Controllers
             ResponseVM<string> responseContent = new ResponseVM<string>();
             if (result != null)
             {
-                EmailController emailController = new EmailController();
+                EmailController emailController = new EmailController(_hostingEnvironment);
                 emailController.SendEmail(loginVM.Email, EmailController.EmailType.TemporaryPassword, result);
 
                 responseContent.Status = ResponseVM<string>.StatusType.Success;

@@ -103,3 +103,6 @@ C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.Vi
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MVC.Views.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\API.pdb
 C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\LENOVO\source\repos\MCC_Compensation\MVC\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

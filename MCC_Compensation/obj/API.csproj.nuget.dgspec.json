@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.11.1, )"
+            },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
               "version": "[2.2.0, )"
