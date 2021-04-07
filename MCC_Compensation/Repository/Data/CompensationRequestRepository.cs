@@ -31,25 +31,32 @@ namespace API.Repository.Data
         public IEnumerable<RequestListVM> RequestList(string Status, string NIK)
         {
             var departmentName = employees.Include("Position").Where(e => e.NIK == NIK).FirstOrDefault().Position.Department.DepartmentName;
-            var roleName = accountRoles.Include(ar => ar.Account).Where(ar => ar.NIK == NIK).FirstOrDefault().Role.RoleName;
+            var roleName = accountRoles.Include(ar => ar.Account).Where(ar => ar.NIK == NIK).Select(ar => ar.Role.RoleName).ToList();
             var _crRepository = new GeneralDapperRepository<RequestListVM>(_configuration);
 
-            if(roleName == "Employee")
+            if (roleName.Count > 0)
             {
-                var SPName = "SP_RetrieveRequestListByNIK";
-                _parameters.Add("@Status", Status);
-                _parameters.Add("@DepartmentName", departmentName);
-                _parameters.Add("@NIK", NIK);
-                var result = _crRepository.MultipleGet(SPName, _parameters);
-                return result;
+                if (roleName.Contains("Employee"))
+                {
+                    var SPName = "SP_RetrieveRequestListByNIK";
+                    _parameters.Add("@Status", Status);
+                    _parameters.Add("@DepartmentName", departmentName);
+                    _parameters.Add("@NIK", NIK);
+                    var result = _crRepository.MultipleGet(SPName, _parameters);
+                    return result;
+                }
+                else
+                {
+                    var SPName = "SP_RetrieveRequestList";
+                    _parameters.Add("@Status", Status);
+                    _parameters.Add("@DepartmentName", departmentName);
+                    var result = _crRepository.MultipleGet(SPName, _parameters);
+                    return result;
+                }
             }
             else
             {
-                var SPName = "SP_RetrieveRequestList";
-                _parameters.Add("@Status", Status);
-                _parameters.Add("@DepartmentName", departmentName);
-                var result = _crRepository.MultipleGet(SPName, _parameters);
-                return result;
+                return null;
             }
         }
 
