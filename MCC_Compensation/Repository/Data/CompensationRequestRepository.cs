@@ -68,6 +68,15 @@ namespace API.Repository.Data
             return email;
         }
 
+        public DetailRequestVM GetDetailRequest(int requestID)
+        {
+            var _crRepository = new GeneralDapperRepository<DetailRequestVM>(_configuration);
+            var SPName = "SP_RetrieveDetailRequest";
+            _parameters.Add("@RequestID", requestID);
+            var result = _crRepository.SingleGet(SPName, _parameters);
+            return result;
+        }
+
         public IEnumerable<CompensationRequest> GetRequestsByDepartment(string nik)
         {
             var departmentID = employees.Include("Position").Where(e => e.NIK == nik).FirstOrDefault().Position.DepartmentID;

@@ -39,6 +39,18 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetDetail(int id)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            var response = await httpClient.GetAsync("CompensationRequest/GetDetail?RequestID=" + id);
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<DetailRequestVM>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> RequestList(string Status, string NIK)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
