@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit.Security;
+using API.Models;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class EmailController : ControllerBase
     {
-        public const string RequestSubject = "Compensation Request";
-        public const string TemporaryPasswordSubject = "New Temporary Password";
-        public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
-        public const string TemporaryPasswordBody = "Login with your new temporary password: ";
+        public const string RequestSubject = "Compensation Request #";
+        public const string TemporaryPasswordSubject = "New Temporary Password #";
+        //public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
+        //public const string TemporaryPasswordBody = "Login with your new temporary password: ";
 
         private IWebHostEnvironment _hostingEnvironment;
 
@@ -33,37 +33,66 @@ namespace API.Controllers
         public enum EmailType
         {
             CompensationRequest,
+            CompensationRequestApproved,
+            CompensationRequestRejected,
             TemporaryPassword
         }
 
-        public void SendEmail(string recipient, EmailType emailType, string bodyParam)
+        public void SendEmail(EmailType emailType, Employee employeeRecipient, CompensationRequest request)
         {
             var webRoot = _hostingEnvironment.WebRootPath;
-            var pathToFile = webRoot
-                            + Path.DirectorySeparatorChar.ToString()
-                            + "tes.html";
+            string messageBody = "";
+
+            MimeMessage message = new MimeMessage();
+            MailboxAddress from = new MailboxAddress("Compensation Request Admin", "compensationmcc@gmail.com");
+            MailboxAddress to = new MailboxAddress(employeeRecipient.EmployeeName, employeeRecipient.Email);
+
+            message.To.Add(to);
+            message.From.Add(from);
 
             var builder = new BodyBuilder();
 
-            using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+            var tes = request;
+
+            string pathToFile;
+            switch (emailType)
             {
+                case EmailType.CompensationRequest:
+                    message.Subject = RequestSubject + DateTime.Now.ToString("MMddyyyyHHmmss");
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "Request.html";
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
 
-                builder.HtmlBody = SourceReader.ReadToEnd();
+                        builder.HtmlBody = SourceReader.ReadToEnd();
 
-            }            
-            
-            //string to = recipient;
-            //string from = "compensationmcc@gmail.com";
-            MimeMessage message = new MimeMessage();
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        request.NIK,
+                        request.Employee.EmployeeName,
+                        request.RequestDate,
+                        request.Compensation.CompensationName,
+                        "https://localhost:44309/Request/Approval?id=" + request.RequestID
+                        );
+                    break;
+                case EmailType.TemporaryPassword:
+                    message.Subject = TemporaryPasswordSubject + DateTime.Now.ToString("MMddyyyyHHmmss");
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "ForgotPassword.html";
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
 
-            MailboxAddress from = new MailboxAddress("Admin", "compensationmcc@gmail.com");
-            MailboxAddress to = new MailboxAddress("User", recipient);
-            message.To.Add(to);
-            message.From.Add(from);
-            message.Body = builder.ToMessageBody();
+                        builder.HtmlBody = SourceReader.ReadToEnd();
 
-            message.Subject = "This is email subject";
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        employeeRecipient.Account.Password,
+                        "https://localhost:44309/"
+                        );
+                    break;
+            }
 
+            message.Body = new TextPart("html") { Text = messageBody };
 
             SmtpClient client = new SmtpClient();
             client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);

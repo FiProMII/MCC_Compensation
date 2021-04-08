@@ -104,7 +104,7 @@ namespace API.Controllers
             if (result != null)
             {
                 EmailController emailController = new EmailController(_hostingEnvironment);
-                emailController.SendEmail(loginVM.Email, EmailController.EmailType.TemporaryPassword, result);
+                emailController.SendEmail(EmailController.EmailType.TemporaryPassword, result, null);
 
                 responseContent.Status = ResponseVM<string>.StatusType.Success;
                 responseContent.Message = "New password sent";

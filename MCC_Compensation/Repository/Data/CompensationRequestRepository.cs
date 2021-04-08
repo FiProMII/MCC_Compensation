@@ -53,12 +53,11 @@ namespace API.Repository.Data
             }
         }
 
-        public string GetManagerEmail(string nik)
+        public Employee GetManager(string nik)
         {
-            string email = null;
             var employee = employees.Where(e => e.NIK == nik).SingleOrDefault();
-            email = employees.Where(e => e.NIK == employee.ManagerNIK).SingleOrDefault().Email;
-            return email;
+            var manager = employees.Where(e => e.NIK == employee.ManagerNIK).SingleOrDefault();
+            return manager;
         }
 
         public IEnumerable<CompensationRequest> GetRequestsByDepartment(string nik)
@@ -68,14 +67,15 @@ namespace API.Repository.Data
             return requestList.ToList();
         }
 
-        public override int Insert(CompensationRequest compensationRequest)
+        public CompensationRequest InsertRequest(CompensationRequest compensationRequest)
         {
             if (compensationRequest == null)
                 throw new ArgumentNullException("entity");
             entities.Add(compensationRequest);
             myContext.SaveChanges();
-            var requestID = compensationRequest.RequestID;
-            return requestID;
+            var employee = employees.Find(compensationRequest.NIK);
+            compensationRequest.Employee = employee;
+            return compensationRequest;
         }
     }
 }

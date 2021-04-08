@@ -42,9 +42,9 @@ namespace API.Controllers
                 return BadRequest(responseContent);
             }
 
-            var result = _compensationRequestRepository.Insert(compensationRequest);
+            var result = _compensationRequestRepository.InsertRequest(compensationRequest);
 
-            if (result > 0)
+            if (result.RequestID > 0)
             {
                 responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
@@ -53,8 +53,8 @@ namespace API.Controllers
                 try
                 {
                     var nik = User.FindFirst("NIK").Value;
-                    var email = _compensationRequestRepository.GetManagerEmail(nik);
-                    emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
+                    var manager = _compensationRequestRepository.GetManager(nik);
+                    emailController.SendEmail(EmailController.EmailType.CompensationRequest, manager, result);
                 } catch
                 {
                     responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Failed;

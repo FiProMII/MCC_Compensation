@@ -56,7 +56,7 @@ namespace API.Controllers
             ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
             var result = _approvalRepository.UpdateApprovalStatus(updateStatusVM);
 
-            if (result > 0)
+            if (result != null)
             {
                 responseContent.Status = ResponseVM<Approval>.StatusType.Success;
                 responseContent.Message = "Data was updated";
@@ -64,10 +64,10 @@ namespace API.Controllers
                 EmailController emailController = new EmailController(_hostingEnvironment);
                 try
                 {
-                    var emails = GetRecipientEmails();
-                    foreach (var email in emails)
+                    var employees = GetRecipientEmails();
+                    foreach (var employee in employees)
                     {
-                        emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
+                        emailController.SendEmail(EmailController.EmailType.CompensationRequest, employee, result);
                     }
                 }
                 catch
@@ -87,19 +87,19 @@ namespace API.Controllers
             }
         }
 
-        public IEnumerable<string> GetRecipientEmails()
+        public IEnumerable<Employee> GetRecipientEmails()
         {
             var nik = User.FindFirst("NIK").Value;
-            IEnumerable<string> emails = Enumerable.Empty<string>();
+            IEnumerable<Employee> employees = Enumerable.Empty<Employee>();
             if (User.IsInRole("RM"))
             {
-                emails = _approvalRepository.GetRecipientEmails(1, nik);
+                employees = _approvalRepository.GetRecipients(1, nik);
             }
             else if (User.IsInRole("HR"))
             {
-                emails = _approvalRepository.GetRecipientEmails(2, nik);
+                employees = _approvalRepository.GetRecipients(2, nik);
             }
-            return emails;
+            return employees;
         }
     }
 }

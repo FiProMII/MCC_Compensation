@@ -65,7 +65,7 @@ namespace API.Repository.Data
             return loginResult;
         }
 
-        public string ForgotPassword(string email)
+        public Employee ForgotPassword(string email)
         {
             var employee = employees.SingleOrDefault(x => x.Email == email);
             if (employee != null)
@@ -75,7 +75,8 @@ namespace API.Repository.Data
                 account.NIK = employee.NIK;
                 account.Password = 'n' + BC.EnhancedHashPassword(tempPassword);
                 Update(account);
-                return tempPassword;
+                var result = employees.Include("Account").Where(e => e.NIK == employee.NIK).SingleOrDefault();
+                return result;
             }
             return null;
         }

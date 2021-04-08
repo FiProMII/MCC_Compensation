@@ -134,6 +134,13 @@ namespace MCC_Compensation
                 
             });
 
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/src")),
+                RequestPath = new PathString("/src"),
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
