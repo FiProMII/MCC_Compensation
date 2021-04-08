@@ -56,7 +56,7 @@ namespace API.Repository.Data
             return request;
         }
 
-        public IEnumerable<Employee> GetRecipients(int type, string nik)
+        public IEnumerable<Employee> GetRecipients(int type, string requestNIK)
         {
             IEnumerable<Employee> employeesList = Enumerable.Empty<Employee>();
             switch (type)
@@ -70,6 +70,9 @@ namespace API.Repository.Data
                     var FinanceID = departments.Where(d => d.DepartmentName == "Finance").Select(d => d.DepartmentID).FirstOrDefault();
                     employeesList = employees.Include("Position")
                         .Where(e => e.Position.DepartmentID == FinanceID);
+                    break;
+                case 3:
+                    employeesList = employees.Where(e => e.NIK == requestNIK);
                     break;
             }
             return employeesList.AsList();

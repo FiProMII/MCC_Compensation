@@ -55,7 +55,6 @@ namespace API.Controllers
         {
             ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
             var result = _approvalRepository.UpdateApprovalStatus(updateStatusVM);
-
             if (result != null)
             {
                 responseContent.Status = ResponseVM<Approval>.StatusType.Success;
@@ -64,7 +63,7 @@ namespace API.Controllers
                 EmailController emailController = new EmailController(_hostingEnvironment);
                 try
                 {
-                    var employees = GetRecipientEmails();
+                    var employees = GetRecipients(null);
                     foreach (var employee in employees)
                     {
                         emailController.SendEmail(EmailController.EmailType.CompensationRequest, employee, result);
@@ -87,17 +86,20 @@ namespace API.Controllers
             }
         }
 
-        public IEnumerable<Employee> GetRecipientEmails()
+        public IEnumerable<Employee> GetRecipients(string requestNIK)
         {
-            var nik = User.FindFirst("NIK").Value;
             IEnumerable<Employee> employees = Enumerable.Empty<Employee>();
             if (User.IsInRole("RM"))
             {
-                employees = _approvalRepository.GetRecipients(1, nik);
+                employees = _approvalRepository.GetRecipients(1, null);
             }
             else if (User.IsInRole("HR"))
             {
-                employees = _approvalRepository.GetRecipients(2, nik);
+                employees = _approvalRepository.GetRecipients(2, null);
+            }
+            else if (User.IsInRole("Finance"))
+            {
+                employees = _approvalRepository.GetRecipients(3, requestNIK);
             }
             return employees;
         }
