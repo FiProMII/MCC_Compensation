@@ -19,12 +19,14 @@ namespace API.Repository.Data
         private readonly MyContext _myContext;
         private readonly DbSet<Employee> employees;
         private readonly DbSet<Department> departments;
+        private readonly DbSet<Status> statuses;
         public ApprovalRepository(MyContext myContext, IConfiguration configutarion) : base(myContext)
         {
             _configuration = configutarion;
             _myContext = myContext;
             employees = _myContext.Set<Employee>();
             departments = _myContext.Set<Department>();
+            statuses = _myContext.Set<Status>();
         }
 
         public IEnumerable<RequestStatusVM> ApprovalStatus(int RequestID)
@@ -47,7 +49,7 @@ namespace API.Repository.Data
             var SPName = "SP_UpdateStatus";
             _parameters.Add("@RequestID", updateStatusVM.RequestID);
             _parameters.Add("@DepartmentID", departmentID);
-            _parameters.Add("@NewStatusID", updateStatusVM.NewStatusID);
+            _parameters.Add("@StatusName", updateStatusVM.StatusName);
             _parameters.Add("@NIK", updateStatusVM.NIK);
             var result = _crRepository.Execute(SPName, _parameters);
             return result;

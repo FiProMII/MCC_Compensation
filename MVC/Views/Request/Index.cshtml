@@ -221,8 +221,8 @@
                     </div>
                     <div class="modal-footer form-actions">
                         <button type="button" class="btn btn-outline-secondary btn-rounded" data-dismiss="modal" id="close" onclick="reset()">Close</button>
-                        <button type="submit" class="btn btn-danger btn-rounded" id="reject" value="3">Reject</button>
-                        <button type="submit" class="btn btn-success btn-rounded" id="approve" value="2">Approve</button>
+                        <button type="submit" class="btn btn-danger btn-rounded" id="reject" value="Reject">Reject</button>
+                        <button type="submit" class="btn btn-success btn-rounded" id="approve" value="Approve">Approve</button>
                     </div>
                 </form>
             </div>
@@ -242,7 +242,7 @@
             NIK = sessionStorage.getItem("NIK");
             urlString = "/Request/RequestList";
             dataStatus = "Pending";
-            pendingTable();
+            myTable();
 
             var data = JSON.parse(localStorage.getItem("Role"));
             if (data.includes("Super Admin") || data.includes("RM") || data.includes("HR") || data.includes("Finance")) {
@@ -265,7 +265,7 @@
             urlString = "/Request/RequestList";
             if (value == '0') {
                 dataStatus = "Pending";
-                pendingTable();
+                myTable();
                 $('#reject').show();
                 $('#approve').show();
                 $('#close').hide();
@@ -289,7 +289,7 @@
             }
         });
 
-        function pendingTable() {
+        function myTable() {
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -373,7 +373,11 @@
                     {
                         "data": 'requestID',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Needed" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Approval</button>'
+                            if (dataStatus == "Pending") {
+                                return '<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Needed" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Approval</button>'
+                            } else {
+                                return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button>'
+                            }
                         }
                     }
                 ]
@@ -470,99 +474,7 @@
             })
         }
 
-        function myTable() {
-            $('#table_id').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'csv',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    }
-                ],
-                "order": [],
-                "responsive": true,
-                "filter": true,
-                "orderMulti": false,
-                "ajax": {
-                    "url": urlString,
-                    "type": "Get",
-                    "data": { 'status': dataStatus, 'nik': NIK },
-                    "dataSrc": "result"
-                },
-                "columnDefs": [
-                    {
-                        "targets": [1],
-                        "visible": false,
-                    },
-                    {
-                        "targets": [0, 8],
-                        "orderable": false,
-                    },
-                    {
-                        "targets": [0, 1, 3, 5, 6, 7, 8],
-                        "className": "texUrl-center",
-                    },
-                    {
-                        "order": [[2, 'asc']]
-                    }
-                ],
-                "columns": [
-                    {
-                        "data": null,
-                        "name": "no",
-                        "autowidth": true,
-                        "render": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    { "data": 'requestID' },
-                    { "data": 'employeeName' },
-                    {
-                        "data": 'joinDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    { "data": 'manager' },
-                    { "data": 'compensationName' },
-                    {
-                        "data": 'eventDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    {
-                        "data": 'requestDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    {
-                        "data": 'requestID',
-                        "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button>'
-                        }
-                    }
-                ]
-            })
-        }
-
         function GetDetail(id) {
-            debugger;
             reset();
             $.ajax({
                 url: "/Request/GetDetail",
@@ -570,7 +482,6 @@
                 data: { 'RequestID': id },
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    debugger;
                     var data = result["result"];
                     $('#Requester').html(data.employeeName)
                     $('#DepartmentName').html(data.departmentName)
@@ -588,7 +499,6 @@
                         data: { 'RequestID': id },
                         headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (result) {
-                            debugger;
                             var data = result["result"];
                             for (var i = 0; i < data.length; i++) {
                                 if (data[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
@@ -617,7 +527,6 @@
                         data: { 'RequestID': id },
                         headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (result) {
-                            debugger;
                             var data = result["result"];
                             for (var i = 0; i < data.length; i++) {
                                 var statusList = '<tr><th id="Status">' + data[i].statusName + '</th>'
@@ -653,9 +562,9 @@
             $("#tablestatus tbody").empty();
         }
 
-        var statusID;
+        var statusName;
         $('.btn').on('click', function () {
-            statusID = parseInt($(this).val())
+            statusName = $(this).val()
         })
 
         $('#formApproval').submit(function (event) {
@@ -663,7 +572,7 @@
             event.preventDefault()
             var requestID = parseInt(document.getElementById("RequestID").innerHTML);
             var UpdateStatusVM = new Object();
-            UpdateStatusVM.newStatusID = statusID;
+            UpdateStatusVM.statusName = statusName;
             UpdateStatusVM.requestID = requestID;
             debugger;
             $.ajax({

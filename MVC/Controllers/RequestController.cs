@@ -16,10 +16,6 @@ namespace MVC.Controllers
 {
     public class RequestController : BaseController<CompensationRequest, int>
     {
-        public ViewResult Admin() => View();
-
-        public ViewResult Details() => View();
-
         public ViewResult Requester() => View();
 
         public ViewResult Approval() => View();
