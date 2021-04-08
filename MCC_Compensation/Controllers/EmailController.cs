@@ -1,58 +1,108 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
+using API.Models;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class EmailController : ControllerBase
     {
-        public const string RequestSubject = "Compensation Request";
-        public const string TemporaryPasswordSubject = "New Temporary Password";
-        public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
-        public const string TemporaryPasswordBody = "Login with your new temporary password: ";
+        public const string RequestSubject = "Compensation Request #";
+        public const string TemporaryPasswordSubject = "New Temporary Password #";
+        //public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
+        //public const string TemporaryPasswordBody = "Login with your new temporary password: ";
+
+        private IWebHostEnvironment _hostingEnvironment;
+
+        public EmailController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
 
         public enum EmailType
         {
             CompensationRequest,
+            CompensationRequestApproved,
+            CompensationRequestRejected,
             TemporaryPassword
         }
 
-        public void SendEmail(string recipient, EmailType emailType, string bodyParam)
+        public void SendEmail(EmailType emailType, Employee employeeRecipient, CompensationRequest request)
         {
-            string to = recipient;
-            string from = "compensationmcc@gmail.com";
-            MailMessage message = new MailMessage(from, to);
+            var webRoot = _hostingEnvironment.WebRootPath;
+            string messageBody = "";
 
+            MimeMessage message = new MimeMessage();
+            MailboxAddress from = new MailboxAddress("Compensation Request Admin", "compensationmcc@gmail.com");
+            MailboxAddress to = new MailboxAddress(employeeRecipient.EmployeeName, employeeRecipient.Email);
+
+            message.To.Add(to);
+            message.From.Add(from);
+
+            var builder = new BodyBuilder();
+
+            var tes = request;
+
+            string pathToFile;
             switch (emailType)
             {
                 case EmailType.CompensationRequest:
-                    message.Body = RequestBody + bodyParam;
-                    message.Subject = RequestSubject;
+                    message.Subject = RequestSubject + DateTime.Now.ToString("MMddyyyyHHmmss");
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "Request.html";
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        request.NIK,
+                        request.Employee.EmployeeName,
+                        request.RequestDate,
+                        request.Compensation.CompensationName,
+                        "https://localhost:44309/Request/Approval?id=" + request.RequestID
+                        );
                     break;
                 case EmailType.TemporaryPassword:
-                    message.Body = TemporaryPasswordBody + bodyParam;
-                    message.Subject = TemporaryPasswordSubject;
+                    message.Subject = TemporaryPasswordSubject + DateTime.Now.ToString("MMddyyyyHHmmss");
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "ForgotPassword.html";
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        employeeRecipient.Account.Password,
+                        "https://localhost:44309/"
+                        );
                     break;
             }
 
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("compensationmcc@gmail.com", "compensationmcc2021");
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.Credentials = basicCredential1;
+            message.Body = new TextPart("html") { Text = messageBody };
+
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            client.Authenticate("compensationmcc@gmail.com", "compensationmcc2021");
+            
             try
             {
                 client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
             }
 
             catch (Exception ex)

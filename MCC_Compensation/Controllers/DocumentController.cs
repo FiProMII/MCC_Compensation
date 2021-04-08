@@ -49,7 +49,7 @@ namespace API.Controllers
                     Document document = new Document();
 
                     document.DocumentName = file.FileName;
-                    document.Link = uploads + "/" + file.FileName;
+                    document.Link = "https://localhost:44317/uploads/" + file.FileName;
 
                     documents.Add(document);
                 }

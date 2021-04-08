@@ -3,6 +3,7 @@ using API.Models;
 using API.Repository.Data;
 using API.ViewModels;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,11 +22,13 @@ namespace API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly CompensationRequestRepository _compensationRequestRepository;
+        private IWebHostEnvironment _hostingEnvironment;
 
-        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository, IConfiguration configuration) : base(compensationRequestRepository)
+        public CompensationRequestController(CompensationRequestRepository compensationRequestRepository, IConfiguration configuration, IWebHostEnvironment hostingEnvironment) : base(compensationRequestRepository)
         {
             _compensationRequestRepository = compensationRequestRepository;
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public override ActionResult Post(CompensationRequest compensationRequest)
@@ -39,19 +42,19 @@ namespace API.Controllers
                 return BadRequest(responseContent);
             }
 
-            var result = _compensationRequestRepository.Insert(compensationRequest);
+            var result = _compensationRequestRepository.InsertRequest(compensationRequest);
 
-            if (result > 0)
+            if (result.RequestID > 0)
             {
                 responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Success;
                 responseContent.Message = "Data created successfully";
                 
-                EmailController emailController = new EmailController();
+                EmailController emailController = new EmailController(_hostingEnvironment);
                 try
                 {
                     var nik = User.FindFirst("NIK").Value;
-                    var email = _compensationRequestRepository.GetManagerEmail(nik);
-                    emailController.SendEmail(email, EmailController.EmailType.CompensationRequest, result.ToString());
+                    var manager = _compensationRequestRepository.GetManager(nik);
+                    emailController.SendEmail(EmailController.EmailType.CompensationRequest, manager, result);
                 } catch
                 {
                     responseContent.Status = ResponseVM<CompensationRequest>.StatusType.Failed;

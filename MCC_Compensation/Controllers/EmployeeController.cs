@@ -2,9 +2,12 @@
 using API.Models;
 using API.Repository.Data;
 using API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +30,7 @@ namespace API.Controllers
             _employeeRepository = employeeRepository;
             _configuration = configuration;
         }
-        
+
         [HttpPost]
         public override ActionResult Post(Employee employee)
         {
