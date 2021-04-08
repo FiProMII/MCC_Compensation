@@ -12,5 +12,6 @@ namespace API.ViewModels
         public string StatusName { get; set; }
         public string NIK { get; set; }
         public DateTime ApprovalDate { get; set; }
+        public string Note { get; set; }
     }
 }

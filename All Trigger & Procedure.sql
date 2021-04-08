@@ -28,9 +28,9 @@
 		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
 		SET @DepartmentID = (SELECT dep.DepartmentID FROM TB_M_Department dep JOIN TB_M_Position pos ON dep.DepartmentID = pos.DepartmentID JOIN TB_M_Employee emp ON pos.PositionID = emp.PositionID WHERE emp.NIK = @NIK)
 
-		INSERT TB_T_Approval 
-		SELECT @StatusID,@NIK,RequestID,@DepartmentID,GETDATE()
-		FROM inserted
+		INSERT INTO TB_T_Approval
+		SELECT @StatusID,@NIK,RequestID,@DepartmentID,GETDATE(),NULL
+		FROM INSERTED
 	END
 	GO
 
@@ -173,7 +173,8 @@
 	@RequestID int,
 	@DepartmentID int,
 	@StatusName nvarchar(max),
-	@NIK nvarchar(450)
+	@NIK nvarchar(450),
+	@DetailInfo nvarchar(max)
 	AS
 	BEGIN
 		DECLARE @NewStatusID int
@@ -214,7 +215,7 @@
 		ELSE
 		BEGIN
 			UPDATE TB_T_Approval
-			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
+			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK, DetailInformation = @DetailInfo
 			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = @PendingID
 		END
 	END

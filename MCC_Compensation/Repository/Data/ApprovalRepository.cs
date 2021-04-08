@@ -51,6 +51,7 @@ namespace API.Repository.Data
             _parameters.Add("@DepartmentID", departmentID);
             _parameters.Add("@StatusName", updateStatusVM.StatusName);
             _parameters.Add("@NIK", updateStatusVM.NIK);
+            _parameters.Add("@DetailInfo", updateStatusVM.Note);
             var result = _crRepository.Execute(SPName, _parameters);
             return result;
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class Create : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -213,7 +213,8 @@ namespace API.Migrations
                     NIK = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RequestID = table.Column<int>(type: "int", nullable: false),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DetailInformation = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
