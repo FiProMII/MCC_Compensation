@@ -567,7 +567,7 @@
             $.ajax({
                 url: "/Request/GetDetail",
                 type: "GET",
-                data: { 'id': id },
+                data: { 'RequestID': id },
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
                     debugger;
@@ -585,7 +585,7 @@
                     $.ajax({
                         url: "/Document/GetDocument",
                         type: "GET",
-                        data: { 'requestID': id },
+                        data: { 'RequestID': id },
                         headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (result) {
                             debugger;
