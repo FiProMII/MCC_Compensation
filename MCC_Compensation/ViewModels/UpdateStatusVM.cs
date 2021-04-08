@@ -9,8 +9,9 @@ namespace API.ViewModels
     {
         public int RequestID { get; set; }
         public int DepartmentID { get; set; }
-        public int NewStatusID { get; set; }
+        public string StatusName { get; set; }
         public string NIK { get; set; }
         public DateTime ApprovalDate { get; set; }
+        public string Note { get; set; }
     }
 }

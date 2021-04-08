@@ -71,6 +71,27 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetDetail")]
+        public IActionResult GetDetail(int RequestID)
+        {
+            ResponseVM<DetailRequestVM> responseContent = new ResponseVM<DetailRequestVM>();
+            var result = _compensationRequestRepository.GetDetailRequest(RequestID);
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<DetailRequestVM>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<DetailRequestVM>.StatusType.Failed;
+                responseContent.Message = "Data not found";
+                return StatusCode(500, responseContent);
+            }
+        }
+
         [HttpGet("RequestList")]
         public IActionResult RequestList(string Status, string NIK)
         {

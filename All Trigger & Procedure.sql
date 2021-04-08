@@ -28,9 +28,9 @@
 		SET @NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE NIK = (SELECT NIK FROM inserted))
 		SET @DepartmentID = (SELECT dep.DepartmentID FROM TB_M_Department dep JOIN TB_M_Position pos ON dep.DepartmentID = pos.DepartmentID JOIN TB_M_Employee emp ON pos.PositionID = emp.PositionID WHERE emp.NIK = @NIK)
 
-		INSERT TB_T_Approval 
-		SELECT @StatusID,@NIK,RequestID,@DepartmentID,GETDATE()
-		FROM inserted
+		INSERT INTO TB_T_Approval
+		SELECT @StatusID,@NIK,RequestID,@DepartmentID,GETDATE(),NULL
+		FROM INSERTED
 	END
 	GO
 
@@ -143,14 +143,43 @@
 	END
 	GO
 	
+	-- Get Detail Request--
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDetailRequest]
+		@RequestID int
+	AS
+	BEGIN
+	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, pos.PositionName, dep.DepartmentName, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
+		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+		JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
+		JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
+		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
+	WHERE creq.RequestID = @RequestID GROUP BY creq.RequestID, emp.EmployeeName, emp.joinDate, comp.CompensationName, creq.EventDate, creq.RequestDate, pos.PositionName, dep.DepartmentName
+	END
+	GO
+
+	-- Get Document--
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDocument]
+		@RequestID int
+	AS
+	BEGIN
+	SELECT doc.DocumentName, doc.Link FROM TB_M_Document doc WHERE doc.RequestID = @RequestID
+	END
+	GO
+
 	--update status, set pending to next department if not rejected
 	CREATE OR ALTER PROCEDURE [dbo].[SP_UpdateStatus] 
 	@RequestID int,
 	@DepartmentID int,
-	@NewStatusID int,
-	@NIK nvarchar(450)
+	@StatusName nvarchar(max),
+	@NIK nvarchar(450),
+	@DetailInfo nvarchar(max)
 	AS
 	BEGIN
+		DECLARE @NewStatusID int
+		SET @NewStatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%'+@StatusName+'%')
+
 		DECLARE @PendingID int
 		SET @PendingID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%Pending%')
 
@@ -171,7 +200,7 @@
 
 				UPDATE TB_T_Approval
 				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
-				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = @PendingID
 			END
 			ELSE
 			BEGIN
@@ -180,14 +209,14 @@
 
 				UPDATE TB_T_Approval
 				SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
-				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+				WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = @PendingID
 			END
 		END
 		ELSE
 		BEGIN
 			UPDATE TB_T_Approval
-			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK
-			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = 1
+			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK, DetailInformation = @DetailInfo
+			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = @PendingID
 		END
 	END
 	GO

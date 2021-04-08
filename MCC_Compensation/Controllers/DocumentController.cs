@@ -5,6 +5,7 @@ using API.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,11 +22,13 @@ namespace API.Controllers
     {
         private IWebHostEnvironment _hostingEnvironment;
         private readonly DocumentRepository _documentRepository;
+        private readonly IConfiguration _configuration;
 
-        public DocumentController(DocumentRepository documentRepository, IWebHostEnvironment environment) : base(documentRepository)
+        public DocumentController(DocumentRepository documentRepository, IWebHostEnvironment environment, IConfiguration configuration) : base(documentRepository)
         {
             _hostingEnvironment = environment;
             _documentRepository = documentRepository;
+            _configuration = configuration;
         }
 
         [HttpPost("Upload")]
@@ -51,8 +54,28 @@ namespace API.Controllers
                     documents.Add(document);
                 }
             }
-
             return Ok(documents);
+        }
+
+        [HttpGet("GetDocument")]
+        public IActionResult GetDocument(int RequestID)
+        {
+            ResponseVM<IEnumerable<Document>> responseContent = new ResponseVM<IEnumerable<Document>>();
+            var result = _documentRepository.GetDocument(RequestID);
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<IEnumerable<Document>>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<IEnumerable<Document>>.StatusType.Failed;
+                responseContent.Message = "Data not found";
+                return StatusCode(500, responseContent);
+            }
         }
     }
 }

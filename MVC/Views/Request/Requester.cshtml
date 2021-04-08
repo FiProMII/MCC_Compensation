@@ -183,13 +183,13 @@
                 contentType: false,
                 enctype: 'multipart/form-data',
                 processData: false,
-                beforeSend: function () {
+                beforeSend: function (response) {
                     Swal.fire({
                         title: 'Please Wait !',
                         html: 'Your request is being processed',
                         allowOutsideClick: false,
                         showConfirmButton: false,
-                        onBeforeOpen: () => {
+                        willOpen: () => {
                             Swal.showLoading()
                         }
                     })

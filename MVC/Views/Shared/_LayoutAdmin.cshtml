@@ -249,8 +249,8 @@
 
         $('#userEmail').text(sessionStorage.getItem("Email"));
         $('#userName').text(sessionStorage.getItem("FullName"));
-        var data = JSON.parse(localStorage.getItem("Role"));
-        if (data.includes("Super Admin")) {
+        var roleName = JSON.parse(localStorage.getItem("Role"));
+        if (roleName.includes("Super Admin")) {
             $('#management').show();
             $('#department').show();
             $('#position').show();
@@ -260,7 +260,7 @@
             $('#compensationRequest').show();
             $('#requestList').show();
         }
-        else if (data.includes("RM") || data.includes("Employee") || data.includes("Finance")) {
+        else if (roleName.includes("RM") || roleName.includes("Employee") || roleName.includes("Finance")) {
             $('#management').hide();
             $('#department').hide();
             $('#position').hide();
@@ -269,7 +269,7 @@
             $('#userRole').hide();
             $('#compensationRequest').show();
             $('#requestList').show();
-        } else if (data.includes("HR")) {
+        } else if (roleName.includes("HR")) {
             $('#management').show();
             $('#department').show();
             $('#position').show();

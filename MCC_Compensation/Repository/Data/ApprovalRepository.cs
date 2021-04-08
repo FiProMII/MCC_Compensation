@@ -49,8 +49,9 @@ namespace API.Repository.Data
             var SPName = "SP_UpdateStatus";
             _parameters.Add("@RequestID", updateStatusVM.RequestID);
             _parameters.Add("@DepartmentID", departmentID);
-            _parameters.Add("@NewStatusID", updateStatusVM.NewStatusID);
+            _parameters.Add("@StatusName", updateStatusVM.StatusName);
             _parameters.Add("@NIK", updateStatusVM.NIK);
+            _parameters.Add("@DetailInfo", updateStatusVM.Note);
             var result = _crRepository.Execute(SPName, _parameters);
             var request = requests.Where(r => r.RequestID == updateStatusVM.RequestID).SingleOrDefault();
             return request;

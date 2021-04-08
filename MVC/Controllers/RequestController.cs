@@ -16,10 +16,6 @@ namespace MVC.Controllers
 {
     public class RequestController : BaseController<CompensationRequest, int>
     {
-        public ViewResult Admin() => View();
-
-        public ViewResult Details() => View();
-
         public ViewResult Requester() => View();
 
         public ViewResult Approval() => View();
@@ -33,6 +29,18 @@ namespace MVC.Controllers
             var response = await httpClient.PostAsync("CompensationRequest", content);
             string apiResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseVM<CompensationRequest>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDetail(int RequestID)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            var response = await httpClient.GetAsync("CompensationRequest/GetDetail?RequestID=" + RequestID);
+            var apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<DetailRequestVM>>(apiResponse);
             if (response.IsSuccessStatusCode)
                 return Ok(result);
             return BadRequest(result);

@@ -17,8 +17,10 @@ namespace API.Models
         public string NIK { get; set; }
         public int RequestID { get; set; }
         public int DepartmentID { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime ApprovalDate { get; set; }
+        public string Note { get; set; }
         public virtual Status Status { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Department Department { get; set; }

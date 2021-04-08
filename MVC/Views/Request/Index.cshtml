@@ -220,9 +220,9 @@
                         </div>
                     </div>
                     <div class="modal-footer form-actions">
-                        <button type="button" class="btn-secondary btn-rounded waves-effect waves-light" data-dismiss="modal" id="close" onclick="reset()">Close</button>
-                        <button type="submit" class="btn btn-danger btn-rounded waves-effect waves-light" id="reject" value="3">Reject</button>
-                        <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light" id="approve" value="2">Approve</button>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded" data-dismiss="modal" id="close" onclick="reset()">Close</button>
+                        <button type="submit" class="btn btn-danger btn-rounded approval" id="reject" value="Reject">Reject</button>
+                        <button type="submit" class="btn btn-success btn-rounded approval" id="approve" value="Approve">Approve</button>
                     </div>
                 </form>
             </div>
@@ -233,60 +233,88 @@
 </div>
 <!-- /.modal -->
 
+<div id="modalRejected" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form class="form-horizontal" role="form" id="formReject">
+                <div class="modal-body">
+                    <div class="form-group controls" id="excuseText">
+                        <label id="messageText"><strong>Please enter why you declined this request</strong></label>
+                        <textarea class="form-control" rows="5" id="textArea" required></textarea>
+                    </div>
+                    <p>Do you want to save changes you made before closing?</p>
+                    <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveChange">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @section scripts
 {
     @*<script src="~/js/Request/Index.js"></script>*@
     <script>
         var isUpdate = 0, value, urlString, dataStatus, NIK;
         $(document).ready(function () {
+            NIK = sessionStorage.getItem("NIK");
             urlString = "/Request/RequestList";
             dataStatus = "Pending";
-            NIK = sessionStorage.getItem("NIK");
-            pendingTable();
-            $('#reject').show();
-            $('#approve').show();
-            $('#close').hide();
+            myTable();
 
             var data = JSON.parse(localStorage.getItem("Role"));
             if (data.includes("Super Admin") || data.includes("RM") || data.includes("HR") || data.includes("Finance")) {
                 $('#CreateRequest').hide()
+                $('#reject').show();
+                $('#approve').show();
+                $('#close').hide();
             } else {
                 $('#CreateRequest').show()
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
             }
-
-            $('#View').on('change', function () {
-                value = $(this).val();
-                console.log(value);
-                $('#table_id').DataTable().destroy();
-                urlString = "/Request/RequestList";
-                if (value == '0') {
-                    dataStatus = "Pending";
-                    pendingTable();
-                    $('#reject').show();
-                    $('#approve').show();
-                    $('#close').hide();
-                } else if (value == '1') {
-                    dataStatus = "Approve";
-                    myTable();
-                    $('#reject').hide();
-                    $('#approve').hide();
-                    $('#close').show();
-                } else if (value == '-1') {
-                    dataStatus = "Rejected";
-                    myTable();
-                    $('#reject').hide();
-                    $('#approve').hide();
-                    $('#close').show();
-                } else {
-                    defaultTable();
-                    $('#close').show();
-                    $('#reject').hide();
-                    $('#approve').hide();
-                }
-            });
         });
 
-        function pendingTable() {
+        $('#View').on('change', function () {
+            value = $(this).val();
+            console.log(value);
+            $('#table_id').DataTable().destroy();
+            urlString = "/Request/RequestList";
+            if (value == '0') {
+                dataStatus = "Pending";
+                myTable();
+                $('#reject').show();
+                $('#approve').show();
+                $('#close').hide();
+            } else if (value == '1') {
+                dataStatus = "Approve";
+                myTable();
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
+            } else if (value == '-1') {
+                dataStatus = "Rejected";
+                myTable();
+                $('#reject').hide();
+                $('#approve').hide();
+                $('#close').show();
+            } else {
+                defaultTable();
+                $('#close').show();
+                $('#reject').hide();
+                $('#approve').hide();
+            }
+        });
+
+        function myTable() {
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -321,7 +349,7 @@
                 },
                 "columnDefs": [
                     {
-                        "targets": [1],
+                        "targets": [1, 3, 4],
                         "visible": false,
                     },
                     {
@@ -370,7 +398,11 @@
                     {
                         "data": 'requestID',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Needed" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Approval</button>'
+                            if (dataStatus == "Pending") {
+                                return '<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Approval Needed" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Approval</button>'
+                            } else {
+                                return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button>'
+                            }
                         }
                     }
                 ]
@@ -467,132 +499,58 @@
             })
         }
 
-        function myTable() {
-            $('#table_id').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'csv',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6]
-                        }
-                    }
-                ],
-                "order": [],
-                "responsive": true,
-                "filter": true,
-                "orderMulti": false,
-                "ajax": {
-                    "url": urlString,
-                    "type": "Get",
-                    "data": { 'status': dataStatus, 'nik': NIK },
-                    "dataSrc": "result"
-                },
-                "columnDefs": [
-                    {
-                        "targets": [1],
-                        "visible": false,
-                    },
-                    {
-                        "targets": [0, 8],
-                        "orderable": false,
-                    },
-                    {
-                        "targets": [0, 1, 3, 5, 6, 7, 8],
-                        "className": "texUrl-center",
-                    },
-                    {
-                        "order": [[2, 'asc']]
-                    }
-                ],
-                "columns": [
-                    {
-                        "data": null,
-                        "name": "no",
-                        "autowidth": true,
-                        "render": function (data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    { "data": 'requestID' },
-                    { "data": 'employeeName' },
-                    {
-                        "data": 'joinDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    { "data": 'manager' },
-                    { "data": 'compensationName' },
-                    {
-                        "data": 'eventDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    {
-                        "data": 'requestDate',
-                        "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
-                        }
-                    },
-                    {
-                        "data": 'requestID',
-                        "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-outline-info waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Detail Information" onclick="GetDetail(\'' + row['requestID'] + '\')"><i class="fa fa-info-circle"></i> Details</button>'
-                        }
-                    }
-                ]
-            })
-        }
-
         function GetDetail(id) {
             reset();
             $.ajax({
-                url: "/Request/GetById",
+                url: "/Request/GetDetail",
                 type: "GET",
-                data: { 'key': id },
+                data: { 'RequestID': id },
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    $('#modal').modal('show');
                     var data = result["result"];
-                    $('#Requester').html(data.employee.employeeName)
-                    $('#DepartmentName').html(data.employee.position.department.departmentName)
-                    $('#PositionName').html(data.employee.position.positionName)
-                    $('#ManagerName').html(data.employee.manager.employeeName)
-                    $('#JoinDate').html(moment(data.employee.joinDate).format('DD MMMM YYYY'))
+                    $('#Requester').html(data.employeeName)
+                    $('#DepartmentName').html(data.departmentName)
+                    $('#PositionName').html(data.positionName)
+                    $('#ManagerName').html(data.manager)
+                    $('#JoinDate').html(moment(data.joinDate).format('DD MMMM YYYY'))
                     $('#RequestID').html(data.requestID)
-                    $('#RequestIDText').html(data.requestID)
-                    $('#CompensationName').html(data.compensation.compensationName)
+                    $('#CompensationName').html(data.compensationName)
                     $('#EventDate').html(moment(data.eventDate).format('DD MMMM YYYY'))
                     $('#RequestDate').html(moment(data.requestDate).format('DD MMMM YYYY'))
 
-                    for (var i = 0; i < data.documents.length; i++) {
-                        if (data.documents[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
-                            var documentList = '<a target="_blank" href="' + data.documents[i].link
-                                + '"><img src="/lib/src/images/pdf.png" width="30">' + data.documents[i].documentName + '</><br/>'
-                        } else if (data.documents[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
-                            var documentList = '<a target="_blank" href="' + data.documents[i].link
-                                + '"><img src="/lib/src/images/images.png" width="30">' + data.documents[i].documentName + '</><br/>'
+                    $.ajax({
+                        url: "/Document/GetDocument",
+                        type: "GET",
+                        data: { 'RequestID': id },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                        success: function (result) {
+                            var data = result["result"];
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].link.match(/(.*?)\.(pdf|PDF)$/)) {
+                                    var documentList = '<a target="_blank" href="' + data[i].link
+                                        + '"><img src="/lib/src/images/pdf.png" width="30">' + data[i].documentName + '</><br/>'
+                                } else if (data[i].link.match(/(.*?)\.(jpg|jpeg|JPG|JPEG)$/)) {
+                                    var documentList = '<a target="_blank" href="' + data[i].link
+                                        + '"><img src="/lib/src/images/images.png" width="30">' + data[i].documentName + '</><br/>'
+                                }
+                                $('#Document').append(documentList);
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something in GetDocument went wrong!',
+                                footer: '<a href>Why do I have this issue?</a>'
+                            })
                         }
-                        $('#Document').append(documentList);
-                    }
+                    })
 
                     $.ajax({
                         url: "/Approval/ApprovalStatus",
                         type: "GET",
                         data: { 'RequestID': id },
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
                         success: function (result) {
                             var data = result["result"];
                             for (var i = 0; i < data.length; i++) {
@@ -601,10 +559,27 @@
                                     + '<th id="ApprovalDate">' + moment(data[i].approvalDate).format('DD MM YYYY') + '</th></tr>'
                                 $('#Status').append(statusList);
                             }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something in Approval Status went wrong!',
+                                footer: '<a href>Why do I have this issue?</a>'
+                            })
                         }
                     })
+                    $('#modal').modal('show');
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something in GetDetailRequest went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                    })
                 }
-            });
+            })
         };
 
         function reset() {
@@ -612,45 +587,85 @@
             $("#tablestatus tbody").empty();
         }
 
-        var statusID;
-        $('.btn').on('click', function () {
-            debugger;
-            statusID = parseInt($(this).val())
+        var statusName;
+        $('.approval').on('click', function () {
+            statusName = $(this).val()
         })
 
         $('#formApproval').submit(function (event) {
-            debugger;
             event.preventDefault()
             var requestID = parseInt(document.getElementById("RequestID").innerHTML);
             var UpdateStatusVM = new Object();
-            UpdateStatusVM.newStatusID = statusID;
+            UpdateStatusVM.statusName = statusName;
             UpdateStatusVM.requestID = requestID;
-            debugger;
-            $.ajax({
-                type: "POST",
-                url: "/Approval/UpdateStatus",
-                data: JSON.stringify(UpdateStatusVM),
-                headers: { 'Authorization': 'Bearer ' + localStorage.token },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    Swal.fire({
-                        title: '<strong>Thank You</strong>',
-                        icon: 'info',
-                        html:
-                            'you succeeded in <b>giving approval</b> ',
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> Great!',
-                        confirmButtonAriaLabel: 'Thumbs up, great!',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $('#table_id').DataTable().ajax.reload();
-                            $('#modal').modal('hide');
+
+            if (statusName == "Reject") {
+                $('#modalRejected').modal({
+                    backdrop: 'static'
+                })
+                $('#textArea').prop('required', true);
+                $('#saveChange').on('click',function (event) {
+                    event.preventDefault()
+                    UpdateStatusVM.note = $('#textArea').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/Approval/UpdateStatus",
+                        data: JSON.stringify(UpdateStatusVM),
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function () {
+                            $('#modalRejected').modal('hide');
+                            $('#textArea').empty();
+                            Swal.fire({
+                                title: '<strong>Thank You</strong>',
+                                icon: 'info',
+                                html:
+                                    'you succeeded in <b>giving approval</b> ',
+                                focusConfirm: false,
+                                confirmButtonText:
+                                    '<i class="fa fa-thumbs-up"></i> Great!',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#table_id').DataTable().ajax.reload();
+                                    $('#modal').modal('hide');
+                                }
+                            })
                         }
                     })
-                }
-            })
+                })
+            } else {
+                UpdateStatusVM.note = "Approved without a hitch";
+                $.ajax({
+                    type: "POST",
+                    url: "/Approval/UpdateStatus",
+                    data: JSON.stringify(UpdateStatusVM),
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        Swal.fire({
+                            title: '<strong>Thank You</strong>',
+                            icon: 'info',
+                            html:
+                                'you succeeded in <b>giving approval</b> ',
+                            focusConfirm: false,
+                            confirmButtonText:
+                                '<i class="fa fa-thumbs-up"></i> Great!',
+                            confirmButtonAriaLabel: 'Thumbs up, great!',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('#table_id').DataTable().ajax.reload();
+                                $('#modal').modal('hide');
+                            }
+                        })
+                    }
+                })
+            }
         })
+
     </script>
 }
