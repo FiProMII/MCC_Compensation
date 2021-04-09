@@ -26,5 +26,23 @@ namespace MVC.Controllers
             var result = JsonConvert.DeserializeObject<ResponseVM<Employee>>(apiResponse);
             return new JsonResult(result);
         }
+
+        [HttpPost]
+        public override async Task<IActionResult> Post(Employee employee)
+        {
+            if (employee.ManagerNIK == "-1")
+            {
+                employee.ManagerNIK = null;
+            }
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            StringContent content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("Employee", content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<Employee>>(apiResponse);
+            if (response.IsSuccessStatusCode)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

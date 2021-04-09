@@ -19,9 +19,9 @@ namespace API.Controllers
     public class EmailController : ControllerBase
     {
         public const string RequestSubject = "Compensation Request #";
+        public const string RequestResultSubject = "Update on your compensation request";
         public const string TemporaryPasswordSubject = "New Temporary Password #";
-        //public const string RequestBody = "Please verify this compensation request by clicking this link: https://localhost:44309/Request/Approval?id=";
-        //public const string TemporaryPasswordBody = "Login with your new temporary password: ";
+
 
         private IWebHostEnvironment _hostingEnvironment;
 
@@ -52,9 +52,9 @@ namespace API.Controllers
 
             var builder = new BodyBuilder();
 
-            var tes = request;
-
             string pathToFile;
+            Approval approval;
+
             switch (emailType)
             {
                 case EmailType.CompensationRequest:
@@ -73,6 +73,45 @@ namespace API.Controllers
                         request.RequestDate,
                         request.Compensation.CompensationName,
                         "https://localhost:44309/Request/Approval?id=" + request.RequestID
+                        );
+                    break;
+                case EmailType.CompensationRequestApproved:
+                    message.Subject = RequestResultSubject;
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "RequestApproved.html";
+                    approval = request.Approvals.OrderBy(a => a.ApprovalDate).Last();
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        request.Compensation.CompensationName.ToLower(),
+                        request.RequestDate,
+                        approval.Employee.EmployeeName,
+                        approval.Employee.Position.Department.DepartmentName,
+                        approval.Employee.Email
+                        );
+                    break;
+                case EmailType.CompensationRequestRejected:
+                    message.Subject = RequestResultSubject;
+                    pathToFile = webRoot + Path.DirectorySeparatorChar.ToString() + "RequestRejected.html";
+                    approval = request.Approvals.OrderBy(a => a.ApprovalDate).Last();
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
+                    {
+
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+
+                    }
+                    messageBody = string.Format(builder.HtmlBody,
+                        employeeRecipient.EmployeeName,
+                        request.Compensation.CompensationName.ToLower(),
+                        request.RequestDate,
+                        approval.Employee.EmployeeName,
+                        approval.Employee.Position.Department.DepartmentName,
+                        approval.Employee.Email,
+                        approval.Note
                         );
                     break;
                 case EmailType.TemporaryPassword:

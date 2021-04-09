@@ -53,7 +53,13 @@ namespace API.Repository.Data
             _parameters.Add("@NIK", updateStatusVM.NIK);
             _parameters.Add("@DetailInfo", updateStatusVM.Note);
             var result = _crRepository.Execute(SPName, _parameters);
-            var request = requests.Where(r => r.RequestID == updateStatusVM.RequestID).SingleOrDefault();
+            var request = requests
+                        .Include(r => r.Compensation)
+                        .Include(r => r.Employee)
+                            .ThenInclude(e => e.Position)
+                            .ThenInclude(p => p.Department)
+                        .Where(r => r.RequestID == updateStatusVM.RequestID)
+                        .SingleOrDefault();
             return request;
         }
 

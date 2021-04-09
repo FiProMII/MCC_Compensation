@@ -63,11 +63,27 @@ namespace API.Controllers
                 EmailController emailController = new EmailController(_hostingEnvironment);
                 try
                 {
-                    var employees = GetRecipients(null);
-                    foreach (var employee in employees)
+                    
+                    if (User.IsInRole("Finance") && updateStatusVM.StatusName.ToLower().Contains("approve"))
                     {
-                        emailController.SendEmail(EmailController.EmailType.CompensationRequest, employee, result);
+                        var employees = GetRecipients(result.NIK);
+                        emailController.SendEmail(EmailController.EmailType.CompensationRequestApproved, employees.FirstOrDefault(), result);
                     }
+                    else if (updateStatusVM.StatusName.ToLower().Contains("reject"))
+                    {
+                        var employees = GetRecipients(result.NIK);
+                        emailController.SendEmail(EmailController.EmailType.CompensationRequestRejected, employees.FirstOrDefault(), result);
+                    }
+                    else
+                    {
+                        var employees = GetRecipients(null);
+                        foreach (var employee in employees)
+                        {
+                            emailController.SendEmail(EmailController.EmailType.CompensationRequest, employee, result);
+                        }
+                    }
+                    
+                    return Ok(responseContent);
                 }
                 catch
                 {
@@ -75,8 +91,6 @@ namespace API.Controllers
                     responseContent.Message = "Email is not sent";
                     return StatusCode(500, responseContent);
                 }
-
-                return Ok(responseContent);
             }
             else
             {
@@ -89,15 +103,15 @@ namespace API.Controllers
         public IEnumerable<Employee> GetRecipients(string requestNIK)
         {
             IEnumerable<Employee> employees = Enumerable.Empty<Employee>();
-            if (User.IsInRole("RM"))
+            if (User.IsInRole("RM") && requestNIK == null)
             {
                 employees = _approvalRepository.GetRecipients(1, null);
             }
-            else if (User.IsInRole("HR"))
+            else if (User.IsInRole("HR") && requestNIK == null)
             {
                 employees = _approvalRepository.GetRecipients(2, null);
             }
-            else if (User.IsInRole("Finance"))
+            else
             {
                 employees = _approvalRepository.GetRecipients(3, requestNIK);
             }
