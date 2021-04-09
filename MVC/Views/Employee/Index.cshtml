@@ -96,7 +96,7 @@
                         <div class="form-body">
                             <div class="row p-t-20">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="nikGroup">
                                         <label for="nik" class="control-label">NIK <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
@@ -104,7 +104,7 @@
                                                 <div class="input-group-addon"><i class="ti-id-badge"></i></div>
                                             </div>
                                         </div>
-                                        <small class="text-danger" id="ValidationNIK" style="visibility: hidden"><code>NIK</code> already exist</small>
+                                        <div class="form-control-feedback" id="ValidationNIK" style="display: none">Sorry, that NIK's taken. Try another?</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -121,7 +121,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="emailGroup">
                                         <label for="email" class="control-label">Email <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
@@ -129,20 +129,19 @@
                                                 <div class="input-group-addon"><i class="ti-email"></i></div>
                                             </div>
                                         </div>
-                                        <small class="text-danger" id="ValidationEmail" style="visibility: hidden"><code>Email</code> already exist.</small>
+                                        <div class="form-control-feedback" id="ValidationEmail" style="display: none">Email already exist.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="phoneGroup">
                                         <label for="phone" class="control-label">Phone <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
-                                                <span class="input-group-addon">(+62)</span>
                                                 <input type="number" class="form-control" name="Phone" id="Phone" placeholder="Enter Phone Number" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters Allowed, Only Numbers">
                                                 <div class="input-group-addon"><i class="ti-mobile"></i></div>
                                             </div>
                                         </div>
-                                        <small class="text-danger" id="ValidationPhone" style="visibility: hidden"><code>Phone number</code> already exist.</small>
+                                        <div class="form-control-feedback" id="ValidationPhone" style="display: none">Phone number already exist.</div>
                                     </div>
                                 </div>
                             </div>
@@ -159,13 +158,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" id="dateGroup">
                                         <label for="birthPlace" class="control-label">Birth Date <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <div class="input-group">
-                                                <input type="date" class="form-control" name="BirthDate" id="BirthDate" required>
+                                                <input type="date" class="form-control" name="BirthDate" id="BirthDate" required >
                                             </div>
                                         </div>
+                                        <div class="form-control-feedback" id="ValidationDate" style="display: none">You have to older than 18</div>
                                     </div>
                                 </div>
                             </div>
@@ -238,6 +238,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 @section scripts
 {
     <script>
@@ -248,7 +249,6 @@
                 }
             });
         }
-
         var isUpdate = 0;
         $(document).ready(function () {
             $.ajax({
@@ -273,7 +273,6 @@
                     }
                 }
             });
-
             var departmentDropdown = '<option value="-1">Please select a department</option>';
             $.ajax({
                 type: "GET",
@@ -286,7 +285,6 @@
                     }
                 }
             });
-
             $("select#DepartmentDropdown").on('change', function () {
                 var selectedDepartment = $('#DepartmentDropdown option:selected').val();
                 $.ajax({
@@ -303,7 +301,6 @@
                         }
                     }
                 });
-
                 $("select#PositionID").on('change', function () {
                     var selectedPosition = $('#PositionID option:selected').text();
                     var selectedDepartment = $('#DepartmentDropdown option:selected').val();
@@ -331,8 +328,6 @@
                     });
                 })
             });
-
-
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -445,12 +440,10 @@
                             data: { 'key': nikValue }
                         });
                     }
-
                     for (var i = 0; i < myCheckboxes.length; i++) {
                         var role = new Object();
                         role.nik = nikValue;
                         role.roleID = myCheckboxes[i];
-                        debugger;
                         $.ajax({
                             type: "POST",
                             url: "/AccountRole/Post",
@@ -459,7 +452,6 @@
                             dataType: "json"
                         });
                     }
-
                     Swal.fire({
                         icon: 'success',
                         title: 'Your data has been saved',
@@ -495,7 +487,6 @@
                     }
                 }
             });
-
             $.ajax({
                 url: "/Employee/GetById",
                 type: "GET",
@@ -560,37 +551,47 @@
             isUpdate = 0;
             $('#form').trigger('reset');
             $('input:checkbox').removeAttr('checked');
-            $('#NIK').attr('readonly', false);
-            $('#Email').attr('readonly', false);
+            $('#NIK').removeAttr('readonly');
+            $('#Email').removeAttr('readonly');
             $('#ValidationNIK').hide();
             $('#ValidationEmail').hide();
+            $('#ValidationPhone').hide();
+            $('#ValidationDate').hide();
+            $('#nikGroup').removeClass('has-danger').removeClass('has-success').removeClass('has-warning');
+            $('#emailGroup').removeClass('has-danger').removeClass('has-success').removeClass('has-warning');
+            $('#phoneGroup').removeClass('has-danger').removeClass('has-success').removeClass('has-warning');
+            $('#dateGroup').removeClass('has-danger').removeClass('has-success');
+            $('#Submit').removeAttr('disabled');
         }
 
-        $('#NIK').change(function () {
-            var nik = $(this).val();
+        $('#NIK').keyup(function () {
+            var nik = $('#NIK').val();
             $.ajax({
                 url: "/Employee/GetById",
                 type: "GET",
                 data: { 'key': nik },
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    if (result != null) {
-                        $('#ValidationNIK').css('visibility', 'visible');
-                        $('#NIK').focus(function () {
-                            $('#ValidationNIK').css('visibility', 'hidden');
-                        });
-                    }
-                    else {
-                        $('#ValidationNIK').css('visibility', 'hidden');
+                    $('#nikGroup').addClass('has-danger');
+                    $('#ValidationNIK').show();   
+                },
+                error: function () {
+                    if (nik == "") {
+                        $('#nikGroup').removeClass('has-danger').removeClass('has-success').addClass('has-warning');
+                        $('#ValidationNIK').hide();
+                    } else {
+                        $('#nikGroup').removeClass('has-danger').removeClass('has-warning').addClass('has-success');
+                        $('#ValidationNIK').hide();
                     }
                 }
             })
         });
 
-        $('#Email').change(function () {
-            var email = $(this).val();
+        $('#Email').keyup(function () {
+            var email = $('#Email').val();
             if (email == "") {
-                $('#ValidationEmail').css('visibility', 'hidden');
+                $('#emailGroup').removeClass('has-danger').removeClass('has-success').addClass('has-warning');
+                $('#ValidationEmail').hide();
             }
             else {
                 $.ajax({
@@ -600,25 +601,23 @@
                     success: function (result) {
                         var data = result["message"];
                         if (data != "") {
-                            try {
-                                $('#ValidationEmail').css('visibility', 'visible');
-                            } catch (e) {
-                                return false;
-                            }
-                        } else {
-                            $('#Email').focus(function () {
-                                $('#ValidationEmail').css('visibility', 'hidden');
-                            });
+                            $('#emailGroup').removeClass('has-warning').removeClass('has-success').addClass('has-danger');
+                            $('#ValidationEmail').show();
+                        }
+                        else {
+                            $('#emailGroup').removeClass('has-danger').removeClass('has-warning').addClass('has-success');
+                            $('#ValidationEmail').hide();
                         }
                     }
                 })
             }
         });
 
-        $('#Phone').change(function () {
-            var phone = $(this).val();
+        $('#Phone').keyup(function () {
+            var phone = $('#Phone').val();
             if (phone == "") {
-                $('#ValidationPhone').css('visibility', 'hidden');
+                $('#phoneGroup').removeClass('has-danger').removeClass('has-success').addClass('has-warning');
+                $('#ValidationPhone').hide();
             }
             else {
                 $.ajax({
@@ -628,20 +627,34 @@
                     success: function (result) {
                         var data = result["message"];
                         if (data != "") {
-                            try {
-                                $('#ValidationPhone').css('visibility', 'visible');
-                            } catch (e) {
-                                return false;
-                            }
+                            $('#phoneGroup').removeClass('has-warning').removeClass('has-success').addClass('has-danger');
+                            $('#ValidationPhone').show();
                         } else {
-                            $('#Phone').focus(function () {
-                                $('#ValidationPhone').css('visibility', 'hidden');
-                            });
+                            $('#phoneGroup').removeClass('has-danger').removeClass('has-warning').addClass('has-success');
+                            $('#ValidationPhone').hide();
                         }
                     }
                 })
             }
         });
+
+        $('#BirthDate').on('change',function() {
+            var date = new Date();
+            var birthDate = $('#BirthDate').val();
+            console.log(birthDate);
+            var birthYear = moment(birthDate).format('YYYY');
+            var yearNow = moment(date).format('YYYY');
+
+            if ((yearNow - birthYear) < 18) {
+                $('#dateGroup').addClass('has-danger');
+                $('#ValidationDate').show();
+                $('#Submit').attr('disabled', true);
+            } else {
+                $('#dateGroup').removeClass('has-danger').addClass('has-success');
+                $('#ValidationDate').hide();
+                $('#Submit').removeAttr('disabled');
+            }
+        })
 
     </script>
 }
