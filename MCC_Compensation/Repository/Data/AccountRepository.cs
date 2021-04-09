@@ -76,6 +76,7 @@ namespace API.Repository.Data
                 account.Password = 'n' + BC.EnhancedHashPassword(tempPassword);
                 Update(account);
                 var result = employees.Include("Account").Where(e => e.NIK == employee.NIK).SingleOrDefault();
+                result.Account.Password = tempPassword;
                 return result;
             }
             return null;

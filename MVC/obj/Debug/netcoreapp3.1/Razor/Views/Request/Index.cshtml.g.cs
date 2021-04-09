@@ -398,7 +398,8 @@ namespace AspNetCore
                     ""type"": ""Get"",
                     ""data"": { 'status': dataStatus, 'nik': NIK },
                     ""dataSrc"": ""result""
-                },");
+                },
+");
                 WriteLiteral(@"
                 ""columnDefs"": [
                     {

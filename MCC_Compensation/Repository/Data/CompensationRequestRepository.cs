@@ -18,6 +18,7 @@ namespace API.Repository.Data
         private readonly DbSet<Employee> employees;
         private readonly DbSet<AccountRole> accountRoles;
         private readonly DbSet<Approval> approvals;
+        private readonly DbSet<CompensationRequest> requests;
         private readonly MyContext _myContext;
         public CompensationRequestRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
         {
@@ -26,6 +27,7 @@ namespace API.Repository.Data
             employees = _myContext.Set<Employee>();
             accountRoles = _myContext.Set<AccountRole>();
             approvals = _myContext.Set<Approval>();
+            requests = _myContext.Set<CompensationRequest>();
         }
 
         public IEnumerable<RequestListVM> RequestList(string Status, string NIK)
@@ -89,9 +91,13 @@ namespace API.Repository.Data
                 throw new ArgumentNullException("entity");
             entities.Add(compensationRequest);
             myContext.SaveChanges();
-            var employee = employees.Find(compensationRequest.NIK);
-            compensationRequest.Employee = employee;
-            return compensationRequest;
+            var result = requests
+                            .Include(r => r.Compensation)
+                            .Include(r => r.Employee)
+                            .Include(r => r.Approvals)
+                            .Where(r => r.RequestID == compensationRequest.RequestID)
+                            .FirstOrDefault();
+            return result;
         }
     }
 }

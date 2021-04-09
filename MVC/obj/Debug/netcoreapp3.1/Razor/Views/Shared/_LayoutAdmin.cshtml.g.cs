@@ -301,7 +301,8 @@ namespace AspNetCore
                                     <li role=""separator"" class=""divider""></li>
                                     <li><a href=""/Account/Index"" id=""LogOut""><i class=""fa fa-power-off""></i> Logout</a></li>
                                 </ul>
-                            </div>");
+                            </div>
+");
                 WriteLiteral(@"
                         </li>
                     </ul>

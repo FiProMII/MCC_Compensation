@@ -214,7 +214,7 @@ namespace API.Migrations
                     RequestID = table.Column<int>(type: "int", nullable: false),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
                     ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DetailInformation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

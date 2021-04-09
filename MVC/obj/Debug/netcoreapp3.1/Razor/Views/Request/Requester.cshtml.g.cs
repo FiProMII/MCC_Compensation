@@ -131,7 +131,8 @@ namespace AspNetCore
                 </div>
             </div>
         </div>
-    </div>");
+    </div>
+");
             WriteLiteral("\n    <!-- Row -->\r\n</div>\r\n\r\n");
             DefineSection("scripts", async() => {
                 WriteLiteral(@"

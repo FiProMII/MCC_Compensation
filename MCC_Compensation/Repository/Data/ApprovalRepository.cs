@@ -53,11 +53,17 @@ namespace API.Repository.Data
             _parameters.Add("@NIK", updateStatusVM.NIK);
             _parameters.Add("@DetailInfo", updateStatusVM.Note);
             var result = _crRepository.Execute(SPName, _parameters);
-            var request = requests.Where(r => r.RequestID == updateStatusVM.RequestID).SingleOrDefault();
+            var request = requests
+                        .Include(r => r.Compensation)
+                        .Include(r => r.Employee)
+                            .ThenInclude(e => e.Position)
+                            .ThenInclude(p => p.Department)
+                        .Where(r => r.RequestID == updateStatusVM.RequestID)
+                        .SingleOrDefault();
             return request;
         }
 
-        public IEnumerable<Employee> GetRecipients(int type, string nik)
+        public IEnumerable<Employee> GetRecipients(int type, string requestNIK)
         {
             IEnumerable<Employee> employeesList = Enumerable.Empty<Employee>();
             switch (type)
@@ -71,6 +77,9 @@ namespace API.Repository.Data
                     var FinanceID = departments.Where(d => d.DepartmentName == "Finance").Select(d => d.DepartmentID).FirstOrDefault();
                     employeesList = employees.Include("Position")
                         .Where(e => e.Position.DepartmentID == FinanceID);
+                    break;
+                case 3:
+                    employeesList = employees.Where(e => e.NIK == requestNIK);
                     break;
             }
             return employeesList.AsList();
