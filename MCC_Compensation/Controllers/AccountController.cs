@@ -117,5 +117,35 @@ namespace API.Controllers
                 return NotFound(responseContent);
             }
         }
+
+        [HttpPost("Check")]
+        public IActionResult CheckPassword(string pass)
+        {
+            LoginVM login = new LoginVM();
+            login.NIK = User.FindFirst("NIK").Value;
+            login.Password = pass;
+            var result = _accountRepository.CheckPassword(login);
+            ResponseVM<string> responseContent = new ResponseVM<string>();
+            if (result != null)
+            {
+                if (result.IsTemp)
+                {
+                    responseContent.Status = ResponseVM<string>.StatusType.Success;
+                    responseContent.Message = "Correct";
+                }
+                else
+                {
+                    responseContent.Status = ResponseVM<string>.StatusType.Warning;
+                    responseContent.Message = "Incorrect";
+                }
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<string>.StatusType.Failed;
+                responseContent.Message = "Check Password Failed";
+                return BadRequest(responseContent);
+            }
+        }
     }
 }

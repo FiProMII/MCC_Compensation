@@ -31,25 +31,27 @@
                 <div class="card-body">
                     <h4 class="card-title">Change password</h4>
                     <form class="form-horizontal form-material" id="accountSetting">
-                        <div class="form-group m-t-40">
+                        <div class="form-group m-t-40" id="passGroup">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" name="Password" id="oldPassword" required="" placeholder="Old Password">
+                                <input class="form-control" type="password" name="Password" id="oldPassword" required="" placeholder="Current Password">
                             </div>
+                            <div class="form-control-feedback" id="validationPass" style="display: none">sorry this password doesn't exist</div>
                         </div>
-                        <div class="form-group m-t-40">
+                        <div class="form-group" id="newPassGroup">
                             <div class="col-xs-12">
                                 <input class="form-control" type="password" name="Password" id="newPassword" required="" placeholder="New Password">
                             </div>
+                            <div class="form-control-feedback" id="validNewPass" style="display: none">passwords must be different</div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="confirmPassGroup">
                             <div class="col-xs-12">
                                 <input class="form-control" type="password" id="confirmPassword" required="" placeholder="Confirm New Password">
                             </div>
-                            <small class="text-danger" id="passwordmatch" style="display: none"><code>Password</code> doesn't match</small>
+                            <div class="form-control-feedback" id="passwordmatch" style="display: none">password doesn't match</div>
                         </div>
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Change Password</button>
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" id="changePass">Change Password</button>
                             </div>
                         </div>
                     </form>
@@ -67,41 +69,77 @@
             var pass = $('#newPassword').val();
             var cpass = this.value;
             if (cpass != pass) {
+                $('#confirmPassGroup').addClass('has-danger');
                 $('#passwordmatch').show();
-                $('#confirmPassword').focus(
-                    function () {
-                        $('#passwordmatch').hide();
-                    });
                 $('#submit').attr('disable', true);
             } else {
+                $('#confirmPassGroup').removeClass('has-danger');
                 $('#passwordmatch').hide();
+                $('#submit').attr('disable', false);
+            }
+        })
+
+        $('#newPassword').keyup(function () {
+            var oldPass = $('#oldPassword').val();
+            var newPass = this.value;
+            if (newPass == oldPass) {
+                $('#newPassGroup').addClass('has-danger');
+                $('#validNewPass').show();
+                $('#submit').attr('disable', true);
+            } else {
+                $('#newPassGroup').removeClass('has-danger');
+                $('#validNewPass').hide();
                 $('#submit').attr('disable', false);
             }
         })
 
         $('#accountSetting').submit(function (event) {
             event.preventDefault();
-            var form = $(this);
-            $.ajax({
-                type: "POST",
-                url: "Put",
-                data: form.serialize(),
-                headers: { 'Authorization': 'Bearer ' + localStorage.token },
-                success: function (data) {
-                    Swal.fire({
-                        title: 'You have successfully changed your password. <br />Please Sign in again',
-                        icon: 'success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "@Url.Action("Index", "Account")";
+            var newPass = $('#newPassword').val();
+            var pass = $('#oldPassword').val();
+            if (newPass != pass) {
+                $('#newPassGroup').removeClass('has-danger');
+                $('#validationPass').hide();
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/Check",
+                    data: { 'pass': pass },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    success: function (result) {
+                        var data = result['message'];
+                        if (data == "Correct") {
+                            $('#passGroup').removeClass('has-danger');
+                            $('#validationPass').hide();
+                            var account = new Object();
+                            account.password = newPass;
+                            $.ajax({
+                                type: "POST",
+                                url: "/Account/Put",
+                                data: JSON.parse(JSON.stringify(account)),
+                                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                                success: function (data) {
+                                    Swal.fire({
+                                        title: 'You have successfully changed your password. <br />Please Sign in again',
+                                        icon: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = "@Url.Action("Index", "Account")";
+                                        }
+                                    })
+                                }
+                            })
+                        } else {
+                            $('#passGroup').addClass('has-danger');
+                            $('#validationPass').show();
                         }
-                    })
-                },
-                error: function (error) {
-                }
-            })
+                    }
+                })
+            } else {
+                $('#newPassGroup').addClass('has-danger');
+                $('#validationPass').show();
+            }
         });
 
     </script>
