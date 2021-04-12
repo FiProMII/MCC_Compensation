@@ -313,7 +313,6 @@
 
         $('#View').on('change', function () {
             value = $(this).val();
-            console.log(value);
             $('#table_id').DataTable().destroy();
             urlString = "/Request/RequestList";
             if (value == '0') {
@@ -496,15 +495,35 @@
                         }
                     },
                     { "data": 'requestID' },
-                    { "data": 'employee.employeeName' },
                     {
-                        "data": 'employee.joinDate',
+                        "data": 'employee',
                         "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return obj.employeeName;
                         }
                     },
-                    { "data": 'employee.manager.employeeName' },
-                    { "data": 'compensation.compensationName' },
+                    {
+                        "data": 'employee',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return moment(obj.joinDate).format('DD/MM/YYYY');
+                        }
+                    },
+                    {
+                        "data": 'employee',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            var manager = JSON.parse(JSON.stringify(obj.manager));
+                            return manager.employeeName;
+                        }
+                    },
+                    {
+                        "data": 'compensation',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return obj.compensationName;
+                        }
+                    },
                     {
                         "data": 'eventDate',
                         "render": function (data, type, row) {
