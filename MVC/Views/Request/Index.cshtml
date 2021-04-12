@@ -18,7 +18,8 @@
             </ol>
         </div>
         <div class="col-md-6 col-4 align-self-center">
-            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success" id="CreateRequest"><i class="mdi mdi-plus-circle"></i> Create</a>
+            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success" id="CreateRequest" style="display: none"><i class="mdi mdi-plus-circle"></i> Create</a>
+            <button class="btn pull-right hidden-sm-down btn-danger" id="RequestDisable" style="display: none"><i class="mdi mdi-close-octagon-outline"></i> Create</button>
             <div class="dropdown pull-right m-r-10 hidden-sm-down">
                 <select class="selectpicker m-b-20 m-r-10" data-style="btn-secondary" id="View">
                     <option data-tokens="Pending" value="0">Pending</option>
@@ -276,16 +277,42 @@
                 $('#approve').show();
                 $('#close').hide();
             } else {
-                $('#CreateRequest').show()
+                $.ajax({
+                    url: "/Employee/GetById",
+                    type: "GET",
+                    data: { 'key': NIK },
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    success: function (result) {
+                        debugger;
+                        var data = result["result"];
+                        var joinDate = moment(data.joinDate).format('YYYY');
+                        var date = new Date();
+                        var nowDate = moment(date).format('YYYY');
+                        if ((nowDate - joinDate) >= 1) {
+                            $('#CreateRequest').show();
+                            $('#RequestDisable').hide();
+                        } else {
+                            $('#CreateRequest').hide();
+                            $('#RequestDisable').show();
+                        }
+                    }
+                })
                 $('#reject').hide();
                 $('#approve').hide();
                 $('#close').show();
+
+                $('#RequestDisable').on('click', function () {
+                    Swal.fire({
+                        icon: "info",
+                        title: "Sorry...",
+                        text: "You can't make a request because you haven't joined for <b>more than 1 year</b>",
+                    })
+                })
             }
         });
 
         $('#View').on('change', function () {
             value = $(this).val();
-            console.log(value);
             $('#table_id').DataTable().destroy();
             urlString = "/Request/RequestList";
             if (value == '0') {
@@ -468,15 +495,35 @@
                         }
                     },
                     { "data": 'requestID' },
-                    { "data": 'employee.employeeName' },
                     {
-                        "data": 'employee.joinDate',
+                        "data": 'employee',
                         "render": function (data, type, row) {
-                            return moment(data).format('DD/MM/YYYY');
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return obj.employeeName;
                         }
                     },
-                    { "data": 'employee.manager.employeeName' },
-                    { "data": 'compensation.compensationName' },
+                    {
+                        "data": 'employee',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return moment(obj.joinDate).format('DD/MM/YYYY');
+                        }
+                    },
+                    {
+                        "data": 'employee',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            var manager = JSON.parse(JSON.stringify(obj.manager));
+                            return manager.employeeName;
+                        }
+                    },
+                    {
+                        "data": 'compensation',
+                        "render": function (data, type, row) {
+                            var obj = JSON.parse(JSON.stringify(data));
+                            return obj.compensationName;
+                        }
+                    },
                     {
                         "data": 'eventDate',
                         "render": function (data, type, row) {

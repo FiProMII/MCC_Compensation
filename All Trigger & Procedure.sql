@@ -215,8 +215,46 @@
 		ELSE
 		BEGIN
 			UPDATE TB_T_Approval
-			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK, DetailInformation = @DetailInfo
+			SET StatusID = @NewStatusID, ApprovalDate = GETDATE(), NIK = @NIK, Note = @DetailInfo
 			WHERE RequestID = @RequestID AND DepartmentID = @DepartmentID AND StatusID = @PendingID
 		END
+	END
+	GO
+
+	-- Get Count Employee
+	CREATE OR ALTER PROCEDURE [dbo].[SP_CountEmployee]
+	AS
+	BEGIN
+		SELECT COUNT(NIK) AS Total FROM TB_M_Employee
+	END
+	GO
+
+	-- Get Count Wedding Gift
+	CREATE OR ALTER PROCEDURE [dbo].[SP_CountWedding]
+	AS
+	BEGIN
+		SELECT COUNT(creq.CompensationID) AS Total FROM TB_T_CompensationRequest creq 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID 
+		WHERE comp.CompensationName LIKE '%Wedding%'
+	END
+	GO
+
+	-- Get Count Wedding Gift
+	CREATE OR ALTER PROCEDURE [dbo].[SP_CountBaby]
+	AS
+	BEGIN
+		SELECT COUNT(creq.CompensationID) AS Total FROM TB_T_CompensationRequest creq 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID 
+		WHERE comp.CompensationName LIKE '%Baby%'
+	END
+	GO
+
+	-- Get Count Wedding Gift
+	CREATE OR ALTER PROCEDURE [dbo].[SP_CountGrief]
+	AS
+	BEGIN
+		SELECT COUNT(creq.CompensationID) AS Total FROM TB_T_CompensationRequest creq 
+		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID 
+		WHERE comp.CompensationName LIKE '%Grief%'
 	END
 	GO

@@ -81,5 +81,22 @@ namespace API.Repository.Data
             }
             return null;
         }
+
+        public LoginVM CheckPassword(LoginVM loginVM)
+        {
+            var employee = employees.Include("Account")
+                .SingleOrDefault(a => a.NIK == loginVM.NIK);
+            if(employee != null)
+            {
+                var result = BC.EnhancedVerify(loginVM.Password, employee.Account.Password, BCrypt.Net.HashType.SHA384);
+                if(result == true)
+                {
+                    loginVM.IsTemp = true;
+                    return loginVM;
+                }
+                return null;
+            }
+            return null;
+        }
     }
 }

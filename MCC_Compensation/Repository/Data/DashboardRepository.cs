@@ -25,5 +25,33 @@ namespace API.Repository.Data
             var result = _dashboardRepository.MultipleGet("SP_RetrieveChart", _parameters);
             return result;
         }
+
+        public BarVM EmployeeBar()
+        {
+            var _dashboardRepository = new GeneralDapperRepository<BarVM>(_configuration);
+            var result = _dashboardRepository.SingleGet("SP_CountEmployee", null);
+            return result;
+        }
+
+        public BarVM WeddingBar()
+        {
+            var _dashboardRepository = new GeneralDapperRepository<BarVM>(_configuration);
+            var result = _dashboardRepository.SingleGet("SP_CountWedding", null);
+            return result;
+        }
+
+        public BarVM BabyBar()
+        {
+            var _dashboardRepository = new GeneralDapperRepository<BarVM>(_configuration);
+            var result = _dashboardRepository.SingleGet("SP_CountBaby", null);
+            return result;
+        }
+
+        public BarVM GriefBar()
+        {
+            var _dashboardRepository = new GeneralDapperRepository<BarVM>(_configuration);
+            var result = _dashboardRepository.SingleGet("SP_CountGrief", null);
+            return result;
+        }
     }
 }
