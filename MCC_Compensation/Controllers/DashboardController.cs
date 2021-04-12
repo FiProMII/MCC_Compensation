@@ -39,5 +39,73 @@ namespace API.Controllers
                 return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Tidak Ditemukan", result = "" });
             }
         }
+
+        [EnableCors("AllowOrigin")]
+        [HttpGet("EmployeeBar")]
+        [AllowAnonymous]
+        public IActionResult EmployeeBar()
+        {
+            var result = _dashboardRepository.EmployeeBar();
+
+            if (result != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result, message = "Data Ditemukan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Tidak Ditemukan", result = "" });
+            }
+        }
+
+        [EnableCors("AllowOrigin")]
+        [HttpGet("WeddingBar")]
+        [AllowAnonymous]
+        public IActionResult WeddingBar()
+        {
+            var result = _dashboardRepository.WeddingBar();
+
+            if (result != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result, message = "Data Ditemukan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Tidak Ditemukan", result = "" });
+            }
+        }
+
+        [EnableCors("AllowOrigin")]
+        [HttpGet("BabyBar")]
+        [AllowAnonymous]
+        public IActionResult BabyBar()
+        {
+            var result = _dashboardRepository.BabyBar();
+
+            if (result != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result, message = "Data Ditemukan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Tidak Ditemukan", result = "" });
+            }
+        }
+
+        [EnableCors("AllowOrigin")]
+        [HttpGet("GriefBar")]
+        [AllowAnonymous]
+        public IActionResult GriefBar()
+        {
+            var result = _dashboardRepository.GriefBar();
+
+            if (result != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result, message = "Data Ditemukan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Tidak Ditemukan", result = "" });
+            }
+        }
     }
 }
