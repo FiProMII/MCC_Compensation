@@ -71,6 +71,16 @@ namespace MVC.Controllers
 
         public ViewResult AccountSetting() => View();
 
+        public async Task<IActionResult> Check(string pass)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
+            StringContent content = new StringContent(JsonConvert.SerializeObject(pass), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("Account/Check?pass=" + pass, content);
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ResponseVM<string>>(apiResponse);
+            return Ok(result);
+        }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
