@@ -39,14 +39,15 @@
                         </div>
                         <div class="form-group" id="newPassGroup">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" name="Password" id="newPassword" required="" placeholder="New Password">
+                                <input class="form-control" type="password" name="Password" id="newPassword" minlength="8" placeholder="New Password">
                             </div>
                             <div class="form-control-feedback" id="validNewPass" style="display: none">passwords must be different</div>
                         </div>
                         <div class="form-group" id="confirmPassGroup">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" id="confirmPassword" required="" placeholder="Confirm New Password">
+                                <input class="form-control" type="password" id="confirmPassword" minlength="8" placeholder="Confirm New Password">
                             </div>
+                            <div class="form-control-feedback" id="passwordnull" style="display: none">please retype new password</div>
                             <div class="form-control-feedback" id="passwordmatch" style="display: none">password doesn't match</div>
                         </div>
                         <div class="form-group text-center m-t-20">
@@ -65,28 +66,37 @@
 @section scripts
 {
     <script>
-        $('#confirmPassword').keyup(function () {
-            var pass = $('#newPassword').val();
-            var cpass = this.value;
+        var cpass, newpass, pass;
+        $('#oldPassword').on('click', function () {
+            $('#newPassGroup').removeClass('has-danger');
+            $('#validationPass').hide();
+        })
+
+        $('#confirmPassword').on('keyup',function () {
+            pass = $('#newPassword').val();
+            cpass = this.value;
             if (cpass != pass) {
                 $('#confirmPassGroup').addClass('has-danger');
                 $('#passwordmatch').show();
                 $('#submit').attr('disable', true);
             } else {
-                $('#confirmPassGroup').removeClass('has-danger');
+                $('#confirmPassGroup').removeClass('has-danger').addClass('has-success');
+                $('#confirmPassword').addClass('form-control-success');
                 $('#passwordmatch').hide();
                 $('#submit').attr('disable', false);
             }
         })
 
         $('#newPassword').keyup(function () {
-            var oldPass = $('#oldPassword').val();
-            var newPass = this.value;
+            oldPass = $('#oldPassword').val();
+            newPass = this.value;
+            cpass = $('#confirmPassword').val();
             if (newPass == oldPass) {
                 $('#newPassGroup').addClass('has-danger');
                 $('#validNewPass').show();
                 $('#submit').attr('disable', true);
-            } else {
+            } 
+            else {
                 $('#newPassGroup').removeClass('has-danger');
                 $('#validNewPass').hide();
                 $('#submit').attr('disable', false);
@@ -95,8 +105,8 @@
 
         $('#accountSetting').submit(function (event) {
             event.preventDefault();
-            var newPass = $('#newPassword').val();
-            var pass = $('#oldPassword').val();
+            newPass = $('#newPassword').val();
+            pass = $('#oldPassword').val();
             if (newPass != pass) {
                 $('#newPassGroup').removeClass('has-danger');
                 $('#validationPass').hide();
