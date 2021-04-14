@@ -258,3 +258,10 @@
 		WHERE comp.CompensationName LIKE '%Grief%'
 	END
 	GO
+
+	CREATE PROCEDURE [dbo].[SP_RetrieveCompensation]
+	AS
+	BEGIN
+		SELECT * FROM TB_M_Compensation 
+	END
+	GO

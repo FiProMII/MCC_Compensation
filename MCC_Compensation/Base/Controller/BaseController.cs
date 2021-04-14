@@ -25,7 +25,7 @@ namespace API.Base.Controller
         }
 
         [HttpGet]
-        public ActionResult<Entity> Get()
+        public virtual ActionResult<Entity> Get()
         {
             ResponseVM<IEnumerable<Entity>> responseContent = new ResponseVM<IEnumerable<Entity>>();
             var result = repository.Get();

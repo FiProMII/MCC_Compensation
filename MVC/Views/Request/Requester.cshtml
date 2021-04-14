@@ -108,8 +108,7 @@
                 url: '/Compensation/Get',
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    var data = result['result']
-                    console.log(data.length)
+                    var data = JSON.parse(JSON.stringify(result['result']));
                     for (var i = 0; i < data.length; i++) {
                         compensationDropdown += '<option value="' + data[i].compensationID + '">' + data[i].compensationName + '</option>';
                         compensationValue.set(data[i].compensationName, data[i].cost)

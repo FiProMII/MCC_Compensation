@@ -161,7 +161,6 @@
                 url: "https://localhost:44317/API/Dashboard/BabyBar",
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
-                    debugger;
                     var data = result['result'];
                     if (data.total == null) {
                         $('#babyBar').html("0");

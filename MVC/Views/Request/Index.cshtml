@@ -18,7 +18,7 @@
             </ol>
         </div>
         <div class="col-md-6 col-4 align-self-center">
-            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success" id="CreateRequest" style="display: none"><i class="mdi mdi-plus-circle"></i> Create</a>
+            <a href="/Request/Requester" class="btn pull-right hidden-sm-down btn-success" id="CreateRequest"><i class="mdi mdi-plus-circle"></i> Create</a>
             <button class="btn pull-right hidden-sm-down btn-danger" id="RequestDisable" style="display: none"><i class="mdi mdi-close-octagon-outline"></i> Create</button>
             <div class="dropdown pull-right m-r-10 hidden-sm-down">
                 <select class="selectpicker m-b-20 m-r-10" data-style="btn-secondary" id="View">
@@ -283,9 +283,9 @@
                     data: { 'key': NIK },
                     headers: { 'Authorization': 'Bearer ' + localStorage.token },
                     success: function (result) {
-                        debugger;
                         var data = result["result"];
-                        var joinDate = moment(data.joinDate).format('YYYY');
+                        var obj = JSON.parse(JSON.stringify(data));
+                        var joinDate = moment(obj.joinDate).format('YYYY');
                         var date = new Date();
                         var nowDate = moment(date).format('YYYY');
                         if ((nowDate - joinDate) >= 1) {
