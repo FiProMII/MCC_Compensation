@@ -117,5 +117,26 @@ namespace API.Controllers
             }
             return employees;
         }
+
+        [HttpGet("Status")]
+        public IActionResult Status(int RequestID, int DepartmentID)
+        {
+            ResponseVM<Approval> responseContent = new ResponseVM<Approval>();
+            var result = _approvalRepository.GetStatus(RequestID, DepartmentID);
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<Approval>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<Approval>.StatusType.Failed;
+                responseContent.Message = "Data not found";
+                return StatusCode(500, responseContent);
+            }
+        }
     }
 }

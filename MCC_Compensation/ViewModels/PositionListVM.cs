@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace API.ViewModels
 {
-    public class RequestStatusVM
+    public class PositionListVM
     {
-        public string StatusName { get; set; }
-
+        public int PositionID { get; set; }
+        public string PositionName { get; set; }
         public int DepartmentID { get; set; }
-        public string Approval { get; set; }
-        public DateTime ApprovalDate { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

@@ -147,8 +147,8 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-8" id="button">
-                                            <button type="submit" value="2" class="btn btn-outline-success"> <i class="mdi mdi-checkbox-marked-circle-outline"></i> Approve</button>
-                                            <button type="submit" value="3" class="btn btn-outline-danger"><i class="mdi mdi-alert-octagram"></i> Reject</button>
+                                            <button type="submit" value="Approve" class="btn btn-outline-success"> <i class="mdi mdi-checkbox-marked-circle-outline"></i> Approve</button>
+                                            <button type="submit" value="Reject" class="btn btn-outline-danger"><i class="mdi mdi-alert-octagram"></i> Reject</button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,6 +167,31 @@
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
+
+<div id="modalRejected" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form class="form-horizontal" role="form" id="formReject">
+                <div class="modal-body">
+                    <div class="form-group controls" id="excuseText">
+                        <label id="messageText"><strong>Please enter why you declined this request</strong></label>
+                        <textarea class="form-control" rows="5" id="textArea" required></textarea>
+                    </div>
+                    <p>Do you want to save changes you made before closing?</p>
+                    <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveChange">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section scripts
 {
@@ -219,45 +244,82 @@
             }
         });
 
-        var statusID;
-        $('.btn').click(function () {
-            statusID = parseInt($(this).val())
+        var statusName;
+        $('.btn').on('click', function () {
+            statusName = $(this).val()
         })
 
         $('#form').submit(function (event) {
             event.preventDefault()
+            var requestID = parseInt(document.getElementById("RequestID").innerHTML);
             var UpdateStatusVM = new Object();
-            UpdateStatusVM.newStatusID = statusID;
+            UpdateStatusVM.statusName = statusName;
             UpdateStatusVM.requestID = requestID;
-            $.ajax({
-                type: "POST",
-                url: "/Approval/UpdateStatus",
-                data: JSON.stringify(UpdateStatusVM),
-                headers: { 'Authorization': 'Bearer ' + localStorage.token },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (result) {
-                    Swal.fire({
-                        title: '<strong>Thank You</strong>',
-                        icon: 'info',
-                        html:
-                            'you succeeded in <b>giving approval</b> ',
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> Great!',
-                        confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText:
-                            '<i class="fa fa-thumbs-down"></i>',
-                        cancelButtonAriaLabel: 'Thumbs down'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "@Url.Action("Index", "Request")";
+
+            if (statusName == "Reject") {
+                $('#modalRejected').modal({
+                    backdrop: 'static'
+                })
+                $('#textArea').prop('required', true);
+                $('#saveChange').on('click',function (event) {
+                    event.preventDefault()
+                    UpdateStatusVM.note = $('#textArea').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/Approval/UpdateStatus",
+                        data: JSON.stringify(UpdateStatusVM),
+                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function () {
+                            $('#modalRejected').modal('hide');
+                            $('#textArea').empty();
+                            Swal.fire({
+                                title: '<strong>Thank You</strong>',
+                                icon: 'info',
+                                html:
+                                    'you succeeded in <b>giving approval</b> ',
+                                focusConfirm: false,
+                                confirmButtonText:
+                                    '<i class="fa fa-thumbs-up"></i> Great!',
+                                confirmButtonAriaLabel: 'Thumbs up, great!',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "@Url.Action("Index", "Account")";
+                                }
+                            })
                         }
                     })
-                }
-            });
+                })
+            } else {
+                UpdateStatusVM.note = "Approved without a hitch";
+                $.ajax({
+                    type: "POST",
+                    url: "/Approval/UpdateStatus",
+                    data: JSON.stringify(UpdateStatusVM),
+                    headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        Swal.fire({
+                            title: '<strong>Thank You</strong>',
+                            icon: 'info',
+                            html:
+                                'you succeeded in <b>giving approval</b> ',
+                            focusConfirm: false,
+                            confirmButtonText:
+                                '<i class="fa fa-thumbs-up"></i> Great!',
+                            confirmButtonAriaLabel: 'Thumbs up, great!',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "@Url.Action("Index", "Account")";
+                            }
+                        })
+                    }
+                })
+            }
         })
     </script>
 }

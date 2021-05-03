@@ -32,7 +32,7 @@ namespace MVC.Base
             return View();
         }
 
-        public async Task<IActionResult> Get()
+        public virtual async Task<IActionResult> Get()
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("Token"));
             var response = await httpClient.GetAsync(typeof(Entity).Name);

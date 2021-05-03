@@ -276,7 +276,7 @@
             var departmentDropdown = '<option value="-1">Please select a department</option>';
             $.ajax({
                 type: "GET",
-                url: '/department/get',
+                url: '/Department/Get',
                 success: function (result) {
                     var data = result['result']
                     for (var i = 0; i < data.length; i++) {
@@ -285,49 +285,7 @@
                     }
                 }
             });
-            $("select#DepartmentDropdown").on('change', function () {
-                var selectedDepartment = $('#DepartmentDropdown option:selected').val();
-                $.ajax({
-                    type: "GET",
-                    url: '/position/get',
-                    success: function (result) {
-                        var positionDropdown = '<option value="-1">Please select a position</option>';
-                        var data = result['result']
-                        for (var i = 0; i < data.length; i++) {
-                            if (data[i].departmentID == selectedDepartment) {
-                                positionDropdown += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
-                                $("#PositionID").html(positionDropdown);
-                            }
-                        }
-                    }
-                });
-                $("select#PositionID").on('change', function () {
-                    var selectedPosition = $('#PositionID option:selected').text();
-                    var selectedDepartment = $('#DepartmentDropdown option:selected').val();
-                    $.ajax({
-                        type: "GET",
-                        url: '/Employee/Get',
-                        headers: { 'Authorization': 'Bearer ' + localStorage.token },
-                        success: function (result) {
-                            var data = result['result']
-                            if (selectedPosition != "RM") {
-                                $('#ManagerNIK').removeAttr("disabled");
-                                managerDropdown = '<option value="-1">Please select a manager</option>';
-                                for (var i = 0; i < data.length; i++) {
-                                    if (data[i].position.departmentID == selectedDepartment) {
-                                        managerDropdown += '<option value="' + data[i].nik + '">' + data[i].employeeName + '</option>';
-                                        $("#ManagerNIK").html(managerDropdown);
-                                    }
-                                }
-                            } else {
-                                managerDropdown = '< option value = "-1" > Please select a manager</option >';
-                                $("#ManagerNIK").html(managerDropdown);
-                                $('#ManagerNIK').prop("disabled", true);
-                            }
-                        }
-                    });
-                })
-            });
+            
             $('#table_id').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -354,7 +312,7 @@
                 "filter": true,
                 "orderMulti": false,
                 "ajax": {
-                    "url": "/Employee/Get",
+                    "url": "/Employee/GetEmployees",
                     "type": "GET",
                     "dataSrc": "result",
                     "headers": "{ 'Authorization': 'Bearer '" + sessionStorage.token + "}",
@@ -395,13 +353,16 @@
                             return moment(data).format('DD-MM-YYYY');
                         }
                     },
-                    { "data": 'position.positionName' },
+                    {
+                        "data": 'position',
+                        "render": function (data, type, row, meta) {
+                            return row['positionName'] + ' - ' + row['departmentName'];
+                        }
+                    },
                     {
                         "data": 'manager',
-                        "render": function (data) {
-                            if (data != null)
-                                return data.employeeName
-                            return ''
+                        "render": function (data, type, row, meta) {
+                            return data = data || [];
                         }
                     },
                     {
@@ -412,6 +373,51 @@
                         }
                     }
                 ]
+            });
+        });
+
+        $("select#DepartmentDropdown").on('change', function () {
+            var selectedDepartment = $('#DepartmentDropdown option:selected').val();
+            $.ajax({
+                type: "GET",
+                url: '/Position/Get',
+                success: function (result) {
+                    var positionDropdown = '<option value="-1">Please select a position</option>';
+                    var data = result['result']
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].departmentID == selectedDepartment) {
+                            positionDropdown += '<option value="' + data[i].positionID + '">' + data[i].positionName + '</option>';
+                            $("#PositionID").html(positionDropdown);
+                        }
+                    }
+                }
+            });
+        });
+
+        $('select#PositionID').on('change', function () {
+            var selectedPosition = $('#PositionID option:selected').text();
+            var selectedDepartment = $('#DepartmentDropdown option:selected').val();
+            $.ajax({
+                type: "GET",
+                url: '/Employee/GetManagerList',
+                headers: { 'Authorization': 'Bearer ' + localStorage.token },
+                success: function (result) {
+                    var data = result['result'];
+                    if (selectedPosition != "RM") {
+                        $('#ManagerNIK').removeAttr("disabled");
+                        managerDropdown = '<option value="-1">Please select a manager</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].departmentID == selectedDepartment) {
+                                managerDropdown += '<option value="' + data[i].nik + '">' + data[i].employeeName + '</option>';
+                                $("#ManagerNIK").html(managerDropdown);
+                            }
+                        }
+                    } else {
+                        managerDropdown = '< option value = "-1" > Please select a manager</option >';
+                        $("#ManagerNIK").html(managerDropdown);
+                        $('#ManagerNIK').prop("disabled", true);
+                    }
+                }
             });
         });
 
@@ -487,6 +493,7 @@
                     }
                 }
             });
+
             $.ajax({
                 url: "/Employee/GetById",
                 type: "GET",
@@ -564,7 +571,7 @@
             $('#Submit').removeAttr('disabled');
         }
 
-        $('#NIK').keyup(function () {
+        $('#NIK').on('change',function () {
             var nik = $('#NIK').val();
             $.ajax({
                 url: "/Employee/GetById",

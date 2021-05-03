@@ -84,5 +84,16 @@ namespace API.Repository.Data
             }
             return employeesList.AsList();
         }
+
+        public Approval GetStatus(int RequestID, int DepartmentID)
+        {
+            var _appRepository = new GeneralDapperRepository<Approval>(_configuration);
+
+            var SPName = "SP_ReviewRequest";
+            _parameters.Add("@RequestID", RequestID);
+            _parameters.Add("@DepartmentID", DepartmentID);
+            var result = _appRepository.SingleGet(SPName, _parameters);
+            return result;
+        }
     }
 }

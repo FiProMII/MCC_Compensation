@@ -132,30 +132,32 @@
 	@RequestID int
 	AS
 	BEGIN
-		SELECT st.StatusName,dep.DepartmentName AS Approval, app.ApprovalDate 
+		SELECT st.StatusName, app.DepartmentID, (SELECT dep.DepartmentName FROM TB_M_Department dep WHERE dep.DepartmentID = app.DepartmentID) AS Approval, app.ApprovalDate 
 		FROM TB_M_Status st 
 		JOIN TB_T_Approval app ON st.StatusID = app.StatusID 
 		JOIN TB_M_Employee emp ON app.NIK = emp.NIK
 		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID 
 		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
 		WHERE app.RequestID = @RequestID
-		GROUP BY PositionName, StatusName, DepartmentName, ApprovalDate
+		GROUP BY PositionName, StatusName, app.DepartmentID, DepartmentName, ApprovalDate
+		ORDER BY ApprovalDate
 	END
 	GO
-	
+
 	-- Get Detail Request--
 	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveDetailRequest]
 		@RequestID int
 	AS
 	BEGIN
-	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, pos.PositionName, dep.DepartmentName, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate FROM TB_M_Employee emp
+	SELECT creq.RequestID, emp.EmployeeName, emp.JoinDate, pos.PositionName, dep.DepartmentName, (SELECT EmployeeName FROM TB_M_Employee WHERE NIK = (SELECT ManagerNIK FROM TB_M_Employee WHERE EmployeeName = emp.EmployeeName)) AS [Manager], comp.CompensationName, creq.EventDate, creq.RequestDate, app.Note FROM TB_M_Employee emp
 		JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID
 		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
 		JOIN TB_T_CompensationRequest creq ON emp.NIK = creq.NIK 
 		JOIN TB_M_Compensation comp ON creq.CompensationID = comp.CompensationID
 		JOIN TB_T_Approval app ON creq.RequestID = app.RequestID
 		JOIN TB_M_Status st ON app.StatusID = st.StatusID 
-	WHERE creq.RequestID = @RequestID GROUP BY creq.RequestID, emp.EmployeeName, emp.joinDate, comp.CompensationName, creq.EventDate, creq.RequestDate, pos.PositionName, dep.DepartmentName
+	WHERE creq.RequestID = '1016' GROUP BY creq.RequestID, emp.EmployeeName, emp.joinDate, comp.CompensationName, creq.EventDate, creq.RequestDate, pos.PositionName, dep.DepartmentName,
+	  app.Note
 	END
 	GO
 
@@ -259,9 +261,58 @@
 	END
 	GO
 
-	CREATE PROCEDURE [dbo].[SP_RetrieveCompensation]
+	-- Get Compensation List
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveCompensation]
 	AS
 	BEGIN
 		SELECT * FROM TB_M_Compensation 
+	END
+	GO
+
+	-- Get Approval Status if Approve or Reject
+	CREATE OR ALTER PROCEDURE [dbo].[SP_ReviewRequest]
+	@RequestID int,
+	@DepartmentID int
+	AS
+	BEGIN
+		SELECT * FROM TB_T_Approval app JOIN TB_M_Department dep ON app.DepartmentID = dep.DepartmentID WHERE app.RequestId = 1012 AND StatusID = (SELECT StatusID FROM TB_M_Status WHERE StatusName LIKE '%pending%') AND dep.DepartmentID = @DepartmentID
+	END
+	GO
+
+	-- Get Employee List
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveEmployee]
+	AS
+	BEGIN
+	SELECT emp.NIK, emp.EmployeeName, emp.Email, emp.Phone, emp.Address, emp.BirthPlace, emp.BirthDate, emp.JoinDate, pos.PositionName, dep.DepartmentName, (SELECT em.EmployeeName FROM TB_M_Employee em WHERE em.NIK = (SELECT e.ManagerNIK FROM TB_M_Employee e WHERE e.NIK = emp.NIK)) AS Manager FROM TB_M_Employee emp JOIN TB_M_Position pos ON emp.PositionID = pos.PositionID JOIN TB_M_Department dep ON pos.DepartmentID=dep.DepartmentID
+	END
+	GO
+
+	CREATE PROCEDURE [dbo].[SP_RetrieveDepartment]
+	AS
+	BEGIN
+		SELECT * FROM TB_M_Department
+	END
+	GO
+
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrievePosition]
+	AS
+	BEGIN
+		SELECT pos.PositionID, pos.PositionName, dep.DepartmentID, dep.DepartmentName FROM TB_M_Position pos
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID
+	END
+	GO
+
+	CREATE PROCEDURE [dbo].[SP_RetrieveRole]
+	AS
+	BEGIN
+		SELECT * FROM TB_M_Role
+	END
+	GO
+
+	CREATE OR ALTER PROCEDURE [dbo].[SP_RetrieveManager]
+	AS
+	BEGIN
+		SELECT emp.NIK,emp.EmployeeName,dep.DepartmentID FROM TB_M_Employee emp JOIN TB_M_Position pos ON emp.PositionID=pos.PositionID
+		JOIN TB_M_Department dep ON pos.DepartmentID = dep.DepartmentID WHERE pos.PositionName = 'RM' 
 	END
 	GO

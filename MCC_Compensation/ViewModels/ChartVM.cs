@@ -7,6 +7,7 @@ namespace API.ViewModels
 {
     public class ChartVM
     {
+        public int Total { get; set; }
         public string Request {get;set;}
         public string Year { get; set; }
     }

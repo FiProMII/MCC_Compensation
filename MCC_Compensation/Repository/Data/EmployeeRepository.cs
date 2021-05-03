@@ -1,5 +1,6 @@
 ﻿using API.Context;
 using API.Models;
+using API.ViewModels;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -25,6 +26,22 @@ namespace API.Repository.Data
             var SPName = "SP_RetrieveValidation";
             _parameters.Add("@Params", Params);
             var result = _employeeRepository.SingleGet(SPName, _parameters);
+            return result;
+        }
+
+        public IEnumerable<EmployeeListVM> GetEmployee()
+        {
+            var _employeeRepository = new GeneralDapperRepository<EmployeeListVM>(_configuration);
+            var SPName = "SP_RetrieveEmployee";
+            var result = _employeeRepository.MultipleGet(SPName, null);
+            return result;
+        }
+
+        public IEnumerable<ManagerVM> GetManagerList()
+        {
+            var _employeeRepository = new GeneralDapperRepository<ManagerVM>(_configuration);
+            var SPName = "SP_RetrieveManager";
+            var result = _employeeRepository.MultipleGet(SPName, null);
             return result;
         }
     }

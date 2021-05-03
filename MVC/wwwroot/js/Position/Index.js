@@ -64,7 +64,7 @@ $(document).ready(function () {
             },
             { "data": 'positionID' },
             { "data": 'positionName' },
-            { "data": 'department.departmentName' },
+            { "data": 'departmentName' },
             {
                 "data": 'positionID',
                 "render": function (data, type, row, meta) {

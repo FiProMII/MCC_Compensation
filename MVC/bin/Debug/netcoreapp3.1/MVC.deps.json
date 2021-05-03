@@ -2027,6 +2027,7 @@
           "Microsoft.EntityFrameworkCore.Analyzers": "5.0.4",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
+          "MimeKit": "2.11.0",
           "Swashbuckle.AspNetCore": "6.1.1"
         },
         "runtime": {

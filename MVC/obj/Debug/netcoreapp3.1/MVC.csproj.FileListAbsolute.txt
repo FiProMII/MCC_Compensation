@@ -217,3 +217,4 @@ C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.cspr
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.dll
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.pdb
 C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\MVC.genruntimeconfig.cache
+C:\Users\Acer\source\repos\MCC_Compensation\MVC\obj\Debug\netcoreapp3.1\Razor\Views\Request\Review.cshtml.g.cs

@@ -16,5 +16,6 @@ namespace API.ViewModels
         public string CompensationName { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime RequestDate { get; set; }
+        public string Note { get; set; }
     }
 }

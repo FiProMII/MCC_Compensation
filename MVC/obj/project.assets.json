@@ -2587,6 +2587,7 @@
           "Microsoft.EntityFrameworkCore.Analyzers": "5.0.4",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4",
+          "MimeKit": "2.11.0",
           "Swashbuckle.AspNetCore": "6.1.1"
         },
         "compile": {
@@ -8598,7 +8599,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

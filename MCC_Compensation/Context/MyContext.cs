@@ -47,7 +47,8 @@ namespace API.Context
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.CompensationRequests)
                 .WithOne(cr => cr.Employee)
-                .HasForeignKey(cr => cr.NIK);
+                .HasForeignKey(cr => cr.NIK)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Position>()
                 .HasOne(p => p.Department)

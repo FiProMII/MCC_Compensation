@@ -81,5 +81,47 @@ namespace API.Controllers
                 return BadRequest(responseContent);
             }
         }
+
+        [HttpGet("GetEmployees")]
+        public ActionResult<EmployeeListVM> GetEmployees()
+        {
+            ResponseVM<IEnumerable<EmployeeListVM>> responseContent = new ResponseVM<IEnumerable<EmployeeListVM>>();
+            var result = _employeeRepository.GetEmployee();
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<IEnumerable<EmployeeListVM>>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<IEnumerable<EmployeeListVM>>.StatusType.Failed;
+                responseContent.Message = "Something went wrong";
+                return StatusCode(500, responseContent);
+            }
+        }
+
+        [HttpGet("GetManagerList")]
+        public ActionResult<ManagerVM> GetManagerList()
+        {
+            ResponseVM<IEnumerable<ManagerVM>> responseContent = new ResponseVM<IEnumerable<ManagerVM>>();
+            var result = _employeeRepository.GetManagerList();
+
+            if (result != null)
+            {
+                responseContent.Status = ResponseVM<IEnumerable<ManagerVM>>.StatusType.Success;
+                responseContent.Message = "Data found";
+                responseContent.Result = result;
+                return Ok(responseContent);
+            }
+            else
+            {
+                responseContent.Status = ResponseVM<IEnumerable<ManagerVM>>.StatusType.Failed;
+                responseContent.Message = "Something went wrong";
+                return StatusCode(500, responseContent);
+            }
+        }
     }
 }

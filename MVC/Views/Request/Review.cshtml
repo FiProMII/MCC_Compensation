@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Compensation | Recover Password";
+    ViewBag.Title = "Approval | Completed";
     Layout = null;
 }
 
@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/lib/assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/lib/assets/images/favicon.ico">
     <title>@ViewBag.Title</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/lib/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -42,30 +42,34 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(/lib/assets/images/background/login.jpg);">
-        <div class="login-box card">
-            <div class="card-body">
-                <form class="form-horizontal form-material" id="loginform" action="index.html">
-                    <a href="javascript:void(0)" class="text-center db"><img src="/lib/assets/images/logo-icon.png" alt="Home" wiidth="70" /><br /><img src="/lib/assets/images/logo-text.png" alt="Home" width="210" /></a>
-                    <div class="form-group m-t-40">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="password" name="Password" id="newPassword" minlength="8" placeholder="New Password" required>
+    <section id="wrapper">
+        <div class="login-register" style="background-image: url(/lib/assets/images/background/login.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="" action="/Account/Index">
+                        <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <div class="user-thumb text-center">
+                                    <img alt="thumbnail" class="img" width="300" src="/lib/assets/images/thanks animated.gif" >
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="confirm-password">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="password" id="confirmPassword" minlength="8" placeholder="Confirm New Password" required>
+                        <div class="form-group ">
+                            <div class="col-xs-12 text-center">
+                                <label>This request has been given a decision</label>
+                                <label>Please provide a decision for another request</label>
+                            </div>
                         </div>
-                        <div class="form-control-feedback" id="passwordmatch" style="display: none">Password doesn't match</div>
-                    </div>
-                    <div class="form-group text-center m-t-20">
-                        <div class="col-xs-12">
-                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset Password</button>
+                        <div class="form-group text-center">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Back to Dashboard</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
+
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -91,49 +95,6 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="~/lib/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-    <!-- Sweet-Alert  -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
+
 </html>
-
-<script>
-    $('#confirmPassword').keyup(function () {
-        var pass = $('#newPassword').val();
-        var cpass = this.value;
-        if (cpass != pass) {
-            $('#confirm-password').addClass('has-danger');
-            $('#passwordmatch').show();
-            $('#confirmPassword').focus();
-            $('#submit').attr('disable', true);
-        } else {
-            $('#confirm-password').removeClass('has-danger');
-            $('#passwordmatch').hide();
-            $('#submit').attr('disable', false);
-        }
-    })
-
-    $('#loginform').submit(function (event) {
-        event.preventDefault();
-        var form = $(this);
-        $.ajax({
-            type: "POST",
-            url: "Put",
-            data: form.serialize(),
-            headers: { 'Authorization': 'Bearer ' + localStorage.token },
-            success: function (data) {
-                Swal.fire({
-                    title: 'You have successfully changed your password',
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "@Url.Action("Index", "Dashboard")";
-                    }
-                })
-            },
-            error: function (error) {
-            }
-        })
-    });
-</script>

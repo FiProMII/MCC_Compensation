@@ -204,6 +204,16 @@
                             </div>
                             <!--/span-->
                         </div>
+                        <div class="row is-hidden" id="Note">
+                            <div class="col-md-12">
+                                <div class="form-group row has-danger">
+                                    <label class="control-label text-right col-md-2 text-danger">Rejection Description:</label>
+                                    <div class="col-md-10">
+                                        <p class="form-control-feedback" id="Reason"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive m-t-40">
                             <h4 class="box-title">Approval Status</h4>
                             <hr class="m-t-0 m-b-40">
@@ -554,6 +564,7 @@
                 data: { 'RequestID': id },
                 headers: { 'Authorization': 'Bearer ' + localStorage.token },
                 success: function (result) {
+                    debugger;
                     var data = result["result"];
                     $('#Requester').html(data.employeeName)
                     $('#DepartmentName').html(data.departmentName)
@@ -564,6 +575,13 @@
                     $('#CompensationName').html(data.compensationName)
                     $('#EventDate').html(moment(data.eventDate).format('DD MMMM YYYY'))
                     $('#RequestDate').html(moment(data.requestDate).format('DD MMMM YYYY'))
+                    if ($('#View').val() == '-1') {
+                        $('#Reason').html(data.note);
+                        $('#Note').show();
+                    } else {
+                        $('#Reason').html('');
+                        $('#Note').hide();
+                    }
 
                     $.ajax({
                         url: "/Document/GetDocument",
